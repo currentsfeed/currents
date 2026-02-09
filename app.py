@@ -11,6 +11,15 @@ app = Flask(__name__)
 # Database path
 DB_PATH = os.path.join(os.path.dirname(__file__), 'brain.db')
 
+# Template filters
+@app.template_filter('format_number')
+def format_number(value):
+    """Format numbers with commas"""
+    try:
+        return "{:,}".format(int(value))
+    except:
+        return value
+
 class BRain:
     """BRain intelligence layer"""
     
@@ -139,10 +148,17 @@ brain = BRain()
 def index():
     """Homepage"""
     feed = brain.get_homepage_feed()
-    return render_template('index.html',
-                         hero=feed['hero'],
-                         grid=feed['grid'],
-                         stream=feed['stream'])
+    # Try new template first, fallback to old
+    try:
+        return render_template('index-v2.html',
+                             hero=feed['hero'],
+                             grid=feed['grid'],
+                             stream=feed['stream'])
+    except:
+        return render_template('index.html',
+                             hero=feed['hero'],
+                             grid=feed['grid'],
+                             stream=feed['stream'])
 
 @app.route('/market/<market_id>')
 def market_detail(market_id):
