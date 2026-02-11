@@ -1,0 +1,971 @@
+{
+  "batch": 1,
+  "category": "Sports",
+  "created": "2026-02-11",
+  "markets": [
+    {
+      "id": "ucl-madrid-bayern-2026",
+      "title": "Will Real Madrid defeat Bayern Munich in Champions League Round of 16?",
+      "description": "Champions League knockout stage clash between two European giants. Real Madrid hosts the first leg at Santiago Bernabéu. This market resolves YES if Real Madrid wins on aggregate.",
+      "category": "Soccer",
+      "subcategory": "Champions League",
+      "probability": 0.58,
+      "volume": 342000,
+      "resolutionDate": "2026-03-18",
+      "image": "static/images/ucl-madrid-bayern.jpg",
+      "tags": ["Soccer", "Champions League", "Real Madrid", "Bayern Munich", "UEFA", "Football", "Europe"],
+      "currents": [
+        {"date": "2026-02-05", "probability": 0.52},
+        {"date": "2026-02-07", "probability": 0.54},
+        {"date": "2026-02-08", "probability": 0.55},
+        {"date": "2026-02-09", "probability": 0.56},
+        {"date": "2026-02-10", "probability": 0.57},
+        {"date": "2026-02-11", "probability": 0.58}
+      ]
+    },
+    {
+      "id": "ucl-man-city-psg-2026",
+      "title": "Will Manchester City advance past PSG in Champions League?",
+      "description": "Manchester City faces PSG in a highly anticipated Round of 16 matchup. Both teams have invested heavily in their pursuit of European glory. Market resolves based on aggregate score.",
+      "category": "Soccer",
+      "subcategory": "Champions League",
+      "probability": 0.64,
+      "volume": 389000,
+      "resolutionDate": "2026-03-18",
+      "image": "static/images/ucl-city-psg.jpg",
+      "tags": ["Soccer", "Champions League", "Manchester City", "PSG", "UEFA", "Football"],
+      "currents": [
+        {"date": "2026-02-04", "probability": 0.60},
+        {"date": "2026-02-06", "probability": 0.61},
+        {"date": "2026-02-07", "probability": 0.62},
+        {"date": "2026-02-09", "probability": 0.63},
+        {"date": "2026-02-10", "probability": 0.63},
+        {"date": "2026-02-11", "probability": 0.64}
+      ]
+    },
+    {
+      "id": "ucl-barcelona-inter-2026",
+      "title": "Will Barcelona qualify for Champions League Quarter-Finals?",
+      "description": "Barcelona takes on Inter Milan in their Round of 16 tie. Barcelona's attacking prowess versus Inter's legendary defense. Both legs promise tactical masterclasses.",
+      "category": "Soccer",
+      "subcategory": "Champions League",
+      "probability": 0.55,
+      "volume": 298000,
+      "resolutionDate": "2026-03-17",
+      "image": "static/images/ucl-barcelona-inter.jpg",
+      "tags": ["Soccer", "Champions League", "Barcelona", "Inter Milan", "UEFA", "Football", "Spain", "Italy"],
+      "currents": [
+        {"date": "2026-02-05", "probability": 0.50},
+        {"date": "2026-02-07", "probability": 0.51},
+        {"date": "2026-02-08", "probability": 0.53},
+        {"date": "2026-02-09", "probability": 0.54},
+        {"date": "2026-02-10", "probability": 0.54},
+        {"date": "2026-02-11", "probability": 0.55}
+      ]
+    },
+    {
+      "id": "epl-liverpool-arsenal-2026",
+      "title": "Will Liverpool beat Arsenal at Anfield this weekend?",
+      "description": "Top-of-the-table Premier League clash with title implications. Liverpool's home fortress versus Arsenal's impressive away form this season. Resolves based on full-time result.",
+      "category": "Soccer",
+      "subcategory": "Premier League",
+      "probability": 0.48,
+      "volume": 267000,
+      "resolutionDate": "2026-02-15",
+      "image": "static/images/epl-liverpool-arsenal.jpg",
+      "tags": ["Soccer", "Premier League", "Liverpool", "Arsenal", "England", "Football", "Anfield"],
+      "currents": [
+        {"date": "2026-02-06", "probability": 0.45},
+        {"date": "2026-02-08", "probability": 0.46},
+        {"date": "2026-02-09", "probability": 0.47},
+        {"date": "2026-02-10", "probability": 0.47},
+        {"date": "2026-02-11", "probability": 0.48}
+      ]
+    },
+    {
+      "id": "epl-man-utd-chelsea-2026",
+      "title": "Will Manchester United keep a clean sheet against Chelsea?",
+      "description": "Manchester Derby rivals meet at Old Trafford. United's defensive improvements under their new manager face Chelsea's attacking talents. Resolves YES if United concedes zero goals.",
+      "category": "Soccer",
+      "subcategory": "Premier League",
+      "probability": 0.35,
+      "volume": 178000,
+      "resolutionDate": "2026-02-16",
+      "image": "static/images/epl-united-chelsea.jpg",
+      "tags": ["Soccer", "Premier League", "Manchester United", "Chelsea", "England", "Football", "Defense"],
+      "currents": [
+        {"date": "2026-02-07", "probability": 0.32},
+        {"date": "2026-02-08", "probability": 0.33},
+        {"date": "2026-02-09", "probability": 0.34},
+        {"date": "2026-02-10", "probability": 0.34},
+        {"date": "2026-02-11", "probability": 0.35}
+      ]
+    },
+    {
+      "id": "epl-top-4-spurs-2026",
+      "title": "Will Tottenham finish in Premier League Top 4 this season?",
+      "description": "Tottenham currently sits 5th in the table with Champions League qualification on the line. Strong finish needed with 15 games remaining. Market resolves at end of season.",
+      "category": "Soccer",
+      "subcategory": "Premier League",
+      "probability": 0.42,
+      "volume": 412000,
+      "resolutionDate": "2026-05-24",
+      "image": "static/images/epl-spurs-top4.jpg",
+      "tags": ["Soccer", "Premier League", "Tottenham", "England", "Top 4", "Champions League"],
+      "currents": [
+        {"date": "2026-02-01", "probability": 0.38},
+        {"date": "2026-02-04", "probability": 0.39},
+        {"date": "2026-02-07", "probability": 0.40},
+        {"date": "2026-02-09", "probability": 0.41},
+        {"date": "2026-02-10", "probability": 0.42},
+        {"date": "2026-02-11", "probability": 0.42}
+      ]
+    },
+    {
+      "id": "laliga-real-barca-el-clasico-2026",
+      "title": "Will Real Madrid win El Clásico at Camp Nou?",
+      "description": "The world's biggest club rivalry renewed in Barcelona. Real Madrid travels to face Barcelona in a match that could decide the La Liga title race. 90 minutes only.",
+      "category": "Soccer",
+      "subcategory": "La Liga",
+      "probability": 0.38,
+      "volume": 445000,
+      "resolutionDate": "2026-03-22",
+      "image": "static/images/laliga-clasico.jpg",
+      "tags": ["Soccer", "La Liga", "El Clasico", "Real Madrid", "Barcelona", "Spain", "Rivalry"],
+      "currents": [
+        {"date": "2026-02-05", "probability": 0.35},
+        {"date": "2026-02-07", "probability": 0.36},
+        {"date": "2026-02-08", "probability": 0.37},
+        {"date": "2026-02-09", "probability": 0.37},
+        {"date": "2026-02-10", "probability": 0.38},
+        {"date": "2026-02-11", "probability": 0.38}
+      ]
+    },
+    {
+      "id": "serie-a-napoli-juve-2026",
+      "title": "Will Napoli defeat Juventus in Serie A this weekend?",
+      "description": "Napoli hosts Juventus in a crucial Serie A encounter. The defending champions look to maintain their position at the top of the table against the resurgent Old Lady.",
+      "category": "Soccer",
+      "subcategory": "Serie A",
+      "probability": 0.51,
+      "volume": 234000,
+      "resolutionDate": "2026-02-14",
+      "image": "static/images/seria-napoli-juve.jpg",
+      "tags": ["Soccer", "Serie A", "Napoli", "Juventus", "Italy", "Football"],
+      "currents": [
+        {"date": "2026-02-06", "probability": 0.48},
+        {"date": "2026-02-08", "probability": 0.49},
+        {"date": "2026-02-09", "probability": 0.50},
+        {"date": "2026-02-10", "probability": 0.50},
+        {"date": "2026-02-11", "probability": 0.51}
+      ]
+    },
+    {
+      "id": "bundesliga-bayern-dortmund-2026",
+      "title": "Will Bayern Munich win Der Klassiker against Dortmund?",
+      "description": "Germany's biggest rivalry as Bayern hosts Borussia Dortmund at the Allianz Arena. Six-point swing potential in the Bundesliga title race with both teams tied on points.",
+      "category": "Soccer",
+      "subcategory": "Bundesliga",
+      "probability": 0.62,
+      "volume": 289000,
+      "resolutionDate": "2026-02-21",
+      "image": "static/images/bundesliga-bayern-bvb.jpg",
+      "tags": ["Soccer", "Bundesliga", "Bayern Munich", "Dortmund", "Germany", "Der Klassiker"],
+      "currents": [
+        {"date": "2026-02-06", "probability": 0.59},
+        {"date": "2026-02-08", "probability": 0.60},
+        {"date": "2026-02-09", "probability": 0.61},
+        {"date": "2026-02-10", "probability": 0.61},
+        {"date": "2026-02-11", "probability": 0.62}
+      ]
+    },
+    {
+      "id": "wcq-england-qualify-2026",
+      "title": "Will England qualify directly for the 2026 World Cup?",
+      "description": "England currently leads their World Cup qualifying group with 4 matches remaining. Direct qualification requires finishing first. Resolves when qualification is mathematically secured or eliminated.",
+      "category": "Soccer",
+      "subcategory": "World Cup",
+      "probability": 0.78,
+      "volume": 523000,
+      "resolutionDate": "2026-06-15",
+      "image": "static/images/wcq-england.jpg",
+      "tags": ["Soccer", "World Cup", "England", "Qualifying", "International", "FIFA"],
+      "currents": [
+        {"date": "2026-02-01", "probability": 0.74},
+        {"date": "2026-02-04", "probability": 0.75},
+        {"date": "2026-02-07", "probability": 0.76},
+        {"date": "2026-02-09", "probability": 0.77},
+        {"date": "2026-02-10", "probability": 0.78},
+        {"date": "2026-02-11", "probability": 0.78}
+      ]
+    },
+    {
+      "id": "wcq-brazil-argentina-2026",
+      "title": "Will Brazil beat Argentina in World Cup qualifying?",
+      "description": "The South American superclásico returns as Brazil hosts Argentina in crucial World Cup qualifying. Both teams already qualified, but pride and rankings are at stake.",
+      "category": "Soccer",
+      "subcategory": "World Cup",
+      "probability": 0.46,
+      "volume": 387000,
+      "resolutionDate": "2026-03-28",
+      "image": "static/images/wcq-brazil-argentina.jpg",
+      "tags": ["Soccer", "World Cup", "Brazil", "Argentina", "South America", "International", "Rivalry"],
+      "currents": [
+        {"date": "2026-02-05", "probability": 0.44},
+        {"date": "2026-02-07", "probability": 0.45},
+        {"date": "2026-02-08", "probability": 0.45},
+        {"date": "2026-02-09", "probability": 0.46},
+        {"date": "2026-02-10", "probability": 0.46},
+        {"date": "2026-02-11", "probability": 0.46}
+      ]
+    },
+    {
+      "id": "ligue1-psg-marseille-2026",
+      "title": "Will PSG score 3+ goals against Marseille in Le Classique?",
+      "description": "France's biggest derby as PSG hosts Marseille in Le Classique. PSG's star-studded attack has been in devastating form. Market resolves YES if PSG scores 3 or more goals.",
+      "category": "Soccer",
+      "subcategory": "Ligue 1",
+      "probability": 0.43,
+      "volume": 198000,
+      "resolutionDate": "2026-02-23",
+      "image": "static/images/ligue1-psg-marseille.jpg",
+      "tags": ["Soccer", "Ligue 1", "PSG", "Marseille", "France", "Le Classique", "Goals"],
+      "currents": [
+        {"date": "2026-02-07", "probability": 0.40},
+        {"date": "2026-02-08", "probability": 0.41},
+        {"date": "2026-02-09", "probability": 0.42},
+        {"date": "2026-02-10", "probability": 0.42},
+        {"date": "2026-02-11", "probability": 0.43}
+      ]
+    },
+    {
+      "id": "mls-lafc-galaxy-2026",
+      "title": "Will LAFC win the LA Derby against Galaxy?",
+      "description": "Los Angeles rivalry renewed as the MLS season kicks off. LAFC looks to continue their dominance over their crosstown rivals. Regular time result only.",
+      "category": "Soccer",
+      "subcategory": "MLS",
+      "probability": 0.57,
+      "volume": 145000,
+      "resolutionDate": "2026-03-07",
+      "image": "static/images/mls-lafc-galaxy.jpg",
+      "tags": ["Soccer", "MLS", "LAFC", "LA Galaxy", "USA", "Derby", "Los Angeles"],
+      "currents": [
+        {"date": "2026-02-08", "probability": 0.54},
+        {"date": "2026-02-09", "probability": 0.55},
+        {"date": "2026-02-10", "probability": 0.56},
+        {"date": "2026-02-11", "probability": 0.57}
+      ]
+    },
+    {
+      "id": "ucl-liverpool-atletico-2026",
+      "title": "Will Liverpool advance to Champions League Quarter-Finals?",
+      "description": "Liverpool faces Atletico Madrid in their Round of 16 Champions League tie. Klopp's men seek revenge for their 2020 elimination. Aggregate score determines qualification.",
+      "category": "Soccer",
+      "subcategory": "Champions League",
+      "probability": 0.61,
+      "volume": 356000,
+      "resolutionDate": "2026-03-17",
+      "image": "static/images/ucl-liverpool-atletico.jpg",
+      "tags": ["Soccer", "Champions League", "Liverpool", "Atletico Madrid", "UEFA", "England", "Spain"],
+      "currents": [
+        {"date": "2026-02-05", "probability": 0.58},
+        {"date": "2026-02-07", "probability": 0.59},
+        {"date": "2026-02-09", "probability": 0.60},
+        {"date": "2026-02-10", "probability": 0.60},
+        {"date": "2026-02-11", "probability": 0.61}
+      ]
+    },
+    {
+      "id": "epl-man-city-title-2026",
+      "title": "Will Manchester City win the Premier League title?",
+      "description": "Manchester City currently leads the Premier League by 3 points with 15 games remaining. Can Guardiola's side secure another championship? Resolves at season end.",
+      "category": "Soccer",
+      "subcategory": "Premier League",
+      "probability": 0.68,
+      "volume": 678000,
+      "resolutionDate": "2026-05-24",
+      "image": "static/images/epl-city-title.jpg",
+      "tags": ["Soccer", "Premier League", "Manchester City", "Title", "England", "Championship"],
+      "currents": [
+        {"date": "2026-02-01", "probability": 0.65},
+        {"date": "2026-02-04", "probability": 0.66},
+        {"date": "2026-02-07", "probability": 0.67},
+        {"date": "2026-02-09", "probability": 0.67},
+        {"date": "2026-02-10", "probability": 0.68},
+        {"date": "2026-02-11", "probability": 0.68}
+      ]
+    },
+    {
+      "id": "nba-lakers-celtics-2026",
+      "title": "Will Lakers defeat Celtics at TD Garden?",
+      "description": "Historic NBA rivalry renewed as the Lakers visit Boston. Both teams are playoff-bound with championship aspirations. LeBron vs Tatum showdown expected to draw massive viewership.",
+      "category": "Basketball",
+      "subcategory": "NBA",
+      "probability": 0.42,
+      "volume": 312000,
+      "resolutionDate": "2026-02-17",
+      "image": "static/images/nba-lakers-celtics.jpg",
+      "tags": ["Basketball", "NBA", "Lakers", "Celtics", "LeBron", "Rivalry", "Boston"],
+      "currents": [
+        {"date": "2026-02-07", "probability": 0.40},
+        {"date": "2026-02-08", "probability": 0.41},
+        {"date": "2026-02-09", "probability": 0.41},
+        {"date": "2026-02-10", "probability": 0.42},
+        {"date": "2026-02-11", "probability": 0.42}
+      ]
+    },
+    {
+      "id": "nba-warriors-suns-2026",
+      "title": "Will Warriors beat Suns in their matchup this week?",
+      "description": "Western Conference powerhouses collide as the Warriors host the Suns. Curry versus Booker in a crucial mid-season game with playoff seeding implications.",
+      "category": "Basketball",
+      "subcategory": "NBA",
+      "probability": 0.54,
+      "volume": 268000,
+      "resolutionDate": "2026-02-14",
+      "image": "static/images/nba-warriors-suns.jpg",
+      "tags": ["Basketball", "NBA", "Warriors", "Suns", "Curry", "Western Conference"],
+      "currents": [
+        {"date": "2026-02-08", "probability": 0.52},
+        {"date": "2026-02-09", "probability": 0.53},
+        {"date": "2026-02-10", "probability": 0.53},
+        {"date": "2026-02-11", "probability": 0.54}
+      ]
+    },
+    {
+      "id": "nba-bucks-76ers-2026",
+      "title": "Will Bucks defeat 76ers in Eastern Conference showdown?",
+      "description": "Giannis and the Bucks host Embiid's 76ers in a potential playoff preview. Both teams are top-3 in the East and fighting for home-court advantage throughout the playoffs.",
+      "category": "Basketball",
+      "subcategory": "NBA",
+      "probability": 0.59,
+      "volume": 294000,
+      "resolutionDate": "2026-02-15",
+      "image": "static/images/nba-bucks-sixers.jpg",
+      "tags": ["Basketball", "NBA", "Bucks", "76ers", "Giannis", "Embiid", "Eastern Conference"],
+      "currents": [
+        {"date": "2026-02-08", "probability": 0.57},
+        {"date": "2026-02-09", "probability": 0.58},
+        {"date": "2026-02-10", "probability": 0.58},
+        {"date": "2026-02-11", "probability": 0.59}
+      ]
+    },
+    {
+      "id": "nba-nuggets-title-2026",
+      "title": "Will Denver Nuggets win the NBA Championship?",
+      "description": "The defending champions look strong with Jokic playing MVP-caliber basketball. Can the Nuggets repeat and establish a dynasty? Market resolves after NBA Finals.",
+      "category": "Basketball",
+      "subcategory": "NBA",
+      "probability": 0.32,
+      "volume": 487000,
+      "resolutionDate": "2026-06-20",
+      "image": "static/images/nba-nuggets-title.jpg",
+      "tags": ["Basketball", "NBA", "Nuggets", "Championship", "Jokic", "Title", "Denver"],
+      "currents": [
+        {"date": "2026-02-01", "probability": 0.30},
+        {"date": "2026-02-04", "probability": 0.30},
+        {"date": "2026-02-07", "probability": 0.31},
+        {"date": "2026-02-09", "probability": 0.31},
+        {"date": "2026-02-10", "probability": 0.32},
+        {"date": "2026-02-11", "probability": 0.32}
+      ]
+    },
+    {
+      "id": "nba-celtics-title-2026",
+      "title": "Will Boston Celtics win the NBA Championship?",
+      "description": "Boston leads the Eastern Conference and looks poised for a deep playoff run. Tatum and Brown have the Celtics firing on all cylinders. Banner 18 incoming?",
+      "category": "Basketball",
+      "subcategory": "NBA",
+      "probability": 0.28,
+      "volume": 456000,
+      "resolutionDate": "2026-06-20",
+      "image": "static/images/nba-celtics-title.jpg",
+      "tags": ["Basketball", "NBA", "Celtics", "Championship", "Tatum", "Boston", "Title"],
+      "currents": [
+        {"date": "2026-02-01", "probability": 0.26},
+        {"date": "2026-02-04", "probability": 0.26},
+        {"date": "2026-02-07", "probability": 0.27},
+        {"date": "2026-02-09", "probability": 0.27},
+        {"date": "2026-02-10", "probability": 0.28},
+        {"date": "2026-02-11", "probability": 0.28}
+      ]
+    },
+    {
+      "id": "nba-all-star-mvp-2026",
+      "title": "Will LeBron James win NBA All-Star Game MVP?",
+      "description": "The All-Star Game returns to Cleveland, LeBron's home. Will King James claim another All-Star MVP in front of his home crowd? Resolves based on official MVP announcement.",
+      "category": "Basketball",
+      "subcategory": "NBA",
+      "probability": 0.18,
+      "volume": 234000,
+      "resolutionDate": "2026-02-16",
+      "image": "static/images/nba-allstar-lebron.jpg",
+      "tags": ["Basketball", "NBA", "All-Star", "LeBron James", "MVP", "Cleveland"],
+      "currents": [
+        {"date": "2026-02-09", "probability": 0.15},
+        {"date": "2026-02-10", "probability": 0.16},
+        {"date": "2026-02-11", "probability": 0.18}
+      ]
+    },
+    {
+      "id": "nba-lakers-playoffs-2026",
+      "title": "Will Lakers make the NBA Playoffs?",
+      "description": "The Lakers are currently 7th in the West and fighting to avoid the play-in tournament. With LeBron and AD healthy, can they secure a top-6 seed? Resolves at regular season end.",
+      "category": "Basketball",
+      "subcategory": "NBA",
+      "probability": 0.82,
+      "volume": 378000,
+      "resolutionDate": "2026-04-13",
+      "image": "static/images/nba-lakers-playoffs.jpg",
+      "tags": ["Basketball", "NBA", "Lakers", "Playoffs", "LeBron", "Western Conference"],
+      "currents": [
+        {"date": "2026-02-04", "probability": 0.79},
+        {"date": "2026-02-06", "probability": 0.80},
+        {"date": "2026-02-08", "probability": 0.81},
+        {"date": "2026-02-10", "probability": 0.81},
+        {"date": "2026-02-11", "probability": 0.82}
+      ]
+    },
+    {
+      "id": "nba-mavs-clippers-2026",
+      "title": "Will Mavericks defeat Clippers in LA?",
+      "description": "Luka Dončić leads the Mavs into battle against the Clippers in Los Angeles. Both teams are Western Conference contenders looking to gain an edge before the playoffs.",
+      "category": "Basketball",
+      "subcategory": "NBA",
+      "probability": 0.47,
+      "volume": 223000,
+      "resolutionDate": "2026-02-19",
+      "image": "static/images/nba-mavs-clippers.jpg",
+      "tags": ["Basketball", "NBA", "Mavericks", "Clippers", "Luka", "Western Conference", "Los Angeles"],
+      "currents": [
+        {"date": "2026-02-08", "probability": 0.45},
+        {"date": "2026-02-09", "probability": 0.46},
+        {"date": "2026-02-10", "probability": 0.46},
+        {"date": "2026-02-11", "probability": 0.47}
+      ]
+    },
+    {
+      "id": "nba-heat-knicks-2026",
+      "title": "Will Heat beat Knicks at Madison Square Garden?",
+      "description": "Miami travels to New York for an Eastern Conference matchup at the iconic MSG. Both teams are fighting for playoff position in a tight conference race.",
+      "category": "Basketball",
+      "subcategory": "NBA",
+      "probability": 0.44,
+      "volume": 187000,
+      "resolutionDate": "2026-02-18",
+      "image": "static/images/nba-heat-knicks.jpg",
+      "tags": ["Basketball", "NBA", "Heat", "Knicks", "MSG", "Eastern Conference", "New York"],
+      "currents": [
+        {"date": "2026-02-09", "probability": 0.42},
+        {"date": "2026-02-10", "probability": 0.43},
+        {"date": "2026-02-11", "probability": 0.44}
+      ]
+    },
+    {
+      "id": "euroleague-real-madrid-barcelona-2026",
+      "title": "Will Real Madrid defeat Barcelona in EuroLeague El Clásico?",
+      "description": "Spanish basketball giants clash in EuroLeague action. Real Madrid hosts Barcelona in a game that transcends just basketball. European glory on the line.",
+      "category": "Basketball",
+      "subcategory": "EuroLeague",
+      "probability": 0.56,
+      "volume": 156000,
+      "resolutionDate": "2026-02-20",
+      "image": "static/images/euro-real-barca-bball.jpg",
+      "tags": ["Basketball", "EuroLeague", "Real Madrid", "Barcelona", "Spain", "Europe"],
+      "currents": [
+        {"date": "2026-02-08", "probability": 0.54},
+        {"date": "2026-02-09", "probability": 0.55},
+        {"date": "2026-02-10", "probability": 0.55},
+        {"date": "2026-02-11", "probability": 0.56}
+      ]
+    },
+    {
+      "id": "nfl-chiefs-repeat-2027",
+      "title": "Will Kansas City Chiefs win Super Bowl LXI?",
+      "description": "Can Patrick Mahomes and the Chiefs three-peat? Fresh off their Super Bowl LX victory, oddsmakers already favor KC for next season. Market resolves after Super Bowl LXI.",
+      "category": "American Football",
+      "subcategory": "NFL",
+      "probability": 0.22,
+      "volume": 523000,
+      "resolutionDate": "2027-02-07",
+      "image": "static/images/nfl-chiefs-superbowl.jpg",
+      "tags": ["American Football", "NFL", "Chiefs", "Super Bowl", "Mahomes", "Kansas City"],
+      "currents": [
+        {"date": "2026-02-05", "probability": 0.20},
+        {"date": "2026-02-07", "probability": 0.21},
+        {"date": "2026-02-09", "probability": 0.21},
+        {"date": "2026-02-10", "probability": 0.22},
+        {"date": "2026-02-11", "probability": 0.22}
+      ]
+    },
+    {
+      "id": "nfl-49ers-title-2027",
+      "title": "Will San Francisco 49ers win Super Bowl LXI?",
+      "description": "The 49ers are hungry after falling short in Super Bowl LX. Kyle Shanahan's squad returns most of their roster. Can they finally get over the hump?",
+      "category": "American Football",
+      "subcategory": "NFL",
+      "probability": 0.15,
+      "volume": 412000,
+      "resolutionDate": "2027-02-07",
+      "image": "static/images/nfl-49ers-superbowl.jpg",
+      "tags": ["American Football", "NFL", "49ers", "Super Bowl", "San Francisco", "NFC"],
+      "currents": [
+        {"date": "2026-02-05", "probability": 0.14},
+        {"date": "2026-02-07", "probability": 0.14},
+        {"date": "2026-02-09", "probability": 0.15},
+        {"date": "2026-02-10", "probability": 0.15},
+        {"date": "2026-02-11", "probability": 0.15}
+      ]
+    },
+    {
+      "id": "nfl-ravens-title-2027",
+      "title": "Will Baltimore Ravens win Super Bowl LXI?",
+      "description": "Lamar Jackson and the Ravens are perennial contenders. With one of the league's best defenses and an explosive offense, Baltimore is a favorite for next season.",
+      "category": "American Football",
+      "subcategory": "NFL",
+      "probability": 0.13,
+      "volume": 378000,
+      "resolutionDate": "2027-02-07",
+      "image": "static/images/nfl-ravens-superbowl.jpg",
+      "tags": ["American Football", "NFL", "Ravens", "Super Bowl", "Lamar Jackson", "Baltimore", "AFC"],
+      "currents": [
+        {"date": "2026-02-05", "probability": 0.12},
+        {"date": "2026-02-07", "probability": 0.12},
+        {"date": "2026-02-09", "probability": 0.13},
+        {"date": "2026-02-10", "probability": 0.13},
+        {"date": "2026-02-11", "probability": 0.13}
+      ]
+    },
+    {
+      "id": "nfl-bills-title-2027",
+      "title": "Will Buffalo Bills win Super Bowl LXI?",
+      "description": "Josh Allen continues to put up MVP numbers, but the Bills haven't gotten over the AFC Championship hump. Is next season finally their year?",
+      "category": "American Football",
+      "subcategory": "NFL",
+      "probability": 0.11,
+      "volume": 345000,
+      "resolutionDate": "2027-02-07",
+      "image": "static/images/nfl-bills-superbowl.jpg",
+      "tags": ["American Football", "NFL", "Bills", "Super Bowl", "Josh Allen", "Buffalo", "AFC"],
+      "currents": [
+        {"date": "2026-02-05", "probability": 0.10},
+        {"date": "2026-02-07", "probability": 0.10},
+        {"date": "2026-02-09", "probability": 0.11},
+        {"date": "2026-02-10", "probability": 0.11},
+        {"date": "2026-02-11", "probability": 0.11}
+      ]
+    },
+    {
+      "id": "nfl-cowboys-title-2027",
+      "title": "Will Dallas Cowboys win Super Bowl LXI?",
+      "description": "America's Team is perpetually on the brink. Dak Prescott and the Cowboys have the talent, but can they finally deliver a championship to Jerry Jones?",
+      "category": "American Football",
+      "subcategory": "NFL",
+      "probability": 0.09,
+      "volume": 456000,
+      "resolutionDate": "2027-02-07",
+      "image": "static/images/nfl-cowboys-superbowl.jpg",
+      "tags": ["American Football", "NFL", "Cowboys", "Super Bowl", "Dallas", "NFC", "Dak Prescott"],
+      "currents": [
+        {"date": "2026-02-05", "probability": 0.08},
+        {"date": "2026-02-07", "probability": 0.08},
+        {"date": "2026-02-09", "probability": 0.09},
+        {"date": "2026-02-10", "probability": 0.09},
+        {"date": "2026-02-11", "probability": 0.09}
+      ]
+    },
+    {
+      "id": "nfl-lions-title-2027",
+      "title": "Will Detroit Lions win their first Super Bowl?",
+      "description": "The Lions are building something special under Dan Campbell. After years of suffering, Detroit fans are dreaming big. Can they break through and win it all?",
+      "category": "American Football",
+      "subcategory": "NFL",
+      "probability": 0.12,
+      "volume": 389000,
+      "resolutionDate": "2027-02-07",
+      "image": "static/images/nfl-lions-superbowl.jpg",
+      "tags": ["American Football", "NFL", "Lions", "Super Bowl", "Detroit", "NFC", "Dan Campbell"],
+      "currents": [
+        {"date": "2026-02-05", "probability": 0.11},
+        {"date": "2026-02-07", "probability": 0.11},
+        {"date": "2026-02-09", "probability": 0.12},
+        {"date": "2026-02-10", "probability": 0.12},
+        {"date": "2026-02-11", "probability": 0.12}
+      ]
+    },
+    {
+      "id": "nfl-eagles-title-2027",
+      "title": "Will Philadelphia Eagles win Super Bowl LXI?",
+      "description": "The Eagles have built a powerhouse roster with a dominant offensive line and fierce defense. Philadelphia is always a threat in the NFC.",
+      "category": "American Football",
+      "subcategory": "NFL",
+      "probability": 0.10,
+      "volume": 334000,
+      "resolutionDate": "2027-02-07",
+      "image": "static/images/nfl-eagles-superbowl.jpg",
+      "tags": ["American Football", "NFL", "Eagles", "Super Bowl", "Philadelphia", "NFC"],
+      "currents": [
+        {"date": "2026-02-05", "probability": 0.09},
+        {"date": "2026-02-07", "probability": 0.09},
+        {"date": "2026-02-09", "probability": 0.10},
+        {"date": "2026-02-10", "probability": 0.10},
+        {"date": "2026-02-11", "probability": 0.10}
+      ]
+    },
+    {
+      "id": "nfl-bengals-title-2027",
+      "title": "Will Cincinnati Bengals win Super Bowl LXI?",
+      "description": "Joe Burrow and the Bengals are back in contention. With a healthy roster and championship experience, Cincinnati is a dark horse for next season's title.",
+      "category": "American Football",
+      "subcategory": "NFL",
+      "probability": 0.08,
+      "volume": 267000,
+      "resolutionDate": "2027-02-07",
+      "image": "static/images/nfl-bengals-superbowl.jpg",
+      "tags": ["American Football", "NFL", "Bengals", "Super Bowl", "Joe Burrow", "Cincinnati", "AFC"],
+      "currents": [
+        {"date": "2026-02-05", "probability": 0.07},
+        {"date": "2026-02-07", "probability": 0.08},
+        {"date": "2026-02-09", "probability": 0.08},
+        {"date": "2026-02-10", "probability": 0.08},
+        {"date": "2026-02-11", "probability": 0.08}
+      ]
+    },
+    {
+      "id": "nfl-draft-caleb-top3-2026",
+      "title": "Will Caleb Williams be a top 3 pick in 2026 NFL Draft?",
+      "description": "The USC quarterback is generating massive buzz ahead of the 2026 NFL Draft. Multiple teams are projected to need a QB. Resolves YES if picked 1-3 overall.",
+      "category": "American Football",
+      "subcategory": "NFL Draft",
+      "probability": 0.67,
+      "volume": 298000,
+      "resolutionDate": "2026-04-23",
+      "image": "static/images/nfl-draft-2026.jpg",
+      "tags": ["American Football", "NFL", "Draft", "Caleb Williams", "Quarterback", "USC"],
+      "currents": [
+        {"date": "2026-02-04", "probability": 0.64},
+        {"date": "2026-02-06", "probability": 0.65},
+        {"date": "2026-02-08", "probability": 0.66},
+        {"date": "2026-02-10", "probability": 0.66},
+        {"date": "2026-02-11", "probability": 0.67}
+      ]
+    },
+    {
+      "id": "nfl-mahomes-mvp-2026",
+      "title": "Will Patrick Mahomes win NFL MVP for 2026 season?",
+      "description": "Mahomes just led the Chiefs to another Super Bowl. Early odds already favor him for the 2026 season MVP. Can he add another trophy to his collection?",
+      "category": "American Football",
+      "subcategory": "NFL",
+      "probability": 0.19,
+      "volume": 445000,
+      "resolutionDate": "2027-02-06",
+      "image": "static/images/nfl-mahomes-mvp.jpg",
+      "tags": ["American Football", "NFL", "MVP", "Patrick Mahomes", "Chiefs", "Kansas City"],
+      "currents": [
+        {"date": "2026-02-05", "probability": 0.17},
+        {"date": "2026-02-07", "probability": 0.18},
+        {"date": "2026-02-09", "probability": 0.18},
+        {"date": "2026-02-10", "probability": 0.19},
+        {"date": "2026-02-11", "probability": 0.19}
+      ]
+    },
+    {
+      "id": "mlb-dodgers-world-series-2026",
+      "title": "Will Los Angeles Dodgers win the World Series?",
+      "description": "The Dodgers have built another superteam for 2026. With Ohtani fully healthy and a loaded roster, LA is the favorite to win it all. Resolves after World Series.",
+      "category": "Baseball",
+      "subcategory": "MLB",
+      "probability": 0.18,
+      "volume": 478000,
+      "resolutionDate": "2026-11-01",
+      "image": "static/images/mlb-dodgers-ws.jpg",
+      "tags": ["Baseball", "MLB", "Dodgers", "World Series", "Ohtani", "Los Angeles"],
+      "currents": [
+        {"date": "2026-02-01", "probability": 0.16},
+        {"date": "2026-02-04", "probability": 0.17},
+        {"date": "2026-02-07", "probability": 0.17},
+        {"date": "2026-02-09", "probability": 0.18},
+        {"date": "2026-02-10", "probability": 0.18},
+        {"date": "2026-02-11", "probability": 0.18}
+      ]
+    },
+    {
+      "id": "mlb-yankees-world-series-2026",
+      "title": "Will New York Yankees win the World Series?",
+      "description": "The Yankees are always in win-now mode. With Aaron Judge leading the charge and a bolstered pitching staff, the Bronx Bombers are contenders once again.",
+      "category": "Baseball",
+      "subcategory": "MLB",
+      "probability": 0.14,
+      "volume": 423000,
+      "resolutionDate": "2026-11-01",
+      "image": "static/images/mlb-yankees-ws.jpg",
+      "tags": ["Baseball", "MLB", "Yankees", "World Series", "Aaron Judge", "New York"],
+      "currents": [
+        {"date": "2026-02-01", "probability": 0.13},
+        {"date": "2026-02-04", "probability": 0.13},
+        {"date": "2026-02-07", "probability": 0.14},
+        {"date": "2026-02-09", "probability": 0.14},
+        {"date": "2026-02-10", "probability": 0.14},
+        {"date": "2026-02-11", "probability": 0.14}
+      ]
+    },
+    {
+      "id": "mlb-braves-world-series-2026",
+      "title": "Will Atlanta Braves win the World Series?",
+      "description": "Atlanta's young core is entering their prime years. With one of baseball's best farm systems and proven playoff experience, the Braves are built to win now.",
+      "category": "Baseball",
+      "subcategory": "MLB",
+      "probability": 0.12,
+      "volume": 356000,
+      "resolutionDate": "2026-11-01",
+      "image": "static/images/mlb-braves-ws.jpg",
+      "tags": ["Baseball", "MLB", "Braves", "World Series", "Atlanta", "NL East"],
+      "currents": [
+        {"date": "2026-02-01", "probability": 0.11},
+        {"date": "2026-02-04", "probability": 0.11},
+        {"date": "2026-02-07", "probability": 0.12},
+        {"date": "2026-02-09", "probability": 0.12},
+        {"date": "2026-02-10", "probability": 0.12},
+        {"date": "2026-02-11", "probability": 0.12}
+      ]
+    },
+    {
+      "id": "mlb-astros-world-series-2026",
+      "title": "Will Houston Astros win the World Series?",
+      "description": "The Astros dynasty continues with another strong roster. Houston has proven they can win in October. Can they add another championship banner?",
+      "category": "Baseball",
+      "subcategory": "MLB",
+      "probability": 0.11,
+      "volume": 312000,
+      "resolutionDate": "2026-11-01",
+      "image": "static/images/mlb-astros-ws.jpg",
+      "tags": ["Baseball", "MLB", "Astros", "World Series", "Houston", "AL West"],
+      "currents": [
+        {"date": "2026-02-01", "probability": 0.10},
+        {"date": "2026-02-04", "probability": 0.10},
+        {"date": "2026-02-07", "probability": 0.11},
+        {"date": "2026-02-09", "probability": 0.11},
+        {"date": "2026-02-10", "probability": 0.11},
+        {"date": "2026-02-11", "probability": 0.11}
+      ]
+    },
+    {
+      "id": "mlb-mets-world-series-2026",
+      "title": "Will New York Mets win the World Series?",
+      "description": "Steve Cohen's deep pockets have the Mets competing for a championship. With star acquisitions and homegrown talent, Queens is dreaming of October glory.",
+      "category": "Baseball",
+      "subcategory": "MLB",
+      "probability": 0.09,
+      "volume": 289000,
+      "resolutionDate": "2026-11-01",
+      "image": "static/images/mlb-mets-ws.jpg",
+      "tags": ["Baseball", "MLB", "Mets", "World Series", "New York", "NL East"],
+      "currents": [
+        {"date": "2026-02-01", "probability": 0.08},
+        {"date": "2026-02-04", "probability": 0.08},
+        {"date": "2026-02-07", "probability": 0.09},
+        {"date": "2026-02-09", "probability": 0.09},
+        {"date": "2026-02-10", "probability": 0.09},
+        {"date": "2026-02-11", "probability": 0.09}
+      ]
+    },
+    {
+      "id": "mlb-orioles-playoffs-2026",
+      "title": "Will Baltimore Orioles make the MLB Playoffs?",
+      "description": "The O's young talent is maturing rapidly. After surprising everyone last year, Baltimore looks to establish themselves as perennial contenders in the tough AL East.",
+      "category": "Baseball",
+      "subcategory": "MLB",
+      "probability": 0.71,
+      "volume": 234000,
+      "resolutionDate": "2026-10-03",
+      "image": "static/images/mlb-orioles-playoffs.jpg",
+      "tags": ["Baseball", "MLB", "Orioles", "Playoffs", "Baltimore", "AL East"],
+      "currents": [
+        {"date": "2026-02-01", "probability": 0.68},
+        {"date": "2026-02-04", "probability": 0.69},
+        {"date": "2026-02-07", "probability": 0.70},
+        {"date": "2026-02-09", "probability": 0.70},
+        {"date": "2026-02-10", "probability": 0.71},
+        {"date": "2026-02-11", "probability": 0.71}
+      ]
+    },
+    {
+      "id": "mlb-ohtani-mvp-2026",
+      "title": "Will Shohei Ohtani win NL MVP in 2026?",
+      "description": "Ohtani's first full season with the Dodgers. As a two-way superstar in the National League, can he capture his third MVP award? Resolves after announcement.",
+      "category": "Baseball",
+      "subcategory": "MLB",
+      "probability": 0.23,
+      "volume": 387000,
+      "resolutionDate": "2026-11-15",
+      "image": "static/images/mlb-ohtani-mvp.jpg",
+      "tags": ["Baseball", "MLB", "MVP", "Shohei Ohtani", "Dodgers", "Awards"],
+      "currents": [
+        {"date": "2026-02-01", "probability": 0.21},
+        {"date": "2026-02-04", "probability": 0.21},
+        {"date": "2026-02-07", "probability": 0.22},
+        {"date": "2026-02-09", "probability": 0.22},
+        {"date": "2026-02-10", "probability": 0.23},
+        {"date": "2026-02-11", "probability": 0.23}
+      ]
+    },
+    {
+      "id": "mlb-judge-mvp-2026",
+      "title": "Will Aaron Judge win AL MVP in 2026?",
+      "description": "After his historic 2022 season, Judge remains the Yankees' cornerstone. Can the captain capture another MVP trophy and lead NY back to the World Series?",
+      "category": "Baseball",
+      "subcategory": "MLB",
+      "probability": 0.16,
+      "volume": 312000,
+      "resolutionDate": "2026-11-15",
+      "image": "static/images/mlb-judge-mvp.jpg",
+      "tags": ["Baseball", "MLB", "MVP", "Aaron Judge", "Yankees", "Awards"],
+      "currents": [
+        {"date": "2026-02-01", "probability": 0.15},
+        {"date": "2026-02-04", "probability": 0.15},
+        {"date": "2026-02-07", "probability": 0.16},
+        {"date": "2026-02-09", "probability": 0.16},
+        {"date": "2026-02-10", "probability": 0.16},
+        {"date": "2026-02-11", "probability": 0.16}
+      ]
+    },
+    {
+      "id": "mlb-padres-playoffs-2026",
+      "title": "Will San Diego Padres make the MLB Playoffs?",
+      "description": "San Diego is all-in with their star-studded roster. Machado, Tatis, and a loaded pitching staff have the Padres positioned for a deep postseason run.",
+      "category": "Baseball",
+      "subcategory": "MLB",
+      "probability": 0.68,
+      "volume": 267000,
+      "resolutionDate": "2026-10-03",
+      "image": "static/images/mlb-padres-playoffs.jpg",
+      "tags": ["Baseball", "MLB", "Padres", "Playoffs", "San Diego", "NL West"],
+      "currents": [
+        {"date": "2026-02-01", "probability": 0.65},
+        {"date": "2026-02-04", "probability": 0.66},
+        {"date": "2026-02-07", "probability": 0.67},
+        {"date": "2026-02-09", "probability": 0.67},
+        {"date": "2026-02-10", "probability": 0.68},
+        {"date": "2026-02-11", "probability": 0.68}
+      ]
+    },
+    {
+      "id": "mlb-cubs-playoffs-2026",
+      "title": "Will Chicago Cubs make the MLB Playoffs?",
+      "description": "The Cubs are rebuilding with young talent and smart acquisitions. Can they surprise the NL Central and return to October baseball at Wrigley?",
+      "category": "Baseball",
+      "subcategory": "MLB",
+      "probability": 0.44,
+      "volume": 198000,
+      "resolutionDate": "2026-10-03",
+      "image": "static/images/mlb-cubs-playoffs.jpg",
+      "tags": ["Baseball", "MLB", "Cubs", "Playoffs", "Chicago", "NL Central"],
+      "currents": [
+        {"date": "2026-02-01", "probability": 0.42},
+        {"date": "2026-02-04", "probability": 0.42},
+        {"date": "2026-02-07", "probability": 0.43},
+        {"date": "2026-02-09", "probability": 0.43},
+        {"date": "2026-02-10", "probability": 0.44},
+        {"date": "2026-02-11", "probability": 0.44}
+      ]
+    },
+    {
+      "id": "tennis-djokovic-french-2026",
+      "title": "Will Novak Djokovic win French Open 2026?",
+      "description": "Djokovic continues to defy age and chase more Grand Slam titles. Can he add another Roland Garros trophy at 39? His clay court mastery remains elite.",
+      "category": "Tennis",
+      "subcategory": "Grand Slam",
+      "probability": 0.31,
+      "volume": 312000,
+      "resolutionDate": "2026-06-07",
+      "image": "static/images/tennis-djokovic-french.jpg",
+      "tags": ["Tennis", "French Open", "Djokovic", "Grand Slam", "Roland Garros", "Clay"],
+      "currents": [
+        {"date": "2026-02-01", "probability": 0.29},
+        {"date": "2026-02-04", "probability": 0.29},
+        {"date": "2026-02-07", "probability": 0.30},
+        {"date": "2026-02-09", "probability": 0.30},
+        {"date": "2026-02-10", "probability": 0.31},
+        {"date": "2026-02-11", "probability": 0.31}
+      ]
+    },
+    {
+      "id": "f1-verstappen-championship-2026",
+      "title": "Will Max Verstappen win F1 World Championship 2026?",
+      "description": "Verstappen and Red Bull have dominated recent seasons. Can Max secure another championship with new regulations potentially shaking up the grid?",
+      "category": "Formula 1",
+      "subcategory": "Championship",
+      "probability": 0.52,
+      "volume": 445000,
+      "resolutionDate": "2026-12-06",
+      "image": "static/images/f1-verstappen-2026.jpg",
+      "tags": ["Formula 1", "F1", "Verstappen", "Championship", "Red Bull", "Racing"],
+      "currents": [
+        {"date": "2026-02-01", "probability": 0.50},
+        {"date": "2026-02-04", "probability": 0.50},
+        {"date": "2026-02-07", "probability": 0.51},
+        {"date": "2026-02-09", "probability": 0.51},
+        {"date": "2026-02-10", "probability": 0.52},
+        {"date": "2026-02-11", "probability": 0.52}
+      ]
+    },
+    {
+      "id": "f1-ferrari-constructor-2026",
+      "title": "Will Ferrari win F1 Constructors' Championship?",
+      "description": "Ferrari is pushing hard with their 2026 car development. Can the Scuderia break their championship drought and return to glory? Tifosi are hopeful.",
+      "category": "Formula 1",
+      "subcategory": "Championship",
+      "probability": 0.28,
+      "volume": 378000,
+      "resolutionDate": "2026-12-06",
+      "image": "static/images/f1-ferrari-2026.jpg",
+      "tags": ["Formula 1", "F1", "Ferrari", "Constructors", "Championship", "Scuderia"],
+      "currents": [
+        {"date": "2026-02-01", "probability": 0.26},
+        {"date": "2026-02-04", "probability": 0.27},
+        {"date": "2026-02-07", "probability": 0.27},
+        {"date": "2026-02-09", "probability": 0.28},
+        {"date": "2026-02-10", "probability": 0.28},
+        {"date": "2026-02-11", "probability": 0.28}
+      ]
+    },
+    {
+      "id": "ufc-jones-heavyweight-2026",
+      "title": "Will Jon Jones defend UFC Heavyweight title in March?",
+      "description": "Jon Jones faces his next challenger for the heavyweight belt. GOAT status on the line as Jones looks to cement his legacy in a second weight class.",
+      "category": "MMA",
+      "subcategory": "UFC",
+      "probability": 0.74,
+      "volume": 298000,
+      "resolutionDate": "2026-03-21",
+      "image": "static/images/ufc-jones-hw.jpg",
+      "tags": ["MMA", "UFC", "Jon Jones", "Heavyweight", "Championship", "Fighting"],
+      "currents": [
+        {"date": "2026-02-05", "probability": 0.71},
+        {"date": "2026-02-07", "probability": 0.72},
+        {"date": "2026-02-09", "probability": 0.73},
+        {"date": "2026-02-10", "probability": 0.73},
+        {"date": "2026-02-11", "probability": 0.74}
+      ]
+    },
+    {
+      "id": "ufc-adesanya-comeback-2026",
+      "title": "Will Israel Adesanya win in his UFC comeback fight?",
+      "description": "Adesanya returns after a brief hiatus. The Last Stylebender looks to reclaim middleweight supremacy. Can he return to championship form?",
+      "category": "MMA",
+      "subcategory": "UFC",
+      "probability": 0.65,
+      "volume": 267000,
+      "resolutionDate": "2026-03-14",
+      "image": "static/images/ufc-adesanya.jpg",
+      "tags": ["MMA", "UFC", "Adesanya", "Middleweight", "Comeback", "Fighting"],
+      "currents": [
+        {"date": "2026-02-06", "probability": 0.63},
+        {"date": "2026-02-08", "probability": 0.64},
+        {"date": "2026-02-09", "probability": 0.64},
+        {"date": "2026-02-10", "probability": 0.65},
+        {"date": "2026-02-11", "probability": 0.65}
+      ]
+    }
+  ]
+}

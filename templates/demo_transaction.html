@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo: Transaction Flow - Currents</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <h1 class="text-3xl font-bold mb-2">💸 Demo: Transaction Flow</h1>
+        <p class="text-gray-400 mb-8">Working examples of USDC approval and position placement</p>
+        
+        <!-- Wallet Connection Panel -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-6 border border-gray-700">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold">Wallet Status</h2>
+                <div id="wallet-indicator" class="w-3 h-3 rounded-full bg-red-500"></div>
+            </div>
+            
+            <div id="wallet-disconnected" class="text-center py-8">
+                <p class="text-gray-400 mb-4">Connect your wallet to test transactions</p>
+                <button id="connect-wallet-btn" 
+                        class="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-6 rounded-lg transition-all">
+                    Connect Wallet
+                </button>
+            </div>
+            
+            <div id="wallet-connected" class="hidden space-y-3">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs text-gray-400">Address</label>
+                        <div id="wallet-address" class="text-sm font-mono bg-gray-900 px-3 py-2 rounded">-</div>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400">Network</label>
+                        <div id="wallet-network" class="text-sm bg-gray-900 px-3 py-2 rounded">-</div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs text-gray-400">ETH Balance</label>
+                        <div id="eth-balance" class="text-sm bg-gray-900 px-3 py-2 rounded">Loading...</div>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400">USDC Balance</label>
+                        <div id="usdc-balance" class="text-sm bg-gray-900 px-3 py-2 rounded">Loading...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Demo Transactions -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            
+            <!-- USDC Approval -->
+            <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                <h3 class="text-lg font-semibold mb-4">🎟️ USDC Approval</h3>
+                <p class="text-sm text-gray-400 mb-4">Approve Rain contract to spend your USDC</p>
+                
+                <div class="space-y-3 mb-4">
+                    <div>
+                        <label class="text-xs text-gray-400 block mb-1">Spender (Rain Contract)</label>
+                        <input id="spender-address" 
+                               type="text" 
+                               value="0x0000000000000000000000000000000000000000"
+                               class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-2 text-sm font-mono"
+                               placeholder="0x...">
+                        <p class="text-xs text-gray-500 mt-1">⚠️ Replace with actual Rain contract address</p>
+                    </div>
+                    
+                    <div>
+                        <label class="text-xs text-gray-400 block mb-1">Amount (USDC)</label>
+                        <input id="approve-amount" 
+                               type="number" 
+                               value="100"
+                               min="0"
+                               step="0.01"
+                               class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-2 text-sm">
+                    </div>
+                    
+                    <div id="current-allowance" class="text-xs text-gray-400 bg-gray-900 rounded px-3 py-2">
+                        Current allowance: <span class="text-white">-</span>
+                    </div>
+                </div>
+                
+                <button id="approve-btn" 
+                        disabled
+                        class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-lg transition-all">
+                    Approve USDC
+                </button>
+            </div>
+            
+            <!-- Position Placement -->
+            <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                <h3 class="text-lg font-semibold mb-4">🎯 Place Position</h3>
+                <p class="text-sm text-gray-400 mb-4">Simulate placing a position on a market</p>
+                
+                <div class="space-y-3 mb-4">
+                    <div>
+                        <label class="text-xs text-gray-400 block mb-1">Market</label>
+                        <select id="demo-market" 
+                                class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-2 text-sm">
+                            <option value="market-1">Will Bitcoin hit $100k in 2026?</option>
+                            <option value="market-2">Will AI replace developers by 2027?</option>
+                            <option value="market-3">Will Ethereum merge be successful?</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="text-xs text-gray-400 block mb-1">Option</label>
+                        <select id="demo-option" 
+                                class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-2 text-sm">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="text-xs text-gray-400 block mb-1">Amount (USDC)</label>
+                        <input id="position-amount" 
+                               type="number" 
+                               value="10"
+                               min="1"
+                               step="0.01"
+                               class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-2 text-sm">
+                    </div>
+                    
+                    <div class="text-xs bg-gray-900 rounded px-3 py-2 space-y-1">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Fee (2%)</span>
+                            <span id="demo-fee" class="text-white">$0.20</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Total</span>
+                            <span id="demo-total" class="text-white font-semibold">$10.20</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="place-position-btn" 
+                        disabled
+                        class="w-full bg-orange-600 hover:bg-orange-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-lg transition-all">
+                    Place Position
+                </button>
+            </div>
+        </div>
+        
+        <!-- Transaction Log -->
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <h3 class="text-lg font-semibold mb-4">📝 Transaction Log</h3>
+            <div id="tx-log" class="space-y-2 max-h-80 overflow-y-auto">
+                <p class="text-gray-400 text-sm">No transactions yet. Connect wallet and try the demos above.</p>
+            </div>
+        </div>
+        
+        <!-- Implementation Notes -->
+        <div class="mt-8 bg-blue-900/20 border border-blue-700 rounded-lg p-6">
+            <h3 class="text-lg font-semibold mb-3">📚 Implementation Notes</h3>
+            <div class="space-y-2 text-sm text-gray-300">
+                <p><strong>USDC Contract:</strong> 0xaf88d065e77c8cC2239327C5EDb3A432268e5831 (Arbitrum One)</p>
+                <p><strong>Decimals:</strong> 6 (use ethers.utils.parseUnits(amount, 6))</p>
+                <p><strong>Gas Estimation:</strong> Always estimate gas before sending transactions</p>
+                <p><strong>Error Handling:</strong> All user-rejected transactions are caught and logged</p>
+                <p><strong>Rain SDK:</strong> Replace demo code with actual Rain SDK integration</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- WalletConnect v2 + Ethers.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    
+    <script>
+        // ============================================
+        // CONFIGURATION
+        // ============================================
+        
+        const ARBITRUM_CHAIN_ID = 42161;
+        const USDC_ADDRESS = '0xaf88d065e77c8cC2239327C5EDb3A432268e5831'; // Arbitrum USDC
+        
+        // USDC ABI (minimal for demo)
+        const USDC_ABI = [
+            'function approve(address spender, uint256 amount) returns (bool)',
+            'function allowance(address owner, address spender) view returns (uint256)',
+            'function balanceOf(address account) view returns (uint256)',
+            'function decimals() view returns (uint8)'
+        ];
+        
+        // ============================================
+        // WALLET MANAGER (Simplified)
+        // ============================================
+        
+        class SimpleWalletManager {
+            constructor() {
+                this.wcProvider = null;
+                this.ethersProvider = null;
+                this.signer = null;
+                this.address = null;
+            }
+            
+            async connect() {
+                try {
+                    log('Connecting wallet...');
+                    
+                    this.wcProvider = new WalletConnectProvider.default({
+                        projectId: '670912b433d703cd729372f0eac64a24',
+                        rpc: { [ARBITRUM_CHAIN_ID]: 'https://arb1.arbitrum.io/rpc' },
+                        chainId: ARBITRUM_CHAIN_ID,
+                    });
+                    
+                    await this.wcProvider.enable();
+                    
+                    this.ethersProvider = new ethers.providers.Web3Provider(this.wcProvider);
+                    this.signer = this.ethersProvider.getSigner();
+                    this.address = await this.signer.getAddress();
+                    
+                    log(`✅ Connected: ${this.address}`, 'success');
+                    
+                    this.setupListeners();
+                    await updateUI();
+                    
+                    return true;
+                } catch (error) {
+                    log(`❌ Connection failed: ${error.message}`, 'error');
+                    return false;
+                }
+            }
+            
+            async disconnect() {
+                if (this.wcProvider) {
+                    await this.wcProvider.disconnect();
+                }
+                this.wcProvider = null;
+                this.ethersProvider = null;
+                this.signer = null;
+                this.address = null;
+                await updateUI();
+            }
+            
+            setupListeners() {
+                this.wcProvider.on('accountsChanged', async (accounts) => {
+                    this.address = accounts[0];
+                    await updateUI();
+                });
+                
+                this.wcProvider.on('chainChanged', async () => {
+                    await updateUI();
+                });
+                
+                this.wcProvider.on('disconnect', () => {
+                    this.disconnect();
+                });
+            }
+            
+            isConnected() {
+                return !!this.address;
+            }
+        }
+        
+        const wallet = new SimpleWalletManager();
+        
+        // ============================================
+        // UI UPDATES
+        // ============================================
+        
+        async function updateUI() {
+            const connected = wallet.isConnected();
+            
+            // Toggle panels
+            document.getElementById('wallet-disconnected').classList.toggle('hidden', connected);
+            document.getElementById('wallet-connected').classList.toggle('hidden', !connected);
+            
+            // Indicator
+            const indicator = document.getElementById('wallet-indicator');
+            indicator.className = `w-3 h-3 rounded-full ${connected ? 'bg-green-500' : 'bg-red-500'}`;
+            
+            // Enable/disable buttons
+            document.getElementById('approve-btn').disabled = !connected;
+            document.getElementById('place-position-btn').disabled = !connected;
+            
+            if (connected) {
+                // Update address
+                document.getElementById('wallet-address').textContent = wallet.address;
+                
+                // Update network
+                const network = await wallet.ethersProvider.getNetwork();
+                const isArbitrum = network.chainId === ARBITRUM_CHAIN_ID;
+                document.getElementById('wallet-network').innerHTML = isArbitrum
+                    ? '<span class="text-green-400">✓</span> Arbitrum One (42161)'
+                    : `<span class="text-red-400">⚠</span> Wrong Network (${network.chainId})`;
+                
+                // Update balances
+                await updateBalances();
+                
+                // Update allowance
+                await updateAllowance();
+            }
+        }
+        
+        async function updateBalances() {
+            try {
+                // ETH balance
+                const ethBalance = await wallet.ethersProvider.getBalance(wallet.address);
+                document.getElementById('eth-balance').textContent = 
+                    `${parseFloat(ethers.utils.formatEther(ethBalance)).toFixed(4)} ETH`;
+                
+                // USDC balance
+                const usdc = new ethers.Contract(USDC_ADDRESS, USDC_ABI, wallet.ethersProvider);
+                const usdcBalance = await usdc.balanceOf(wallet.address);
+                document.getElementById('usdc-balance').textContent = 
+                    `${parseFloat(ethers.utils.formatUnits(usdcBalance, 6)).toFixed(2)} USDC`;
+                    
+            } catch (error) {
+                console.error('Failed to fetch balances:', error);
+                document.getElementById('eth-balance').textContent = 'Error';
+                document.getElementById('usdc-balance').textContent = 'Error';
+            }
+        }
+        
+        async function updateAllowance() {
+            try {
+                const spenderAddress = document.getElementById('spender-address').value;
+                if (!ethers.utils.isAddress(spenderAddress)) {
+                    document.getElementById('current-allowance').innerHTML = 
+                        'Current allowance: <span class="text-yellow-400">Invalid spender address</span>';
+                    return;
+                }
+                
+                const usdc = new ethers.Contract(USDC_ADDRESS, USDC_ABI, wallet.ethersProvider);
+                const allowance = await usdc.allowance(wallet.address, spenderAddress);
+                const formatted = parseFloat(ethers.utils.formatUnits(allowance, 6)).toFixed(2);
+                
+                document.getElementById('current-allowance').innerHTML = 
+                    `Current allowance: <span class="text-white">${formatted} USDC</span>`;
+                    
+            } catch (error) {
+                console.error('Failed to fetch allowance:', error);
+            }
+        }
+        
+        // ============================================
+        // TRANSACTION HANDLERS
+        // ============================================
+        
+        async function approveUSDC() {
+            try {
+                if (!wallet.isConnected()) {
+                    throw new Error('Wallet not connected');
+                }
+                
+                const spenderAddress = document.getElementById('spender-address').value;
+                const amount = document.getElementById('approve-amount').value;
+                
+                if (!ethers.utils.isAddress(spenderAddress)) {
+                    throw new Error('Invalid spender address');
+                }
+                
+                if (!amount || parseFloat(amount) <= 0) {
+                    throw new Error('Invalid amount');
+                }
+                
+                log(`Approving ${amount} USDC for ${spenderAddress}...`);
+                
+                const amountWei = ethers.utils.parseUnits(amount, 6);
+                const usdc = new ethers.Contract(USDC_ADDRESS, USDC_ABI, wallet.signer);
+                
+                // Estimate gas
+                log('Estimating gas...');
+                const gasEstimate = await usdc.estimateGas.approve(spenderAddress, amountWei);
+                log(`Gas estimate: ${gasEstimate.toString()}`);
+                
+                // Send transaction
+                log('Requesting approval... (check your wallet)');
+                const tx = await usdc.approve(spenderAddress, amountWei);
+                
+                log(`Transaction sent: ${tx.hash}`, 'info');
+                log('View on explorer: https://arbiscan.io/tx/' + tx.hash, 'info');
+                
+                // Wait for confirmation
+                log('Waiting for confirmation...');
+                const receipt = await tx.wait();
+                
+                log(`✅ Approval confirmed! (Block ${receipt.blockNumber})`, 'success');
+                
+                // Update UI
+                await updateAllowance();
+                await updateBalances();
+                
+            } catch (error) {
+                if (error.code === 4001) {
+                    log('❌ Transaction rejected by user', 'error');
+                } else {
+                    log(`❌ Approval failed: ${error.message}`, 'error');
+                }
+                console.error(error);
+            }
+        }
+        
+        async function placePosition() {
+            try {
+                if (!wallet.isConnected()) {
+                    throw new Error('Wallet not connected');
+                }
+                
+                const market = document.getElementById('demo-market').value;
+                const option = document.getElementById('demo-option').value;
+                const amount = document.getElementById('position-amount').value;
+                
+                if (!amount || parseFloat(amount) <= 0) {
+                    throw new Error('Invalid amount');
+                }
+                
+                log(`Placing position: ${market} → ${option} → ${amount} USDC...`);
+                
+                // In a real implementation, this would call your Rain SDK
+                // For demo purposes, we'll simulate the flow
+                
+                log('📊 Demo Mode: This would normally:', 'info');
+                log('  1. Check USDC allowance', 'info');
+                log('  2. Request approval if needed', 'info');
+                log('  3. Call Rain SDK to place position', 'info');
+                log('  4. Wait for confirmation', 'info');
+                log('  5. Update UI with new position', 'info');
+                
+                // Simulate async operation
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                log(`✅ Position placed successfully! (Demo)`, 'success');
+                log(`Market: ${market}`, 'success');
+                log(`Option: ${option.toUpperCase()}`, 'success');
+                log(`Amount: ${amount} USDC`, 'success');
+                
+                // Reset form
+                document.getElementById('position-amount').value = '10';
+                updateFeeCalculation();
+                
+            } catch (error) {
+                if (error.code === 4001) {
+                    log('❌ Transaction rejected by user', 'error');
+                } else {
+                    log(`❌ Position placement failed: ${error.message}`, 'error');
+                }
+                console.error(error);
+            }
+        }
+        
+        // ============================================
+        // FEE CALCULATION
+        // ============================================
+        
+        function updateFeeCalculation() {
+            const amount = parseFloat(document.getElementById('position-amount').value) || 0;
+            const fee = amount * 0.02; // 2% fee
+            const total = amount + fee;
+            
+            document.getElementById('demo-fee').textContent = `$${fee.toFixed(2)}`;
+            document.getElementById('demo-total').textContent = `$${total.toFixed(2)}`;
+        }
+        
+        // ============================================
+        // LOGGING
+        // ============================================
+        
+        function log(message, type = 'info') {
+            console.log(`[Demo] ${message}`);
+            
+            const logEl = document.getElementById('tx-log');
+            
+            // Clear placeholder
+            if (logEl.querySelector('p.text-gray-400')) {
+                logEl.innerHTML = '';
+            }
+            
+            const timestamp = new Date().toLocaleTimeString();
+            const colors = {
+                info: 'text-blue-400',
+                error: 'text-red-400',
+                warning: 'text-yellow-400',
+                success: 'text-green-400'
+            };
+            
+            const logEntry = document.createElement('div');
+            logEntry.className = `text-xs ${colors[type] || colors.info} font-mono`;
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            
+            logEl.insertBefore(logEntry, logEl.firstChild);
+            
+            // Keep only last 100 entries
+            while (logEl.children.length > 100) {
+                logEl.removeChild(logEl.lastChild);
+            }
+        }
+        
+        // ============================================
+        // EVENT LISTENERS
+        // ============================================
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // Connect button
+            document.getElementById('connect-wallet-btn').addEventListener('click', async () => {
+                await wallet.connect();
+            });
+            
+            // Approve button
+            document.getElementById('approve-btn').addEventListener('click', approveUSDC);
+            
+            // Place position button
+            document.getElementById('place-position-btn').addEventListener('click', placePosition);
+            
+            // Spender address change
+            document.getElementById('spender-address').addEventListener('change', () => {
+                if (wallet.isConnected()) {
+                    updateAllowance();
+                }
+            });
+            
+            // Amount inputs for fee calculation
+            document.getElementById('position-amount').addEventListener('input', updateFeeCalculation);
+            
+            // Initial fee calculation
+            updateFeeCalculation();
+            
+            log('Demo page loaded. Connect your wallet to test transactions.');
+        });
+    </script>
+</body>
+</html>

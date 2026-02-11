@@ -1,0 +1,103 @@
+528788|Rojas guilty in Texas illegal abortion case?|Crime|/static/images/market_528788.jpg
+528820|Senator Eichorn guilty of soliciting a child?|Crime|/static/images/market_528820.jpg
+531202|BitBoy convicted?|Crime|/static/images/market_531202.jpg
+544092|Will Harvey Weinstein be sentenced to no prison time?|Crime|/static/images/market_544092.jpg
+544093|Will Harvey Weinstein be sentenced to less than 5 years in prison?|Crime|/static/images/market_544093.jpg
+544094|Will Harvey Weinstein be sentenced to between 5 and 10 years in prison?|Crime|/static/images/market_544094.jpg
+544095|Will Harvey Weinstein be sentenced to between 10 and 20 years in prison?|Crime|/static/images/market_544095.jpg
+544096|Will Harvey Weinstein be sentenced to between 20 and 30 years in prison?|Crime|/static/images/market_544096.jpg
+544097|Will Harvey Weinstein be sentenced to more than 30 years in prison?|Crime|/static/images/market_544097.jpg
+549868|Will Dilan Yeşilgöz-Zegerius become the next Prime Minister of the Netherlands?|Crypto|/static/images/market_549868.jpg
+549869|Will Frans Timmermans become the next Prime Minister of the Netherlands?|Crypto|/static/images/market_549869.jpg
+549870|Will Geert Wilders become the next Prime Minister of the Netherlands?|Crypto|/static/images/market_549870.jpg
+549871|Will Nicolien van Vroonhoven-Kok become the next Prime Minister of the Netherlands?|Crypto|/static/images/market_549871.jpg
+549872|Will Dick Schoof become the next Prime Minister of the Netherlands?|Crypto|/static/images/market_549872.jpg
+549873|Will Caroline van der Plas become the next Prime Minister of the Netherlands?|Crypto|/static/images/market_549873.jpg
+549874|Will Rob Jetten become the next Prime Minister of the Netherlands?|Crypto|/static/images/market_549874.jpg
+549875|Will Henri Bontenbal become the next Prime Minister of the Netherlands?|Crypto|/static/images/market_549875.jpg
+549876|Will Ahmed Aboutaleb become the next Prime Minister of the Netherlands?|Crypto|/static/images/market_549876.jpg
+549877|Will Klaas Dijkhoff become the next Prime Minister of the Netherlands?|Crypto|/static/images/market_549877.jpg
+540819|Will Jesus Christ return before GTA VI?|Culture|/static/images/market_540819.jpg
+521944|Will Elon and DOGE cut less than $50b in federal spending in 2025?|Economics|/static/images/market_521944.jpg
+521945|Will Elon and DOGE cut between $50-100b in federal spending in 2025?|Economics|/static/images/market_521945.jpg
+521946|Will Elon and DOGE cut between $100-150b in federal spending in 2025?|Economics|/static/images/market_521946.jpg
+521947|Will Elon and DOGE cut between $150-200b in federal spending in 2025?|Economics|/static/images/market_521947.jpg
+521948|Will Elon and DOGE cut between $200-250b in federal spending in 2025?|Economics|/static/images/market_521948.jpg
+521949|Will Elon and DOGE cut more than $250b in federal spending in 2025?|Economics|/static/images/market_521949.jpg
+521963|Will Elon cut the budget by at least 10% in 2025?|Economics|/static/images/market_521963.jpg
+521964|Will Elon cut the budget by at least 5% in 2025?|Economics|/static/images/market_521964.jpg
+537484|Will the U.S. collect less than $100b in revenue in 2025?|Economics|/static/images/market_537484.jpg
+537485|Will the U.S. collect between $100b and $200b in revenue in 2025?|Economics|/static/images/market_537485.jpg
+537486|Will the U.S. collect between $200b and $500b in revenue in 2025?|Economics|/static/images/market_537486.jpg
+537487|Will the U.S. collect between $500b and $1t in revenue in 2025?|Economics|/static/images/market_537487.jpg
+537488|Will the U.S. collect between $1t and $2t in revenue in 2025?|Economics|/static/images/market_537488.jpg
+537489|Will the U.S. collect more than $2t in revenue in 2025?|Economics|/static/images/market_537489.jpg
+537490|Will tariffs generate >$250b in 2025?|Economics|/static/images/market_537490.jpg
+527079|Will GTA 6 cost $100+?|Entertainment|/static/images/market_527079.jpg
+540816|Russia-Ukraine Ceasefire before GTA VI?|Entertainment|/static/images/market_540816.jpg
+540817|New Rihanna Album before GTA VI?|Entertainment|/static/images/market_540817.jpg
+540818|New Playboi Carti Album before GTA VI?|Entertainment|/static/images/market_540818.jpg
+540820|Trump out as President before GTA VI?|Entertainment|/static/images/market_540820.jpg
+540843|Will China invades Taiwan before GTA VI?|Entertainment|/static/images/market_540843.jpg
+540844|Will bitcoin hit $1m before GTA VI?|Entertainment|/static/images/market_540844.jpg
+540881|GTA VI released before June 2026?|Entertainment|/static/images/market_540881.jpg
+517310|Will Trump deport less than 250,000?|Politics|/static/images/market_517310.jpg
+517311|Will Trump deport 250,000-500,000 people?|Politics|/static/images/market_517311.jpg
+517313|Will Trump deport 500,000-750,000- people?|Politics|/static/images/market_517313.jpg
+517314|Will Trump deport 750,000-1,000,000 people?|Politics|/static/images/market_517314.jpg
+517315|Will Trump deport 1,000,000-1,250,000 people?|Politics|/static/images/market_517315.jpg
+517316|Will Trump deport 1,250,000-1,500,000 people?|Politics|/static/images/market_517316.jpg
+517317|Will Trump deport 1,500,000-1,750,000 people?|Politics|/static/images/market_517317.jpg
+517318|Will Trump deport 1,750,000-2,000,000 people?|Politics|/static/images/market_517318.jpg
+517319|Will Trump deport 2,000,000 or more people?|Politics|/static/images/market_517319.jpg
+517321|Will Trump deport 750,000 or more people in 2025?|Politics|/static/images/market_517321.jpg
+multi_003|What will Trump's first action as President be?|Politics|/static/images/market_multi_003.jpg
+550694|Will Italy qualify for the 2026 FIFA World Cup?|Sports|/static/images/market_550694.jpg
+550703|Will Sweden qualify for the 2026 FIFA World Cup?|Sports|/static/images/market_550703.jpg
+550706|Will Poland qualify for the 2026 FIFA World Cup?|Sports|/static/images/market_550706.jpg
+553824|Will the Carolina Hurricanes win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553824.jpg
+553825|Will the Florida Panthers win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553825.jpg
+553826|Will the Edmonton Oilers win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553826.jpg
+553827|Will the Dallas Stars win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553827.jpg
+553828|Will the Colorado Avalanche win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553828.jpg
+553829|Will the Vegas Golden Knights win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553829.jpg
+553830|Will the Tampa Bay Lightning win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553830.jpg
+553831|Will the Los Angeles Kings win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553831.jpg
+553832|Will the New Jersey Devils win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553832.jpg
+553833|Will the Winnipeg Jets win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553833.jpg
+553834|Will the Toronto Maple Leafs win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553834.jpg
+553835|Will the Washington Capitals win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553835.jpg
+553836|Will the New York Rangers win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553836.jpg
+553837|Will the Ottawa Senators win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553837.jpg
+553838|Will the Minnesota Wild win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553838.jpg
+553839|Will the Utah Mammoth win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553839.jpg
+553840|Will the St. Louis Blues win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553840.jpg
+553841|Will the Vancouver Canucks win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553841.jpg
+553842|Will the New York Islanders win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553842.jpg
+553843|Will the Philadelphia Flyers win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553843.jpg
+553844|Will the Columbus Blue Jackets win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553844.jpg
+553845|Will the Calgary Flames win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553845.jpg
+553846|Will the Nashville Predators win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553846.jpg
+553847|Will the Detroit Red Wings win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553847.jpg
+553848|Will the Anaheim Ducks win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553848.jpg
+553849|Will the Montreal Canadiens win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553849.jpg
+553850|Will the Boston Bruins win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553850.jpg
+553851|Will the Buffalo Sabres win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553851.jpg
+553852|Will the Pittsburgh Penguins win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553852.jpg
+553853|Will the Seattle Kraken win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553853.jpg
+553854|Will the Chicago Blackhawks win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553854.jpg
+553855|Will the San Jose Sharks win the 2026 NHL Stanley Cup?|Sports|/static/images/market_553855.jpg
+553856|Will the Oklahoma City Thunder win the 2026 NBA Finals?|Sports|/static/images/market_553856.jpg
+553857|Will the Cleveland Cavaliers win the 2026 NBA Finals?|Sports|/static/images/market_553857.jpg
+553858|Will the New York Knicks win the 2026 NBA Finals?|Sports|/static/images/market_553858.jpg
+553859|Will the Minnesota Timberwolves win the 2026 NBA Finals?|Sports|/static/images/market_553859.jpg
+553860|Will the Houston Rockets win the 2026 NBA Finals?|Sports|/static/images/market_553860.jpg
+553861|Will the Indiana Pacers win the 2026 NBA Finals?|Sports|/static/images/market_553861.jpg
+553862|Will the Boston Celtics win the 2026 NBA Finals?|Sports|/static/images/market_553862.jpg
+553863|Will the Los Angeles Lakers win the 2026 NBA Finals?|Sports|/static/images/market_553863.jpg
+553864|Will the Orlando Magic win the 2026 NBA Finals?|Sports|/static/images/market_553864.jpg
+multi_001|Who will win the 2026 NBA Championship?|Sports|/static/images/market_multi_001.jpg
+533851|Negative GDP growth in 2025?|Technology|/static/images/market_533851.jpg
+546612|Will OpenAI launch a new consumer hardware product by March 31, 2026?|Technology|/static/images/market_546612.jpg
+550708|Will Ukraine qualify for the 2026 FIFA World Cup?|Technology|/static/images/market_550708.jpg
+multi_002|What will be the top AI company by market cap in 2027?|Technology|/static/images/market_multi_002.jpg

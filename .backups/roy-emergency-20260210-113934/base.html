@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Currents - Belief-Driven Information{% endblock %}</title>
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Preload critical CSS for instant render -->
+    <link rel="preload" href="/static/tailwind-minimal.css" as="style">
+    
+    <!-- Design Tokens -->
+    <link rel="stylesheet" href="/static/design-tokens.css">
+    
+    <!-- Tailwind CSS - Local Build (FAST!) -->
+    <link rel="stylesheet" href="/static/tailwind-minimal.css">
+    
+    <!-- Design Tokens -->
+    <link rel="stylesheet" href="/static/design-tokens.css">
+    
+    <!-- Custom styles -->
+    <style>
+        /* Using system fonts for INSTANT load - no external requests! */
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            letter-spacing: -0.01em;
+        }
+        .probability-bar {
+            transition: width 0.3s ease;
+        }
+        /* Better text rendering */
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Subtle grid hover effects */
+        .market-card {
+            transition: all 0.2s ease;
+        }
+        .market-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(249, 115, 22, 0.15);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="border-b border-gray-800 bg-black/50 backdrop-blur">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center gap-3">
+                    <!-- Logo -->
+                    <svg class="w-8 h-8" viewBox="0 0 32 32" fill="none">
+                        <circle cx="16" cy="16" r="14" stroke="#F97316" stroke-width="2"/>
+                        <path d="M10 16 L16 10 L22 16 L16 22 Z" fill="#F97316"/>
+                    </svg>
+                    <span class="text-2xl font-bold text-white">Currents</span>
+                    <span class="text-xs text-gray-500 flex items-center gap-1.5">
+                        powered by
+                        <!-- Rain logo - water droplet -->
+                        <svg class="w-5 h-5" viewBox="0 0 100 100" fill="none">
+                            <path d="M50 10 C30 35, 20 50, 20 65 C20 82, 33 95, 50 95 C67 95, 80 82, 80 65 C80 50, 70 35, 50 10 Z" fill="#EAF000"/>
+                            <ellipse cx="50" cy="50" rx="15" ry="25" fill="#000000"/>
+                        </svg>
+                    </span>
+                </a>
+                <nav class="flex gap-6">
+                    <a href="/" class="text-gray-400 hover:text-white transition">Feed</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Categories</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Following</a>
+                </nav>
+                <button id="connect-wallet-btn" 
+                        class="px-4 py-2 bg-orange-600 hover:bg-orange-700 rounded-lg transition font-bold">
+                    Connect Wallet
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="container mx-auto px-4 py-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 mt-16 py-8">
+        <div class="container mx-auto px-4 text-center text-gray-500">
+            <p>Currents v24 © 2026 - Belief-Driven Information</p>
+            <p class="text-xs mt-2 flex items-center justify-center gap-2">
+                powered by 
+                <svg class="w-4 h-4" viewBox="0 0 100 100" fill="none">
+                    <path d="M50 10 C30 35, 20 50, 20 65 C20 82, 33 95, 50 95 C67 95, 80 82, 80 65 C80 50, 70 35, 50 10 Z" fill="#EAF000"/>
+                    <ellipse cx="50" cy="50" rx="15" ry="25" fill="#000000"/>
+                </svg>
+                Rain Protocol
+            </p>
+            <p class="text-xs mt-3">
+                <a href="https://brain-db-viewer.loca.lt" target="_blank" class="text-blue-500 hover:text-blue-400 transition underline">
+                    🔍 View Database
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Working Wallet Integration (Arbitrum) -->
+    {% include 'wallet_integration.html' %}
+</body>
+</html>
+    <!-- Enhanced hover effects -->
+    <style>
+        .market-card {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+        }
+        .market-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25), 
+                        0 0 0 1px rgba(249, 115, 22, 0.2);
+        }
+    </style>

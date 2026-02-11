@@ -1,0 +1,5530 @@
+{
+  "markets": [
+    {
+      "market_id": "new_sports_001",
+      "title": "Will Real Madrid win the 2025-26 Champions League?",
+      "description": "Resolves YES if Real Madrid wins the 2025-26 UEFA Champions League final. The final is scheduled for May 30, 2026 at the Allianz Arena in Munich. Resolves NO if any other team wins.",
+      "probability": 0.42,
+      "volume_24h": 185000,
+      "volume_total": 890000,
+      "category": "Sports",
+      "tags": [
+        "soccer",
+        "champions-league",
+        "real-madrid",
+        "uefa",
+        "european-football"
+      ],
+      "image_search": "champions league trophy real madrid celebration",
+      "resolution_date": "2026-05-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.38
+        },
+        {
+          "date": "2026-01-25",
+          "prob": 0.41
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.39
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.42
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_002",
+      "title": "Will Manchester City win the Premier League 2025-26?",
+      "description": "Resolves YES if Manchester City finishes first in the English Premier League at the end of the 2025-26 season (May 2026). Resolves NO if any other team wins the title.",
+      "probability": 0.55,
+      "volume_24h": 220000,
+      "volume_total": 1250000,
+      "category": "Sports",
+      "tags": [
+        "soccer",
+        "premier-league",
+        "manchester-city",
+        "england",
+        "football"
+      ],
+      "image_search": "premier league trophy manchester city stadium",
+      "resolution_date": "2026-05-24T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-10",
+          "prob": 0.52
+        },
+        {
+          "date": "2026-01-20",
+          "prob": 0.58
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.56
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.55
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_003",
+      "title": "Will Liverpool qualify for Champions League next season?",
+      "description": "Resolves YES if Liverpool finishes in the top 4 of the Premier League 2025-26 season, securing Champions League qualification. Resolves NO if they finish 5th or lower.",
+      "probability": 0.68,
+      "volume_24h": 95000,
+      "volume_total": 420000,
+      "category": "Sports",
+      "tags": [
+        "soccer",
+        "premier-league",
+        "liverpool",
+        "champions-league-qualification"
+      ],
+      "image_search": "liverpool football stadium anfield",
+      "resolution_date": "2026-05-24T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-05",
+          "prob": 0.72
+        },
+        {
+          "date": "2026-01-18",
+          "prob": 0.65
+        },
+        {
+          "date": "2026-02-03",
+          "prob": 0.7
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.68
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_004",
+      "title": "Will Barcelona win La Liga 2025-26?",
+      "description": "Resolves YES if FC Barcelona finishes first in Spain's La Liga at the end of the 2025-26 season. Resolves NO if Real Madrid, Atletico Madrid, or any other team wins.",
+      "probability": 0.48,
+      "volume_24h": 140000,
+      "volume_total": 675000,
+      "category": "Sports",
+      "tags": [
+        "soccer",
+        "la-liga",
+        "barcelona",
+        "spain",
+        "spanish-football"
+      ],
+      "image_search": "barcelona camp nou stadium celebration",
+      "resolution_date": "2026-05-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-12",
+          "prob": 0.45
+        },
+        {
+          "date": "2026-01-22",
+          "prob": 0.5
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.47
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.48
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_005",
+      "title": "Will Inter Milan win Serie A 2025-26?",
+      "description": "Resolves YES if Inter Milan wins the Italian Serie A championship for the 2025-26 season. Resolves NO if Juventus, AC Milan, or any other team wins the Scudetto.",
+      "probability": 0.52,
+      "volume_24h": 88000,
+      "volume_total": 395000,
+      "category": "Sports",
+      "tags": [
+        "soccer",
+        "serie-a",
+        "inter-milan",
+        "italy",
+        "italian-football"
+      ],
+      "image_search": "serie a trophy inter milan san siro",
+      "resolution_date": "2026-05-24T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-08",
+          "prob": 0.48
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.54
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.51
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.52
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_006",
+      "title": "Will PSG win Ligue 1 2025-26?",
+      "description": "Resolves YES if Paris Saint-Germain wins the French Ligue 1 championship for the 2025-26 season. PSG has dominated French football for over a decade.",
+      "probability": 0.72,
+      "volume_24h": 105000,
+      "volume_total": 480000,
+      "category": "Sports",
+      "tags": [
+        "soccer",
+        "ligue-1",
+        "psg",
+        "france",
+        "paris-saint-germain"
+      ],
+      "image_search": "psg parc des princes trophy celebration",
+      "resolution_date": "2026-05-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-10",
+          "prob": 0.75
+        },
+        {
+          "date": "2026-01-25",
+          "prob": 0.7
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.73
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.72
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_007",
+      "title": "Will Bayern Munich win Bundesliga 2025-26?",
+      "description": "Resolves YES if Bayern Munich wins the German Bundesliga championship for the 2025-26 season. They have won 11 consecutive titles entering this season.",
+      "probability": 0.64,
+      "volume_24h": 92000,
+      "volume_total": 425000,
+      "category": "Sports",
+      "tags": [
+        "soccer",
+        "bundesliga",
+        "bayern-munich",
+        "germany",
+        "german-football"
+      ],
+      "image_search": "bayern munich allianz arena bundesliga trophy",
+      "resolution_date": "2026-05-24T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-14",
+          "prob": 0.68
+        },
+        {
+          "date": "2026-01-24",
+          "prob": 0.62
+        },
+        {
+          "date": "2026-02-04",
+          "prob": 0.65
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.64
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_008",
+      "title": "Will Atletico Madrid reach Champions League semifinals?",
+      "description": "Resolves YES if Atletico Madrid advances to the Champions League semifinals in the 2025-26 season. Semifinals are scheduled for late April/early May 2026.",
+      "probability": 0.38,
+      "volume_24h": 68000,
+      "volume_total": 285000,
+      "category": "Sports",
+      "tags": [
+        "soccer",
+        "champions-league",
+        "atletico-madrid",
+        "spain"
+      ],
+      "image_search": "atletico madrid champions league match",
+      "resolution_date": "2026-05-10T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.35
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.4
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.38
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_009",
+      "title": "Will Arsenal finish top 2 in Premier League 2025-26?",
+      "description": "Resolves YES if Arsenal finishes first or second in the 2025-26 Premier League season. This guarantees Champions League football and represents continued progress under Arteta.",
+      "probability": 0.61,
+      "volume_24h": 112000,
+      "volume_total": 520000,
+      "category": "Sports",
+      "tags": [
+        "soccer",
+        "premier-league",
+        "arsenal",
+        "england",
+        "top-four"
+      ],
+      "image_search": "arsenal emirates stadium premier league",
+      "resolution_date": "2026-05-24T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-12",
+          "prob": 0.58
+        },
+        {
+          "date": "2026-01-26",
+          "prob": 0.63
+        },
+        {
+          "date": "2026-02-07",
+          "prob": 0.6
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.61
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_010",
+      "title": "Will Juventus qualify for Champions League 2026-27?",
+      "description": "Resolves YES if Juventus finishes in the top 4 of Serie A 2025-26, securing Champions League qualification. After recent struggles, this would mark a return to European elite.",
+      "probability": 0.58,
+      "volume_24h": 75000,
+      "volume_total": 340000,
+      "category": "Sports",
+      "tags": [
+        "soccer",
+        "serie-a",
+        "juventus",
+        "italy",
+        "champions-league-qualification"
+      ],
+      "image_search": "juventus stadium turin italy",
+      "resolution_date": "2026-05-24T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.55
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.6
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.57
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.58
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_011",
+      "title": "Will Tottenham win a trophy in 2025-26 season?",
+      "description": "Resolves YES if Tottenham Hotspur wins any major trophy (Premier League, FA Cup, League Cup, Europa League) during the 2025-26 season. Their trophy drought dates to 2008.",
+      "probability": 0.28,
+      "volume_24h": 82000,
+      "volume_total": 365000,
+      "category": "Sports",
+      "tags": [
+        "soccer",
+        "premier-league",
+        "tottenham",
+        "trophy",
+        "england"
+      ],
+      "image_search": "tottenham hotspur stadium london",
+      "resolution_date": "2026-06-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-10",
+          "prob": 0.32
+        },
+        {
+          "date": "2026-01-22",
+          "prob": 0.25
+        },
+        {
+          "date": "2026-02-03",
+          "prob": 0.3
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.28
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_012",
+      "title": "Will AC Milan win the Coppa Italia 2025-26?",
+      "description": "Resolves YES if AC Milan wins the Coppa Italia (Italian Cup) for the 2025-26 season. The final is typically held in May at the Stadio Olimpico in Rome.",
+      "probability": 0.35,
+      "volume_24h": 52000,
+      "volume_total": 215000,
+      "category": "Sports",
+      "tags": [
+        "soccer",
+        "coppa-italia",
+        "ac-milan",
+        "italy",
+        "cup-competition"
+      ],
+      "image_search": "ac milan san siro trophy",
+      "resolution_date": "2026-05-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.32
+        },
+        {
+          "date": "2026-01-30",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.34
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.35
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_013",
+      "title": "Will Chelsea finish in Europa League positions (5th-6th)?",
+      "description": "Resolves YES if Chelsea finishes 5th or 6th in the 2025-26 Premier League season, qualifying for Europa League. Represents continued mediocrity after recent struggles.",
+      "probability": 0.44,
+      "volume_24h": 65000,
+      "volume_total": 295000,
+      "category": "Sports",
+      "tags": [
+        "soccer",
+        "premier-league",
+        "chelsea",
+        "europa-league",
+        "england"
+      ],
+      "image_search": "chelsea stamford bridge stadium",
+      "resolution_date": "2026-05-24T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-14",
+          "prob": 0.4
+        },
+        {
+          "date": "2026-01-27",
+          "prob": 0.47
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.43
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.44
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_014",
+      "title": "Will Bayer Leverkusen finish top 3 in Bundesliga 2025-26?",
+      "description": "Resolves YES if Bayer Leverkusen finishes in the top 3 of the German Bundesliga 2025-26 season, securing Champions League qualification. They had a historic unbeaten season in 2023-24.",
+      "probability": 0.62,
+      "volume_24h": 58000,
+      "volume_total": 245000,
+      "category": "Sports",
+      "tags": [
+        "soccer",
+        "bundesliga",
+        "bayer-leverkusen",
+        "germany"
+      ],
+      "image_search": "bayer leverkusen bundesliga match",
+      "resolution_date": "2026-05-24T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.65
+        },
+        {
+          "date": "2026-01-29",
+          "prob": 0.6
+        },
+        {
+          "date": "2026-02-07",
+          "prob": 0.63
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.62
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_015",
+      "title": "Will a non-European team win Club World Cup 2026?",
+      "description": "Resolves YES if a team from South America, Asia, Africa, North America, or Oceania wins the 2026 FIFA Club World Cup. The expanded format features 32 teams from all confederations.",
+      "probability": 0.22,
+      "volume_24h": 45000,
+      "volume_total": 185000,
+      "category": "Sports",
+      "tags": [
+        "soccer",
+        "club-world-cup",
+        "fifa",
+        "international-football"
+      ],
+      "image_search": "fifa club world cup trophy",
+      "resolution_date": "2026-07-20T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.25
+        },
+        {
+          "date": "2026-02-02",
+          "prob": 0.2
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.23
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.22
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_016",
+      "title": "Will Boston Celtics reach NBA Finals 2026?",
+      "description": "Resolves YES if the Boston Celtics advance to the 2026 NBA Finals. The Finals are scheduled for June 2026. Celtics are defending champions from 2024.",
+      "probability": 0.52,
+      "volume_24h": 145000,
+      "volume_total": 685000,
+      "category": "Sports",
+      "tags": [
+        "basketball",
+        "nba",
+        "boston-celtics",
+        "nba-finals",
+        "playoffs"
+      ],
+      "image_search": "boston celtics nba finals championship",
+      "resolution_date": "2026-06-10T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.48
+        },
+        {
+          "date": "2026-01-25",
+          "prob": 0.54
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.51
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.52
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_017",
+      "title": "Will LA Lakers make the NBA playoffs 2026?",
+      "description": "Resolves YES if the Los Angeles Lakers qualify for the 2026 NBA playoffs (finish in top 10 in Western Conference and secure a playoff spot through play-in or direct qualification).",
+      "probability": 0.58,
+      "volume_24h": 132000,
+      "volume_total": 595000,
+      "category": "Sports",
+      "tags": [
+        "basketball",
+        "nba",
+        "los-angeles-lakers",
+        "playoffs",
+        "lebron-james"
+      ],
+      "image_search": "lakers staples center arena nba",
+      "resolution_date": "2026-04-20T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-12",
+          "prob": 0.55
+        },
+        {
+          "date": "2026-01-24",
+          "prob": 0.6
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.57
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.58
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_018",
+      "title": "Will Denver Nuggets win NBA Championship 2026?",
+      "description": "Resolves YES if the Denver Nuggets win the 2026 NBA Championship. Led by Nikola Jokic, they won in 2023 and remain contenders. Finals scheduled for June 2026.",
+      "probability": 0.18,
+      "volume_24h": 95000,
+      "volume_total": 425000,
+      "category": "Sports",
+      "tags": [
+        "basketball",
+        "nba",
+        "denver-nuggets",
+        "nba-championship",
+        "nikola-jokic"
+      ],
+      "image_search": "denver nuggets nba championship celebration",
+      "resolution_date": "2026-06-25T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.15
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.2
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.17
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.18
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_019",
+      "title": "Will Milwaukee Bucks finish top 3 in Eastern Conference?",
+      "description": "Resolves YES if the Milwaukee Bucks finish in the top 3 seeds of the NBA Eastern Conference for the 2025-26 regular season, ending in April 2026.",
+      "probability": 0.64,
+      "volume_24h": 78000,
+      "volume_total": 345000,
+      "category": "Sports",
+      "tags": [
+        "basketball",
+        "nba",
+        "milwaukee-bucks",
+        "eastern-conference",
+        "giannis"
+      ],
+      "image_search": "milwaukee bucks nba basketball arena",
+      "resolution_date": "2026-04-20T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-14",
+          "prob": 0.68
+        },
+        {
+          "date": "2026-01-26",
+          "prob": 0.62
+        },
+        {
+          "date": "2026-02-04",
+          "prob": 0.65
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.64
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_020",
+      "title": "Will Phoenix Suns make Western Conference Finals?",
+      "description": "Resolves YES if the Phoenix Suns advance to the 2026 Western Conference Finals. With their superteam roster, expectations remain high despite recent disappointments.",
+      "probability": 0.42,
+      "volume_24h": 88000,
+      "volume_total": 395000,
+      "category": "Sports",
+      "tags": [
+        "basketball",
+        "nba",
+        "phoenix-suns",
+        "western-conference",
+        "kevin-durant"
+      ],
+      "image_search": "phoenix suns nba basketball game",
+      "resolution_date": "2026-05-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.45
+        },
+        {
+          "date": "2026-01-30",
+          "prob": 0.4
+        },
+        {
+          "date": "2026-02-07",
+          "prob": 0.43
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.42
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_021",
+      "title": "Will Golden State Warriors miss playoffs 2026?",
+      "description": "Resolves YES if the Golden State Warriors fail to qualify for the 2026 NBA playoffs (finish outside top 10 in Western Conference or lose play-in games). Dynasty facing aging challenges.",
+      "probability": 0.36,
+      "volume_24h": 102000,
+      "volume_total": 465000,
+      "category": "Sports",
+      "tags": [
+        "basketball",
+        "nba",
+        "golden-state-warriors",
+        "stephen-curry",
+        "playoffs"
+      ],
+      "image_search": "golden state warriors chase center",
+      "resolution_date": "2026-04-20T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-10",
+          "prob": 0.32
+        },
+        {
+          "date": "2026-01-22",
+          "prob": 0.38
+        },
+        {
+          "date": "2026-02-03",
+          "prob": 0.35
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.36
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_022",
+      "title": "Will Oklahoma City Thunder win over 55 games in 2025-26?",
+      "description": "Resolves YES if the Oklahoma City Thunder win 55 or more regular season games in the 2025-26 NBA season. Young team emerging as Western Conference powerhouse.",
+      "probability": 0.58,
+      "volume_24h": 72000,
+      "volume_total": 315000,
+      "category": "Sports",
+      "tags": [
+        "basketball",
+        "nba",
+        "oklahoma-city-thunder",
+        "regular-season",
+        "young-team"
+      ],
+      "image_search": "oklahoma city thunder nba basketball",
+      "resolution_date": "2026-04-20T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.55
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.6
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.57
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.58
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_023",
+      "title": "Will Real Madrid win EuroLeague 2025-26?",
+      "description": "Resolves YES if Real Madrid wins the 2025-26 EuroLeague Basketball championship. They are perennial contenders with the most titles in competition history.",
+      "probability": 0.32,
+      "volume_24h": 48000,
+      "volume_total": 205000,
+      "category": "Sports",
+      "tags": [
+        "basketball",
+        "euroleague",
+        "real-madrid",
+        "european-basketball"
+      ],
+      "image_search": "euroleague basketball real madrid",
+      "resolution_date": "2026-05-25T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.3
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.34
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.31
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.32
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_024",
+      "title": "Will Minnesota Timberwolves make Conference Finals?",
+      "description": "Resolves YES if the Minnesota Timberwolves reach the 2026 Western Conference Finals. Led by Anthony Edwards, they're building a young contender.",
+      "probability": 0.38,
+      "volume_24h": 65000,
+      "volume_total": 285000,
+      "category": "Sports",
+      "tags": [
+        "basketball",
+        "nba",
+        "minnesota-timberwolves",
+        "anthony-edwards",
+        "playoffs"
+      ],
+      "image_search": "minnesota timberwolves nba game",
+      "resolution_date": "2026-05-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-12",
+          "prob": 0.35
+        },
+        {
+          "date": "2026-01-25",
+          "prob": 0.4
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.38
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_025",
+      "title": "Will New York Knicks win a playoff series in 2026?",
+      "description": "Resolves YES if the New York Knicks win at least one playoff series in the 2026 NBA playoffs. After years of struggles, expectations are rising at Madison Square Garden.",
+      "probability": 0.56,
+      "volume_24h": 92000,
+      "volume_total": 425000,
+      "category": "Sports",
+      "tags": [
+        "basketball",
+        "nba",
+        "new-york-knicks",
+        "playoffs",
+        "madison-square-garden"
+      ],
+      "image_search": "new york knicks madison square garden",
+      "resolution_date": "2026-06-10T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.52
+        },
+        {
+          "date": "2026-01-30",
+          "prob": 0.58
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.55
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.56
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_026",
+      "title": "Will Kansas City Chiefs win Super Bowl LX?",
+      "description": "Resolves YES if the Kansas City Chiefs win Super Bowl LX (60) on February 9, 2026 in New Orleans. Patrick Mahomes seeks his fourth championship ring.",
+      "probability": 0.28,
+      "volume_24h": 285000,
+      "volume_total": 1450000,
+      "category": "Sports",
+      "tags": [
+        "american-football",
+        "nfl",
+        "super-bowl",
+        "kansas-city-chiefs",
+        "patrick-mahomes"
+      ],
+      "image_search": "kansas city chiefs super bowl celebration",
+      "resolution_date": "2026-02-10T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-10",
+          "prob": 0.32
+        },
+        {
+          "date": "2026-01-20",
+          "prob": 0.26
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.29
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.28
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_027",
+      "title": "Will Buffalo Bills reach AFC Championship Game?",
+      "description": "Resolves YES if the Buffalo Bills advance to the 2025 AFC Championship Game (scheduled for late January 2026). Josh Allen continues his quest for a Super Bowl appearance.",
+      "probability": 0.45,
+      "volume_24h": 165000,
+      "volume_total": 785000,
+      "category": "Sports",
+      "tags": [
+        "american-football",
+        "nfl",
+        "buffalo-bills",
+        "afc-championship",
+        "josh-allen"
+      ],
+      "image_search": "buffalo bills nfl stadium",
+      "resolution_date": "2026-01-27T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-08",
+          "prob": 0.42
+        },
+        {
+          "date": "2026-01-15",
+          "prob": 0.47
+        },
+        {
+          "date": "2026-01-22",
+          "prob": 0.44
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.45
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_028",
+      "title": "Will San Francisco 49ers win NFC Championship?",
+      "description": "Resolves YES if the San Francisco 49ers win the 2025 NFC Championship Game and advance to Super Bowl LX. They've been close multiple times in recent years.",
+      "probability": 0.38,
+      "volume_24h": 148000,
+      "volume_total": 695000,
+      "category": "Sports",
+      "tags": [
+        "american-football",
+        "nfl",
+        "san-francisco-49ers",
+        "nfc-championship"
+      ],
+      "image_search": "san francisco 49ers levi stadium",
+      "resolution_date": "2026-01-27T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-10",
+          "prob": 0.35
+        },
+        {
+          "date": "2026-01-18",
+          "prob": 0.4
+        },
+        {
+          "date": "2026-01-24",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.38
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_029",
+      "title": "Will Detroit Lions make Super Bowl LX?",
+      "description": "Resolves YES if the Detroit Lions reach Super Bowl LX. After decades of futility, the Lions are building a legitimate contender under Dan Campbell.",
+      "probability": 0.22,
+      "volume_24h": 125000,
+      "volume_total": 565000,
+      "category": "Sports",
+      "tags": [
+        "american-football",
+        "nfl",
+        "detroit-lions",
+        "super-bowl",
+        "dan-campbell"
+      ],
+      "image_search": "detroit lions ford field stadium",
+      "resolution_date": "2026-02-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-12",
+          "prob": 0.25
+        },
+        {
+          "date": "2026-01-20",
+          "prob": 0.2
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.23
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.22
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_030",
+      "title": "Will Baltimore Ravens win AFC North division?",
+      "description": "Resolves YES if the Baltimore Ravens win the AFC North division for the 2025 NFL season. Lamar Jackson leads a perennial playoff contender.",
+      "probability": 0.52,
+      "volume_24h": 95000,
+      "volume_total": 445000,
+      "category": "Sports",
+      "tags": [
+        "american-football",
+        "nfl",
+        "baltimore-ravens",
+        "lamar-jackson",
+        "afc-north"
+      ],
+      "image_search": "baltimore ravens m&t bank stadium",
+      "resolution_date": "2026-01-08T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-02",
+          "prob": 0.48
+        },
+        {
+          "date": "2026-01-05",
+          "prob": 0.54
+        },
+        {
+          "date": "2026-01-07",
+          "prob": 0.51
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.52
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_031",
+      "title": "Will Philadelphia Eagles make playoffs 2025?",
+      "description": "Resolves YES if the Philadelphia Eagles qualify for the 2025 NFL playoffs. They remain competitive in the NFC East division.",
+      "probability": 0.62,
+      "volume_24h": 88000,
+      "volume_total": 405000,
+      "category": "Sports",
+      "tags": [
+        "american-football",
+        "nfl",
+        "philadelphia-eagles",
+        "playoffs",
+        "nfc-east"
+      ],
+      "image_search": "philadelphia eagles lincoln financial field",
+      "resolution_date": "2026-01-08T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-01",
+          "prob": 0.58
+        },
+        {
+          "date": "2026-01-04",
+          "prob": 0.64
+        },
+        {
+          "date": "2026-01-06",
+          "prob": 0.61
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.62
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_032",
+      "title": "Will Green Bay Packers win NFC North?",
+      "description": "Resolves YES if the Green Bay Packers win the NFC North division for the 2025 NFL season. Historic franchise seeking divisional dominance.",
+      "probability": 0.44,
+      "volume_24h": 78000,
+      "volume_total": 365000,
+      "category": "Sports",
+      "tags": [
+        "american-football",
+        "nfl",
+        "green-bay-packers",
+        "nfc-north"
+      ],
+      "image_search": "green bay packers lambeau field",
+      "resolution_date": "2026-01-08T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-02",
+          "prob": 0.4
+        },
+        {
+          "date": "2026-01-05",
+          "prob": 0.46
+        },
+        {
+          "date": "2026-01-07",
+          "prob": 0.43
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.44
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_033",
+      "title": "Will Dallas Cowboys win a playoff game in 2025-26?",
+      "description": "Resolves YES if the Dallas Cowboys win at least one playoff game in the 2025-26 NFL postseason. Breaking their recent playoff curse is a major storyline.",
+      "probability": 0.48,
+      "volume_24h": 105000,
+      "volume_total": 485000,
+      "category": "Sports",
+      "tags": [
+        "american-football",
+        "nfl",
+        "dallas-cowboys",
+        "playoffs",
+        "jerry-jones"
+      ],
+      "image_search": "dallas cowboys at&t stadium",
+      "resolution_date": "2026-02-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-10",
+          "prob": 0.45
+        },
+        {
+          "date": "2026-01-18",
+          "prob": 0.5
+        },
+        {
+          "date": "2026-01-25",
+          "prob": 0.47
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.48
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_034",
+      "title": "Will Miami Dolphins make AFC playoffs?",
+      "description": "Resolves YES if the Miami Dolphins qualify for the 2025 NFL playoffs (AFC wild card or division winner). Explosive offense aims for postseason success.",
+      "probability": 0.55,
+      "volume_24h": 72000,
+      "volume_total": 335000,
+      "category": "Sports",
+      "tags": [
+        "american-football",
+        "nfl",
+        "miami-dolphins",
+        "playoffs",
+        "afc"
+      ],
+      "image_search": "miami dolphins hard rock stadium",
+      "resolution_date": "2026-01-08T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-03",
+          "prob": 0.52
+        },
+        {
+          "date": "2026-01-05",
+          "prob": 0.57
+        },
+        {
+          "date": "2026-01-07",
+          "prob": 0.54
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.55
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_035",
+      "title": "Will Los Angeles Chargers reach divisional round?",
+      "description": "Resolves YES if the LA Chargers advance to at least the NFL divisional round in the 2025-26 playoffs. Team seeking to break through after years of disappointment.",
+      "probability": 0.35,
+      "volume_24h": 65000,
+      "volume_total": 295000,
+      "category": "Sports",
+      "tags": [
+        "american-football",
+        "nfl",
+        "los-angeles-chargers",
+        "playoffs"
+      ],
+      "image_search": "los angeles chargers sofi stadium",
+      "resolution_date": "2026-01-20T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-08",
+          "prob": 0.32
+        },
+        {
+          "date": "2026-01-12",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-01-16",
+          "prob": 0.34
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.35
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_036",
+      "title": "Will New York Yankees win World Series 2026?",
+      "description": "Resolves YES if the New York Yankees win the 2026 MLB World Series. With Juan Soto and Aaron Judge, the Yankees have championship aspirations.",
+      "probability": 0.15,
+      "volume_24h": 145000,
+      "volume_total": 685000,
+      "category": "Sports",
+      "tags": [
+        "baseball",
+        "mlb",
+        "new-york-yankees",
+        "world-series",
+        "juan-soto"
+      ],
+      "image_search": "new york yankees world series celebration",
+      "resolution_date": "2026-11-05T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.12
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.16
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.14
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.15
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_037",
+      "title": "Will Los Angeles Dodgers win NL West 2026?",
+      "description": "Resolves YES if the Los Angeles Dodgers win the National League West division in 2026. Perennial contenders with star-studded roster.",
+      "probability": 0.68,
+      "volume_24h": 98000,
+      "volume_total": 445000,
+      "category": "Sports",
+      "tags": [
+        "baseball",
+        "mlb",
+        "los-angeles-dodgers",
+        "nl-west",
+        "shohei-ohtani"
+      ],
+      "image_search": "los angeles dodgers dodger stadium",
+      "resolution_date": "2026-10-05T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-25",
+          "prob": 0.7
+        },
+        {
+          "date": "2026-02-02",
+          "prob": 0.66
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.69
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.68
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_038",
+      "title": "Will Atlanta Braves make playoffs 2026?",
+      "description": "Resolves YES if the Atlanta Braves qualify for the 2026 MLB playoffs (division winner or wild card). Consistent playoff contender in NL East.",
+      "probability": 0.72,
+      "volume_24h": 82000,
+      "volume_total": 375000,
+      "category": "Sports",
+      "tags": [
+        "baseball",
+        "mlb",
+        "atlanta-braves",
+        "playoffs",
+        "nl-east"
+      ],
+      "image_search": "atlanta braves truist park",
+      "resolution_date": "2026-10-05T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.75
+        },
+        {
+          "date": "2026-01-30",
+          "prob": 0.7
+        },
+        {
+          "date": "2026-02-07",
+          "prob": 0.73
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.72
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_039",
+      "title": "Will Houston Astros reach ALCS 2026?",
+      "description": "Resolves YES if the Houston Astros advance to the American League Championship Series in 2026. Dynastic run continues with strong core intact.",
+      "probability": 0.38,
+      "volume_24h": 75000,
+      "volume_total": 345000,
+      "category": "Sports",
+      "tags": [
+        "baseball",
+        "mlb",
+        "houston-astros",
+        "alcs",
+        "playoffs"
+      ],
+      "image_search": "houston astros minute maid park",
+      "resolution_date": "2026-10-25T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-22",
+          "prob": 0.35
+        },
+        {
+          "date": "2026-02-03",
+          "prob": 0.4
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.38
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_040",
+      "title": "Will Philadelphia Phillies win NL Pennant 2026?",
+      "description": "Resolves YES if the Philadelphia Phillies win the National League pennant and advance to the 2026 World Series. Seeking first pennant since 2022.",
+      "probability": 0.18,
+      "volume_24h": 88000,
+      "volume_total": 405000,
+      "category": "Sports",
+      "tags": [
+        "baseball",
+        "mlb",
+        "philadelphia-phillies",
+        "nl-pennant",
+        "world-series"
+      ],
+      "image_search": "philadelphia phillies citizens bank park",
+      "resolution_date": "2026-10-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.15
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.2
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.17
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.18
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_041",
+      "title": "Will San Diego Padres make playoffs 2026?",
+      "description": "Resolves YES if the San Diego Padres qualify for the 2026 MLB playoffs. Star-studded roster seeks consistent postseason success.",
+      "probability": 0.58,
+      "volume_24h": 72000,
+      "volume_total": 335000,
+      "category": "Sports",
+      "tags": [
+        "baseball",
+        "mlb",
+        "san-diego-padres",
+        "playoffs",
+        "nl-west"
+      ],
+      "image_search": "san diego padres petco park",
+      "resolution_date": "2026-10-05T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.55
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.6
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.57
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.58
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_042",
+      "title": "Will Baltimore Orioles win AL East 2026?",
+      "description": "Resolves YES if the Baltimore Orioles win the American League East division in 2026. Young core emerging as division powerhouse.",
+      "probability": 0.52,
+      "volume_24h": 78000,
+      "volume_total": 365000,
+      "category": "Sports",
+      "tags": [
+        "baseball",
+        "mlb",
+        "baltimore-orioles",
+        "al-east"
+      ],
+      "image_search": "baltimore orioles camden yards",
+      "resolution_date": "2026-10-05T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.48
+        },
+        {
+          "date": "2026-01-26",
+          "prob": 0.54
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.51
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.52
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_043",
+      "title": "Will Texas Rangers make playoffs 2026?",
+      "description": "Resolves YES if the Texas Rangers qualify for the 2026 MLB playoffs. Defending 2023 World Series champions aim to return to October baseball.",
+      "probability": 0.48,
+      "volume_24h": 68000,
+      "volume_total": 315000,
+      "category": "Sports",
+      "tags": [
+        "baseball",
+        "mlb",
+        "texas-rangers",
+        "playoffs",
+        "defending-champions"
+      ],
+      "image_search": "texas rangers globe life field",
+      "resolution_date": "2026-10-05T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.45
+        },
+        {
+          "date": "2026-01-29",
+          "prob": 0.5
+        },
+        {
+          "date": "2026-02-07",
+          "prob": 0.47
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.48
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_044",
+      "title": "Will Toronto Blue Jays win over 85 games in 2026?",
+      "description": "Resolves YES if the Toronto Blue Jays win 85 or more regular season games in 2026. Talented roster seeks to break through in competitive AL East.",
+      "probability": 0.54,
+      "volume_24h": 62000,
+      "volume_total": 285000,
+      "category": "Sports",
+      "tags": [
+        "baseball",
+        "mlb",
+        "toronto-blue-jays",
+        "regular-season",
+        "al-east"
+      ],
+      "image_search": "toronto blue jays rogers centre",
+      "resolution_date": "2026-10-05T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-22",
+          "prob": 0.5
+        },
+        {
+          "date": "2026-02-02",
+          "prob": 0.56
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.53
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.54
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_045",
+      "title": "Will Chicago Cubs make playoffs 2026?",
+      "description": "Resolves YES if the Chicago Cubs qualify for the 2026 MLB playoffs. Historic franchise seeking return to postseason glory.",
+      "probability": 0.42,
+      "volume_24h": 85000,
+      "volume_total": 395000,
+      "category": "Sports",
+      "tags": [
+        "baseball",
+        "mlb",
+        "chicago-cubs",
+        "playoffs",
+        "wrigley-field"
+      ],
+      "image_search": "chicago cubs wrigley field",
+      "resolution_date": "2026-10-05T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-14",
+          "prob": 0.38
+        },
+        {
+          "date": "2026-01-25",
+          "prob": 0.44
+        },
+        {
+          "date": "2026-02-04",
+          "prob": 0.41
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.42
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_046",
+      "title": "Will Novak Djokovic win Wimbledon 2026?",
+      "description": "Resolves YES if Novak Djokovic wins the 2026 Wimbledon Championships (men's singles). At 39, his pursuit of Grand Slam records continues.",
+      "probability": 0.22,
+      "volume_24h": 125000,
+      "volume_total": 585000,
+      "category": "Sports",
+      "tags": [
+        "tennis",
+        "wimbledon",
+        "novak-djokovic",
+        "grand-slam"
+      ],
+      "image_search": "wimbledon tennis championship centre court",
+      "resolution_date": "2026-07-15T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.25
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.2
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.23
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.22
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_047",
+      "title": "Will Carlos Alcaraz win French Open 2026?",
+      "description": "Resolves YES if Carlos Alcaraz wins the 2026 French Open (men's singles). Young Spanish star seeking to add to his Grand Slam collection.",
+      "probability": 0.35,
+      "volume_24h": 95000,
+      "volume_total": 435000,
+      "category": "Sports",
+      "tags": [
+        "tennis",
+        "french-open",
+        "carlos-alcaraz",
+        "grand-slam",
+        "roland-garros"
+      ],
+      "image_search": "french open roland garros tennis",
+      "resolution_date": "2026-06-10T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.32
+        },
+        {
+          "date": "2026-01-30",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-02-07",
+          "prob": 0.34
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.35
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_048",
+      "title": "Will Max Verstappen win F1 World Championship 2026?",
+      "description": "Resolves YES if Max Verstappen wins the 2026 Formula 1 World Drivers' Championship. He has dominated recent seasons with Red Bull Racing.",
+      "probability": 0.58,
+      "volume_24h": 155000,
+      "volume_total": 725000,
+      "category": "Sports",
+      "tags": [
+        "formula-1",
+        "f1",
+        "max-verstappen",
+        "red-bull",
+        "world-championship"
+      ],
+      "image_search": "formula 1 max verstappen red bull racing",
+      "resolution_date": "2026-12-10T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.55
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.6
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.57
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.58
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_049",
+      "title": "Will Lewis Hamilton win an F1 race in 2026?",
+      "description": "Resolves YES if Lewis Hamilton wins at least one Formula 1 race during the 2026 season. Legendary driver now racing for Ferrari seeks to end winless streak.",
+      "probability": 0.65,
+      "volume_24h": 132000,
+      "volume_total": 615000,
+      "category": "Sports",
+      "tags": [
+        "formula-1",
+        "f1",
+        "lewis-hamilton",
+        "ferrari",
+        "race-win"
+      ],
+      "image_search": "lewis hamilton ferrari formula 1",
+      "resolution_date": "2026-12-10T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-22",
+          "prob": 0.62
+        },
+        {
+          "date": "2026-02-03",
+          "prob": 0.67
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.64
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.65
+        }
+      ]
+    },
+    {
+      "market_id": "new_sports_050",
+      "title": "Will Conor McGregor fight in UFC in 2026?",
+      "description": "Resolves YES if Conor McGregor competes in at least one UFC fight during 2026. Multiple return dates have been announced and postponed in recent years.",
+      "probability": 0.48,
+      "volume_24h": 145000,
+      "volume_total": 685000,
+      "category": "Sports",
+      "tags": [
+        "mma",
+        "ufc",
+        "conor-mcgregor",
+        "combat-sports"
+      ],
+      "image_search": "conor mcgregor ufc octagon",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-10",
+          "prob": 0.52
+        },
+        {
+          "date": "2026-01-24",
+          "prob": 0.45
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.49
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.48
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_001",
+      "title": "Will Netanyahu remain Israeli PM through end of 2026?",
+      "description": "Resolves YES if Benjamin Netanyahu is still serving as Prime Minister of Israel on December 31, 2026. Coalition stability and legal challenges pose ongoing risks.",
+      "probability": 0.52,
+      "volume_24h": 185000,
+      "volume_total": 825000,
+      "category": "Politics",
+      "tags": [
+        "israel",
+        "netanyahu",
+        "middle-east",
+        "israeli-politics",
+        "prime-minister"
+      ],
+      "image_search": "israeli knesset parliament building jerusalem",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.48
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.54
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.51
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.52
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_002",
+      "title": "Will Israel and Saudi Arabia normalize relations by end of 2026?",
+      "description": "Resolves YES if Israel and Saudi Arabia establish formal diplomatic relations and sign normalization agreements by December 31, 2026. Abraham Accords expansion.",
+      "probability": 0.28,
+      "volume_24h": 145000,
+      "volume_total": 665000,
+      "category": "Politics",
+      "tags": [
+        "israel",
+        "saudi-arabia",
+        "middle-east",
+        "diplomacy",
+        "abraham-accords"
+      ],
+      "image_search": "diplomatic handshake middle east peace",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-10",
+          "prob": 0.32
+        },
+        {
+          "date": "2026-01-22",
+          "prob": 0.25
+        },
+        {
+          "date": "2026-02-03",
+          "prob": 0.29
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.28
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_003",
+      "title": "Will Israeli settlement construction exceed 10,000 units in 2026?",
+      "description": "Resolves YES if Israel approves construction of 10,000 or more new housing units in West Bank settlements during 2026. Major point of international contention.",
+      "probability": 0.62,
+      "volume_24h": 95000,
+      "volume_total": 425000,
+      "category": "Politics",
+      "tags": [
+        "israel",
+        "settlements",
+        "west-bank",
+        "palestinian-conflict"
+      ],
+      "image_search": "west bank settlement construction",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.58
+        },
+        {
+          "date": "2026-01-30",
+          "prob": 0.64
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.61
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.62
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_004",
+      "title": "Will Israel hold early elections in 2026?",
+      "description": "Resolves YES if Israel calls and holds early Knesset elections at any point during 2026 (before the scheduled 2026 election date). Coalition instability could trigger snap elections.",
+      "probability": 0.38,
+      "volume_24h": 115000,
+      "volume_total": 515000,
+      "category": "Politics",
+      "tags": [
+        "israel",
+        "elections",
+        "knesset",
+        "israeli-politics"
+      ],
+      "image_search": "israeli election voting ballot",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-12",
+          "prob": 0.35
+        },
+        {
+          "date": "2026-01-26",
+          "prob": 0.4
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.38
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_005",
+      "title": "Will Israel's GDP growth exceed 3% in 2026?",
+      "description": "Resolves YES if Israel's annual GDP growth for 2026 exceeds 3.0% according to official government statistics. Tech sector and geopolitical stability are key factors.",
+      "probability": 0.55,
+      "volume_24h": 82000,
+      "volume_total": 375000,
+      "category": "Economics",
+      "tags": [
+        "israel",
+        "gdp",
+        "economy",
+        "growth",
+        "middle-east"
+      ],
+      "image_search": "tel aviv business district skyline",
+      "resolution_date": "2027-03-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.52
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.57
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.54
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.55
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_006",
+      "title": "Will Hezbollah and Israel engage in direct military conflict in 2026?",
+      "description": "Resolves YES if Israel and Hezbollah engage in sustained military hostilities (defined as 7+ consecutive days of attacks) at any point in 2026. Northern border tensions remain high.",
+      "probability": 0.32,
+      "volume_24h": 165000,
+      "volume_total": 785000,
+      "category": "World",
+      "tags": [
+        "israel",
+        "hezbollah",
+        "lebanon",
+        "military-conflict",
+        "middle-east"
+      ],
+      "image_search": "israel lebanon border military",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.35
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.3
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.33
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.32
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_007",
+      "title": "Will Israeli tech sector raise over $10B in VC funding in 2026?",
+      "description": "Resolves YES if Israeli technology companies raise $10 billion or more in venture capital funding during 2026. 'Startup Nation' continues to attract global investment.",
+      "probability": 0.48,
+      "volume_24h": 75000,
+      "volume_total": 345000,
+      "category": "Technology",
+      "tags": [
+        "israel",
+        "venture-capital",
+        "tech",
+        "startups",
+        "innovation"
+      ],
+      "image_search": "tel aviv tech startup office",
+      "resolution_date": "2027-01-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-22",
+          "prob": 0.45
+        },
+        {
+          "date": "2026-02-03",
+          "prob": 0.5
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.47
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.48
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_008",
+      "title": "Will Ben-Gvir remain Israeli National Security Minister through 2026?",
+      "description": "Resolves YES if Itamar Ben-Gvir remains in his position as Israel's National Security Minister through December 31, 2026. Controversial far-right figure in Netanyahu coalition.",
+      "probability": 0.58,
+      "volume_24h": 92000,
+      "volume_total": 425000,
+      "category": "Politics",
+      "tags": [
+        "israel",
+        "ben-gvir",
+        "coalition",
+        "far-right",
+        "israeli-politics"
+      ],
+      "image_search": "israeli cabinet meeting government",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.55
+        },
+        {
+          "date": "2026-01-29",
+          "prob": 0.6
+        },
+        {
+          "date": "2026-02-07",
+          "prob": 0.57
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.58
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_009",
+      "title": "Will Japan's Liberal Democratic Party win 2026 elections?",
+      "description": "Resolves YES if the Liberal Democratic Party (LDP) wins the most seats in Japan's next general election (expected 2026). LDP has dominated postwar Japanese politics.",
+      "probability": 0.68,
+      "volume_24h": 125000,
+      "volume_total": 585000,
+      "category": "Politics",
+      "tags": [
+        "japan",
+        "elections",
+        "ldp",
+        "japanese-politics",
+        "asia"
+      ],
+      "image_search": "japanese diet parliament building tokyo",
+      "resolution_date": "2026-11-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-14",
+          "prob": 0.7
+        },
+        {
+          "date": "2026-01-27",
+          "prob": 0.66
+        },
+        {
+          "date": "2026-02-04",
+          "prob": 0.69
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.68
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_010",
+      "title": "Will Japan's population decline by over 500,000 in 2026?",
+      "description": "Resolves YES if Japan's total population decreases by more than 500,000 people during 2026. Demographic crisis accelerating with historic low birth rates.",
+      "probability": 0.72,
+      "volume_24h": 88000,
+      "volume_total": 405000,
+      "category": "World",
+      "tags": [
+        "japan",
+        "demographics",
+        "population",
+        "birth-rate",
+        "aging"
+      ],
+      "image_search": "tokyo cityscape japan urban",
+      "resolution_date": "2027-02-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.75
+        },
+        {
+          "date": "2026-01-30",
+          "prob": 0.7
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.73
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.72
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_011",
+      "title": "Will Japan raise interest rates above 0.5% by end of 2026?",
+      "description": "Resolves YES if the Bank of Japan raises its policy interest rate to above 0.5% at any point by December 31, 2026. Historic shift from decades of ultra-low rates.",
+      "probability": 0.42,
+      "volume_24h": 145000,
+      "volume_total": 685000,
+      "category": "Economics",
+      "tags": [
+        "japan",
+        "interest-rates",
+        "bank-of-japan",
+        "monetary-policy"
+      ],
+      "image_search": "bank of japan building tokyo",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-12",
+          "prob": 0.38
+        },
+        {
+          "date": "2026-01-25",
+          "prob": 0.44
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.41
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.42
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_012",
+      "title": "Will Japan and South Korea hold a bilateral summit in 2026?",
+      "description": "Resolves YES if the leaders of Japan and South Korea hold an official bilateral summit meeting in 2026. Relations warming after years of tension over historical issues.",
+      "probability": 0.78,
+      "volume_24h": 68000,
+      "volume_total": 315000,
+      "category": "World",
+      "tags": [
+        "japan",
+        "south-korea",
+        "diplomacy",
+        "asia",
+        "bilateral-relations"
+      ],
+      "image_search": "japan south korea diplomatic meeting",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.75
+        },
+        {
+          "date": "2026-02-02",
+          "prob": 0.8
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.77
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.78
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_013",
+      "title": "Will Tokyo host Summer Olympics prep events in 2026?",
+      "description": "Resolves YES if Tokyo hosts official test events or preparation competitions for a future Summer Olympics bid in 2026. Olympic legacy and future hosting ambitions.",
+      "probability": 0.35,
+      "volume_24h": 52000,
+      "volume_total": 245000,
+      "category": "Sports",
+      "tags": [
+        "japan",
+        "olympics",
+        "tokyo",
+        "sports",
+        "international-events"
+      ],
+      "image_search": "tokyo olympic stadium sports",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.32
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.34
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.35
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_014",
+      "title": "Will Japan's Nikkei index reach 45,000 by end of 2026?",
+      "description": "Resolves YES if Japan's Nikkei 225 stock index closes at or above 45,000 at any point before December 31, 2026. Recent bull run continues with corporate reforms.",
+      "probability": 0.48,
+      "volume_24h": 115000,
+      "volume_total": 535000,
+      "category": "Economics",
+      "tags": [
+        "japan",
+        "nikkei",
+        "stock-market",
+        "economy",
+        "japanese-markets"
+      ],
+      "image_search": "tokyo stock exchange trading floor",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.45
+        },
+        {
+          "date": "2026-01-27",
+          "prob": 0.5
+        },
+        {
+          "date": "2026-02-04",
+          "prob": 0.47
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.48
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_015",
+      "title": "Will Japan increase defense spending to 2.5% of GDP in 2026?",
+      "description": "Resolves YES if Japan's defense budget reaches or exceeds 2.5% of GDP in fiscal year 2026. Historic military buildup amid regional tensions with China and North Korea.",
+      "probability": 0.52,
+      "volume_24h": 95000,
+      "volume_total": 445000,
+      "category": "Politics",
+      "tags": [
+        "japan",
+        "defense",
+        "military",
+        "china",
+        "security"
+      ],
+      "image_search": "japan self defense force military",
+      "resolution_date": "2027-03-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.48
+        },
+        {
+          "date": "2026-01-30",
+          "prob": 0.54
+        },
+        {
+          "date": "2026-02-07",
+          "prob": 0.51
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.52
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_016",
+      "title": "Will Erdogan remain Turkish President through end of 2026?",
+      "description": "Resolves YES if Recep Tayyip Erdogan is still serving as President of Turkey on December 31, 2026. Term runs through 2028 but health and political challenges exist.",
+      "probability": 0.82,
+      "volume_24h": 135000,
+      "volume_total": 625000,
+      "category": "Politics",
+      "tags": [
+        "turkey",
+        "erdogan",
+        "middle-east",
+        "turkish-politics"
+      ],
+      "image_search": "ankara turkish parliament building",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-12",
+          "prob": 0.85
+        },
+        {
+          "date": "2026-01-24",
+          "prob": 0.8
+        },
+        {
+          "date": "2026-02-03",
+          "prob": 0.83
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.82
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_017",
+      "title": "Will Turkey's inflation rate exceed 50% in 2026?",
+      "description": "Resolves YES if Turkey's annual inflation rate exceeds 50% at any point during 2026. Economic crisis with lira volatility and unorthodox monetary policy.",
+      "probability": 0.58,
+      "volume_24h": 105000,
+      "volume_total": 485000,
+      "category": "Economics",
+      "tags": [
+        "turkey",
+        "inflation",
+        "economy",
+        "lira",
+        "economic-crisis"
+      ],
+      "image_search": "istanbul business district bosphorus",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.62
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.55
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.59
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.58
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_018",
+      "title": "Will Turkey be readmitted to F-35 program by end of 2026?",
+      "description": "Resolves YES if Turkey is officially readmitted to the F-35 Joint Strike Fighter program by December 31, 2026. Expelled in 2019 over S-400 purchase from Russia.",
+      "probability": 0.18,
+      "volume_24h": 72000,
+      "volume_total": 335000,
+      "category": "World",
+      "tags": [
+        "turkey",
+        "f-35",
+        "nato",
+        "defense",
+        "us-relations"
+      ],
+      "image_search": "f-35 fighter jet military",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.15
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.2
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.17
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.18
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_019",
+      "title": "Will Turkey approve Sweden's NATO membership in 2026?",
+      "description": "Resolves YES if Turkey's parliament ratifies Sweden's NATO membership application during 2026. Last holdout after Finland joined in 2023.",
+      "probability": 0.65,
+      "volume_24h": 88000,
+      "volume_total": 405000,
+      "category": "World",
+      "tags": [
+        "turkey",
+        "nato",
+        "sweden",
+        "diplomacy",
+        "alliance"
+      ],
+      "image_search": "nato headquarters brussels alliance",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.68
+        },
+        {
+          "date": "2026-01-30",
+          "prob": 0.63
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.66
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.65
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_020",
+      "title": "Will Turkish lira fall below 40 per USD by end of 2026?",
+      "description": "Resolves YES if the Turkish lira exchange rate falls to 40 lira per US dollar or weaker at any point by December 31, 2026. Continued currency crisis.",
+      "probability": 0.72,
+      "volume_24h": 125000,
+      "volume_total": 585000,
+      "category": "Economics",
+      "tags": [
+        "turkey",
+        "currency",
+        "lira",
+        "forex",
+        "exchange-rate"
+      ],
+      "image_search": "turkish lira currency exchange",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-14",
+          "prob": 0.75
+        },
+        {
+          "date": "2026-01-26",
+          "prob": 0.7
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.73
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.72
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_021",
+      "title": "Will Turkey hold local elections in 2026?",
+      "description": "Resolves YES if Turkey conducts local/municipal elections at any point during 2026. Next scheduled local elections are important test for Erdogan's AKP.",
+      "probability": 0.88,
+      "volume_24h": 95000,
+      "volume_total": 445000,
+      "category": "Politics",
+      "tags": [
+        "turkey",
+        "elections",
+        "local-government",
+        "akp",
+        "democracy"
+      ],
+      "image_search": "turkish election voting democracy",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.9
+        },
+        {
+          "date": "2026-01-29",
+          "prob": 0.86
+        },
+        {
+          "date": "2026-02-07",
+          "prob": 0.89
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.88
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_022",
+      "title": "Will Turkey and Greece engage in naval incidents in 2026?",
+      "description": "Resolves YES if Turkish and Greek naval or air forces have confrontational incidents (warning shots, dangerous maneuvers) in disputed waters during 2026. Aegean tensions persist.",
+      "probability": 0.45,
+      "volume_24h": 78000,
+      "volume_total": 365000,
+      "category": "World",
+      "tags": [
+        "turkey",
+        "greece",
+        "mediterranean",
+        "naval",
+        "territorial-disputes"
+      ],
+      "image_search": "aegean sea mediterranean naval",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.42
+        },
+        {
+          "date": "2026-02-02",
+          "prob": 0.47
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.44
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.45
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_023",
+      "title": "Will Australian Labor Party win 2026 federal election?",
+      "description": "Resolves YES if the Australian Labor Party wins the 2026 federal election (expected mid-2026). Prime Minister Anthony Albanese seeks second term.",
+      "probability": 0.58,
+      "volume_24h": 115000,
+      "volume_total": 535000,
+      "category": "Politics",
+      "tags": [
+        "australia",
+        "elections",
+        "labor-party",
+        "albanese",
+        "australian-politics"
+      ],
+      "image_search": "australian parliament house canberra",
+      "resolution_date": "2026-08-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-12",
+          "prob": 0.55
+        },
+        {
+          "date": "2026-01-25",
+          "prob": 0.6
+        },
+        {
+          "date": "2026-02-04",
+          "prob": 0.57
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.58
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_024",
+      "title": "Will Australia sign AUKUS nuclear submarine deal in 2026?",
+      "description": "Resolves YES if Australia officially signs contracts for AUKUS nuclear submarine acquisition during 2026. Historic defense partnership with US and UK.",
+      "probability": 0.72,
+      "volume_24h": 95000,
+      "volume_total": 445000,
+      "category": "World",
+      "tags": [
+        "australia",
+        "aukus",
+        "submarines",
+        "defense",
+        "china"
+      ],
+      "image_search": "nuclear submarine australian navy",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.75
+        },
+        {
+          "date": "2026-01-30",
+          "prob": 0.7
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.73
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.72
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_025",
+      "title": "Will Australia experience major flooding events in 2026?",
+      "description": "Resolves YES if Australia experiences flooding that causes over $1 billion AUD in damages during 2026. Climate change increasing extreme weather frequency.",
+      "probability": 0.52,
+      "volume_24h": 68000,
+      "volume_total": 315000,
+      "category": "World",
+      "tags": [
+        "australia",
+        "climate",
+        "flooding",
+        "natural-disasters",
+        "weather"
+      ],
+      "image_search": "australia flooding natural disaster",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.48
+        },
+        {
+          "date": "2026-01-27",
+          "prob": 0.54
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.51
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.52
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_026",
+      "title": "Will Australia's housing prices increase by 10% in 2026?",
+      "description": "Resolves YES if Australian median housing prices increase by 10% or more during 2026. Housing affordability crisis continues in major cities.",
+      "probability": 0.38,
+      "volume_24h": 125000,
+      "volume_total": 585000,
+      "category": "Economics",
+      "tags": [
+        "australia",
+        "housing",
+        "real-estate",
+        "property-market",
+        "sydney"
+      ],
+      "image_search": "sydney australia housing real estate",
+      "resolution_date": "2027-01-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.35
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.4
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.38
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_027",
+      "title": "Will Australia ban TikTok on government devices in 2026?",
+      "description": "Resolves YES if Australia implements a ban on TikTok on government-issued devices during 2026. Following Five Eyes partners' security concerns.",
+      "probability": 0.68,
+      "volume_24h": 82000,
+      "volume_total": 385000,
+      "category": "Technology",
+      "tags": [
+        "australia",
+        "tiktok",
+        "cybersecurity",
+        "china",
+        "government"
+      ],
+      "image_search": "government cybersecurity technology",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.65
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.7
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.67
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.68
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_028",
+      "title": "Will Australia host Cricket World Cup matches in 2026?",
+      "description": "Resolves YES if Australia hosts official ICC Cricket World Cup matches in 2026. Major sporting event for cricket-obsessed nation.",
+      "probability": 0.42,
+      "volume_24h": 58000,
+      "volume_total": 265000,
+      "category": "Sports",
+      "tags": [
+        "australia",
+        "cricket",
+        "world-cup",
+        "sports",
+        "icc"
+      ],
+      "image_search": "cricket world cup australia stadium",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-14",
+          "prob": 0.38
+        },
+        {
+          "date": "2026-01-26",
+          "prob": 0.44
+        },
+        {
+          "date": "2026-02-04",
+          "prob": 0.41
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.42
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_029",
+      "title": "Will Reserve Bank of Australia cut rates below 3% in 2026?",
+      "description": "Resolves YES if the Reserve Bank of Australia cuts its cash rate target to below 3.0% at any point during 2026. Responding to economic slowdown pressures.",
+      "probability": 0.48,
+      "volume_24h": 105000,
+      "volume_total": 485000,
+      "category": "Economics",
+      "tags": [
+        "australia",
+        "interest-rates",
+        "rba",
+        "monetary-policy",
+        "economy"
+      ],
+      "image_search": "reserve bank australia building",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.45
+        },
+        {
+          "date": "2026-01-30",
+          "prob": 0.5
+        },
+        {
+          "date": "2026-02-07",
+          "prob": 0.47
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.48
+        }
+      ]
+    },
+    {
+      "market_id": "new_intl_030",
+      "title": "Will Australia and China restore full diplomatic relations in 2026?",
+      "description": "Resolves YES if Australia and China fully normalize diplomatic and trade relations during 2026, removing all trade restrictions. Relationship thawing after years of tension.",
+      "probability": 0.52,
+      "volume_24h": 135000,
+      "volume_total": 625000,
+      "category": "World",
+      "tags": [
+        "australia",
+        "china",
+        "diplomacy",
+        "trade",
+        "bilateral-relations"
+      ],
+      "image_search": "australia china diplomacy handshake",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-12",
+          "prob": 0.48
+        },
+        {
+          "date": "2026-01-24",
+          "prob": 0.54
+        },
+        {
+          "date": "2026-02-03",
+          "prob": 0.51
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.52
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_001",
+      "title": "Will OpenAI release GPT-5 by end of 2026?",
+      "description": "Resolves YES if OpenAI officially releases GPT-5 (or next major model after GPT-4) to the public by December 31, 2026. Race toward AGI accelerates.",
+      "probability": 0.55,
+      "volume_24h": 245000,
+      "volume_total": 1150000,
+      "category": "Technology",
+      "tags": [
+        "ai",
+        "openai",
+        "gpt-5",
+        "artificial-intelligence",
+        "llm"
+      ],
+      "image_search": "artificial intelligence neural network technology",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.52
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.57
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.54
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.55
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_002",
+      "title": "Will Apple release Vision Pro 2 in 2026?",
+      "description": "Resolves YES if Apple announces and begins selling the Vision Pro 2 (or successor AR/VR headset) during 2026. Spatial computing evolution continues.",
+      "probability": 0.48,
+      "volume_24h": 185000,
+      "volume_total": 865000,
+      "category": "Technology",
+      "tags": [
+        "apple",
+        "vision-pro",
+        "ar",
+        "vr",
+        "spatial-computing"
+      ],
+      "image_search": "apple vision pro virtual reality headset",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.45
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.5
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.47
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.48
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_003",
+      "title": "Will Nvidia stock reach $1000 per share by end of 2026?",
+      "description": "Resolves YES if Nvidia (NVDA) stock price reaches $1000 per share or higher at any point by December 31, 2026. AI chip demand driving historic growth.",
+      "probability": 0.42,
+      "volume_24h": 295000,
+      "volume_total": 1425000,
+      "category": "Technology",
+      "tags": [
+        "nvidia",
+        "stock-market",
+        "ai-chips",
+        "semiconductors",
+        "tech-stocks"
+      ],
+      "image_search": "nvidia gpu artificial intelligence chip",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-12",
+          "prob": 0.38
+        },
+        {
+          "date": "2026-01-25",
+          "prob": 0.44
+        },
+        {
+          "date": "2026-02-04",
+          "prob": 0.41
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.42
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_004",
+      "title": "Will Bitcoin exceed $150,000 by end of 2026?",
+      "description": "Resolves YES if Bitcoin (BTC) price exceeds $150,000 USD at any point by December 31, 2026. Institutional adoption and halving cycle driving bull market.",
+      "probability": 0.38,
+      "volume_24h": 425000,
+      "volume_total": 2050000,
+      "category": "Crypto",
+      "tags": [
+        "bitcoin",
+        "cryptocurrency",
+        "btc",
+        "price-prediction",
+        "crypto-market"
+      ],
+      "image_search": "bitcoin cryptocurrency digital currency",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.35
+        },
+        {
+          "date": "2026-01-30",
+          "prob": 0.4
+        },
+        {
+          "date": "2026-02-07",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.38
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_005",
+      "title": "Will Ethereum surpass $8,000 by end of 2026?",
+      "description": "Resolves YES if Ethereum (ETH) price exceeds $8,000 USD at any point by December 31, 2026. Network upgrades and institutional DeFi adoption key drivers.",
+      "probability": 0.32,
+      "volume_24h": 285000,
+      "volume_total": 1350000,
+      "category": "Crypto",
+      "tags": [
+        "ethereum",
+        "eth",
+        "cryptocurrency",
+        "defi",
+        "smart-contracts"
+      ],
+      "image_search": "ethereum blockchain cryptocurrency network",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.28
+        },
+        {
+          "date": "2026-01-29",
+          "prob": 0.34
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.31
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.32
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_006",
+      "title": "Will a Bitcoin ETF accumulate over $100B AUM by end of 2026?",
+      "description": "Resolves YES if any single Bitcoin exchange-traded fund reaches $100 billion or more in assets under management by December 31, 2026. BlackRock IBIT leading the race.",
+      "probability": 0.58,
+      "volume_24h": 195000,
+      "volume_total": 925000,
+      "category": "Crypto",
+      "tags": [
+        "bitcoin-etf",
+        "blackrock",
+        "institutional-crypto",
+        "etf",
+        "wall-street"
+      ],
+      "image_search": "bitcoin etf wall street trading",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-14",
+          "prob": 0.55
+        },
+        {
+          "date": "2026-01-27",
+          "prob": 0.6
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.57
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.58
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_007",
+      "title": "Will SEC approve Solana ETF by end of 2026?",
+      "description": "Resolves YES if the U.S. Securities and Exchange Commission approves a spot Solana ETF by December 31, 2026. Following Bitcoin and Ethereum ETF approvals.",
+      "probability": 0.35,
+      "volume_24h": 165000,
+      "volume_total": 785000,
+      "category": "Crypto",
+      "tags": [
+        "solana",
+        "etf",
+        "sec",
+        "cryptocurrency",
+        "regulation"
+      ],
+      "image_search": "solana cryptocurrency blockchain",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.32
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.34
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.35
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_008",
+      "title": "Will Coinbase stock reach $500 by end of 2026?",
+      "description": "Resolves YES if Coinbase (COIN) stock price reaches $500 per share or higher at any point by December 31, 2026. Crypto bull market lifting exchange valuations.",
+      "probability": 0.28,
+      "volume_24h": 145000,
+      "volume_total": 685000,
+      "category": "Crypto",
+      "tags": [
+        "coinbase",
+        "coin-stock",
+        "crypto-exchange",
+        "stock-market"
+      ],
+      "image_search": "coinbase cryptocurrency exchange trading",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.25
+        },
+        {
+          "date": "2026-02-02",
+          "prob": 0.3
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.27
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.28
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_009",
+      "title": "Will a major DeFi protocol be hacked for over $500M in 2026?",
+      "description": "Resolves YES if any decentralized finance protocol suffers a hack resulting in over $500 million in losses during 2026. Security risks persist as TVL grows.",
+      "probability": 0.42,
+      "volume_24h": 125000,
+      "volume_total": 585000,
+      "category": "Crypto",
+      "tags": [
+        "defi",
+        "hacking",
+        "cybersecurity",
+        "smart-contracts",
+        "crypto-risk"
+      ],
+      "image_search": "cybersecurity hacking computer code",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.38
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.44
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.41
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.42
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_010",
+      "title": "Will quantum computing break RSA encryption in 2026?",
+      "description": "Resolves YES if a quantum computer successfully breaks RSA-2048 encryption or demonstrates capability to do so during 2026. Cryptographic security implications massive.",
+      "probability": 0.08,
+      "volume_24h": 185000,
+      "volume_total": 875000,
+      "category": "Technology",
+      "tags": [
+        "quantum-computing",
+        "encryption",
+        "cybersecurity",
+        "cryptography"
+      ],
+      "image_search": "quantum computer technology laboratory",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-12",
+          "prob": 0.05
+        },
+        {
+          "date": "2026-01-25",
+          "prob": 0.1
+        },
+        {
+          "date": "2026-02-04",
+          "prob": 0.07
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.08
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_011",
+      "title": "Will Google release Gemini 2.0 by end of 2026?",
+      "description": "Resolves YES if Google/DeepMind releases Gemini 2.0 (or next major model upgrade) by December 31, 2026. AI arms race with OpenAI intensifies.",
+      "probability": 0.68,
+      "volume_24h": 165000,
+      "volume_total": 785000,
+      "category": "Technology",
+      "tags": [
+        "google",
+        "gemini",
+        "ai",
+        "deepmind",
+        "artificial-intelligence"
+      ],
+      "image_search": "google ai artificial intelligence technology",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.65
+        },
+        {
+          "date": "2026-01-30",
+          "prob": 0.7
+        },
+        {
+          "date": "2026-02-07",
+          "prob": 0.67
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.68
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_012",
+      "title": "Will Anthropic raise Series D funding round in 2026?",
+      "description": "Resolves YES if Anthropic (creator of Claude) completes a Series D funding round during 2026. AI startups commanding unprecedented valuations.",
+      "probability": 0.72,
+      "volume_24h": 135000,
+      "volume_total": 625000,
+      "category": "Technology",
+      "tags": [
+        "anthropic",
+        "claude",
+        "ai",
+        "venture-capital",
+        "funding"
+      ],
+      "image_search": "ai startup office technology venture capital",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.75
+        },
+        {
+          "date": "2026-01-29",
+          "prob": 0.7
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.73
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.72
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_013",
+      "title": "Will xAI (Elon Musk) raise over $10B in funding in 2026?",
+      "description": "Resolves YES if Elon Musk's xAI company raises $10 billion or more in funding during 2026. Grok AI competing with OpenAI and Google.",
+      "probability": 0.48,
+      "volume_24h": 175000,
+      "volume_total": 825000,
+      "category": "Technology",
+      "tags": [
+        "xai",
+        "elon-musk",
+        "grok",
+        "ai",
+        "funding"
+      ],
+      "image_search": "elon musk technology artificial intelligence",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-14",
+          "prob": 0.45
+        },
+        {
+          "date": "2026-01-27",
+          "prob": 0.5
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.47
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.48
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_014",
+      "title": "Will Meta release AR glasses for consumers in 2026?",
+      "description": "Resolves YES if Meta releases consumer-ready augmented reality glasses (not just developer kits) during 2026. Metaverse vision evolving into wearable AR.",
+      "probability": 0.35,
+      "volume_24h": 145000,
+      "volume_total": 685000,
+      "category": "Technology",
+      "tags": [
+        "meta",
+        "ar-glasses",
+        "augmented-reality",
+        "metaverse",
+        "wearables"
+      ],
+      "image_search": "augmented reality smart glasses technology",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.32
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.34
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.35
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_015",
+      "title": "Will Tesla deliver over 2 million vehicles in 2026?",
+      "description": "Resolves YES if Tesla delivers 2 million or more vehicles globally during calendar year 2026. Production ramp and new models driving growth targets.",
+      "probability": 0.58,
+      "volume_24h": 195000,
+      "volume_total": 925000,
+      "category": "Technology",
+      "tags": [
+        "tesla",
+        "electric-vehicles",
+        "elon-musk",
+        "automotive",
+        "production"
+      ],
+      "image_search": "tesla electric vehicle production factory",
+      "resolution_date": "2027-01-15T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.55
+        },
+        {
+          "date": "2026-02-02",
+          "prob": 0.6
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.57
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.58
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_016",
+      "title": "Will SpaceX complete first orbital Starship flight with crew in 2026?",
+      "description": "Resolves YES if SpaceX successfully completes an orbital flight of Starship with human crew on board during 2026. Mars mission timeline accelerating.",
+      "probability": 0.32,
+      "volume_24h": 215000,
+      "volume_total": 1025000,
+      "category": "Technology",
+      "tags": [
+        "spacex",
+        "starship",
+        "space",
+        "elon-musk",
+        "crewed-flight"
+      ],
+      "image_search": "spacex starship rocket launch space",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.28
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.34
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.31
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.32
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_017",
+      "title": "Will Microsoft acquire a major gaming studio in 2026?",
+      "description": "Resolves YES if Microsoft announces acquisition of a major gaming studio (valued at $1B+) during 2026. Following Activision-Blizzard deal, expansion continues.",
+      "probability": 0.42,
+      "volume_24h": 125000,
+      "volume_total": 585000,
+      "category": "Technology",
+      "tags": [
+        "microsoft",
+        "gaming",
+        "acquisitions",
+        "xbox",
+        "game-pass"
+      ],
+      "image_search": "microsoft xbox gaming console",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-12",
+          "prob": 0.38
+        },
+        {
+          "date": "2026-01-25",
+          "prob": 0.44
+        },
+        {
+          "date": "2026-02-04",
+          "prob": 0.41
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.42
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_018",
+      "title": "Will TikTok be sold to US entity by end of 2026?",
+      "description": "Resolves YES if TikTok (ByteDance) sells its US operations to an American company or entity by December 31, 2026. National security concerns and divestiture pressure.",
+      "probability": 0.38,
+      "volume_24h": 185000,
+      "volume_total": 875000,
+      "category": "Technology",
+      "tags": [
+        "tiktok",
+        "bytedance",
+        "social-media",
+        "china",
+        "national-security"
+      ],
+      "image_search": "tiktok social media app smartphone",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.35
+        },
+        {
+          "date": "2026-01-30",
+          "prob": 0.4
+        },
+        {
+          "date": "2026-02-07",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.38
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_019",
+      "title": "Will Amazon launch prescription drug delivery nationwide in 2026?",
+      "description": "Resolves YES if Amazon expands its prescription drug delivery service to all 50 US states during 2026. Healthcare disruption accelerating.",
+      "probability": 0.62,
+      "volume_24h": 115000,
+      "volume_total": 535000,
+      "category": "Technology",
+      "tags": [
+        "amazon",
+        "healthcare",
+        "pharmacy",
+        "delivery",
+        "disruption"
+      ],
+      "image_search": "amazon delivery healthcare pharmacy",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.58
+        },
+        {
+          "date": "2026-01-29",
+          "prob": 0.64
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.61
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.62
+        }
+      ]
+    },
+    {
+      "market_id": "new_tech_020",
+      "title": "Will Neuralink perform first human brain implant surgery in 2026?",
+      "description": "Resolves YES if Neuralink (Elon Musk's brain-computer interface company) performs its first human brain implant surgery during 2026. Brain-machine interface milestone.",
+      "probability": 0.65,
+      "volume_24h": 175000,
+      "volume_total": 825000,
+      "category": "Technology",
+      "tags": [
+        "neuralink",
+        "brain-computer-interface",
+        "elon-musk",
+        "neurotechnology"
+      ],
+      "image_search": "brain computer interface neurotechnology",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-14",
+          "prob": 0.68
+        },
+        {
+          "date": "2026-01-27",
+          "prob": 0.63
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.66
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.65
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_001",
+      "title": "Will Dune: Part Three be announced by end of 2026?",
+      "description": "Resolves YES if Warner Bros and/or Denis Villeneuve officially announce Dune: Part Three (Dune Messiah) by December 31, 2026. Epic franchise continuation anticipated.",
+      "probability": 0.75,
+      "volume_24h": 165000,
+      "volume_total": 785000,
+      "category": "Entertainment",
+      "tags": [
+        "dune",
+        "movies",
+        "denis-villeneuve",
+        "sci-fi",
+        "box-office"
+      ],
+      "image_search": "dune movie desert science fiction",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.72
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.77
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.74
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.75
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_002",
+      "title": "Will Avatar 3 gross over $1.5 billion worldwide?",
+      "description": "Resolves YES if Avatar 3 (releasing December 2025) achieves worldwide box office gross exceeding $1.5 billion. James Cameron's franchise continues epic scale.",
+      "probability": 0.62,
+      "volume_24h": 195000,
+      "volume_total": 925000,
+      "category": "Entertainment",
+      "tags": [
+        "avatar",
+        "james-cameron",
+        "box-office",
+        "movies",
+        "blockbuster"
+      ],
+      "image_search": "avatar movie pandora james cameron",
+      "resolution_date": "2026-06-30T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.58
+        },
+        {
+          "date": "2026-01-30",
+          "prob": 0.64
+        },
+        {
+          "date": "2026-02-07",
+          "prob": 0.61
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.62
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_003",
+      "title": "Will The Last of Us Season 3 be announced by HBO in 2026?",
+      "description": "Resolves YES if HBO officially announces The Last of Us Season 3 during 2026. Critically acclaimed video game adaptation continuing its run.",
+      "probability": 0.82,
+      "volume_24h": 135000,
+      "volume_total": 625000,
+      "category": "Entertainment",
+      "tags": [
+        "the-last-of-us",
+        "hbo",
+        "streaming",
+        "tv-series",
+        "video-game-adaptation"
+      ],
+      "image_search": "the last of us hbo series",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-12",
+          "prob": 0.85
+        },
+        {
+          "date": "2026-01-25",
+          "prob": 0.8
+        },
+        {
+          "date": "2026-02-04",
+          "prob": 0.83
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.82
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_004",
+      "title": "Will Stranger Things Season 5 be released in 2026?",
+      "description": "Resolves YES if the final season of Stranger Things (Season 5) is released on Netflix during 2026. Long-awaited conclusion to hit series.",
+      "probability": 0.68,
+      "volume_24h": 175000,
+      "volume_total": 825000,
+      "category": "Entertainment",
+      "tags": [
+        "stranger-things",
+        "netflix",
+        "streaming",
+        "tv-series",
+        "final-season"
+      ],
+      "image_search": "stranger things netflix series upside down",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.65
+        },
+        {
+          "date": "2026-01-29",
+          "prob": 0.7
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.67
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.68
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_005",
+      "title": "Will Marvel release 3 or more movies in 2026?",
+      "description": "Resolves YES if Marvel Studios releases three or more theatrical films during calendar year 2026. MCU production pipeline recovering post-strikes.",
+      "probability": 0.72,
+      "volume_24h": 145000,
+      "volume_total": 685000,
+      "category": "Entertainment",
+      "tags": [
+        "marvel",
+        "mcu",
+        "movies",
+        "disney",
+        "superhero"
+      ],
+      "image_search": "marvel cinematic universe avengers",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-14",
+          "prob": 0.75
+        },
+        {
+          "date": "2026-01-27",
+          "prob": 0.7
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.73
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.72
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_006",
+      "title": "Will The Batman Part II release date be delayed beyond October 2026?",
+      "description": "Resolves YES if The Batman Part II (currently scheduled for October 2, 2026) has its release date pushed back beyond October 2026. Production timeline concerns.",
+      "probability": 0.45,
+      "volume_24h": 125000,
+      "volume_total": 585000,
+      "category": "Entertainment",
+      "tags": [
+        "the-batman",
+        "dc",
+        "movies",
+        "robert-pattinson",
+        "warner-bros"
+      ],
+      "image_search": "the batman movie gotham dark knight",
+      "resolution_date": "2026-10-03T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.42
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.47
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.44
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.45
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_007",
+      "title": "Will GTA 6 be released in 2026?",
+      "description": "Resolves YES if Grand Theft Auto VI (GTA 6) is officially released by Rockstar Games during 2026. Most anticipated video game release in years.",
+      "probability": 0.62,
+      "volume_24h": 285000,
+      "volume_total": 1350000,
+      "category": "Entertainment",
+      "tags": [
+        "gta-6",
+        "rockstar-games",
+        "video-games",
+        "gaming",
+        "grand-theft-auto"
+      ],
+      "image_search": "grand theft auto gta video game",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.58
+        },
+        {
+          "date": "2026-02-02",
+          "prob": 0.64
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.61
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.62
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_008",
+      "title": "Will Elder Scrolls VI be announced for 2027 release?",
+      "description": "Resolves YES if Bethesda officially announces The Elder Scrolls VI will release in 2027 (announcement made during 2026). Decade-long wait for next mainline game.",
+      "probability": 0.28,
+      "volume_24h": 155000,
+      "volume_total": 725000,
+      "category": "Entertainment",
+      "tags": [
+        "elder-scrolls",
+        "bethesda",
+        "video-games",
+        "rpg",
+        "skyrim"
+      ],
+      "image_search": "elder scrolls video game fantasy rpg",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.25
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.3
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.27
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.28
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_009",
+      "title": "Will Beyonc\u00e9 release a new album in 2026?",
+      "description": "Resolves YES if Beyonc\u00e9 releases a new studio album during 2026. Following her country album 'Cowboy Carter', fans anticipate what genre she'll explore next.",
+      "probability": 0.52,
+      "volume_24h": 165000,
+      "volume_total": 785000,
+      "category": "Entertainment",
+      "tags": [
+        "beyonce",
+        "music",
+        "album",
+        "pop",
+        "r&b"
+      ],
+      "image_search": "beyonce concert performance music",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-12",
+          "prob": 0.48
+        },
+        {
+          "date": "2026-01-25",
+          "prob": 0.54
+        },
+        {
+          "date": "2026-02-04",
+          "prob": 0.51
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.52
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_010",
+      "title": "Will Taylor Swift announce new album in 2026?",
+      "description": "Resolves YES if Taylor Swift officially announces a new studio album (not re-recording) during 2026. Prolific songwriter continues record-breaking output.",
+      "probability": 0.58,
+      "volume_24h": 195000,
+      "volume_total": 925000,
+      "category": "Entertainment",
+      "tags": [
+        "taylor-swift",
+        "music",
+        "album",
+        "pop",
+        "singer-songwriter"
+      ],
+      "image_search": "taylor swift eras tour concert",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.55
+        },
+        {
+          "date": "2026-01-29",
+          "prob": 0.6
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.57
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.58
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_011",
+      "title": "Will Drake and Kendrick Lamar collaborate on a track in 2026?",
+      "description": "Resolves YES if Drake and Kendrick Lamar release an official collaboration track during 2026. After years of rivalry, surprise collaboration would shake hip-hop.",
+      "probability": 0.12,
+      "volume_24h": 145000,
+      "volume_total": 685000,
+      "category": "Entertainment",
+      "tags": [
+        "drake",
+        "kendrick-lamar",
+        "hip-hop",
+        "music",
+        "collaboration"
+      ],
+      "image_search": "hip hop rap music concert",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.1
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.14
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.11
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.12
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_012",
+      "title": "Will The Winds of Winter (Game of Thrones book) be published in 2026?",
+      "description": "Resolves YES if George R.R. Martin publishes The Winds of Winter (6th book in A Song of Ice and Fire series) during 2026. Fans have waited over a decade.",
+      "probability": 0.15,
+      "volume_24h": 125000,
+      "volume_total": 585000,
+      "category": "Entertainment",
+      "tags": [
+        "game-of-thrones",
+        "george-rr-martin",
+        "books",
+        "fantasy",
+        "winds-of-winter"
+      ],
+      "image_search": "game of thrones book series fantasy",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-14",
+          "prob": 0.12
+        },
+        {
+          "date": "2026-01-27",
+          "prob": 0.17
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.14
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.15
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_013",
+      "title": "Will Succession win Best Drama at 2026 Emmys?",
+      "description": "Resolves YES if HBO's Succession wins Outstanding Drama Series at the 2026 Emmy Awards (for final season). Critics' favorite seeking swan song victory.",
+      "probability": 0.42,
+      "volume_24h": 95000,
+      "volume_total": 445000,
+      "category": "Entertainment",
+      "tags": [
+        "succession",
+        "emmy-awards",
+        "hbo",
+        "tv-series",
+        "drama"
+      ],
+      "image_search": "emmy awards television drama series",
+      "resolution_date": "2026-09-30T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.38
+        },
+        {
+          "date": "2026-02-02",
+          "prob": 0.44
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.41
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.42
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_014",
+      "title": "Will Zendaya win Best Actress Oscar by 2027?",
+      "description": "Resolves YES if Zendaya wins Academy Award for Best Actress at the 2027 Oscars (for 2026 films). Rising star poised for major awards recognition.",
+      "probability": 0.18,
+      "volume_24h": 115000,
+      "volume_total": 535000,
+      "category": "Entertainment",
+      "tags": [
+        "zendaya",
+        "oscars",
+        "academy-awards",
+        "movies",
+        "actress"
+      ],
+      "image_search": "oscars academy awards red carpet",
+      "resolution_date": "2027-03-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.15
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.2
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.17
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.18
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_015",
+      "title": "Will Netflix subscriber count exceed 300 million globally in 2026?",
+      "description": "Resolves YES if Netflix reports over 300 million total global subscribers at any earnings report during 2026. Streaming wars leader continues growth.",
+      "probability": 0.62,
+      "volume_24h": 175000,
+      "volume_total": 825000,
+      "category": "Entertainment",
+      "tags": [
+        "netflix",
+        "streaming",
+        "subscribers",
+        "tech",
+        "media"
+      ],
+      "image_search": "netflix streaming service entertainment",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.58
+        },
+        {
+          "date": "2026-01-30",
+          "prob": 0.64
+        },
+        {
+          "date": "2026-02-07",
+          "prob": 0.61
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.62
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_016",
+      "title": "Will Disney+ surpass 200 million subscribers in 2026?",
+      "description": "Resolves YES if Disney+ reaches 200 million global subscribers at any point during 2026. Disney's streaming platform continuing expansion.",
+      "probability": 0.48,
+      "volume_24h": 145000,
+      "volume_total": 685000,
+      "category": "Entertainment",
+      "tags": [
+        "disney-plus",
+        "streaming",
+        "subscribers",
+        "disney",
+        "media"
+      ],
+      "image_search": "disney plus streaming service",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.45
+        },
+        {
+          "date": "2026-01-29",
+          "prob": 0.5
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.47
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.48
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_017",
+      "title": "Will Harry Styles release new album in 2026?",
+      "description": "Resolves YES if Harry Styles releases a new studio album during 2026. Former One Direction star and solo pop sensation continues musical evolution.",
+      "probability": 0.55,
+      "volume_24h": 125000,
+      "volume_total": 585000,
+      "category": "Entertainment",
+      "tags": [
+        "harry-styles",
+        "music",
+        "pop",
+        "album",
+        "one-direction"
+      ],
+      "image_search": "harry styles concert performance",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-14",
+          "prob": 0.52
+        },
+        {
+          "date": "2026-01-27",
+          "prob": 0.57
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.54
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.55
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_018",
+      "title": "Will Squid Game Season 3 be announced by Netflix in 2026?",
+      "description": "Resolves YES if Netflix officially announces Squid Game Season 3 during 2026. Korean phenomenon continues global streaming dominance.",
+      "probability": 0.72,
+      "volume_24h": 155000,
+      "volume_total": 725000,
+      "category": "Entertainment",
+      "tags": [
+        "squid-game",
+        "netflix",
+        "korean-drama",
+        "streaming",
+        "k-drama"
+      ],
+      "image_search": "squid game netflix korean series",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.75
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.7
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.73
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.72
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_019",
+      "title": "Will Coachella 2026 sell out all weekend passes?",
+      "description": "Resolves YES if Coachella Music Festival 2026 (April 2026) sells out all general admission weekend passes for both weekends. Live music festival recovery post-pandemic.",
+      "probability": 0.78,
+      "volume_24h": 95000,
+      "volume_total": 445000,
+      "category": "Entertainment",
+      "tags": [
+        "coachella",
+        "music-festival",
+        "live-music",
+        "concerts",
+        "events"
+      ],
+      "image_search": "coachella music festival california",
+      "resolution_date": "2026-04-30T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.75
+        },
+        {
+          "date": "2026-02-02",
+          "prob": 0.8
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.77
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.78
+        }
+      ]
+    },
+    {
+      "market_id": "new_ent_020",
+      "title": "Will Spider-Man 4 (MCU) be officially announced in 2026?",
+      "description": "Resolves YES if Marvel Studios officially announces Spider-Man 4 (Tom Holland) during 2026. Highly anticipated continuation of MCU Spider-Man trilogy.",
+      "probability": 0.82,
+      "volume_24h": 185000,
+      "volume_total": 875000,
+      "category": "Entertainment",
+      "tags": [
+        "spider-man",
+        "marvel",
+        "mcu",
+        "tom-holland",
+        "movies"
+      ],
+      "image_search": "spider-man marvel mcu tom holland",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": false,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.85
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.8
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.83
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.82
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_001",
+      "title": "Will Meta launch Threads premium subscription in Q1 2026? (Hypothetical Market)",
+      "description": "Resolves YES if Meta introduces a paid premium tier for Threads social network during Q1 2026. Twitter Blue competitor monetization strategy.",
+      "probability": 0.45,
+      "volume_24h": 85000,
+      "volume_total": 395000,
+      "category": "Technology",
+      "tags": [
+        "threads",
+        "meta",
+        "social-media",
+        "subscription",
+        "monetization"
+      ],
+      "image_search": "social media app smartphone technology",
+      "resolution_date": "2026-03-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.42
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.47
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.44
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.45
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_002",
+      "title": "Will Rihanna perform at Super Bowl LXI halftime show 2027? (Hypothetical Market)",
+      "description": "Resolves YES if Rihanna is announced as headliner for Super Bowl LXI (61) halftime show in 2027. After iconic 2023 performance, return speculation high.",
+      "probability": 0.22,
+      "volume_24h": 125000,
+      "volume_total": 585000,
+      "category": "Entertainment",
+      "tags": [
+        "rihanna",
+        "super-bowl",
+        "halftime-show",
+        "nfl",
+        "music"
+      ],
+      "image_search": "super bowl halftime show performance",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.2
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.24
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.21
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.22
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_003",
+      "title": "Will Bluesky Social exceed 50 million users by mid-2026? (Hypothetical Market)",
+      "description": "Resolves YES if Bluesky decentralized social network reaches 50 million total users by June 30, 2026. Twitter alternative gaining momentum.",
+      "probability": 0.38,
+      "volume_24h": 95000,
+      "volume_total": 445000,
+      "category": "Technology",
+      "tags": [
+        "bluesky",
+        "social-media",
+        "decentralized",
+        "twitter-alternative"
+      ],
+      "image_search": "social network technology smartphone",
+      "resolution_date": "2026-06-30T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-12",
+          "prob": 0.35
+        },
+        {
+          "date": "2026-01-25",
+          "prob": 0.4
+        },
+        {
+          "date": "2026-02-04",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.38
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_004",
+      "title": "Will OpenAI announce partnership with Apple in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if OpenAI and Apple officially announce a major partnership or integration deal during 2026. ChatGPT + Siri speculation heating up.",
+      "probability": 0.52,
+      "volume_24h": 185000,
+      "volume_total": 875000,
+      "category": "Technology",
+      "tags": [
+        "openai",
+        "apple",
+        "ai",
+        "partnership",
+        "chatgpt"
+      ],
+      "image_search": "apple technology artificial intelligence",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.48
+        },
+        {
+          "date": "2026-01-29",
+          "prob": 0.54
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.51
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.52
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_005",
+      "title": "Will Elon Musk step down as X (Twitter) CEO in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if Elon Musk announces or implements stepping down as CEO of X Corp (formerly Twitter) during 2026. Leadership transition rumors persist.",
+      "probability": 0.35,
+      "volume_24h": 165000,
+      "volume_total": 785000,
+      "category": "Technology",
+      "tags": [
+        "elon-musk",
+        "twitter",
+        "x-corp",
+        "social-media",
+        "ceo"
+      ],
+      "image_search": "elon musk technology social media",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-14",
+          "prob": 0.32
+        },
+        {
+          "date": "2026-01-27",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.34
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.35
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_006",
+      "title": "Will Barbenheimer sequel films be announced in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if both Barbie sequel AND Oppenheimer follow-up film are officially announced by respective studios during 2026. Cultural phenomenon continues.",
+      "probability": 0.28,
+      "volume_24h": 115000,
+      "volume_total": 535000,
+      "category": "Entertainment",
+      "tags": [
+        "barbenheimer",
+        "barbie",
+        "oppenheimer",
+        "movies",
+        "sequels"
+      ],
+      "image_search": "movie theater cinema blockbuster",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.25
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.3
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.27
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.28
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_007",
+      "title": "Will YouTube launch AI-generated shorts creator tool in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if YouTube releases an AI-powered tool that automatically generates YouTube Shorts content during 2026. Creator tools evolution.",
+      "probability": 0.68,
+      "volume_24h": 145000,
+      "volume_total": 685000,
+      "category": "Technology",
+      "tags": [
+        "youtube",
+        "ai",
+        "shorts",
+        "content-creation",
+        "google"
+      ],
+      "image_search": "youtube video creation technology",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.65
+        },
+        {
+          "date": "2026-02-02",
+          "prob": 0.7
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.67
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.68
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_008",
+      "title": "Will MrBeast launch MrBeast Burger 2.0 with physical locations in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if MrBeast announces opening of permanent physical MrBeast Burger restaurant locations (not ghost kitchens) during 2026. Creator economy empire expansion.",
+      "probability": 0.42,
+      "volume_24h": 125000,
+      "volume_total": 585000,
+      "category": "Entertainment",
+      "tags": [
+        "mrbeast",
+        "youtube",
+        "fast-food",
+        "creator-economy",
+        "restaurants"
+      ],
+      "image_search": "fast food restaurant burger",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.38
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.44
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.41
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.42
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_009",
+      "title": "Will Kim Kardashian run for political office in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if Kim Kardashian officially announces candidacy for any political office (local, state, or federal) during 2026. Celebrity politics speculation.",
+      "probability": 0.08,
+      "volume_24h": 155000,
+      "volume_total": 725000,
+      "category": "Politics",
+      "tags": [
+        "kim-kardashian",
+        "celebrity",
+        "politics",
+        "elections",
+        "hollywood"
+      ],
+      "image_search": "celebrity politics campaign",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.05
+        },
+        {
+          "date": "2026-01-29",
+          "prob": 0.1
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.07
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.08
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_010",
+      "title": "Will Dwayne 'The Rock' Johnson announce presidential run for 2028? (Hypothetical Market)",
+      "description": "Resolves YES if Dwayne Johnson officially announces candidacy for U.S. President in 2028 election (announcement made during 2026). Celebrity presidential speculation.",
+      "probability": 0.12,
+      "volume_24h": 175000,
+      "volume_total": 825000,
+      "category": "Politics",
+      "tags": [
+        "the-rock",
+        "dwayne-johnson",
+        "president",
+        "2028-election",
+        "celebrity"
+      ],
+      "image_search": "presidential campaign politics american flag",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-14",
+          "prob": 0.1
+        },
+        {
+          "date": "2026-01-27",
+          "prob": 0.14
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.11
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.12
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_011",
+      "title": "Will Apple announce foldable iPhone in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if Apple officially announces a foldable iPhone model during 2026. Long-rumored form factor innovation finally arriving.",
+      "probability": 0.28,
+      "volume_24h": 225000,
+      "volume_total": 1075000,
+      "category": "Technology",
+      "tags": [
+        "apple",
+        "iphone",
+        "foldable",
+        "smartphone",
+        "innovation"
+      ],
+      "image_search": "foldable smartphone technology",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.25
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.3
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.27
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.28
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_012",
+      "title": "Will Shein IPO in US markets by end of 2026? (Hypothetical Market)",
+      "description": "Resolves YES if fast-fashion giant Shein completes initial public offering on U.S. stock exchanges by December 31, 2026. Massive consumer brand IPO.",
+      "probability": 0.52,
+      "volume_24h": 165000,
+      "volume_total": 785000,
+      "category": "Economics",
+      "tags": [
+        "shein",
+        "ipo",
+        "fast-fashion",
+        "retail",
+        "china"
+      ],
+      "image_search": "fashion retail shopping online",
+      "resolution_date": "2027-01-01T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.48
+        },
+        {
+          "date": "2026-02-02",
+          "prob": 0.54
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.51
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.52
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_013",
+      "title": "Will Universal Basic Income pilot launch in major US city in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if a major U.S. city (population 500K+) launches a Universal Basic Income pilot program during 2026. UBI experiments expanding.",
+      "probability": 0.38,
+      "volume_24h": 135000,
+      "volume_total": 625000,
+      "category": "Politics",
+      "tags": [
+        "ubi",
+        "universal-basic-income",
+        "economics",
+        "social-policy"
+      ],
+      "image_search": "economics money social welfare",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.35
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.4
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.38
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_014",
+      "title": "Will lab-grown meat be sold in US supermarkets nationwide by mid-2026? (Hypothetical Market)",
+      "description": "Resolves YES if cultivated/lab-grown meat products are available for purchase in major U.S. supermarket chains nationwide by June 30, 2026. Food tech revolution.",
+      "probability": 0.32,
+      "volume_24h": 115000,
+      "volume_total": 535000,
+      "category": "Technology",
+      "tags": [
+        "lab-grown-meat",
+        "food-tech",
+        "cultivated-meat",
+        "sustainability"
+      ],
+      "image_search": "laboratory food technology science",
+      "resolution_date": "2026-06-30T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-12",
+          "prob": 0.28
+        },
+        {
+          "date": "2026-01-25",
+          "prob": 0.34
+        },
+        {
+          "date": "2026-02-04",
+          "prob": 0.31
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.32
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_015",
+      "title": "Will 4-day work week be adopted by Fortune 500 company in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if any Fortune 500 company announces permanent adoption of 4-day work week for all employees during 2026. Work culture transformation.",
+      "probability": 0.25,
+      "volume_24h": 145000,
+      "volume_total": 685000,
+      "category": "Economics",
+      "tags": [
+        "four-day-workweek",
+        "work-culture",
+        "labor",
+        "corporate"
+      ],
+      "image_search": "office workplace corporate business",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.22
+        },
+        {
+          "date": "2026-01-29",
+          "prob": 0.27
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.24
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.25
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_016",
+      "title": "Will flying car be certified for commercial use in US by 2026? (Hypothetical Market)",
+      "description": "Resolves YES if FAA certifies any eVTOL (electric vertical takeoff and landing) 'flying car' for commercial passenger use in U.S. by December 31, 2026.",
+      "probability": 0.35,
+      "volume_24h": 125000,
+      "volume_total": 585000,
+      "category": "Technology",
+      "tags": [
+        "evtol",
+        "flying-cars",
+        "aviation",
+        "transportation",
+        "future-tech"
+      ],
+      "image_search": "evtol flying car future transportation",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.32
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.34
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.35
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_017",
+      "title": "Will major US bank offer Bitcoin custody services in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if any of the top 10 US banks (by assets) launches Bitcoin custody/storage services for retail customers during 2026. TradFi crypto integration.",
+      "probability": 0.58,
+      "volume_24h": 185000,
+      "volume_total": 875000,
+      "category": "Crypto",
+      "tags": [
+        "bitcoin",
+        "banking",
+        "custody",
+        "crypto",
+        "wall-street"
+      ],
+      "image_search": "bank vault bitcoin cryptocurrency",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-14",
+          "prob": 0.55
+        },
+        {
+          "date": "2026-01-27",
+          "prob": 0.6
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.57
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.58
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_018",
+      "title": "Will AI-generated song top Billboard Hot 100 in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if a song created primarily with AI (vocals, lyrics, or production) reaches #1 on Billboard Hot 100 chart during 2026. AI music revolution.",
+      "probability": 0.22,
+      "volume_24h": 155000,
+      "volume_total": 725000,
+      "category": "Entertainment",
+      "tags": [
+        "ai-music",
+        "artificial-intelligence",
+        "billboard",
+        "music",
+        "ai-generated"
+      ],
+      "image_search": "music production studio artificial intelligence",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.18
+        },
+        {
+          "date": "2026-02-02",
+          "prob": 0.24
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.21
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.22
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_019",
+      "title": "Will Ozempic be approved for general weight loss by FDA in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if FDA approves Ozempic (semaglutide) for general weight loss indication (not just diabetes) during 2026. Weight loss drug revolution expanding.",
+      "probability": 0.48,
+      "volume_24h": 165000,
+      "volume_total": 785000,
+      "category": "World",
+      "tags": [
+        "ozempic",
+        "weight-loss",
+        "fda",
+        "pharmaceuticals",
+        "health"
+      ],
+      "image_search": "pharmaceutical medicine healthcare",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.45
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.5
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.47
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.48
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_020",
+      "title": "Will major hurricane hit NYC area in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if a Category 3+ hurricane makes landfall in the New York City metropolitan area during 2026 hurricane season. Climate change increasing extreme weather risk.",
+      "probability": 0.15,
+      "volume_24h": 195000,
+      "volume_total": 925000,
+      "category": "World",
+      "tags": [
+        "hurricane",
+        "new-york",
+        "climate-change",
+        "natural-disaster",
+        "weather"
+      ],
+      "image_search": "hurricane storm extreme weather",
+      "resolution_date": "2026-11-30T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.12
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.17
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.14
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.15
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_021",
+      "title": "Will cannabis be federally legalized in US in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if U.S. federal government removes cannabis from Schedule I and legalizes recreational cannabis nationwide during 2026. Major drug policy reform.",
+      "probability": 0.28,
+      "volume_24h": 175000,
+      "volume_total": 825000,
+      "category": "Politics",
+      "tags": [
+        "cannabis",
+        "legalization",
+        "marijuana",
+        "drug-policy",
+        "federal-law"
+      ],
+      "image_search": "cannabis marijuana legalization",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.25
+        },
+        {
+          "date": "2026-01-29",
+          "prob": 0.3
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.27
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.28
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_022",
+      "title": "Will Jeff Bezos return to Amazon as CEO in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if Jeff Bezos announces return to Amazon as CEO (or equivalent executive role) during 2026. Founder return speculation amid Andy Jassy tenure.",
+      "probability": 0.08,
+      "volume_24h": 145000,
+      "volume_total": 685000,
+      "category": "Technology",
+      "tags": [
+        "jeff-bezos",
+        "amazon",
+        "ceo",
+        "tech",
+        "leadership"
+      ],
+      "image_search": "amazon headquarters corporate technology",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-14",
+          "prob": 0.05
+        },
+        {
+          "date": "2026-01-27",
+          "prob": 0.1
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.07
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.08
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_023",
+      "title": "Will brain upload technology be successfully demonstrated in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if any organization successfully demonstrates uploading human consciousness or complete brain state to a computer during 2026. Sci-fi becoming reality.",
+      "probability": 0.02,
+      "volume_24h": 215000,
+      "volume_total": 1025000,
+      "category": "Technology",
+      "tags": [
+        "brain-upload",
+        "consciousness",
+        "neuroscience",
+        "futurism",
+        "transhumanism"
+      ],
+      "image_search": "brain technology neuroscience computer",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.01
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.03
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.02
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.02
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_024",
+      "title": "Will Disney acquire Netflix in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if Disney announces acquisition or merger with Netflix during 2026. Mega streaming consolidation deal speculation.",
+      "probability": 0.12,
+      "volume_24h": 225000,
+      "volume_total": 1075000,
+      "category": "Entertainment",
+      "tags": [
+        "disney",
+        "netflix",
+        "merger",
+        "acquisition",
+        "streaming"
+      ],
+      "image_search": "corporate merger business handshake",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-12",
+          "prob": 0.1
+        },
+        {
+          "date": "2026-01-25",
+          "prob": 0.14
+        },
+        {
+          "date": "2026-02-04",
+          "prob": 0.11
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.12
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_025",
+      "title": "Will permanent moon base be announced by any nation in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if any country officially announces plans to establish a permanent lunar base with construction beginning before 2030 (announcement made in 2026).",
+      "probability": 0.42,
+      "volume_24h": 165000,
+      "volume_total": 785000,
+      "category": "Technology",
+      "tags": [
+        "moon-base",
+        "space",
+        "lunar",
+        "nasa",
+        "space-exploration"
+      ],
+      "image_search": "moon lunar base space exploration",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.38
+        },
+        {
+          "date": "2026-01-29",
+          "prob": 0.44
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.41
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.42
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_026",
+      "title": "Will human receive transplant from genetically modified pig in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if a human patient receives and survives (30+ days) an organ transplant from a genetically modified pig (xenotransplant) during 2026. Medical breakthrough.",
+      "probability": 0.55,
+      "volume_24h": 135000,
+      "volume_total": 625000,
+      "category": "World",
+      "tags": [
+        "xenotransplant",
+        "medical",
+        "organ-transplant",
+        "biotechnology"
+      ],
+      "image_search": "medical surgery hospital transplant",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-20",
+          "prob": 0.52
+        },
+        {
+          "date": "2026-02-02",
+          "prob": 0.57
+        },
+        {
+          "date": "2026-02-09",
+          "prob": 0.54
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.55
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_027",
+      "title": "Will US ban gas-powered car sales in any state by 2035? (Hypothetical Market)",
+      "description": "Resolves YES if any U.S. state passes legislation banning sale of new gasoline-powered vehicles by 2035 (law passed during 2026). Climate policy acceleration.",
+      "probability": 0.48,
+      "volume_24h": 155000,
+      "volume_total": 725000,
+      "category": "Politics",
+      "tags": [
+        "climate-change",
+        "electric-vehicles",
+        "gas-ban",
+        "environmental-policy"
+      ],
+      "image_search": "electric vehicle charging climate",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-15",
+          "prob": 0.45
+        },
+        {
+          "date": "2026-01-28",
+          "prob": 0.5
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.47
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.48
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_028",
+      "title": "Will Cristiano Ronaldo retire from professional soccer in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if Cristiano Ronaldo officially announces retirement from professional soccer/football during 2026. End of an era for legendary player.",
+      "probability": 0.35,
+      "volume_24h": 185000,
+      "volume_total": 875000,
+      "category": "Sports",
+      "tags": [
+        "cristiano-ronaldo",
+        "soccer",
+        "retirement",
+        "football",
+        "sports-legend"
+      ],
+      "image_search": "soccer football stadium professional",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-18",
+          "prob": 0.32
+        },
+        {
+          "date": "2026-02-01",
+          "prob": 0.37
+        },
+        {
+          "date": "2026-02-08",
+          "prob": 0.34
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.35
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_029",
+      "title": "Will UFO/UAP disclosure event happen in US in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if U.S. government holds official disclosure event confirming non-human intelligence or extraterrestrial contact during 2026. UAP hearings intensifying.",
+      "probability": 0.18,
+      "volume_24h": 195000,
+      "volume_total": 925000,
+      "category": "World",
+      "tags": [
+        "ufo",
+        "uap",
+        "aliens",
+        "disclosure",
+        "government"
+      ],
+      "image_search": "ufo unidentified flying object sky",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-16",
+          "prob": 0.15
+        },
+        {
+          "date": "2026-01-29",
+          "prob": 0.2
+        },
+        {
+          "date": "2026-02-06",
+          "prob": 0.17
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.18
+        }
+      ]
+    },
+    {
+      "market_id": "new_trend_030",
+      "title": "Will AGI (Artificial General Intelligence) be achieved in 2026? (Hypothetical Market)",
+      "description": "Resolves YES if any organization credibly demonstrates AGI - human-level artificial intelligence across all cognitive tasks - during 2026. Alignment debates reaching fever pitch.",
+      "probability": 0.08,
+      "volume_24h": 325000,
+      "volume_total": 1550000,
+      "category": "Technology",
+      "tags": [
+        "agi",
+        "artificial-general-intelligence",
+        "ai",
+        "singularity",
+        "superintelligence"
+      ],
+      "image_search": "artificial intelligence robot humanoid",
+      "resolution_date": "2026-12-31T00:00:00Z",
+      "hypothetical": true,
+      "probability_history": [
+        {
+          "date": "2026-01-14",
+          "prob": 0.05
+        },
+        {
+          "date": "2026-01-27",
+          "prob": 0.1
+        },
+        {
+          "date": "2026-02-05",
+          "prob": 0.07
+        },
+        {
+          "date": "2026-02-11",
+          "prob": 0.08
+        }
+      ]
+    }
+  ]
+}

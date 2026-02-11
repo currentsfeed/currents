@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRain Analytics Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background: #0a0a0a; color: #fff; }
+        .chart-container { position: relative; height: 300px; }
+    </style>
+</head>
+<body class="p-6">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="mb-8 flex items-center justify-between">
+            <div>
+                <h1 class="text-4xl font-bold mb-2">🧠 BRain Analytics Dashboard</h1>
+                <p class="text-gray-400">Visualize data, test personalization, and tune the ranking algorithm</p>
+            </div>
+            <a href="/users" class="px-6 py-3 bg-orange-600 hover:bg-orange-700 rounded-lg font-bold transition">
+                👥 View User Profiles
+            </a>
+        </div>
+
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-gray-900 p-6 rounded-lg">
+                <div class="text-gray-400 text-sm mb-2">Total Markets</div>
+                <div class="text-3xl font-bold">{{ total_markets }}</div>
+            </div>
+            <div class="bg-gray-900 p-6 rounded-lg">
+                <div class="text-gray-400 text-sm mb-2">Categories</div>
+                <div class="text-3xl font-bold">{{ category_dist|length }}</div>
+            </div>
+            <div class="bg-gray-900 p-6 rounded-lg">
+                <div class="text-gray-400 text-sm mb-2">Unique Tags</div>
+                <div class="text-3xl font-bold">{{ tag_dist|length }}</div>
+            </div>
+            <div class="bg-gray-900 p-6 rounded-lg">
+                <div class="text-gray-400 text-sm mb-2">Avg Belief Intensity</div>
+                <div class="text-3xl font-bold">{{ "%.1f"|format(markets|map(attribute='belief_intensity')|sum / markets|length) }}</div>
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <!-- Category Distribution -->
+            <div class="bg-gray-900 p-6 rounded-lg">
+                <h2 class="text-xl font-bold mb-4">Category Distribution</h2>
+                <div class="chart-container">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Belief Intensity Distribution -->
+            <div class="bg-gray-900 p-6 rounded-lg">
+                <h2 class="text-xl font-bold mb-4">Belief Intensity Distribution</h2>
+                <div class="chart-container">
+                    <canvas id="biChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Volume Distribution -->
+            <div class="bg-gray-900 p-6 rounded-lg">
+                <h2 class="text-xl font-bold mb-4">Volume Distribution</h2>
+                <div class="chart-container">
+                    <canvas id="volumeChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Probability Distribution -->
+            <div class="bg-gray-900 p-6 rounded-lg">
+                <h2 class="text-xl font-bold mb-4">Probability Distribution</h2>
+                <div class="chart-container">
+                    <canvas id="probChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Tags -->
+        <div class="bg-gray-900 p-6 rounded-lg mb-8">
+            <h2 class="text-xl font-bold mb-4">Top Tags</h2>
+            <div class="flex flex-wrap gap-2">
+                {% for tag, count in tag_dist.items() %}
+                <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">
+                    {{ tag }} <span class="text-gray-500">({{ count }})</span>
+                </span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Personalization Simulator -->
+        <div class="bg-gray-900 p-6 rounded-lg mb-8">
+            <h2 class="text-2xl font-bold mb-4">🎯 Personalization Simulator</h2>
+            <p class="text-gray-400 mb-6">Test how different user profiles affect market ranking</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Preferred Categories (select multiple)</label>
+                    <select id="pref-categories" multiple class="w-full bg-gray-800 rounded px-3 py-2 text-sm" size="5">
+                        {% for cat in category_dist.keys() %}
+                        <option value="{{ cat }}">{{ cat }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Preferred Tags (select multiple)</label>
+                    <select id="pref-tags" multiple class="w-full bg-gray-800 rounded px-3 py-2 text-sm" size="5">
+                        {% for tag in tag_dist.keys() %}
+                        <option value="{{ tag }}">{{ tag }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Volume Preference</label>
+                    <select id="volume-pref" class="w-full bg-gray-800 rounded px-3 py-2">
+                        <option value="medium">Medium (default)</option>
+                        <option value="high">High volume markets</option>
+                        <option value="low">Low volume markets</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Contestedness Preference</label>
+                    <select id="contest-pref" class="w-full bg-gray-800 rounded px-3 py-2">
+                        <option value="medium">Medium (default)</option>
+                        <option value="high">Highly contested (50/50)</option>
+                        <option value="low">Clear winners</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button onclick="runPersonalization()" class="px-6 py-3 bg-orange-600 hover:bg-orange-700 rounded-lg font-bold">
+                Run Personalization
+            </button>
+            
+            <div id="personalized-results" class="mt-6 hidden">
+                <h3 class="text-lg font-bold mb-4">Personalized Results</h3>
+                <div id="personalized-table" class="overflow-x-auto"></div>
+            </div>
+        </div>
+
+        <!-- Algorithm Playground -->
+        <div class="bg-gray-900 p-6 rounded-lg mb-8">
+            <h2 class="text-2xl font-bold mb-4">🔬 Algorithm Playground</h2>
+            <p class="text-gray-400 mb-6">Adjust ranking weights and see results in real-time</p>
+            
+            <div class="mb-6">
+                <label class="block text-sm font-medium mb-2">
+                    Volume Weight: <span id="volume-weight-value" class="text-orange-400">0.6</span>
+                </label>
+                <input type="range" id="volume-weight" min="0" max="1" step="0.1" value="0.6" 
+                       class="w-full" oninput="updateWeightDisplay()">
+            </div>
+            
+            <div class="mb-6">
+                <label class="block text-sm font-medium mb-2">
+                    Contestedness Weight: <span id="contest-weight-value" class="text-orange-400">0.4</span>
+                </label>
+                <input type="range" id="contest-weight" min="0" max="1" step="0.1" value="0.4" 
+                       class="w-full" oninput="updateWeightDisplay()">
+            </div>
+            
+            <button onclick="runAlgorithmTest()" class="px-6 py-3 bg-green-600 hover:bg-green-700 rounded-lg font-bold">
+                Test Algorithm
+            </button>
+            
+            <div id="algorithm-results" class="mt-6 hidden">
+                <h3 class="text-lg font-bold mb-4">Algorithm Results</h3>
+                <div id="algorithm-table" class="overflow-x-auto"></div>
+            </div>
+        </div>
+
+        <!-- Market Table -->
+        <div class="bg-gray-900 p-6 rounded-lg">
+            <h2 class="text-2xl font-bold mb-4">📊 Top 50 Markets (Current Ranking)</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b border-gray-800">
+                            <th class="text-left py-3 px-2">Rank</th>
+                            <th class="text-left py-3 px-2">Question</th>
+                            <th class="text-right py-3 px-2">Belief Intensity</th>
+                            <th class="text-right py-3 px-2">Volume</th>
+                            <th class="text-right py-3 px-2">Probability</th>
+                            <th class="text-left py-3 px-2">Category</th>
+                            <th class="text-left py-3 px-2">Tags</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for market in markets|sort(attribute='belief_intensity', reverse=True) %}
+                        <tr class="border-b border-gray-800 hover:bg-gray-800">
+                            <td class="py-3 px-2 text-gray-500">{{ loop.index }}</td>
+                            <td class="py-3 px-2">
+                                <a href="/market/{{ market.market_id }}" class="hover:text-orange-400">
+                                    {{ market.title[:60] }}{% if market.title|length > 60 %}...{% endif %}
+                                </a>
+                            </td>
+                            <td class="py-3 px-2 text-right font-bold text-orange-400">
+                                {{ "%.2f"|format(market.belief_intensity) }}
+                            </td>
+                            <td class="py-3 px-2 text-right">${{ (market.volume_24h / 1000)|round(1) }}K</td>
+                            <td class="py-3 px-2 text-right">{{ (market.probability * 100)|int }}%</td>
+                            <td class="py-3 px-2">
+                                <span class="px-2 py-1 bg-gray-800 rounded text-xs">{{ market.category }}</span>
+                            </td>
+                            <td class="py-3 px-2">
+                                {% for tag in market.tags[:3] %}
+                                <span class="px-2 py-0.5 bg-gray-800 rounded text-xs mr-1">{{ tag }}</span>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chart.js defaults
+        Chart.defaults.color = '#9CA3AF';
+        Chart.defaults.borderColor = '#374151';
+
+        // Category Chart
+        new Chart(document.getElementById('categoryChart'), {
+            type: 'bar',
+            data: {
+                labels: {{ category_dist.keys()|list|tojson }},
+                datasets: [{
+                    label: 'Markets',
+                    data: {{ category_dist.values()|list|tojson }},
+                    backgroundColor: '#F97316'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // Belief Intensity Chart
+        new Chart(document.getElementById('biChart'), {
+            type: 'bar',
+            data: {
+                labels: {{ bi_ranges.keys()|list|tojson }},
+                datasets: [{
+                    label: 'Markets',
+                    data: {{ bi_ranges.values()|list|tojson }},
+                    backgroundColor: '#10B981'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // Volume Chart
+        new Chart(document.getElementById('volumeChart'), {
+            type: 'doughnut',
+            data: {
+                labels: {{ volume_ranges.keys()|list|tojson }},
+                datasets: [{
+                    data: {{ volume_ranges.values()|list|tojson }},
+                    backgroundColor: ['#EF4444', '#F59E0B', '#10B981', '#3B82F6', '#8B5CF6']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // Probability Chart
+        new Chart(document.getElementById('probChart'), {
+            type: 'line',
+            data: {
+                labels: {{ prob_ranges.keys()|list|tojson }},
+                datasets: [{
+                    label: 'Markets',
+                    data: {{ prob_ranges.values()|list|tojson }},
+                    borderColor: '#F97316',
+                    backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // Personalization
+        function runPersonalization() {
+            const categories = Array.from(document.getElementById('pref-categories').selectedOptions).map(o => o.value);
+            const tags = Array.from(document.getElementById('pref-tags').selectedOptions).map(o => o.value);
+            const volumePref = document.getElementById('volume-pref').value;
+            const contestPref = document.getElementById('contest-pref').value;
+
+            fetch('/api/personalize', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    categories,
+                    tags,
+                    volume_preference: volumePref,
+                    contestedness_preference: contestPref,
+                    limit: 20
+                })
+            })
+            .then(r => r.json())
+            .then(data => {
+                const results = document.getElementById('personalized-results');
+                const table = document.getElementById('personalized-table');
+                
+                let html = '<table class="w-full text-sm"><thead><tr class="border-b border-gray-800">';
+                html += '<th class="text-left py-2">Rank</th><th class="text-left py-2">Question</th>';
+                html += '<th class="text-right py-2">Score</th><th class="text-right py-2">Base BI</th>';
+                html += '<th class="text-left py-2">Category</th><th class="text-left py-2">Tags</th></tr></thead><tbody>';
+                
+                data.markets.forEach((m, i) => {
+                    html += `<tr class="border-b border-gray-800 hover:bg-gray-800">`;
+                    html += `<td class="py-2">${i + 1}</td>`;
+                    html += `<td class="py-2">${m.title.substring(0, 50)}...</td>`;
+                    html += `<td class="py-2 text-right font-bold text-orange-400">${m.personalized_score.toFixed(2)}</td>`;
+                    html += `<td class="py-2 text-right text-gray-500">${m.belief_intensity.toFixed(2)}</td>`;
+                    html += `<td class="py-2"><span class="px-2 py-1 bg-gray-800 rounded text-xs">${m.category}</span></td>`;
+                    html += `<td class="py-2">${m.tags.slice(0, 2).map(t => `<span class="px-2 py-0.5 bg-gray-800 rounded text-xs mr-1">${t}</span>`).join('')}</td>`;
+                    html += `</tr>`;
+                });
+                
+                html += '</tbody></table>';
+                table.innerHTML = html;
+                results.classList.remove('hidden');
+            });
+        }
+
+        // Algorithm Testing
+        function updateWeightDisplay() {
+            document.getElementById('volume-weight-value').textContent = 
+                document.getElementById('volume-weight').value;
+            document.getElementById('contest-weight-value').textContent = 
+                document.getElementById('contest-weight').value;
+        }
+
+        function runAlgorithmTest() {
+            const volumeWeight = parseFloat(document.getElementById('volume-weight').value);
+            const contestWeight = parseFloat(document.getElementById('contest-weight').value);
+
+            fetch('/api/algorithm-test', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    volume_weight: volumeWeight,
+                    contested_weight: contestWeight,
+                    limit: 20
+                })
+            })
+            .then(r => r.json())
+            .then(data => {
+                const results = document.getElementById('algorithm-results');
+                const table = document.getElementById('algorithm-table');
+                
+                let html = '<table class="w-full text-sm"><thead><tr class="border-b border-gray-800">';
+                html += '<th class="text-left py-2">Rank</th><th class="text-left py-2">Question</th>';
+                html += '<th class="text-right py-2">New BI</th><th class="text-right py-2">Volume</th>';
+                html += '<th class="text-right py-2">Probability</th></tr></thead><tbody>';
+                
+                data.markets.forEach((m, i) => {
+                    html += `<tr class="border-b border-gray-800 hover:bg-gray-800">`;
+                    html += `<td class="py-2">${i + 1}</td>`;
+                    html += `<td class="py-2">${m.title.substring(0, 60)}...</td>`;
+                    html += `<td class="py-2 text-right font-bold text-green-400">${m.belief_intensity.toFixed(2)}</td>`;
+                    html += `<td class="py-2 text-right">$${(m.volume_24h / 1000).toFixed(1)}K</td>`;
+                    html += `<td class="py-2 text-right">${(m.probability * 100).toFixed(0)}%</td>`;
+                    html += `</tr>`;
+                });
+                
+                html += '</tbody></table>';
+                table.innerHTML = html;
+                results.classList.remove('hidden');
+            });
+        }
+    </script>
+</body>
+</html>

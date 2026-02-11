@@ -1,0 +1,2267 @@
+{
+  "batch": 2,
+  "category": "International",
+  "created": "2026-02-11",
+  "markets": [
+    {
+      "id": "israel-election-2026",
+      "title": "Will Benjamin Netanyahu remain Prime Minister after 2026 election?",
+      "description": "Israel faces another crucial election amid ongoing political turmoil. Netanyahu's coalition stability remains uncertain. Market resolves based on who forms government after election.",
+      "category": "Israel",
+      "subcategory": "Politics",
+      "probability": 0.54,
+      "volume": 487000,
+      "resolutionDate": "2026-11-15",
+      "image": "static/images/israel-election-netanyahu.jpg",
+      "tags": [
+        "Israel",
+        "Politics",
+        "Election",
+        "Netanyahu",
+        "Middle East",
+        "Government",
+        "Coalition"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.52
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.52
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.53
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.53
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.54
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.54
+        }
+      ]
+    },
+    {
+      "id": "israel-tech-ipo-2026",
+      "title": "Will an Israeli tech unicorn IPO above $5B valuation in 2026?",
+      "description": "Israel's tech sector continues its hot streak with multiple unicorns eyeing public markets. Several companies including Wiz and Papaya Global are potential candidates.",
+      "category": "Israel",
+      "subcategory": "Technology",
+      "probability": 0.61,
+      "volume": 312000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/israel-tech-unicorn.jpg",
+      "tags": [
+        "Israel",
+        "Technology",
+        "IPO",
+        "Startup",
+        "Tech",
+        "Unicorn",
+        "Tel Aviv"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.58
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.59
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.6
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.6
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.61
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.61
+        }
+      ]
+    },
+    {
+      "id": "israel-maccabi-euroleague-2026",
+      "title": "Will Maccabi Tel Aviv reach EuroLeague Final Four?",
+      "description": "Maccabi Tel Aviv continues their EuroLeague campaign with strong performances. Can they secure a spot in the prestigious Final Four? Resolves based on playoff results.",
+      "category": "Israel",
+      "subcategory": "Sports",
+      "probability": 0.38,
+      "volume": 198000,
+      "resolutionDate": "2026-05-15",
+      "image": "static/images/israel-maccabi-euroleague.jpg",
+      "tags": [
+        "Israel",
+        "Basketball",
+        "EuroLeague",
+        "Maccabi Tel Aviv",
+        "Sports",
+        "Europe"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-05",
+          "probability": 0.36
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.37
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.37
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.38
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.38
+        }
+      ]
+    },
+    {
+      "id": "israel-gas-exports-2026",
+      "title": "Will Israel's natural gas exports exceed $10B in 2026?",
+      "description": "Israel's Mediterranean gas fields continue expanding production. New pipeline deals with Europe could significantly boost export revenues. Resolves based on official trade statistics.",
+      "category": "Israel",
+      "subcategory": "Economy",
+      "probability": 0.67,
+      "volume": 289000,
+      "resolutionDate": "2027-01-31",
+      "image": "static/images/israel-gas-exports.jpg",
+      "tags": [
+        "Israel",
+        "Energy",
+        "Natural Gas",
+        "Exports",
+        "Economy",
+        "Mediterranean",
+        "Trade"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.64
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.65
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.66
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.66
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.67
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.67
+        }
+      ]
+    },
+    {
+      "id": "israel-judiciary-reform-2026",
+      "title": "Will Israel pass major judicial reform legislation in 2026?",
+      "description": "The controversial judicial reform debate continues to divide Israel. Netanyahu's coalition seeks to limit Supreme Court powers. Massive protests ongoing.",
+      "category": "Israel",
+      "subcategory": "Politics",
+      "probability": 0.48,
+      "volume": 423000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/israel-judiciary-reform.jpg",
+      "tags": [
+        "Israel",
+        "Politics",
+        "Judiciary",
+        "Reform",
+        "Supreme Court",
+        "Protests",
+        "Law"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.45
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.46
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.47
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.47
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.48
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.48
+        }
+      ]
+    },
+    {
+      "id": "israel-peace-talks-2026",
+      "title": "Will Israel-Saudi Arabia normalize relations in 2026?",
+      "description": "Diplomatic efforts continue toward a historic normalization agreement. US mediation ongoing. Major geopolitical implications for the Middle East region.",
+      "category": "Israel",
+      "subcategory": "Foreign Policy",
+      "probability": 0.34,
+      "volume": 567000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/israel-saudi-normalization.jpg",
+      "tags": [
+        "Israel",
+        "Saudi Arabia",
+        "Diplomacy",
+        "Peace",
+        "Middle East",
+        "Normalization",
+        "Foreign Policy"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.32
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.32
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.33
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.33
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.34
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.34
+        }
+      ]
+    },
+    {
+      "id": "israel-shabbat-transport-2026",
+      "title": "Will Tel Aviv expand public transport on Shabbat in 2026?",
+      "description": "Secular-religious tensions over Shabbat transport services continue. Tel Aviv municipality pushing for expanded Saturday bus and train service. Opposition from religious parties.",
+      "category": "Israel",
+      "subcategory": "Society",
+      "probability": 0.42,
+      "volume": 178000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/israel-shabbat-transport.jpg",
+      "tags": [
+        "Israel",
+        "Transportation",
+        "Shabbat",
+        "Tel Aviv",
+        "Religion",
+        "Society",
+        "Public Transit"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-05",
+          "probability": 0.4
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.41
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.41
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.42
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.42
+        }
+      ]
+    },
+    {
+      "id": "israel-eurovision-top5-2026",
+      "title": "Will Israel finish Top 5 at Eurovision 2026?",
+      "description": "Israel has a strong Eurovision track record and this year's entry is generating buzz. Can they secure another top placement? Resolves after final results.",
+      "category": "Israel",
+      "subcategory": "Entertainment",
+      "probability": 0.36,
+      "volume": 234000,
+      "resolutionDate": "2026-05-16",
+      "image": "static/images/israel-eurovision.jpg",
+      "tags": [
+        "Israel",
+        "Eurovision",
+        "Music",
+        "Entertainment",
+        "Competition",
+        "Europe"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-05",
+          "probability": 0.34
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.35
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.35
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.36
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.36
+        }
+      ]
+    },
+    {
+      "id": "israel-ai-funding-2026",
+      "title": "Will Israeli AI startups raise over $3B in 2026?",
+      "description": "Israel's AI sector is booming with companies in computer vision, NLP, and defense tech. Multiple mega-rounds expected. Resolves based on total funding announced.",
+      "category": "Israel",
+      "subcategory": "Technology",
+      "probability": 0.72,
+      "volume": 345000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/israel-ai-funding.jpg",
+      "tags": [
+        "Israel",
+        "AI",
+        "Artificial Intelligence",
+        "Startups",
+        "Funding",
+        "Venture Capital",
+        "Tech"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.69
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.7
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.71
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.71
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.72
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.72
+        }
+      ]
+    },
+    {
+      "id": "israel-west-bank-tension-2026",
+      "title": "Will settler population in West Bank increase by 5% in 2026?",
+      "description": "Settlement expansion continues amid international criticism. Israeli government approving new construction. Demographic shifts with major political implications.",
+      "category": "Israel",
+      "subcategory": "Politics",
+      "probability": 0.58,
+      "volume": 389000,
+      "resolutionDate": "2027-01-31",
+      "image": "static/images/israel-settlements.jpg",
+      "tags": [
+        "Israel",
+        "West Bank",
+        "Settlements",
+        "Politics",
+        "Demographics",
+        "Palestinian Territories"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.56
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.56
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.57
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.57
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.58
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.58
+        }
+      ]
+    },
+    {
+      "id": "israel-hapoel-tel-aviv-2026",
+      "title": "Will Hapoel Tel Aviv win Israeli Premier League?",
+      "description": "Hapoel challenges Maccabi Haifa for the Israeli football championship. Tight race at the top of the table with 10 matches remaining. Resolves at season end.",
+      "category": "Israel",
+      "subcategory": "Sports",
+      "probability": 0.44,
+      "volume": 167000,
+      "resolutionDate": "2026-05-30",
+      "image": "static/images/israel-hapoel-league.jpg",
+      "tags": [
+        "Israel",
+        "Soccer",
+        "Football",
+        "Hapoel",
+        "Premier League",
+        "Sports",
+        "Tel Aviv"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-05",
+          "probability": 0.42
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.43
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.43
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.44
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.44
+        }
+      ]
+    },
+    {
+      "id": "israel-desalination-2026",
+      "title": "Will Israel produce 90%+ of drinking water from desalination in 2026?",
+      "description": "Israel leads the world in desalination technology. New plants coming online. Moving toward complete water independence through Mediterranean seawater conversion.",
+      "category": "Israel",
+      "subcategory": "Technology",
+      "probability": 0.78,
+      "volume": 234000,
+      "resolutionDate": "2027-01-31",
+      "image": "static/images/israel-desalination.jpg",
+      "tags": [
+        "Israel",
+        "Water",
+        "Desalination",
+        "Technology",
+        "Environment",
+        "Infrastructure"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.75
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.76
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.77
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.77
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.78
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.78
+        }
+      ]
+    },
+    {
+      "id": "japan-ldp-majority-2026",
+      "title": "Will LDP maintain majority in Japan's House of Councillors election?",
+      "description": "Japan's ruling Liberal Democratic Party faces a crucial upper house election. Recent scandals have damaged support. Opposition sensing opportunity for gains.",
+      "category": "Japan",
+      "subcategory": "Politics",
+      "probability": 0.63,
+      "volume": 456000,
+      "resolutionDate": "2026-07-12",
+      "image": "static/images/japan-ldp-election.jpg",
+      "tags": [
+        "Japan",
+        "Politics",
+        "Election",
+        "LDP",
+        "Parliament",
+        "Government",
+        "Tokyo"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.61
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.61
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.62
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.62
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.63
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.63
+        }
+      ]
+    },
+    {
+      "id": "japan-nikkei-40000-2026",
+      "title": "Will Nikkei 225 reach 40,000 before end of 2026?",
+      "description": "Japanese stocks have been rallying as the yen weakens and corporate governance reforms take hold. Nikkei approaching all-time highs. Can momentum continue?",
+      "category": "Japan",
+      "subcategory": "Economy",
+      "probability": 0.57,
+      "volume": 523000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/japan-nikkei-stocks.jpg",
+      "tags": [
+        "Japan",
+        "Stock Market",
+        "Nikkei",
+        "Economy",
+        "Finance",
+        "Tokyo",
+        "Trading"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.54
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.55
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.56
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.56
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.57
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.57
+        }
+      ]
+    },
+    {
+      "id": "japan-immigration-target-2026",
+      "title": "Will Japan admit 500K+ foreign workers in 2026?",
+      "description": "Japan facing severe labor shortages as population ages. Government expanding visa programs despite traditional resistance to immigration. Demographic crisis deepening.",
+      "category": "Japan",
+      "subcategory": "Society",
+      "probability": 0.68,
+      "volume": 289000,
+      "resolutionDate": "2027-01-31",
+      "image": "static/images/japan-immigration.jpg",
+      "tags": [
+        "Japan",
+        "Immigration",
+        "Labor",
+        "Demographics",
+        "Society",
+        "Population",
+        "Workers"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.65
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.66
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.67
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.67
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.68
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.68
+        }
+      ]
+    },
+    {
+      "id": "japan-samurai-blue-wcq-2026",
+      "title": "Will Japan qualify directly for 2026 World Cup?",
+      "description": "Japan's Samurai Blue lead their World Cup qualifying group. Strong performances have them on track for automatic qualification. Must maintain form in final matches.",
+      "category": "Japan",
+      "subcategory": "Sports",
+      "probability": 0.81,
+      "volume": 378000,
+      "resolutionDate": "2026-06-15",
+      "image": "static/images/japan-world-cup-qualify.jpg",
+      "tags": [
+        "Japan",
+        "Soccer",
+        "World Cup",
+        "Qualifying",
+        "Samurai Blue",
+        "Football",
+        "Sports"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.78
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.79
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.8
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.8
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.81
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.81
+        }
+      ]
+    },
+    {
+      "id": "japan-boj-rate-hike-2026",
+      "title": "Will Bank of Japan raise interest rates in 2026?",
+      "description": "BOJ has maintained negative rates for years but inflation finally emerging. Market watching for potential historic policy shift. Yen implications massive.",
+      "category": "Japan",
+      "subcategory": "Economy",
+      "probability": 0.73,
+      "volume": 612000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/japan-boj-rates.jpg",
+      "tags": [
+        "Japan",
+        "Central Bank",
+        "BOJ",
+        "Interest Rates",
+        "Monetary Policy",
+        "Economy",
+        "Finance"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.7
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.71
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.72
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.72
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.73
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.73
+        }
+      ]
+    },
+    {
+      "id": "japan-anime-exports-2026",
+      "title": "Will Japanese anime exports exceed $15B in 2026?",
+      "description": "Japanese animation continues global expansion with streaming platforms driving growth. Record international revenue expected as anime enters mainstream Western culture.",
+      "category": "Japan",
+      "subcategory": "Entertainment",
+      "probability": 0.76,
+      "volume": 345000,
+      "resolutionDate": "2027-02-28",
+      "image": "static/images/japan-anime-exports.jpg",
+      "tags": [
+        "Japan",
+        "Anime",
+        "Entertainment",
+        "Exports",
+        "Culture",
+        "Streaming",
+        "Media"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.73
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.74
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.75
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.75
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.76
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.76
+        }
+      ]
+    },
+    {
+      "id": "japan-fukushima-water-2026",
+      "title": "Will Japan complete Fukushima wastewater release plan in 2026?",
+      "description": "Controversial plan to release treated nuclear wastewater into Pacific continues despite neighboring countries' objections. IAEA monitoring. Environmental concerns persist.",
+      "category": "Japan",
+      "subcategory": "Environment",
+      "probability": 0.82,
+      "volume": 267000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/japan-fukushima-water.jpg",
+      "tags": [
+        "Japan",
+        "Fukushima",
+        "Nuclear",
+        "Environment",
+        "Water",
+        "Energy",
+        "IAEA"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.79
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.8
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.81
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.81
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.82
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.82
+        }
+      ]
+    },
+    {
+      "id": "japan-ev-production-2026",
+      "title": "Will Japan's EV production exceed 1 million units in 2026?",
+      "description": "Japanese automakers ramping up electric vehicle production after slow start. Toyota, Nissan, Honda all launching new EV models. Playing catch-up to China and Tesla.",
+      "category": "Japan",
+      "subcategory": "Technology",
+      "probability": 0.54,
+      "volume": 412000,
+      "resolutionDate": "2027-01-31",
+      "image": "static/images/japan-ev-production.jpg",
+      "tags": [
+        "Japan",
+        "Electric Vehicles",
+        "EV",
+        "Automotive",
+        "Technology",
+        "Manufacturing",
+        "Toyota"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.51
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.52
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.53
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.53
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.54
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.54
+        }
+      ]
+    },
+    {
+      "id": "japan-sumo-tournament-2026",
+      "title": "Will a foreign-born wrestler win a Grand Sumo tournament in 2026?",
+      "description": "Mongolian and Eastern European wrestlers dominate modern sumo. Six tournaments in 2026 with several foreign yokozuna and ozeki competing at the highest level.",
+      "category": "Japan",
+      "subcategory": "Sports",
+      "probability": 0.88,
+      "volume": 198000,
+      "resolutionDate": "2026-11-30",
+      "image": "static/images/japan-sumo.jpg",
+      "tags": [
+        "Japan",
+        "Sumo",
+        "Wrestling",
+        "Sports",
+        "Tradition",
+        "Tournament",
+        "Culture"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.86
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.86
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.87
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.87
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.88
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.88
+        }
+      ]
+    },
+    {
+      "id": "japan-osaka-expo-visitors-2026",
+      "title": "Will Osaka Expo 2026 exceed 25 million visitors?",
+      "description": "World Expo comes to Osaka with ambitious attendance targets. Japan's first Expo in decades. International participation strong despite geopolitical tensions.",
+      "category": "Japan",
+      "subcategory": "Society",
+      "probability": 0.48,
+      "volume": 312000,
+      "resolutionDate": "2026-10-31",
+      "image": "static/images/japan-osaka-expo.jpg",
+      "tags": [
+        "Japan",
+        "Osaka",
+        "Expo",
+        "Tourism",
+        "Events",
+        "World Fair",
+        "Visitors"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.46
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.46
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.47
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.47
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.48
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.48
+        }
+      ]
+    },
+    {
+      "id": "japan-tourism-record-2026",
+      "title": "Will Japan receive 40M+ international tourists in 2026?",
+      "description": "Tourism rebounds strongly post-pandemic. Weak yen making Japan affordable for foreigners. Infrastructure stretched but government pushing for new records.",
+      "category": "Japan",
+      "subcategory": "Economy",
+      "probability": 0.71,
+      "volume": 389000,
+      "resolutionDate": "2027-01-31",
+      "image": "static/images/japan-tourism.jpg",
+      "tags": [
+        "Japan",
+        "Tourism",
+        "Travel",
+        "Economy",
+        "Visitors",
+        "Yen",
+        "Hospitality"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.68
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.69
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.7
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.7
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.71
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.71
+        }
+      ]
+    },
+    {
+      "id": "japan-semiconductor-investment-2026",
+      "title": "Will Japan's semiconductor production capacity increase 25%+ in 2026?",
+      "description": "Japan investing heavily in chip manufacturing with TSMC and domestic firms building new fabs. Government subsidies driving renaissance in semiconductor industry.",
+      "category": "Japan",
+      "subcategory": "Technology",
+      "probability": 0.66,
+      "volume": 367000,
+      "resolutionDate": "2027-01-31",
+      "image": "static/images/japan-semiconductor.jpg",
+      "tags": [
+        "Japan",
+        "Semiconductors",
+        "Technology",
+        "Manufacturing",
+        "TSMC",
+        "Chips",
+        "Industry"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.63
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.64
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.65
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.65
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.66
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.66
+        }
+      ]
+    },
+    {
+      "id": "japan-baseball-wbc-2026",
+      "title": "Will Japan win the World Baseball Classic 2026?",
+      "description": "Japan defending their WBC title with Ohtani and a star-studded roster. Team Japan dominates international baseball. Can they three-peat?",
+      "category": "Japan",
+      "subcategory": "Sports",
+      "probability": 0.44,
+      "volume": 289000,
+      "resolutionDate": "2026-03-22",
+      "image": "static/images/japan-wbc-baseball.jpg",
+      "tags": [
+        "Japan",
+        "Baseball",
+        "WBC",
+        "World Baseball Classic",
+        "Ohtani",
+        "Sports",
+        "International"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-05",
+          "probability": 0.42
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.43
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.43
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.44
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.44
+        }
+      ]
+    },
+    {
+      "id": "turkey-erdogan-referendum-2026",
+      "title": "Will Erdogan call a constitutional referendum in 2026?",
+      "description": "Turkish president considering changes to extend term limits and expand presidential powers. Opposition mobilizing to prevent further consolidation of authority.",
+      "category": "Turkey",
+      "subcategory": "Politics",
+      "probability": 0.56,
+      "volume": 445000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/turkey-erdogan-referendum.jpg",
+      "tags": [
+        "Turkey",
+        "Politics",
+        "Erdogan",
+        "Referendum",
+        "Constitution",
+        "Democracy",
+        "Ankara"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.54
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.54
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.55
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.55
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.56
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.56
+        }
+      ]
+    },
+    {
+      "id": "turkey-inflation-target-2026",
+      "title": "Will Turkey's inflation rate drop below 20% by year-end 2026?",
+      "description": "Turkey battling persistent high inflation after years of unorthodox monetary policy. New central bank governor attempting orthodox approach. Economic pain widespread.",
+      "category": "Turkey",
+      "subcategory": "Economy",
+      "probability": 0.42,
+      "volume": 378000,
+      "resolutionDate": "2027-01-31",
+      "image": "static/images/turkey-inflation.jpg",
+      "tags": [
+        "Turkey",
+        "Inflation",
+        "Economy",
+        "Central Bank",
+        "Monetary Policy",
+        "Finance",
+        "Lira"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.4
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.4
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.41
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.41
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.42
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.42
+        }
+      ]
+    },
+    {
+      "id": "turkey-galatasaray-champions-2026",
+      "title": "Will Galatasaray win the Turkish Super Lig?",
+      "description": "Galatasaray leads the Super Lig table in a tight three-way race with Fenerbahce and Besiktas. Istanbul derby battles will decide the championship.",
+      "category": "Turkey",
+      "subcategory": "Sports",
+      "probability": 0.52,
+      "volume": 234000,
+      "resolutionDate": "2026-05-31",
+      "image": "static/images/turkey-galatasaray.jpg",
+      "tags": [
+        "Turkey",
+        "Soccer",
+        "Super Lig",
+        "Galatasaray",
+        "Football",
+        "Istanbul",
+        "Sports"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-05",
+          "probability": 0.5
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.51
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.51
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.52
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.52
+        }
+      ]
+    },
+    {
+      "id": "turkey-tourism-record-2026",
+      "title": "Will Turkey receive 60M+ tourists in 2026?",
+      "description": "Turkey's tourism industry rebounding strongly. Weak lira making it attractive destination. Mediterranean and Aegean coasts seeing record bookings.",
+      "category": "Turkey",
+      "subcategory": "Economy",
+      "probability": 0.68,
+      "volume": 312000,
+      "resolutionDate": "2027-01-31",
+      "image": "static/images/turkey-tourism.jpg",
+      "tags": [
+        "Turkey",
+        "Tourism",
+        "Travel",
+        "Economy",
+        "Mediterranean",
+        "Hospitality",
+        "Revenue"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.65
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.66
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.67
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.67
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.68
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.68
+        }
+      ]
+    },
+    {
+      "id": "turkey-nato-expansion-2026",
+      "title": "Will Turkey approve all pending NATO expansion applications in 2026?",
+      "description": "Turkey holds veto power over NATO expansion. Playing hardball on various geopolitical issues. Sweden and potential other applicants waiting for approval.",
+      "category": "Turkey",
+      "subcategory": "Foreign Policy",
+      "probability": 0.61,
+      "volume": 423000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/turkey-nato.jpg",
+      "tags": [
+        "Turkey",
+        "NATO",
+        "Foreign Policy",
+        "Geopolitics",
+        "Alliance",
+        "Security",
+        "Europe"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.58
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.59
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.6
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.6
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.61
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.61
+        }
+      ]
+    },
+    {
+      "id": "turkey-earthquake-reconstruction-2026",
+      "title": "Will Turkey complete 50% of earthquake reconstruction by end 2026?",
+      "description": "Massive rebuilding effort continues after devastating 2023 earthquakes. Government promised rapid reconstruction but progress slower than expected. Hundreds of thousands still displaced.",
+      "category": "Turkey",
+      "subcategory": "Society",
+      "probability": 0.47,
+      "volume": 289000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/turkey-earthquake-rebuild.jpg",
+      "tags": [
+        "Turkey",
+        "Earthquake",
+        "Reconstruction",
+        "Infrastructure",
+        "Disaster",
+        "Housing",
+        "Society"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.45
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.45
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.46
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.46
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.47
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.47
+        }
+      ]
+    },
+    {
+      "id": "turkey-s400-resolution-2026",
+      "title": "Will Turkey reach agreement with US on S-400 missile system?",
+      "description": "Years-long dispute over Turkish purchase of Russian S-400 continues. US excluded Turkey from F-35 program. Both sides seeking face-saving compromise.",
+      "category": "Turkey",
+      "subcategory": "Defense",
+      "probability": 0.38,
+      "volume": 367000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/turkey-s400.jpg",
+      "tags": [
+        "Turkey",
+        "USA",
+        "Defense",
+        "S-400",
+        "F-35",
+        "Military",
+        "Russia"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.36
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.36
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.37
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.37
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.38
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.38
+        }
+      ]
+    },
+    {
+      "id": "turkey-ev-factory-2026",
+      "title": "Will Turkey's domestic EV brand TOGG sell 50K+ vehicles in 2026?",
+      "description": "Turkey's ambitious electric vehicle project TOGG ramping up production. Government backing strong. Aiming to become regional EV hub and reduce import dependency.",
+      "category": "Turkey",
+      "subcategory": "Technology",
+      "probability": 0.53,
+      "volume": 267000,
+      "resolutionDate": "2027-01-31",
+      "image": "static/images/turkey-togg-ev.jpg",
+      "tags": [
+        "Turkey",
+        "Electric Vehicles",
+        "TOGG",
+        "Automotive",
+        "Technology",
+        "Manufacturing",
+        "EV"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.5
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.51
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.52
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.52
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.53
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.53
+        }
+      ]
+    },
+    {
+      "id": "turkey-bosphorus-tunnel-2026",
+      "title": "Will Istanbul's new Bosphorus metro tunnel open in 2026?",
+      "description": "Massive infrastructure project connecting European and Asian sides of Istanbul via undersea rail tunnel. Delays and cost overruns but nearing completion.",
+      "category": "Turkey",
+      "subcategory": "Infrastructure",
+      "probability": 0.64,
+      "volume": 234000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/turkey-bosphorus-metro.jpg",
+      "tags": [
+        "Turkey",
+        "Istanbul",
+        "Infrastructure",
+        "Metro",
+        "Transportation",
+        "Bosphorus",
+        "Tunnel"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.61
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.62
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.63
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.63
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.64
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.64
+        }
+      ]
+    },
+    {
+      "id": "turkey-lira-dollar-parity-2026",
+      "title": "Will Turkish Lira weaken past 40 TRY/USD by end 2026?",
+      "description": "Turkish lira continues long-term depreciation trend. Central bank attempting to stabilize but pressure intense. Inflation and unorthodox policies driving weakness.",
+      "category": "Turkey",
+      "subcategory": "Economy",
+      "probability": 0.59,
+      "volume": 456000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/turkey-lira-usd.jpg",
+      "tags": [
+        "Turkey",
+        "Currency",
+        "Lira",
+        "Dollar",
+        "Exchange Rate",
+        "Finance",
+        "Economy"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.56
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.57
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.58
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.58
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.59
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.59
+        }
+      ]
+    },
+    {
+      "id": "turkey-fenerbahce-europa-2026",
+      "title": "Will Fenerbahce reach Europa League semifinals?",
+      "description": "Fenerbahce showing strong form in Europa League knockout stages. Jos\u00e9 Mourinho's experience could lead them deep into the tournament. Istanbul club dreaming of European glory.",
+      "category": "Turkey",
+      "subcategory": "Sports",
+      "probability": 0.34,
+      "volume": 289000,
+      "resolutionDate": "2026-05-08",
+      "image": "static/images/turkey-fenerbahce-europa.jpg",
+      "tags": [
+        "Turkey",
+        "Soccer",
+        "Europa League",
+        "Fenerbahce",
+        "Football",
+        "UEFA",
+        "Mourinho"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-05",
+          "probability": 0.32
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.33
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.33
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.34
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.34
+        }
+      ]
+    },
+    {
+      "id": "turkey-drone-exports-2026",
+      "title": "Will Turkish drone exports exceed $3B in 2026?",
+      "description": "Turkish Bayraktar drones gaining global market share. Proven in conflicts worldwide. Countries lining up to purchase Turkish military technology.",
+      "category": "Turkey",
+      "subcategory": "Defense",
+      "probability": 0.71,
+      "volume": 378000,
+      "resolutionDate": "2027-01-31",
+      "image": "static/images/turkey-drone-exports.jpg",
+      "tags": [
+        "Turkey",
+        "Drones",
+        "Defense",
+        "Exports",
+        "Bayraktar",
+        "Military",
+        "Technology"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.68
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.69
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.7
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.7
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.71
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.71
+        }
+      ]
+    },
+    {
+      "id": "australia-labor-reelection-2026",
+      "title": "Will Australian Labor Party win the 2026 federal election?",
+      "description": "Prime Minister Anthony Albanese seeks re-election amid economic challenges. Cost of living crisis and housing affordability key issues. Coalition mounting strong challenge.",
+      "category": "Australia",
+      "subcategory": "Politics",
+      "probability": 0.58,
+      "volume": 412000,
+      "resolutionDate": "2026-05-30",
+      "image": "static/images/australia-election-albanese.jpg",
+      "tags": [
+        "Australia",
+        "Politics",
+        "Election",
+        "Labor Party",
+        "Albanese",
+        "Government",
+        "Canberra"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.56
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.56
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.57
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.57
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.58
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.58
+        }
+      ]
+    },
+    {
+      "id": "australia-housing-prices-2026",
+      "title": "Will Sydney median house price exceed $1.5M AUD in 2026?",
+      "description": "Australian housing crisis intensifying. Sydney prices at record highs despite affordability concerns. Immigration and supply shortage driving continued growth.",
+      "category": "Australia",
+      "subcategory": "Economy",
+      "probability": 0.66,
+      "volume": 345000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/australia-sydney-housing.jpg",
+      "tags": [
+        "Australia",
+        "Housing",
+        "Real Estate",
+        "Sydney",
+        "Property",
+        "Economy",
+        "Prices"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.63
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.64
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.65
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.65
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.66
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.66
+        }
+      ]
+    },
+    {
+      "id": "australia-cricket-ashes-2026",
+      "title": "Will Australia win the 2026 Ashes series?",
+      "description": "Australia hosts England in the iconic Ashes rivalry. Pat Cummins leads a strong Australian side. England seeking to regain the urn on hostile Australian pitches.",
+      "category": "Australia",
+      "subcategory": "Sports",
+      "probability": 0.71,
+      "volume": 456000,
+      "resolutionDate": "2026-01-18",
+      "image": "static/images/australia-ashes-cricket.jpg",
+      "tags": [
+        "Australia",
+        "Cricket",
+        "Ashes",
+        "England",
+        "Sports",
+        "Test Cricket",
+        "MCG"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-05",
+          "probability": 0.69
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.7
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.7
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.71
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.71
+        }
+      ]
+    },
+    {
+      "id": "australia-climate-target-2026",
+      "title": "Will Australia achieve 50% renewable energy generation in 2026?",
+      "description": "Australia's renewable energy transition accelerating. Solar and wind projects coming online rapidly. Government committed to ambitious climate targets despite coal lobbying.",
+      "category": "Australia",
+      "subcategory": "Environment",
+      "probability": 0.62,
+      "volume": 312000,
+      "resolutionDate": "2027-01-31",
+      "image": "static/images/australia-renewable-energy.jpg",
+      "tags": [
+        "Australia",
+        "Renewable Energy",
+        "Climate",
+        "Solar",
+        "Wind",
+        "Environment",
+        "Green Energy"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.59
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.6
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.61
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.61
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.62
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.62
+        }
+      ]
+    },
+    {
+      "id": "australia-great-barrier-reef-2026",
+      "title": "Will Great Barrier Reef coral cover increase in 2026?",
+      "description": "After years of bleaching, recent cooler years have allowed some recovery. Climate change threat remains. Annual survey will determine if positive trend continues.",
+      "category": "Australia",
+      "subcategory": "Environment",
+      "probability": 0.48,
+      "volume": 267000,
+      "resolutionDate": "2027-03-31",
+      "image": "static/images/australia-great-barrier-reef.jpg",
+      "tags": [
+        "Australia",
+        "Great Barrier Reef",
+        "Coral",
+        "Environment",
+        "Ocean",
+        "Climate Change",
+        "Marine"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.46
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.46
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.47
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.47
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.48
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.48
+        }
+      ]
+    },
+    {
+      "id": "australia-china-trade-2026",
+      "title": "Will Australia-China trade fully normalize in 2026?",
+      "description": "Relations improving after years of trade restrictions. Wine, barley, and other exports gradually being unblocked. Full normalization would be major economic boost.",
+      "category": "Australia",
+      "subcategory": "Foreign Policy",
+      "probability": 0.52,
+      "volume": 389000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/australia-china-trade.jpg",
+      "tags": [
+        "Australia",
+        "China",
+        "Trade",
+        "Foreign Policy",
+        "Exports",
+        "Diplomacy",
+        "Economy"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.49
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.5
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.51
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.51
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.52
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.52
+        }
+      ]
+    },
+    {
+      "id": "australia-immigration-record-2026",
+      "title": "Will Australia's net migration exceed 500K in 2026?",
+      "description": "Record immigration levels as Australia opens doors post-pandemic. Housing and infrastructure under pressure. Political debate intensifying over sustainable immigration levels.",
+      "category": "Australia",
+      "subcategory": "Society",
+      "probability": 0.73,
+      "volume": 298000,
+      "resolutionDate": "2027-02-28",
+      "image": "static/images/australia-immigration.jpg",
+      "tags": [
+        "Australia",
+        "Immigration",
+        "Migration",
+        "Population",
+        "Society",
+        "Demographics",
+        "Policy"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.7
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.71
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.72
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.72
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.73
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.73
+        }
+      ]
+    },
+    {
+      "id": "australia-afl-richmond-2026",
+      "title": "Will Richmond Tigers make AFL Finals in 2026?",
+      "description": "Richmond rebuilding after dynasty years. Young list showing promise but inconsistent. Can they sneak into finals? Resolves based on regular season finish.",
+      "category": "Australia",
+      "subcategory": "Sports",
+      "probability": 0.44,
+      "volume": 187000,
+      "resolutionDate": "2026-08-31",
+      "image": "static/images/australia-afl-richmond.jpg",
+      "tags": [
+        "Australia",
+        "AFL",
+        "Richmond Tigers",
+        "Football",
+        "Sports",
+        "Australian Rules",
+        "Finals"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-05",
+          "probability": 0.42
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.43
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.43
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.44
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.44
+        }
+      ]
+    },
+    {
+      "id": "australia-lithium-exports-2026",
+      "title": "Will Australian lithium exports exceed $15B AUD in 2026?",
+      "description": "Australia dominates global lithium supply. EV boom driving massive demand. New mines coming online but competition from South America and Africa intensifying.",
+      "category": "Australia",
+      "subcategory": "Economy",
+      "probability": 0.69,
+      "volume": 423000,
+      "resolutionDate": "2027-01-31",
+      "image": "static/images/australia-lithium-mining.jpg",
+      "tags": [
+        "Australia",
+        "Lithium",
+        "Mining",
+        "Exports",
+        "Economy",
+        "EV",
+        "Resources"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.66
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.67
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.68
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.68
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.69
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.69
+        }
+      ]
+    },
+    {
+      "id": "australia-voice-referendum-implementation-2026",
+      "title": "Will Australia implement alternative Indigenous representation reforms in 2026?",
+      "description": "After Voice referendum failed, government seeking other paths for Indigenous representation. Treaty discussions ongoing in several states. National framework uncertain.",
+      "category": "Australia",
+      "subcategory": "Politics",
+      "probability": 0.41,
+      "volume": 312000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/australia-indigenous-rights.jpg",
+      "tags": [
+        "Australia",
+        "Indigenous",
+        "Politics",
+        "Reconciliation",
+        "Rights",
+        "Treaty",
+        "Reform"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.39
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.39
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.4
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.4
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.41
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.41
+        }
+      ]
+    },
+    {
+      "id": "australia-rba-rate-cuts-2026",
+      "title": "Will Reserve Bank of Australia cut rates by 0.5%+ in 2026?",
+      "description": "RBA holding rates high to combat inflation. Housing market cooling but labor market still tight. Market pricing in potential cuts if inflation moderates.",
+      "category": "Australia",
+      "subcategory": "Economy",
+      "probability": 0.57,
+      "volume": 456000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/australia-rba-rates.jpg",
+      "tags": [
+        "Australia",
+        "Interest Rates",
+        "RBA",
+        "Central Bank",
+        "Economy",
+        "Monetary Policy",
+        "Finance"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.54
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.55
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.56
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.56
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.57
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.57
+        }
+      ]
+    },
+    {
+      "id": "australia-submarine-delivery-2026",
+      "title": "Will Australia finalize AUKUS submarine design by end 2026?",
+      "description": "Historic AUKUS deal moving forward. Nuclear submarine program facing technical and political challenges. Final design approval crucial milestone.",
+      "category": "Australia",
+      "subcategory": "Defense",
+      "probability": 0.64,
+      "volume": 334000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/australia-aukus-submarines.jpg",
+      "tags": [
+        "Australia",
+        "AUKUS",
+        "Submarines",
+        "Defense",
+        "Military",
+        "USA",
+        "UK"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.61
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.62
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.63
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.63
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.64
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.64
+        }
+      ]
+    },
+    {
+      "id": "australia-bushfire-season-2026",
+      "title": "Will 2026 Australian bushfire season burn fewer than 1M hectares?",
+      "description": "Climate change intensifying bushfire risk. La Ni\u00f1a years brought relief but El Ni\u00f1o returning. Improved prevention and response systems being tested.",
+      "category": "Australia",
+      "subcategory": "Environment",
+      "probability": 0.52,
+      "volume": 278000,
+      "resolutionDate": "2027-03-31",
+      "image": "static/images/australia-bushfires.jpg",
+      "tags": [
+        "Australia",
+        "Bushfires",
+        "Environment",
+        "Climate",
+        "Disaster",
+        "Wildfire",
+        "Emergency"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.5
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.5
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.51
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.51
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.52
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.52
+        }
+      ]
+    }
+  ]
+}

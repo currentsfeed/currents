@@ -8,6 +8,9 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Mobile Responsive Fixes -->
+    <link rel="stylesheet" href="/static/css/mobile.css">
+    
     <!-- Custom styles -->
     <style>
         body {
@@ -24,7 +27,16 @@
     <header class="border-b border-gray-800 bg-black/50 backdrop-blur">
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
-                <a href="/" class="text-2xl font-bold">
+                <a href="/" class="flex items-center gap-3 text-2xl font-bold group">
+                    <!-- Currents Logo: Flowing waves -->
+                    <svg width="32" height="32" viewBox="0 0 32 32" class="group-hover:scale-110 transition">
+                        <path d="M4 16 Q8 10, 12 16 T20 16 T28 16" 
+                              stroke="#60a5fa" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                        <path d="M4 22 Q8 16, 12 22 T20 22 T28 22" 
+                              stroke="#3b82f6" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+                        <path d="M4 10 Q8 4, 12 10 T20 10 T28 10" 
+                              stroke="#93c5fd" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+                    </svg>
                     <span class="text-blue-400">Currents</span>
                 </a>
                 <nav class="flex gap-6">
@@ -32,15 +44,15 @@
                     <a href="#" class="text-gray-400 hover:text-white transition">Categories</a>
                     <a href="#" class="text-gray-400 hover:text-white transition">Following</a>
                 </nav>
-                <button class="px-4 py-2 bg-orange-600 hover:bg-orange-700 rounded-lg transition">
+                <a href="/wallet" class="px-4 py-2 bg-orange-600 hover:bg-orange-700 rounded-lg transition inline-block">
                     Connect Wallet
-                </button>
+                </a>
             </div>
         </div>
     </header>
 
     <!-- Main content -->
-    <main class="container mx-auto px-4 py-8">
+    <main>
         {% block content %}{% endblock %}
     </main>
 
@@ -48,7 +60,59 @@
     <footer class="border-t border-gray-800 mt-16 py-8">
         <div class="container mx-auto px-4 text-center text-gray-500">
             <p>Currents © 2026 - Belief-Driven Information</p>
+            <p class="text-sm mt-2 text-gray-600">v87 • Feb 11, 2026</p>
+            <p class="text-sm mt-3 space-x-4">
+                <a href="/tracking-admin" target="_blank" class="text-orange-400 hover:text-orange-300 transition">
+                    📊 Learning Dashboard
+                </a>
+                <span class="text-gray-700">|</span>
+                <a href="/brain-viewer" target="_blank" class="text-blue-400 hover:text-blue-300 transition">
+                    🧠 Database Viewer
+                </a>
+            </p>
         </div>
     </footer>
+    
+    <!-- BRain Tracking -->
+    <script src="/static/tracking.js"></script>
+    
+    <!-- Like Button Handler -->
+    <script>
+    function likeMarket(marketId, button) {
+        // Toggle liked state
+        const svg = button.querySelector('svg');
+        const path = svg.querySelector('path');
+        const isLiked = button.classList.contains('liked');
+        
+        if (isLiked) {
+            // Unlike
+            button.classList.remove('liked');
+            svg.setAttribute('fill', 'none');
+            path.classList.remove('text-red-500');
+            path.classList.add('text-gray-400');
+        } else {
+            // Like
+            button.classList.add('liked');
+            svg.setAttribute('fill', 'currentColor');
+            path.classList.remove('text-gray-400');
+            path.classList.add('text-red-500');
+            
+            // Animate
+            svg.style.transform = 'scale(1.3)';
+            setTimeout(() => {
+                svg.style.transform = 'scale(1)';
+            }, 200);
+        }
+        
+        // Track the interaction (bookmark action = like)
+        if (typeof trackEvent !== 'undefined') {
+            trackEvent({
+                action: 'bookmark',
+                market_id: marketId,
+                value: isLiked ? -1 : 1
+            });
+        }
+    }
+    </script>
 </body>
 </html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.display_name }} - User Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background: #0a0a0a; color: #fff; }
+        .score-bar { 
+            transition: all 0.3s ease;
+        }
+        .score-bar:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="p-6">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="mb-8">
+            <a href="/users" class="inline-flex items-center text-orange-400 hover:text-orange-300 mb-4">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                Back to Users
+            </a>
+
+            <div class="flex items-center gap-4">
+                <!-- Avatar -->
+                <div class="w-20 h-20 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-3xl font-bold">
+                    {{ profile.display_name[0] }}
+                </div>
+
+                <!-- User Info -->
+                <div>
+                    <h1 class="text-4xl font-bold">{{ profile.display_name }}</h1>
+                    <div class="text-gray-400 mt-1">{{ profile.user_id }}</div>
+                    <div class="text-sm text-gray-500 mt-1">
+                        Last active: {{ profile.last_active[:19] }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Scores -->
+        <div class="bg-gray-900 rounded-lg p-6 mb-6">
+            <h2 class="text-2xl font-bold mb-4">📂 Category Preferences</h2>
+            <p class="text-gray-400 text-sm mb-6">Scoring across market categories (0.0 = no interest, 1.0 = high interest)</p>
+
+            {% if profile.scores.category %}
+            <div class="space-y-3">
+                {% for item in profile.scores.category %}
+                <div class="score-bar">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-medium">{{ item.topic }}</span>
+                        <span class="text-2xl font-bold text-orange-400">{{ "%.2f"|format(item.score) }}</span>
+                    </div>
+                    <div class="h-4 bg-gray-800 rounded-full overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-orange-600 to-red-600 rounded-full transition-all" 
+                             style="width: {{ (item.score * 100)|int }}%"></div>
+                    </div>
+                    <div class="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>{{ item.interactions }} interactions</span>
+                        <span>Updated: {{ item.last_updated[:10] }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center text-gray-500 py-8">No category preferences recorded</div>
+            {% endif %}
+        </div>
+
+        <!-- Tag Scores -->
+        <div class="bg-gray-900 rounded-lg p-6 mb-6">
+            <h2 class="text-2xl font-bold mb-4">🏷️ Tag Preferences</h2>
+            <p class="text-gray-400 text-sm mb-6">Interest in specific topics and keywords</p>
+
+            {% if profile.scores.tag %}
+            <div class="space-y-3">
+                {% for item in profile.scores.tag %}
+                <div class="score-bar">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-1 bg-gray-800 rounded text-sm">{{ item.topic }}</span>
+                        </div>
+                        <span class="text-2xl font-bold text-green-400">{{ "%.2f"|format(item.score) }}</span>
+                    </div>
+                    <div class="h-4 bg-gray-800 rounded-full overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-green-600 to-emerald-600 rounded-full transition-all" 
+                             style="width: {{ (item.score * 100)|int }}%"></div>
+                    </div>
+                    <div class="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>{{ item.interactions }} interactions</span>
+                        <span>Updated: {{ item.last_updated[:10] }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center text-gray-500 py-8">No tag preferences recorded</div>
+            {% endif %}
+        </div>
+
+        <!-- Preference Scores -->
+        <div class="bg-gray-900 rounded-lg p-6 mb-6">
+            <h2 class="text-2xl font-bold mb-4">⚙️ Behavioral Preferences</h2>
+            <p class="text-gray-400 text-sm mb-6">Trading style and market preferences</p>
+
+            {% if profile.scores.preference %}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {% for item in profile.scores.preference %}
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="font-medium capitalize">{{ item.topic }}</span>
+                        <span class="text-xl font-bold text-blue-400">{{ "%.2f"|format(item.score) }}</span>
+                    </div>
+                    <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full" 
+                             style="width: {{ (item.score * 100)|int }}%"></div>
+                    </div>
+                    <div class="text-xs text-gray-500 mt-2">
+                        {% if item.topic == 'volume' %}
+                            {% if item.score < 0.4 %}Low volume markets{% elif item.score > 0.7 %}High volume markets{% else %}Medium volume{% endif %}
+                        {% elif item.topic == 'contestedness' %}
+                            {% if item.score < 0.4 %}Clear winners{% elif item.score > 0.7 %}Contested 50/50{% else %}Moderate uncertainty{% endif %}
+                        {% else %}
+                            {{ item.topic }}
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center text-gray-500 py-8">No behavioral preferences recorded</div>
+            {% endif %}
+        </div>
+
+        <!-- Score Visualization -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <!-- Category Chart -->
+            <div class="bg-gray-900 rounded-lg p-6">
+                <h3 class="text-xl font-bold mb-4">Category Distribution</h3>
+                <div style="position: relative; height: 300px;">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Tag Chart -->
+            <div class="bg-gray-900 rounded-lg p-6">
+                <h3 class="text-xl font-bold mb-4">Top Tags</h3>
+                <div style="position: relative; height: 300px;">
+                    <canvas id="tagChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <a href="/api/personalize" 
+               onclick="testPersonalization(event)"
+               class="p-4 bg-orange-600 hover:bg-orange-700 rounded-lg text-center transition cursor-pointer">
+                <div class="text-2xl mb-2">🎯</div>
+                <div class="font-bold">Test Personalization</div>
+                <div class="text-xs opacity-80">See recommended markets</div>
+            </a>
+            <a href="/" class="p-4 bg-gray-800 hover:bg-gray-700 rounded-lg text-center transition">
+                <div class="text-2xl mb-2">📊</div>
+                <div class="font-bold">View Analytics</div>
+                <div class="text-xs text-gray-400">Market distributions</div>
+            </a>
+            <a href="/users" class="p-4 bg-gray-800 hover:bg-gray-700 rounded-lg text-center transition">
+                <div class="text-2xl mb-2">👥</div>
+                <div class="font-bold">All Users</div>
+                <div class="text-xs text-gray-400">Browse profiles</div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Chart.js defaults
+        Chart.defaults.color = '#9CA3AF';
+        Chart.defaults.borderColor = '#374151';
+
+        // Category Chart
+        {% if profile.scores.category %}
+        const categoryData = {
+            labels: [{% for item in profile.scores.category %}"{{ item.topic }}",{% endfor %}],
+            datasets: [{
+                label: 'Interest Score',
+                data: [{% for item in profile.scores.category %}{{ item.score }},{% endfor %}],
+                backgroundColor: [
+                    '#F97316', '#EF4444', '#EC4899', '#8B5CF6', 
+                    '#6366F1', '#3B82F6', '#06B6D4', '#10B981'
+                ]
+            }]
+        };
+
+        new Chart(document.getElementById('categoryChart'), {
+            type: 'polarArea',
+            data: categoryData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 1.0
+                    }
+                }
+            }
+        });
+        {% endif %}
+
+        // Tag Chart
+        {% if profile.scores.tag %}
+        const tagData = {
+            labels: [{% for item in profile.scores.tag %}"{{ item.topic }}",{% endfor %}],
+            datasets: [{
+                label: 'Interest Score',
+                data: [{% for item in profile.scores.tag %}{{ item.score }},{% endfor %}],
+                backgroundColor: '#10B981',
+                borderColor: '#059669',
+                borderWidth: 2
+            }]
+        };
+
+        new Chart(document.getElementById('tagChart'), {
+            type: 'bar',
+            data: tagData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 1.0
+                    }
+                }
+            }
+        });
+        {% endif %}
+
+        // Test personalization
+        function testPersonalization(e) {
+            e.preventDefault();
+            
+            const categories = [{% for item in profile.scores.category %}"{{ item.topic }}",{% endfor %}];
+            const tags = [{% for item in profile.scores.tag %}"{{ item.topic }}",{% endfor %}];
+            
+            {% if profile.scores.preference %}
+            const volumePref = {{ profile.scores.preference|selectattr('topic', 'equalto', 'volume')|map(attribute='score')|first|default(0.5) }};
+            const contestPref = {{ profile.scores.preference|selectattr('topic', 'equalto', 'contestedness')|map(attribute='score')|first|default(0.5) }};
+            
+            let volumeLevel = 'medium';
+            if (volumePref < 0.4) volumeLevel = 'low';
+            else if (volumePref > 0.7) volumeLevel = 'high';
+            
+            let contestLevel = 'medium';
+            if (contestPref < 0.4) contestLevel = 'low';
+            else if (contestPref > 0.7) contestLevel = 'high';
+            {% else %}
+            const volumeLevel = 'medium';
+            const contestLevel = 'medium';
+            {% endif %}
+            
+            // Redirect to main analytics with personalization params
+            const params = new URLSearchParams({
+                categories: categories.join(','),
+                tags: tags.join(','),
+                volume: volumeLevel,
+                contest: contestLevel
+            });
+            
+            window.location.href = '/#personalization?' + params.toString();
+        }
+    </script>
+</body>
+</html>

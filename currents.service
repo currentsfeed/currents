@@ -1,0 +1,22 @@
+[Unit]
+Description=Currents Flask Application
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/.openclaw/workspace/currents-full-local
+ExecStart=/home/linuxbrew/.linuxbrew/bin/python3 /home/ubuntu/.openclaw/workspace/currents-full-local/app.py
+Restart=always
+RestartSec=3
+StandardOutput=append:/tmp/currents_systemd.log
+StandardError=append:/tmp/currents_systemd.log
+
+# Environment
+Environment="PYTHONUNBUFFERED=1"
+
+# Auto-restart on crash
+StartLimitInterval=0
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,435 @@
+# Currents Feature Registry
+# Version tracking for regression prevention
+# Update this file whenever you add/modify features
+
+version: 88
+last_updated: "2026-02-11"
+
+features:
+  # ===== HOMEPAGE FEATURES =====
+  - id: hero-section
+    name: "Hero Market Card"
+    added_version: 78
+    pages:
+      homepage:
+        enabled: true
+        elements:
+          - selector: "img[alt]"
+            description: "Hero image present"
+          - selector: "h2"
+            description: "Market title present"
+  
+  - id: editorial-descriptions
+    name: "Editorial Descriptions (1-2 sentence narrative)"
+    added_version: 78
+    pages:
+      homepage:
+        enabled: false  # Conditional - only on top 10 markets
+        conditional: true
+        elements:
+          - selector: "p.leading-relaxed"
+            description: "Editorial text on grid cards"
+      detail-page:
+        enabled: true
+        elements:
+          - selector: ".text-base.text-gray-300.mb-4.leading-relaxed"
+            description: "Editorial text in hero (above title)"
+  
+  - id: like-buttons
+    name: "Like/Bookmark Buttons (Heart Icon)"
+    added_version: 85
+    pages:
+      homepage:
+        enabled: true
+        elements:
+          - selector: ".like-btn"
+            description: "Heart icon on all cards"
+      detail-page:
+        enabled: true
+        elements:
+          - selector: ".like-btn"
+            description: "Heart icon in hero"
+  
+  - id: belief-currents
+    name: "Belief Currents Gradient Bars"
+    added_version: 75
+    pages:
+      homepage:
+        enabled: true
+        elements:
+          - selector: ".h-2.bg-gray-800.rounded-full.overflow-hidden"
+            description: "Gradient probability bars on cards"
+      detail-page:
+        enabled: true
+        elements:
+          - selector: ".h-6.bg-gray-800.rounded-full.overflow-hidden"
+            description: "Belief currents section with timeline"
+  
+  - id: category-tags
+    name: "Category Tags (Colored Text)"
+    added_version: 77
+    pages:
+      homepage:
+        enabled: false  # Conditional - styling may vary
+        conditional: true
+        elements:
+          - selector: "span"
+            description: "Category tags present"
+      detail-page:
+        enabled: true
+        elements:
+          - selector: "h2:contains('Market Stats')"
+            description: "Stats sidebar with category"
+  
+  - id: user-switcher
+    name: "Test User Switcher (Purple Bar)"
+    added_version: 82
+    pages:
+      homepage:
+        enabled: false  # Test mode only - not in production
+        test_only: true
+        elements:
+          - selector: "#test-user-switcher"
+            description: "Purple test mode bar at top"
+      detail-page:
+        enabled: false  # Not needed on detail pages
+  
+  - id: the-stream
+    name: "The Stream Section (Markets 10-20)"
+    added_version: 79
+    pages:
+      homepage:
+        enabled: false  # May not always render depending on data
+        conditional: true
+        elements:
+          - selector: "section"
+            description: "Stream section if enough markets"
+      detail-page:
+        enabled: false  # Not applicable
+  
+  # ===== DETAIL PAGE FEATURES =====
+  - id: detail-hero
+    name: "Detail Page Hero Section"
+    added_version: 70
+    pages:
+      detail-page:
+        enabled: true
+        elements:
+          - selector: ".h-96.rounded-2xl.overflow-hidden"
+            description: "Hero image with gradient overlay"
+          - selector: ".text-4xl.font-bold"
+            description: "Market title"
+  
+  - id: yes-no-labels
+    name: "YES/NO Probability Labels"
+    added_version: 81
+    pages:
+      detail-page:
+        enabled: true
+        elements:
+          - selector: "span:contains('YES')"
+            description: "YES percentage label"
+          - selector: "span:contains('NO')"
+            description: "NO percentage label"
+  
+  - id: connect-wallet-link
+    name: "Connect Wallet Link"
+    added_version: 80
+    pages:
+      detail-page:
+        enabled: true
+        elements:
+          - selector: "a[href='/wallet']"
+            description: "Orange CTA button to wallet"
+  
+  - id: related-markets
+    name: "Related Markets Sidebar"
+    added_version: 70
+    pages:
+      detail-page:
+        enabled: true
+        elements:
+          - selector: "h2:contains('Related Markets')"
+            description: "Sidebar with related markets"
+  
+  # ===== PERSONALIZATION FEATURES =====
+  - id: tracking-system
+    name: "User Interaction Tracking"
+    added_version: 83
+    pages:
+      homepage:
+        enabled: true
+        backend: true
+        description: "tracking.js captures all user events"
+      detail-page:
+        enabled: true
+        backend: true
+        description: "Same tracking as homepage"
+  
+  - id: tag-level-learning
+    name: "Tag-Level Personalization (90/10 split)"
+    added_version: 83
+    backend: true
+    description: "PersonalScore algorithm with 90% tag, 10% category"
+  
+  - id: news-boost
+    name: "Fresh News Boost (+0.8)"
+    added_version: 83
+    backend: true
+    description: "Content <24h old gets +0.8 boost"
+  
+  - id: sports-boost
+    name: "Upcoming Sports Boost (+1.5)"
+    added_version: 84
+    backend: true
+    description: "Games resolving in 0-3 days get +1.5 boost"
+  
+  - id: personalization-indicator
+    name: "Personalized Feed Indicator"
+    added_version: 83
+    pages:
+      homepage:
+        enabled: false  # Conditional - only after 5 interactions
+        conditional: true
+        elements:
+          - selector: "p:contains('Personalized')"
+            description: "Shows after 5 interactions"
+  
+  # ===== WALLET FEATURES =====
+  - id: wallet-connect
+    name: "WalletConnect v2 Integration"
+    added_version: 80
+    updated_version: 88
+    pages:
+      wallet-page:
+        enabled: true
+        network: "Arbitrum One (42161)"
+        currency: "ETH"
+        description: "Full WalletConnect implementation - Arbitrum only"
+    
+    validation:
+      chain_id: 42161
+      chain_id_hex: "0xa4b1"
+      chain_name: "Arbitrum One"
+      rpc_url: "https://arb1.arbitrum.io/rpc"
+      block_explorer: "https://arbiscan.io"
+      currency_name: "ETH"
+      currency_symbol: "ETH"
+      forbidden_keywords:
+        - "POLYGON"
+        - "polygon"
+        - "MATIC"
+        - "matic"
+        - "137"
+        - "0x89"
+        - "polygon-rpc.com"
+        - "polygonscan.com"
+      
+    regression_tests:
+      - check: "No POLYGON_CHAIN_ID variable references"
+        command: "grep -r 'POLYGON_CHAIN_ID' templates/wallet*.html templates/demo_transaction.html"
+        expected: "Should fail (no matches)"
+      - check: "No MATIC currency references"
+        command: "grep -r 'MATIC' templates/wallet*.html templates/demo_transaction.html"
+        expected: "Should fail (no matches)"
+      - check: "All chain IDs are 42161"
+        command: "grep -h 'chainId.*=' templates/wallet*.html | grep -v '42161'"
+        expected: "Should fail (no matches)"
+      - check: "All currency symbols are ETH"
+        command: "grep -h 'symbol.*=' templates/wallet*.html | grep -v 'ETH'"
+        expected: "Should fail (no matches)"
+  
+  # ===== ADMIN FEATURES =====
+  - id: tracking-admin
+    name: "Learning Dashboard (/tracking-admin)"
+    added_version: 83
+    pages:
+      admin:
+        enabled: true
+        url: "/tracking-admin"
+        description: "Real-time user profile viewer"
+  
+  - id: brain-viewer
+    name: "Database Viewer (/brain-viewer)"
+    added_version: 76
+    pages:
+      admin:
+        enabled: true
+        url: "/brain-viewer"
+        description: "SQLite database browser (proxied)"
+
+# ===== IMAGE VALIDATION =====
+image_validation:
+  added_version: 87
+  registry_path: "IMAGE_REGISTRY.md"
+  description: "Prevent sports markets from having mismatched images"
+  
+  category_rules:
+    Basketball:
+      required_keywords: ["basketball", "nba", "court", "hoop", "player"]
+      prohibited_keywords: ["tennis", "concert", "money", "theater", "soccer", "football", "parliament"]
+      valid_files:
+        - "nba-action-1.jpg"
+        - "nba-action-2.jpg"
+        - "nba-action-3.jpg"
+        - "nba-action-4.jpg"
+        - "nba-celtics-championship.jpg"
+        - "nba-nuggets-championship.jpg"
+        - "nba-allstar.jpg"
+        - "euroleague-basketball.jpg"
+        - "basketball_nba_action_1.jpg"
+        - "basketball_nba_action_2.jpg"
+        - "basketball_nba_court_1.jpg"
+        - "basketball_nba_court_2.jpg"
+        - "basketball_nba_arena_1.jpg"
+        - "basketball_nba_player_1.jpg"
+        - "basketball_nba_game_1.jpg"
+        - "basketball_nba_dunk_1.jpg"
+        - "basketball_nba_hoop_2.jpg"
+    
+    Soccer:
+      required_keywords: ["soccer", "football", "pitch", "ball", "goal", "stadium"]
+      prohibited_keywords: ["basketball", "tennis", "bitcoin", "space", "earth", "clapperboard", "parliament"]
+      valid_files:
+        - "bundesliga-match.jpg"
+        - "laliga-match.jpg"
+        - "seriea-derby.jpg"
+        - "epl-mancity.jpg"
+        - "epl-united-spurs.jpg"
+        - "ucl-psg-barca.jpg"
+        - "ucl-bayern.jpg"
+        - "market_new_60010.jpg"  # Soccer ball/cleat - approved
+        - "soccer_match_action_1.jpg"
+        - "soccer_stadium_1.jpg"
+        - "soccer_ball_1.jpg"
+        - "soccer_player_action_1.jpg"
+        - "soccer_goal_action_1.jpg"
+        - "soccer_field_1.jpg"
+    
+    Hockey:
+      required_keywords: ["hockey", "nhl", "ice", "rink", "puck"]
+      prohibited_keywords: ["parliament", "basketball", "soccer", "tennis"]
+      valid_files:
+        - "nhl-action-1.jpg"
+        - "nhl-action-2.jpg"
+        - "nhl-rangers-bruins.jpg"
+        - "hockey_nhl_action_1.jpg"
+        - "hockey_game_action_1.jpg"
+        - "hockey_arena_1.jpg"
+        - "hockey_ice_arena_1.jpg"
+    
+    Baseball:
+      required_keywords: ["baseball", "mlb", "npb", "diamond", "bat"]
+      prohibited_keywords: ["harry potter", "potions", "magic", "basketball", "soccer"]
+      valid_files:
+        - "npb-baseball.jpg"
+        - "baseball_mlb_action_1.jpg"
+        - "baseball_stadium_2.jpg"
+    
+    Tennis:
+      required_keywords: ["tennis", "court", "racket", "grand slam"]
+      prohibited_keywords: ["basketball", "soccer", "hockey"]
+      valid_files:
+        - "tennis-french-open.jpg"
+        - "market_new_60018.jpg"  # Tennis court - DO NOT reuse for other sports
+    
+    Rugby:
+      required_keywords: ["rugby", "pitch", "scrum", "six nations"]
+      prohibited_keywords: ["parliament", "basketball", "soccer"]
+      valid_files:
+        - "rugby-six-nations.jpg"
+        - "rugby_match_action_1.jpg"
+    
+    "Australian Football":
+      required_keywords: ["afl", "australian football", "oval"]
+      prohibited_keywords: ["parliament", "basketball", "soccer"]
+      valid_files:
+        - "afl-match.jpg"
+        - "afl_football_action_1.jpg"
+  
+  prohibited_images:
+    # These were found being misused - NEVER use for sports
+    - filename: "market_540818.jpg"
+      contains: "Concert/music performance"
+      reason: "Was used for basketball markets"
+    - filename: "market_540816.jpg"
+      contains: "Dollar bills/money"
+      reason: "Was used for basketball markets"
+    - filename: "market_540817.jpg"
+      contains: "Empty movie theater"
+      reason: "Was used for basketball markets"
+    - filename: "market_new_60046.jpg"
+      contains: "Earth from space"
+      reason: "Was used for soccer markets"
+    - filename: "market_new_60025.jpg"
+      contains: "Bitcoin/cryptocurrency"
+      reason: "Was used for soccer markets"
+    - filename: "market_new_60034.jpg"
+      contains: "Film clapperboard"
+      reason: "Was used for soccer markets"
+    - filename: "market_new_60003.jpg"
+      contains: "Italian Parliament"
+      reason: "Was used for hockey markets"
+    - filename: "market_new_60002.jpg"
+      contains: "Italian Parliament"
+      reason: "Was used for hockey markets"
+    - filename: "market_new_60005.jpg"
+      contains: "Italian Parliament"
+      reason: "Was used for rugby/AFL markets"
+    - filename: "market_new_60004.jpg"
+      contains: "Harry Potter potions"
+      reason: "Was used for baseball markets"
+  
+  validation_queries:
+    # SQL queries to validate image/category matching
+    basketball_check: |
+      SELECT market_id, title, category, image_url 
+      FROM markets 
+      WHERE category = 'Basketball' 
+      AND image_url NOT LIKE '%nba-%' 
+      AND image_url NOT LIKE '%euroleague-basketball%'
+    
+    soccer_check: |
+      SELECT market_id, title, category, image_url 
+      FROM markets 
+      WHERE category = 'Soccer' 
+      AND image_url NOT LIKE '%bundesliga-%' 
+      AND image_url NOT LIKE '%laliga-%' 
+      AND image_url NOT LIKE '%seriea-%' 
+      AND image_url NOT LIKE '%epl-%' 
+      AND image_url NOT LIKE '%ucl-%' 
+      AND image_url NOT LIKE '%ligue1-%'
+      AND image_url NOT LIKE '%mls-%'
+      AND image_url NOT LIKE '%wcq-%'
+      AND image_url != 'static/images/market_new_60010.jpg'
+    
+    hockey_check: |
+      SELECT market_id, title, category, image_url 
+      FROM markets 
+      WHERE category = 'Hockey' 
+      AND image_url NOT LIKE '%nhl-%'
+    
+    tennis_misuse_check: |
+      SELECT market_id, title, category, image_url 
+      FROM markets 
+      WHERE category != 'Tennis' 
+      AND category != 'Sports'
+      AND (image_url LIKE '%tennis%' OR image_url = 'static/images/market_new_60018.jpg')
+
+# ===== DEPLOYMENT CHECKLIST =====
+pre_deploy_checks:
+  - "Run smoke_test.py"
+  - "Verify version number in footer"
+  - "Check homepage loads without errors"
+  - "Check detail page loads without errors"
+  - "Verify tracking events in browser console"
+  - "Test user switcher (if in test mode)"
+  - "Confirm editorial descriptions on both homepage + detail"
+  - "Run image validation checks (see image_validation section)"
+  - "Verify no sports markets have mismatched images"
+
+# ===== KNOWN ISSUES =====
+known_issues:
+  - "App crashes periodically (memory leak suspected)"
+  - "Need cron for trending refresh (every 30 min)"
+  - "Need cron for score decay (daily)"

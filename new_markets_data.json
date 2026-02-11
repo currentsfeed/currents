@@ -1,0 +1,354 @@
+[
+  {
+    "title": "Will Trump's approval rating exceed 50% by March 2026?",
+    "category": "Politics",
+    "editorial_description": "Trump's second term started with strong base support but independents remain skeptical. His first 100 days will define whether he can build a broader coalition or double down on his base.",
+    "keywords": ["approval rating", "polling", "politics", "president"],
+    "image_search": "polling politics approval rating"
+  },
+  {
+    "title": "Will VP Vance run for President in 2028?",
+    "category": "Politics",
+    "editorial_description": "JD Vance's national profile has skyrocketed, but questions about Trump's succession plan create intrigue. Early 2028 positioning begins now with staffing and donor cultivation.",
+    "keywords": ["vance", "2028 election", "politics", "president"],
+    "image_search": "campaign politics presidential"
+  },
+  {
+    "title": "Will Senate flip to Democrats in 2026 midterms?",
+    "category": "Politics",
+    "editorial_description": "Republicans hold a slim Senate majority entering 2026 midterms, with several purple-state senators up for reelection. Historical midterm dynamics favor the opposition party.",
+    "keywords": ["senate", "midterms", "election", "congress"],
+    "image_search": "senate congress capitol building"
+  },
+  {
+    "title": "Will Newsom announce 2028 presidential run by July 2026?",
+    "category": "Politics",
+    "editorial_description": "California's governor has been building national infrastructure and appearing on cable news non-stop. An early announcement would clear the Democratic field or spark a contested primary.",
+    "keywords": ["newsom", "california", "2028", "democrat"],
+    "image_search": "california governor politics"
+  },
+  {
+    "title": "Will AOC challenge Schumer in 2028 Senate primary?",
+    "category": "Politics",
+    "editorial_description": "Alexandria Ocasio-Cortez has transformed from backbencher to progressive powerhouse. Taking on Schumer would be the ultimate establishment challenge in deep-blue New York.",
+    "keywords": ["aoc", "progressive", "senate", "primary"],
+    "image_search": "congress politics progressive"
+  },
+  {
+    "title": "Will Supreme Court overturn same-sex marriage by 2027?",
+    "category": "Politics",
+    "editorial_description": "Conservative legal groups are openly strategizing to bring new cases challenging Obergefell. The court's willingness to revisit precedent after Dobbs has activists on both sides mobilizing.",
+    "keywords": ["supreme court", "marriage equality", "legal"],
+    "image_search": "supreme court washington dc"
+  },
+  {
+    "title": "Will Trump pardon January 6 defendants by June 2026?",
+    "category": "Politics",
+    "editorial_description": "Trump promised pardons on the campaign trail, calling Jan 6 defendants 'hostages.' The scope and timing of clemency will test limits of presidential pardon power and political tolerance.",
+    "keywords": ["pardon", "january 6", "clemency"],
+    "image_search": "washington dc capitol politics"
+  },
+  {
+    "title": "Will federal abortion ban pass Congress by 2027?",
+    "category": "Politics",
+    "editorial_description": "Pro-life activists are pushing for a national 15-week ban with narrow exceptions. Moderate Republicans are caught between base demands and swing district voters who favor abortion access.",
+    "keywords": ["abortion", "congress", "legislation"],
+    "image_search": "congress politics healthcare"
+  },
+  {
+    "title": "Will Caitlin Clark win MVP in 2026 WNBA season?",
+    "category": "Sports",
+    "editorial_description": "Clark's rookie season shattered viewership records and elevated women's basketball. Her sophomore campaign will determine if she's a transcendent superstar or beneficiary of hype.",
+    "keywords": ["wnba", "basketball", "mvp", "caitlin clark"],
+    "image_search": "wnba basketball women sports"
+  },
+  {
+    "title": "Will Lionel Messi win 2026 World Cup with Argentina?",
+    "category": "Sports",
+    "editorial_description": "Messi's final World Cup arrives after his fairy-tale 2022 victory. At 39, he's defying age with Inter Miami but international soccer at altitude tests even legends.",
+    "keywords": ["messi", "world cup", "soccer", "argentina"],
+    "image_search": "soccer world cup argentina"
+  },
+  {
+    "title": "Will Yankees win 2026 World Series?",
+    "category": "Sports",
+    "editorial_description": "Judge and Soto form baseball's most dangerous duo, but championship drought dating to 2009 weighs heavy. The Steinbrenner family is demanding October success after years of playoff disappointments.",
+    "keywords": ["yankees", "baseball", "world series"],
+    "image_search": "baseball world series yankees"
+  },
+  {
+    "title": "Will Connor McDavid win his first Stanley Cup?",
+    "category": "Sports",
+    "editorial_description": "The best player of his generation still lacks the ultimate trophy. Edmonton's championship window is wide open, but McDavid's legacy hangs in the balance.",
+    "keywords": ["mcdavid", "oilers", "stanley cup", "hockey"],
+    "image_search": "ice hockey nhl stanley cup"
+  },
+  {
+    "title": "Will Tiger Woods play in 2026 Masters?",
+    "category": "Sports",
+    "editorial_description": "Tiger's body continues betraying his competitive spirit, but Augusta's magic pulls him back year after year. His relationship with the Masters transcends normal athlete-event dynamics.",
+    "keywords": ["tiger woods", "golf", "masters", "augusta"],
+    "image_search": "golf masters tournament"
+  },
+  {
+    "title": "Will Simone Biles compete in 2028 Olympics?",
+    "category": "Sports",
+    "editorial_description": "Biles returned triumphantly in 2024, but Los Angeles 2028 would make her 31—ancient for gymnastics. Her advocacy work may ultimately prove more impactful than more medals.",
+    "keywords": ["simone biles", "gymnastics", "olympics"],
+    "image_search": "gymnastics olympics sports"
+  },
+  {
+    "title": "Will Michigan repeat as College Football champions?",
+    "category": "Sports",
+    "editorial_description": "The Wolverines broke their title drought dramatically in 2023. Sustaining excellence in the NIL era requires both on-field coaching and off-field fundraising prowess.",
+    "keywords": ["michigan", "college football", "ncaa"],
+    "image_search": "college football stadium"
+  },
+  {
+    "title": "Will Saquon Barkley rush for 2,000 yards?",
+    "category": "Sports",
+    "editorial_description": "Barkley's Eagles debut was spectacular, reviving his career behind an elite offensive line. The 2,000-yard milestone remains NFL's rarest rushing achievement.",
+    "keywords": ["saquon barkley", "nfl", "rushing", "eagles"],
+    "image_search": "nfl football running back"
+  },
+  {
+    "title": "Will Jake Paul fight Canelo Alvarez?",
+    "category": "Sports",
+    "editorial_description": "Paul's boxing journey has gone from gimmick to genuine contender status. Taking on pound-for-pound king Canelo would be the ultimate test—or ultimate payday stunt.",
+    "keywords": ["jake paul", "boxing", "canelo", "fight"],
+    "image_search": "boxing match ring fight"
+  },
+  {
+    "title": "Will Novak Djokovic win another Grand Slam?",
+    "category": "Sports",
+    "editorial_description": "At 38, Djokovic's pursuit of records continues against Father Time and younger challengers. Each major could be his last chance to extend his Grand Slam lead.",
+    "keywords": ["djokovic", "tennis", "grand slam"],
+    "image_search": "tennis grand slam court"
+  },
+  {
+    "title": "Will Ethereum surpass $5,000 by June 2026?",
+    "category": "Crypto",
+    "editorial_description": "ETH has lagged Bitcoin's rally despite successful network upgrades. The flippening debate rages on as institutional adoption of smart contracts accelerates.",
+    "keywords": ["ethereum", "eth", "cryptocurrency"],
+    "image_search": "ethereum cryptocurrency blockchain"
+  },
+  {
+    "title": "Will SEC approve Solana ETF by December 2026?",
+    "category": "Crypto",
+    "editorial_description": "Bitcoin and Ethereum ETFs opened the floodgates, but the SEC remains cautious on alt-coins. Solana's speed and ecosystem growth make it the next obvious candidate.",
+    "keywords": ["solana", "etf", "sec", "crypto"],
+    "image_search": "cryptocurrency trading blockchain"
+  },
+  {
+    "title": "Will Coinbase stock hit $500 by end of 2026?",
+    "category": "Crypto",
+    "editorial_description": "Coinbase rode the crypto bull market to profitability but faces intensifying competition from BlackRock and traditional finance entering the space.",
+    "keywords": ["coinbase", "crypto", "stock"],
+    "image_search": "cryptocurrency exchange trading"
+  },
+  {
+    "title": "Will USDC depeg below $0.95?",
+    "category": "Crypto",
+    "editorial_description": "Stablecoin trust is crypto's foundation, but banking crises and regulatory pressure create systemic risks. USDC's March 2023 depeg trauma still haunts the market.",
+    "keywords": ["usdc", "stablecoin", "depeg"],
+    "image_search": "stablecoin cryptocurrency digital"
+  },
+  {
+    "title": "Will NFT trading volume exceed $10B in Q2 2026?",
+    "category": "Crypto",
+    "editorial_description": "NFTs crashed from peak mania but never disappeared. Gaming integration and IP licensing deals are building sustainable utility beyond speculation.",
+    "keywords": ["nft", "trading", "digital art"],
+    "image_search": "nft digital art blockchain"
+  },
+  {
+    "title": "Will SBF's sentence be reduced on appeal?",
+    "category": "Crypto",
+    "editorial_description": "Sam Bankman-Fried's 25-year sentence shocked crypto, but his legal team is arguing procedural errors. The appeals process will test DOJ's aggressive crypto enforcement strategy.",
+    "keywords": ["sbf", "ftx", "crypto", "legal"],
+    "image_search": "courthouse legal justice"
+  },
+  {
+    "title": "Will Ripple win SEC lawsuit by July 2026?",
+    "category": "Crypto",
+    "editorial_description": "The Ripple-SEC battle has dragged on for years, with billions in crypto regulation hanging on the outcome. A Ripple victory could greenlight dozens of alt-coins, while SEC win would consolidate power.",
+    "keywords": ["ripple", "xrp", "sec", "lawsuit"],
+    "image_search": "legal cryptocurrency regulation"
+  }
+]
+,
+  {
+    "title": "Will Apple Vision Pro 2 launch by December 2026?",
+    "category": "Technology",
+    "editorial_description": "The Vision Pro's $3,500 price tag limited adoption despite impressive tech. Apple's playbook is iterative hardware improvements at lower price points—but spatial computing takes time to mature.",
+    "keywords": ["apple", "vision pro", "vr", "ar"],
+    "image_search": "virtual reality headset technology"
+  },
+  {
+    "title": "Will ChatGPT reach 1 billion users?",
+    "category": "Technology",
+    "editorial_description": "ChatGPT revolutionized AI accessibility but competition from Google, Microsoft, and open-source models intensifies daily. The billion-user milestone would cement OpenAI's consumer dominance.",
+    "keywords": ["chatgpt", "ai", "openai"],
+    "image_search": "artificial intelligence technology"
+  },
+  {
+    "title": "Will Tesla stock hit $500 by end of 2026?",
+    "category": "Technology",
+    "editorial_description": "Musk's political pivot and production delays have tested investor patience. Full self-driving promises and the Cybertruck's success will determine if Tesla can reignite growth.",
+    "keywords": ["tesla", "elon musk", "stock", "ev"],
+    "image_search": "electric vehicle tesla technology"
+  },
+  {
+    "title": "Will SpaceX launch first manned Mars mission?",
+    "category": "Technology",
+    "editorial_description": "Starship test flights progress toward Musk's Mars ambitions, but manned missions require life support systems not yet demonstrated. Even Musk's optimistic timeline extends beyond 2026.",
+    "keywords": ["spacex", "mars", "starship", "space"],
+    "image_search": "spacex rocket launch mars"
+  },
+  {
+    "title": "Will TikTok be banned in the US by end of 2026?",
+    "category": "Technology",
+    "editorial_description": "Congressional TikTok ban legislation passed but faces court challenges and ByteDance resistance. The app's 170 million US users represent massive political and economic leverage.",
+    "keywords": ["tiktok", "ban", "social media"],
+    "image_search": "social media technology smartphone"
+  },
+  {
+    "title": "Will Microsoft acquire Nintendo?",
+    "category": "Technology",
+    "editorial_description": "Microsoft's gaming ambitions grew with Activision-Blizzard, but Nintendo's fierce independence and Japanese corporate culture make acquisition nearly impossible. Stranger deals have happened.",
+    "keywords": ["microsoft", "nintendo", "gaming", "acquisition"],
+    "image_search": "video game console gaming"
+  },
+  {
+    "title": "Will Sam Altman remain OpenAI CEO through 2026?",
+    "category": "Technology",
+    "editorial_description": "Altman survived his brief ouster but tensions with the board and safety concerns persist. OpenAI's explosive growth and AGI timeline create unprecedented leadership pressure.",
+    "keywords": ["sam altman", "openai", "ai", "ceo"],
+    "image_search": "technology ceo silicon valley"
+  },
+  {
+    "title": "Will Google's Gemini beat GPT-5?",
+    "category": "Technology",
+    "editorial_description": "The AI race intensifies as Google throws its full resources behind Gemini. DeepMind's research pedigree meets Google's computational infrastructure in a battle for AI supremacy.",
+    "keywords": ["google", "gemini", "ai", "llm"],
+    "image_search": "artificial intelligence technology"
+  },
+  {
+    "title": "Will Barbie win Best Picture at 2026 Oscars?",
+    "category": "Entertainment",
+    "editorial_description": "The Barbie cultural phenomenon dominated 2023, but Academy voters historically snub blockbusters for prestige dramas. Greta Gerwig's direction and cultural impact could break the pattern.",
+    "keywords": ["barbie", "oscars", "movie", "awards"],
+    "image_search": "hollywood oscars red carpet"
+  },
+  {
+    "title": "Will Taylor Swift marry Travis Kelce in 2026?",
+    "category": "Entertainment",
+    "editorial_description": "Pop culture's power couple has dominated tabloids for months. Swift's Eras Tour wraps and Kelce's NFL career timeline could align for America's most-watched wedding.",
+    "keywords": ["taylor swift", "travis kelce", "celebrity"],
+    "image_search": "celebrity couple entertainment"
+  },
+  {
+    "title": "Will Beyoncé tour in 2026?",
+    "category": "Entertainment",
+    "editorial_description": "Queen Bey's Renaissance tour broke records, but touring's physical toll and her film/business empire expansion suggest she might step back from the road. Fans remain hopeful.",
+    "keywords": ["beyonce", "tour", "concert", "music"],
+    "image_search": "concert tour music performance"
+  },
+  {
+    "title": "Will Succession win Emmy for Best Drama?",
+    "category": "Entertainment",
+    "editorial_description": "The Roy family saga concluded as prestige TV's crown jewel. Its final season sweep would cap one of television's most critically acclaimed runs in Emmy history.",
+    "keywords": ["succession", "emmy", "tv", "drama"],
+    "image_search": "television emmy awards"
+  },
+  {
+    "title": "Will Avatar 3 outgross Avatar 2?",
+    "category": "Entertainment",
+    "editorial_description": "Cameron's Way of Water proved audiences still crave spectacle, but diminishing returns plagued franchise sequels. Avatar 3's underwater focus and production delays create uncertainty.",
+    "keywords": ["avatar", "james cameron", "movie", "box office"],
+    "image_search": "movie theater cinema blockbuster"
+  },
+  {
+    "title": "Will Disney+ subscriber count exceed Netflix?",
+    "category": "Entertainment",
+    "editorial_description": "Disney's streaming empire expanded rapidly but Netflix remains the industry leader. The streaming wars enter a mature phase where content quality trumps growth-at-any-cost.",
+    "keywords": ["disney plus", "netflix", "streaming"],
+    "image_search": "streaming video entertainment"
+  },
+  {
+    "title": "Will unemployment rate exceed 5% by July 2026?",
+    "category": "Economics",
+    "editorial_description": "Labor market resilience has surprised economists, but higher interest rates traditionally lead to job losses. The Fed's soft landing attempt faces its sternest test in coming months.",
+    "keywords": ["unemployment", "jobs", "economy"],
+    "image_search": "economy business finance"
+  },
+  {
+    "title": "Will inflation drop below 2% target by December 2026?",
+    "category": "Economics",
+    "editorial_description": "The Fed's inflation fight has made progress but sticky service prices and wage growth complicate the final mile. Declaring victory too early risked 1970s-style resurgence.",
+    "keywords": ["inflation", "federal reserve", "economy"],
+    "image_search": "federal reserve economics finance"
+  },
+  {
+    "title": "Will S&P 500 hit 7000 by end of 2026?",
+    "category": "Economics",
+    "editorial_description": "Markets surged on AI optimism and soft landing hopes, but valuations stretched. The path to 7000 requires sustained earnings growth without recession or major geopolitical shocks.",
+    "keywords": ["stock market", "s&p 500", "wall street"],
+    "image_search": "stock market wall street trading"
+  },
+  {
+    "title": "Will housing prices fall 10% nationally by year-end?",
+    "category": "Economics",
+    "editorial_description": "Sky-high mortgage rates froze the housing market but prices remained sticky. A 10% correction would provide relief for buyers but devastate recent homeowners and construction industries.",
+    "keywords": ["housing", "real estate", "prices"],
+    "image_search": "real estate housing market"
+  },
+  {
+    "title": "Will Fed cut rates by 1% or more in 2026?",
+    "category": "Economics",
+    "editorial_description": "Powell's Fed maintained higher-for-longer stance, but economic data could force aggressive cutting. The debate centers on whether cuts signal victory over inflation or panic over recession.",
+    "keywords": ["federal reserve", "interest rates", "fed"],
+    "image_search": "federal reserve interest rates"
+  },
+  {
+    "title": "Will U.S. enter recession in 2026?",
+    "category": "Economics",
+    "editorial_description": "Recession calls have been wrong for two years, but inverted yield curves and tightening credit conditions historically precede downturns. The question is when, not if.",
+    "keywords": ["recession", "economy", "gdp"],
+    "image_search": "economy recession business"
+  },
+  {
+    "title": "Will Israel and Hamas reach ceasefire by March 2026?",
+    "category": "World",
+    "editorial_description": "The Gaza conflict drags on despite international pressure and humanitarian catastrophe. Ceasef ire negotiations have repeatedly stalled over hostage releases and security guarantees.",
+    "keywords": ["israel", "hamas", "gaza", "ceasefire"],
+    "image_search": "peace talks diplomacy international"
+  },
+  {
+    "title": "Will North Korea conduct nuclear test in 2026?",
+    "category": "World",
+    "editorial_description": "Kim Jong Un's weapons program accelerated despite sanctions. A seventh nuclear test would escalate regional tensions and test US-South Korea-Japan alliance coordination.",
+    "keywords": ["north korea", "nuclear", "kim jong un"],
+    "image_search": "north korea military nuclear"
+  },
+  {
+    "title": "Will UK rejoin EU by 2027?",
+    "category": "World",
+    "editorial_description": "Brexit's economic pain has fueled rejoiner sentiment, but EU skepticism and UK politics complicate any return. Labour's election victory changed dynamics but not EU appetite for British drama.",
+    "keywords": ["brexit", "uk", "eu", "britain"],
+    "image_search": "british parliament london politics"
+  },
+  {
+    "title": "Will India surpass China in population officially?",
+    "category": "World",
+    "editorial_description": "India likely already eclipsed China as world's most populous nation, but official census data lags. The demographic shift reshapes global economic and political power dynamics.",
+    "keywords": ["india", "china", "population"],
+    "image_search": "india population demographics"
+  },
+  {
+    "title": "Will Mexico legalize all drugs by end of 2026?",
+    "category": "World",
+    "editorial_description": "Mexico's progressive president pushed decriminalization amid cartel violence, but conservative opposition and US pressure create obstacles. Full legalization would be unprecedented globally.",
+    "keywords": ["mexico", "drugs", "legalization"],
+    "image_search": "mexico politics government"
+  }
+]

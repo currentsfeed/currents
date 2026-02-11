@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Test - Currents</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #0a0a0a; color: white; padding: 2rem; }
+        .test-box { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .gradient-demo { height: 40px; border-radius: 4px; margin: 0.5rem 0; }
+    </style>
+</head>
+<body>
+    <h1 class="text-3xl font-bold mb-8">🧪 Jinja Filter Test Suite</h1>
+    
+    {% set test_market = {
+        'market_id': 'test_001',
+        'title': 'Test Market',
+        'probability': 0.75,
+        'market_type': 'binary',
+        'created_at': '2025-12-14T05:13:41.438837',
+        'participant_count': 1234,
+        'volume_total': 5000000
+    } %}
+    
+    <div class="test-box">
+        <h2 class="text-xl font-bold mb-4">1️⃣ belief_gradient Filter</h2>
+        <p class="text-gray-400 mb-2">Market with 75% probability:</p>
+        <div class="gradient-demo" style="background: {{ test_market|belief_gradient }}"></div>
+        <code class="text-xs text-green-400">{{ test_market|belief_gradient }}</code>
+    </div>
+    
+    <div class="test-box">
+        <h2 class="text-xl font-bold mb-4">2️⃣ option_color Filter</h2>
+        <p class="text-gray-400 mb-2">Colors for multi-option markets:</p>
+        {% for i in range(8) %}
+        <div class="inline-block mr-2 mb-2">
+            <div class="w-20 h-8 rounded bg-gradient-to-r {{ i|option_color }}"></div>
+            <div class="text-xs text-center mt-1">Option {{ i }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="test-box">
+        <h2 class="text-xl font-bold mb-4">3️⃣ timeline_points Filter</h2>
+        <p class="text-gray-400 mb-2">Timeline from market creation to now:</p>
+        {% set points = test_market.created_at|timeline_points %}
+        <div class="flex justify-between text-sm">
+            {% for point in points %}
+            <span class="{% if loop.first %}text-green-400{% elif loop.last %}text-blue-400{% else %}text-gray-400{% endif %}">
+                {{ point }}
+            </span>
+            {% endfor %}
+        </div>
+        <code class="text-xs text-green-400 mt-2 block">{{ points }}</code>
+    </div>
+    
+    <div class="test-box">
+        <h2 class="text-xl font-bold mb-4">4️⃣ format_number Filter</h2>
+        <p class="text-gray-400 mb-2">Format large numbers with commas:</p>
+        <div class="text-2xl">{{ test_market.participant_count|format_number }} participants</div>
+        <div class="text-2xl">{{ test_market.volume_total|format_number }} volume</div>
+    </div>
+    
+    <div class="test-box">
+        <h2 class="text-xl font-bold mb-4">5️⃣ category_color Filter</h2>
+        <p class="text-gray-400 mb-2">Category badge colors:</p>
+        {% for cat in ['Politics', 'Sports', 'Technology', 'Markets', 'Crypto', 'World'] %}
+        <span class="inline-block px-3 py-1 rounded text-xs font-bold mr-2 mb-2 {{ cat|category_color }}">
+            {{ cat }}
+        </span>
+        {% endfor %}
+    </div>
+    
+    <div class="test-box">
+        <h2 class="text-xl font-bold mb-4">✅ LIVE MARKET TEST</h2>
+        <p class="text-gray-400 mb-4">Real hero market with all filters:</p>
+        
+        {% if hero %}
+        {% for market in hero %}
+        <div class="bg-gray-900 rounded-lg p-4">
+            <h3 class="font-bold mb-2">{{ market.title[:80] }}</h3>
+            
+            <div class="mb-3">
+                <div class="text-xs text-gray-400 mb-1">BELIEF CURRENTS GRADIENT:</div>
+                <div class="h-8 rounded" style="background: {{ market|belief_gradient }}"></div>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-4 text-sm">
+                <div>
+                    <div class="text-gray-400">Probability</div>
+                    <div class="text-xl font-bold">{{ (market.probability * 100)|int }}%</div>
+                </div>
+                <div>
+                    <div class="text-gray-400">Participants</div>
+                    <div class="text-xl font-bold">{{ market.participant_count|format_number }}</div>
+                </div>
+                <div>
+                    <div class="text-gray-400">Timeline</div>
+                    <div class="text-xs">{{ market.created_at|timeline_points|last }}</div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class="text-red-400">No hero market loaded</p>
+        {% endif %}
+    </div>
+    
+    <div class="mt-8 p-4 bg-green-900 border border-green-500 rounded">
+        <h2 class="text-xl font-bold mb-2">🎉 ALL FILTERS WORKING!</h2>
+        <p>If you see colorful gradients, formatted numbers, and timeline points above, all Jinja filters are registered and functioning correctly.</p>
+    </div>
+    
+    <div class="mt-4 text-center">
+        <a href="/" class="inline-block px-6 py-3 bg-orange-600 hover:bg-orange-700 rounded-lg font-bold">
+            ← Back to Homepage
+        </a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+2026-02-11 15:03 UTC - App crashed (ERR_NGROK_8012), restarted PID 85158
+2026-02-11 16:43 UTC - App crashed again, restarted PID 86169
+86170
+86184

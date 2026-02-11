@@ -66,42 +66,62 @@
                     {{ market.description[:200] }}...
                 </p>
                 
-                <!-- Belief Currents Chart -->
+                <!-- Belief Currents Chart - Time Evolution -->
                 <div class="bg-black/60 backdrop-blur rounded-xl p-6 max-w-4xl">
-                    <div class="text-sm text-gray-400 mb-3">BELIEF CURRENTS</div>
-                    
-                    <!-- Multi-outcome bar -->
-                    <div class="h-3 bg-gray-800 rounded-full overflow-hidden flex mb-4">
-                        <div class="bg-gradient-to-r from-green-500 to-green-400" style="width: 47%"></div>
-                        <div class="bg-gradient-to-r from-orange-500 to-orange-400" style="width: 39%"></div>
-                        <div class="bg-gradient-to-r from-yellow-500 to-yellow-400" style="width: 14%"></div>
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="text-sm text-gray-400">BELIEF CURRENTS</div>
+                        <div class="text-xs text-gray-500">{{ market.created_at[:10] }} → Now</div>
                     </div>
                     
-                    <!-- Options -->
-                    <div class="grid grid-cols-4 gap-6 mb-6">
+                    <!-- Time-based flowing gradient (smooth color transitions over time) -->
+                    <div class="h-3 bg-gray-800 rounded-full overflow-hidden mb-2 relative">
+                        <div class="absolute inset-0 rounded-full" style="background: linear-gradient(to right, 
+                            #EF4444 0%,      /* Red: No leading (start) */
+                            #F59E0B 20%,     /* Yellow: transition */
+                            #10B981 35%,     /* Green: Yes takes lead */
+                            #10B981 60%,     /* Green: Yes strong */
+                            #F59E0B 75%,     /* Yellow: contested */
+                            #10B981 85%,     /* Green: Yes regains */
+                            #22C55E 100%     /* Bright green: current strong Yes */
+                        )"></div>
+                    </div>
+                    
+                    <!-- Timeline labels with dividers (dynamically calculated) -->
+                    {% set points = market.created_at|timeline_points %}
+                    <div class="flex items-center justify-between text-xs text-gray-500 mb-4 px-1">
+                        {% for point in points %}
+                            <span>{{ point }}</span>
+                            {% if not loop.last %}
+                                <span class="text-gray-700">|</span>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Current belief breakdown -->
+                    <div class="grid grid-cols-3 gap-6 mb-6">
                         <div>
                             <div class="flex items-center gap-2 mb-1">
                                 <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                                <span class="text-sm text-gray-300">Yes, likely</span>
+                                <span class="text-sm text-gray-300">Yes</span>
                             </div>
-                            <div class="text-2xl font-bold">47%</div>
-                            <div class="text-green-500 text-sm">+2.0</div>
+                            <div class="text-2xl font-bold">{{ (market.probability * 100)|int }}%</div>
+                            <div class="text-green-500 text-sm">+{{ ((market.probability - 0.5) * 20)|round(1) }}%</div>
                         </div>
                         <div>
                             <div class="flex items-center gap-2 mb-1">
-                                <div class="w-3 h-3 rounded-full bg-orange-500"></div>
-                                <span class="text-sm text-gray-300">Maybe</span>
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <span class="text-sm text-gray-300">No</span>
                             </div>
-                            <div class="text-2xl font-bold">39%</div>
-                            <div class="text-green-500 text-sm">+2.0</div>
+                            <div class="text-2xl font-bold">{{ ((1 - market.probability) * 100)|int }}%</div>
+                            <div class="text-red-500 text-sm">{{ ((market.probability - 0.5) * -20)|round(1) }}%</div>
                         </div>
                         <div>
                             <div class="flex items-center gap-2 mb-1">
-                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                <span class="text-sm text-gray-300">Unlikely</span>
+                                <div class="w-3 h-3 rounded-full bg-gray-500"></div>
+                                <span class="text-sm text-gray-300">Trend</span>
                             </div>
-                            <div class="text-2xl font-bold">14%</div>
-                            <div class="text-red-500 text-sm">-4.0</div>
+                            <div class="text-lg font-bold text-green-400">↗ Rising</div>
+                            <div class="text-xs text-gray-500">Belief strengthening</div>
                         </div>
                     </div>
                     
@@ -196,22 +216,71 @@
                         {{ market.title }}
                     </h3>
                     
-                    <!-- Gradient Bar -->
-                    <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden mb-3">
-                        <div class="h-full {% if market.probability > 0.6 %}bg-gradient-to-r from-green-500 to-green-400{% elif market.probability > 0.4 %}bg-gradient-to-r from-yellow-500 to-yellow-400{% else %}bg-gradient-to-r from-red-500 to-red-400{% endif %}" 
-                             style="width: {{ market.probability * 100 }}%"></div>
+                    <!-- Belief Currents Chart (same as hero) -->
+                    <div class="bg-black/60 backdrop-blur rounded-lg p-3 mb-3">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="text-[10px] text-gray-400 font-medium tracking-wide">BELIEF CURRENTS</div>
+                            <div class="text-[9px] text-gray-500">{{ market.created_at[:10] }} → Now</div>
+                        </div>
+                        
+                        <!-- Time-based flowing gradient -->
+                        <div class="h-2 bg-gray-800 rounded-full overflow-hidden mb-2 relative">
+                            <div class="absolute inset-0 rounded-full" style="background: linear-gradient(to right, 
+                                #EF4444 0%,      /* Red: No leading (start) */
+                                #F59E0B 20%,     /* Yellow: transition */
+                                #10B981 35%,     /* Green: Yes takes lead */
+                                #10B981 60%,     /* Green: Yes strong */
+                                #F59E0B 75%,     /* Yellow: contested */
+                                #10B981 85%,     /* Green: Yes regains */
+                                #22C55E 100%     /* Bright green: current strong Yes */
+                            )"></div>
+                        </div>
+                        
+                        <!-- Timeline labels -->
+                        {% set points = market.created_at|timeline_points %}
+                        <div class="flex items-center justify-between text-[9px] text-gray-500 mb-3 px-0.5">
+                            {% for point in points %}
+                                <span>{{ point }}</span>
+                                {% if not loop.last %}
+                                    <span class="text-gray-700">|</span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        
+                        <!-- Current belief breakdown (compact) -->
+                        <div class="grid grid-cols-3 gap-2 mb-2">
+                            <div>
+                                <div class="flex items-center gap-1 mb-0.5">
+                                    <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                    <span class="text-[10px] text-gray-300">Yes</span>
+                                </div>
+                                <div class="text-lg font-bold">{{ (market.probability * 100)|int }}%</div>
+                                <div class="text-green-500 text-[10px]">+{{ ((market.probability - 0.5) * 20)|round(1) }}%</div>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-1 mb-0.5">
+                                    <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                                    <span class="text-[10px] text-gray-300">No</span>
+                                </div>
+                                <div class="text-lg font-bold">{{ ((1 - market.probability) * 100)|int }}%</div>
+                                <div class="text-red-500 text-[10px]">{{ ((market.probability - 0.5) * -20)|round(1) }}%</div>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-1 mb-0.5">
+                                    <div class="w-2 h-2 rounded-full bg-gray-500"></div>
+                                    <span class="text-[10px] text-gray-300">Trend</span>
+                                </div>
+                                <div class="text-sm font-bold text-green-400">↗</div>
+                                <div class="text-[9px] text-gray-500">Rising</div>
+                            </div>
+                        </div>
                     </div>
                     
                     <!-- Stats -->
                     <div class="flex justify-between text-xs text-gray-500">
                         <span>{{ (market.volume_24h / 1000)|round(1) }}K votes</span>
                         <span class="flex items-center gap-1">
-                            {% if market.probability > 0.5 %}
-                            <span class="text-green-500">▲</span>
-                            {% else %}
-                            <span class="text-red-500">▼</span>
-                            {% endif %}
-                            Rising
+                            💰 ${{ (market.volume_total / 1000000)|round(1) }}M
                         </span>
                     </div>
                 </div>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Wallet - Currents</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-2xl">
+        <h1 class="text-3xl font-bold mb-8">🔗 Connect Your Wallet</h1>
+        
+        <!-- Status -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-6 border border-gray-700">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold">Connection Status</h2>
+                <div id="status-dot" class="w-3 h-3 rounded-full bg-red-500"></div>
+            </div>
+            
+            <!-- Disconnected -->
+            <div id="disconnected-view">
+                <p class="text-gray-400 mb-4">No wallet connected</p>
+                <button id="connect-btn" 
+                        class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-4 px-6 rounded-lg text-lg">
+                    🦊 Connect MetaMask
+                </button>
+                <p class="text-xs text-gray-500 text-center mt-3">MetaMask extension required</p>
+            </div>
+            
+            <!-- Connected -->
+            <div id="connected-view" class="hidden">
+                <div class="space-y-3 mb-4">
+                    <div>
+                        <label class="text-xs text-gray-400">Wallet Address</label>
+                        <div class="flex gap-2">
+                            <code id="address" class="text-sm font-mono bg-gray-900 px-3 py-2 rounded flex-1 break-all">-</code>
+                            <button id="copy-btn" class="px-3 py-2 bg-gray-700 hover:bg-gray-600 rounded text-sm whitespace-nowrap">Copy</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400">Network</label>
+                        <div id="network" class="text-sm bg-gray-900 px-3 py-2 rounded">-</div>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400">Balance</label>
+                        <div id="balance" class="text-sm bg-gray-900 px-3 py-2 rounded">Loading...</div>
+                    </div>
+                </div>
+                <button id="disconnect-btn" 
+                        class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg">
+                    Disconnect
+                </button>
+            </div>
+        </div>
+
+        <!-- Log -->
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <h2 class="text-xl font-semibold mb-4">Activity Log</h2>
+            <div id="log" class="space-y-2 max-h-64 overflow-y-auto font-mono text-xs"></div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="mt-6 p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg">
+            <h3 class="font-bold mb-2 text-blue-300">📱 Need MetaMask?</h3>
+            <p class="text-sm text-gray-300 mb-2">Install from: <a href="https://metamask.io" target="_blank" class="text-blue-400 underline">metamask.io</a></p>
+            <p class="text-xs text-gray-400">Works best on: Chrome, Brave, Firefox, Edge</p>
+        </div>
+    </div>
+
+    <script>
+        // NO EXTERNAL LIBRARIES - Pure JavaScript + MetaMask API
+        
+        const ARBITRUM_CHAIN_ID = 42161;
+        const ARBITRUM_CHAIN_ID_HEX = "0xa4b1";
+        
+        let currentAddress = null;
+        let currentChainId = null;
+
+        // Simple logging
+        function log(msg, type = 'info') {
+            const colors = {
+                info: 'text-gray-400',
+                success: 'text-green-400',
+                error: 'text-red-400',
+                warning: 'text-yellow-400'
+            };
+            const time = new Date().toLocaleTimeString();
+            const logEl = document.getElementById('log');
+            logEl.innerHTML = `<div class="${colors[type]}">[${time}] ${msg}</div>` + logEl.innerHTML;
+            console.log(`[${type.toUpperCase()}] ${msg}`);
+        }
+
+        // Update UI
+        function updateUI(connected) {
+            const statusDot = document.getElementById('status-dot');
+            const disconnectedView = document.getElementById('disconnected-view');
+            const connectedView = document.getElementById('connected-view');
+            
+            statusDot.className = `w-3 h-3 rounded-full ${connected ? 'bg-green-500' : 'bg-red-500'}`;
+            
+            if (connected) {
+                disconnectedView.classList.add('hidden');
+                connectedView.classList.remove('hidden');
+                
+                // Show short address
+                const short = currentAddress.slice(0, 6) + '...' + currentAddress.slice(-4);
+                document.getElementById('address').textContent = currentAddress;
+                
+                // Get network name
+                getNetworkName();
+                getBalance();
+            } else {
+                disconnectedView.classList.remove('hidden');
+                connectedView.classList.add('hidden');
+            }
+        }
+
+        // Check MetaMask
+        function checkMetaMask() {
+            if (typeof window.ethereum === 'undefined') {
+                log('❌ MetaMask not found', 'error');
+                alert('MetaMask is not installed!\n\nInstall from: https://metamask.io/download/');
+                return false;
+            }
+            return true;
+        }
+
+        // Connect
+        async function connect() {
+            if (!checkMetaMask()) return;
+
+            try {
+                log('Requesting wallet connection...', 'info');
+                
+                // Request accounts (opens MetaMask popup)
+                const accounts = await window.ethereum.request({
+                    method: 'eth_requestAccounts'
+                });
+                
+                currentAddress = accounts[0];
+                
+                // Get chain ID
+                const chainId = await window.ethereum.request({
+                    method: 'eth_chainId'
+                });
+                currentChainId = parseInt(chainId, 16);
+                
+                log(`✅ Connected: ${currentAddress}`, 'success');
+                
+                // Check network
+                if (currentChainId !== POLYGON_CHAIN_ID) {
+                    log('⚠️ Wrong network - switching to Polygon...', 'warning');
+                    await switchToPolygon();
+                } else {
+                    log('✅ On Polygon network', 'success');
+                }
+                
+                setupListeners();
+                updateUI(true);
+                
+            } catch (err) {
+                log(`❌ Connection failed: ${err.message}`, 'error');
+                if (err.code === 4001) {
+                    alert('You cancelled the connection request.\nPlease try again and approve.');
+                }
+            }
+        }
+
+        // Switch to Polygon
+        async function switchToPolygon() {
+            try {
+                await window.ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: POLYGON_CHAIN_ID_HEX }]
+                });
+                log('✅ Switched to Polygon', 'success');
+                currentChainId = POLYGON_CHAIN_ID;
+            } catch (err) {
+                // Network not added
+                if (err.code === 4902) {
+                    try {
+                        await window.ethereum.request({
+                            method: 'wallet_addEthereumChain',
+                            params: [{
+                                chainId: POLYGON_CHAIN_ID_HEX,
+                                chainName: 'Arbitrum One',
+                                nativeCurrency: {
+                                    name: 'MATIC',
+                                    symbol: 'MATIC',
+                                    decimals: 18
+                                },
+                                rpcUrls: ['https://arb1.arbitrum.io/rpc'],
+                                blockExplorerUrls: ['https://arbiscan.io']
+                            }]
+                        });
+                        log('✅ Polygon network added', 'success');
+                        currentChainId = POLYGON_CHAIN_ID;
+                    } catch (addErr) {
+                        log(`❌ Failed to add Polygon: ${addErr.message}`, 'error');
+                    }
+                }
+            }
+        }
+
+        // Get network name
+        function getNetworkName() {
+            const names = {
+                1: 'Ethereum Mainnet',
+                137: 'Arbitrum One',
+                5: 'Goerli Testnet',
+                80001: 'Mumbai Testnet'
+            };
+            const name = names[currentChainId] || `Chain ID: ${currentChainId}`;
+            document.getElementById('network').textContent = name;
+        }
+
+        // Get balance (no ethers.js needed!)
+        async function getBalance() {
+            try {
+                const balance = await window.ethereum.request({
+                    method: 'eth_getBalance',
+                    params: [currentAddress, 'latest']
+                });
+                
+                // Convert hex to decimal, then Wei to Ether
+                const balanceWei = parseInt(balance, 16);
+                const balanceEther = balanceWei / 1e18;
+                
+                document.getElementById('balance').textContent = 
+                    `${balanceEther.toFixed(4)} MATIC`;
+                log(`Balance: ${balanceEther.toFixed(4)} MATIC`, 'info');
+            } catch (err) {
+                log(`❌ Balance fetch failed: ${err.message}`, 'error');
+                document.getElementById('balance').textContent = 'Error';
+            }
+        }
+
+        // Disconnect
+        function disconnect() {
+            currentAddress = null;
+            currentChainId = null;
+            updateUI(false);
+            log('Disconnected', 'info');
+        }
+
+        // Event listeners
+        function setupListeners() {
+            window.ethereum.on('accountsChanged', (accounts) => {
+                if (accounts.length === 0) {
+                    log('⚠️ Wallet disconnected', 'warning');
+                    disconnect();
+                } else {
+                    currentAddress = accounts[0];
+                    log(`Account changed: ${currentAddress}`, 'info');
+                    updateUI(true);
+                }
+            });
+
+            window.ethereum.on('chainChanged', (chainId) => {
+                currentChainId = parseInt(chainId, 16);
+                log(`Chain changed: ${currentChainId}`, 'info');
+                
+                if (currentChainId !== POLYGON_CHAIN_ID) {
+                    log('⚠️ Please switch back to Polygon', 'warning');
+                }
+                
+                // Reload page to reset state
+                setTimeout(() => window.location.reload(), 1000);
+            });
+        }
+
+        // Copy address
+        function copyAddress() {
+            if (!currentAddress) return;
+            navigator.clipboard.writeText(currentAddress);
+            log('✅ Address copied', 'success');
+            
+            const btn = document.getElementById('copy-btn');
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = 'Copy', 2000);
+        }
+
+        // Button handlers
+        document.getElementById('connect-btn').onclick = connect;
+        document.getElementById('disconnect-btn').onclick = disconnect;
+        document.getElementById('copy-btn').onclick = copyAddress;
+
+        // Auto-reconnect
+        window.addEventListener('load', async () => {
+            log('Page loaded', 'info');
+            
+            if (typeof window.ethereum !== 'undefined') {
+                log('✅ MetaMask detected', 'success');
+                
+                // Check if already connected
+                try {
+                    const accounts = await window.ethereum.request({
+                        method: 'eth_accounts'
+                    });
+                    
+                    if (accounts.length > 0) {
+                        log('Found existing connection...', 'info');
+                        currentAddress = accounts[0];
+                        
+                        const chainId = await window.ethereum.request({
+                            method: 'eth_chainId'
+                        });
+                        currentChainId = parseInt(chainId, 16);
+                        
+                        setupListeners();
+                        updateUI(true);
+                    }
+                } catch (err) {
+                    log(`Auto-reconnect failed: ${err.message}`, 'error');
+                }
+            } else {
+                log('❌ MetaMask not found', 'error');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!-- User Switcher (Test Only) -->
+<div class="bg-gradient-to-r from-purple-900/40 to-blue-900/40 border-b border-purple-500/30">
+    <div class="container mx-auto px-4 py-3">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div class="text-xs text-gray-400 uppercase tracking-wider">🧪 Test Mode:</div>
+            <div class="flex flex-wrap items-center gap-2">
+                <button onclick="switchUser('roy')" 
+                        class="test-user-btn px-3 py-1.5 rounded-lg text-sm font-medium transition"
+                        data-user="roy">
+                    👨‍💼 Roy
+                </button>
+                <button onclick="switchUser('user2')" 
+                        class="test-user-btn px-3 py-1.5 rounded-lg text-sm font-medium transition"
+                        data-user="user2">
+                    👩‍💼 User 2
+                </button>
+                <button onclick="switchUser('user3')" 
+                        class="test-user-btn px-3 py-1.5 rounded-lg text-sm font-medium transition"
+                        data-user="user3">
+                    👨‍🎨 User 3
+                </button>
+                <button onclick="switchUser('user4')" 
+                        class="test-user-btn px-3 py-1.5 rounded-lg text-sm font-medium transition"
+                        data-user="user4">
+                    👩‍🔬 User 4
+                </button>
+            </div>
+            <div class="text-xs text-gray-500">
+                Current: <span id="current-user-display" class="text-orange-400 font-medium"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.test-user-btn {
+    background: rgba(75, 85, 99, 0.5);
+    color: #d1d5db;
+    border: 1px solid rgba(107, 114, 128, 0.3);
+}
+
+.test-user-btn:hover {
+    background: rgba(107, 114, 128, 0.7);
+    border-color: rgba(156, 163, 175, 0.5);
+}
+
+.test-user-btn.active {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: white;
+    border-color: #f97316;
+    box-shadow: 0 0 15px rgba(249, 115, 22, 0.3);
+}
+</style>
+
+<script>
+// Get current user from cookie or default to 'roy'
+function getCurrentUser() {
+    const match = document.cookie.match(/currents_test_user=([^;]+)/);
+    return match ? match[1] : 'roy';
+}
+
+// Set user cookie and reload
+function switchUser(userId) {
+    // Set cookie for 7 days
+    const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString();
+    document.cookie = `currents_test_user=${userId}; expires=${expires}; path=/`;
+    
+    // Reload to apply personalization
+    window.location.reload();
+}
+
+// Update UI on load
+document.addEventListener('DOMContentLoaded', function() {
+    const currentUser = getCurrentUser();
+    
+    // Update display
+    document.getElementById('current-user-display').textContent = currentUser;
+    
+    // Highlight active button
+    document.querySelectorAll('.test-user-btn').forEach(btn => {
+        if (btn.dataset.user === currentUser) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+});
+</script>

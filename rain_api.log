@@ -1,0 +1,51 @@
+🌧️  Starting Rain API on http://localhost:5001
+📊 Database: rain.db
+ * Serving Flask app 'rain_api_standalone'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://172.31.66.27:5001
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [11/Feb/2026 09:44:37] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:44:37] "GET /api/v1/markets?limit=10 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:44:37] "GET /api/v1/markets/multi_003 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:44:37] "POST /api/v1/markets/batch HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:44:37] "GET /api/v1/stats HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:44:37] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:44:37] "GET /api/v1/markets?status=open&limit=10&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:44:37] "GET /api/v1/markets/multi_003 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:44:37] "POST /api/v1/markets/batch HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:44:37] "GET /api/v1/markets?status=open&limit=200&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:46:30] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:46:30] "GET /api/v1/stats HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:53:33] "GET /api/v1/markets?status=open&limit=200&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:53:36] "GET /api/v1/markets?limit=1 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:53:40] "GET /api/v1/markets?status=open&limit=3&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:54:38] "GET /api/v1/markets?status=open&limit=5&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:58:05] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:58:05] "GET /api/v1/stats HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:58:05] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:58:05] "GET /api/v1/markets?limit=10 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:58:05] "GET /api/v1/markets/multi_003 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:58:05] "POST /api/v1/markets/batch HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:58:05] "GET /api/v1/stats HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:58:05] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:58:05] "GET /api/v1/markets?status=open&limit=10&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:58:05] "GET /api/v1/markets/multi_003 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:58:05] "POST /api/v1/markets/batch HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 09:58:05] "GET /api/v1/markets?status=open&limit=200&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 10:04:26] "GET /api/v1/markets?status=open&limit=200&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 10:04:39] "GET /api/v1/markets?status=open&limit=200&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 10:08:50] "GET /api/v1/markets?status=open&limit=200&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 10:08:50] "GET /api/v1/markets?status=open&limit=200&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 10:08:53] "GET /api/v1/markets?status=open&limit=200&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 10:08:55] "GET /api/v1/markets?status=open&limit=200&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 10:09:00] "GET /api/v1/markets?status=open&limit=200&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 10:09:04] "GET /api/v1/markets?status=open&limit=200&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 10:09:04] "GET /api/v1/markets?status=open&limit=200&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 10:09:08] "GET /api/v1/markets?status=open&limit=200&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 10:09:10] "GET /api/v1/markets?status=open&limit=200&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 10:09:13] "GET /api/v1/markets?status=open&limit=200&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 10:09:15] "GET /api/v1/markets?status=open&limit=200&offset=0 HTTP/1.1" 200 -
+127.0.0.1 - - [11/Feb/2026 10:09:17] "GET /api/v1/markets?status=open&limit=200&offset=0 HTTP/1.1" 200 -

@@ -1,0 +1,2295 @@
+{
+  "batch": 3,
+  "category": "Trending & Technology",
+  "created": "2026-02-11",
+  "markets": [
+    {
+      "id": "openai-gpt5-release-2026",
+      "title": "Will OpenAI release GPT-5 in 2026?",
+      "description": "OpenAI continues rapid AI development with speculation mounting about GPT-5. Sam Altman has hinted at major breakthroughs coming. Market resolves on official release.",
+      "category": "Technology",
+      "subcategory": "AI",
+      "probability": 0.58,
+      "volume": 678000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-openai-gpt5.jpg",
+      "tags": [
+        "AI",
+        "OpenAI",
+        "GPT-5",
+        "Technology",
+        "Machine Learning",
+        "LLM",
+        "ChatGPT"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.55
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.56
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.57
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.57
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.58
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.58
+        }
+      ]
+    },
+    {
+      "id": "bitcoin-100k-2026",
+      "title": "Will Bitcoin reach $100,000 in 2026?",
+      "description": "Bitcoin volatility continues with institutional adoption growing. ETF inflows strong. Halving effects and potential Fed rate cuts could drive new all-time highs.",
+      "category": "Crypto",
+      "subcategory": "Bitcoin",
+      "probability": 0.52,
+      "volume": 1234000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/crypto-bitcoin-100k.jpg",
+      "tags": [
+        "Crypto",
+        "Bitcoin",
+        "BTC",
+        "Cryptocurrency",
+        "Price",
+        "Trading",
+        "Markets"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.49
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.5
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.51
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.51
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.52
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.52
+        }
+      ]
+    },
+    {
+      "id": "ethereum-etf-approval-2026",
+      "title": "Will Ethereum spot ETF launch in the US in 2026?",
+      "description": "After Bitcoin ETF success, Ethereum ETF applications pending SEC approval. Regulatory clarity improving. Multiple issuers waiting for green light.",
+      "category": "Crypto",
+      "subcategory": "Ethereum",
+      "probability": 0.74,
+      "volume": 892000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/crypto-ethereum-etf.jpg",
+      "tags": [
+        "Crypto",
+        "Ethereum",
+        "ETF",
+        "SEC",
+        "Regulation",
+        "ETH",
+        "Investment"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.71
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.72
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.73
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.73
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.74
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.74
+        }
+      ]
+    },
+    {
+      "id": "apple-vision-pro-2-2026",
+      "title": "Will Apple release Vision Pro 2 in 2026?",
+      "description": "Apple's first-gen Vision Pro showed promise but needed improvements. Lighter weight, lower price, and better software expected in second generation. Market watches for announcement.",
+      "category": "Technology",
+      "subcategory": "Hardware",
+      "probability": 0.42,
+      "volume": 567000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-apple-vision-pro.jpg",
+      "tags": [
+        "Apple",
+        "VR",
+        "Vision Pro",
+        "Technology",
+        "Hardware",
+        "AR",
+        "Headset"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.4
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.4
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.41
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.41
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.42
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.42
+        }
+      ]
+    },
+    {
+      "id": "tesla-fsd-level-4-2026",
+      "title": "Will Tesla achieve Level 4 autonomous driving in 2026?",
+      "description": "Elon Musk continues promising full self-driving breakthroughs. Regulatory approval remains hurdle. Current FSD improving but still requires driver attention.",
+      "category": "Technology",
+      "subcategory": "Autonomous Vehicles",
+      "probability": 0.28,
+      "volume": 723000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-tesla-fsd.jpg",
+      "tags": [
+        "Tesla",
+        "FSD",
+        "Autonomous Driving",
+        "Technology",
+        "Self-Driving",
+        "Elon Musk",
+        "Cars"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.26
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.26
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.27
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.27
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.28
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.28
+        }
+      ]
+    },
+    {
+      "id": "spacex-starship-mars-2026",
+      "title": "Will SpaceX land Starship on Mars in 2026?",
+      "description": "SpaceX's Starship development accelerating. Mars launch windows limited. Ambitious timeline but Elon's track record shows possibility. Uncrewed mission expected first.",
+      "category": "Technology",
+      "subcategory": "Space",
+      "probability": 0.18,
+      "volume": 612000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-spacex-mars.jpg",
+      "tags": [
+        "SpaceX",
+        "Starship",
+        "Mars",
+        "Space",
+        "Elon Musk",
+        "Technology",
+        "Rocket"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.16
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.17
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.17
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.18
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.18
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.18
+        }
+      ]
+    },
+    {
+      "id": "taylor-swift-new-album-2026-hypothetical",
+      "title": "(Hypothetical) Will Taylor Swift drop surprise album in 2026?",
+      "description": "Taylor Swift's surprise album drops have become legendary. Swifties constantly speculating about new releases. This market tracks speculation about 2026 release.",
+      "category": "Entertainment",
+      "subcategory": "Music",
+      "probability": 0.64,
+      "volume": 445000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/entertainment-taylor-swift.jpg",
+      "tags": [
+        "Taylor Swift",
+        "Music",
+        "Entertainment",
+        "Album",
+        "Pop",
+        "Hypothetical"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.61
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.62
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.63
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.63
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.64
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.64
+        }
+      ]
+    },
+    {
+      "id": "google-gemini-ultra-2026",
+      "title": "Will Google Gemini surpass GPT-4 benchmarks in 2026?",
+      "description": "Google's Gemini competing fiercely with OpenAI. New versions promised with improved capabilities. AI arms race intensifying between tech giants.",
+      "category": "Technology",
+      "subcategory": "AI",
+      "probability": 0.61,
+      "volume": 534000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-google-gemini.jpg",
+      "tags": [
+        "Google",
+        "Gemini",
+        "AI",
+        "Machine Learning",
+        "Technology",
+        "LLM",
+        "Benchmarks"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.58
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.59
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.6
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.6
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.61
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.61
+        }
+      ]
+    },
+    {
+      "id": "meta-quest-4-release-2026",
+      "title": "Will Meta release Quest 4 VR headset in 2026?",
+      "description": "Meta continues VR hardware iteration. Quest 3 successful but competition heating up. Next generation expected with improved specs and mixed reality features.",
+      "category": "Technology",
+      "subcategory": "VR",
+      "probability": 0.69,
+      "volume": 378000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-meta-quest4.jpg",
+      "tags": [
+        "Meta",
+        "Quest",
+        "VR",
+        "Virtual Reality",
+        "Technology",
+        "Headset",
+        "Zuckerberg"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.66
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.67
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.68
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.68
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.69
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.69
+        }
+      ]
+    },
+    {
+      "id": "nvidia-stock-200-2026",
+      "title": "Will NVIDIA stock reach $200 per share in 2026?",
+      "description": "NVIDIA dominates AI chip market. Data center demand explosive. Stock already at highs but AI revolution could drive further gains. Split-adjusted price.",
+      "category": "Technology",
+      "subcategory": "Stocks",
+      "probability": 0.46,
+      "volume": 912000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-nvidia-stock.jpg",
+      "tags": [
+        "NVIDIA",
+        "Stocks",
+        "AI",
+        "Semiconductors",
+        "Technology",
+        "Trading",
+        "Jensen Huang"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.43
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.44
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.45
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.45
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.46
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.46
+        }
+      ]
+    },
+    {
+      "id": "beyonce-tour-2026-hypothetical",
+      "title": "(Hypothetical) Will Beyonc\u00e9 announce world tour for 2026?",
+      "description": "Renaissance tour was massive success. Fans hoping for another tour. Industry insiders speculating about 2026 dates. This tracks tour announcement likelihood.",
+      "category": "Entertainment",
+      "subcategory": "Music",
+      "probability": 0.58,
+      "volume": 389000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/entertainment-beyonce.jpg",
+      "tags": [
+        "Beyonc\u00e9",
+        "Music",
+        "Tour",
+        "Entertainment",
+        "Concert",
+        "Hypothetical"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.55
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.56
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.57
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.57
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.58
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.58
+        }
+      ]
+    },
+    {
+      "id": "gta-6-release-2026",
+      "title": "Will GTA 6 release in 2026?",
+      "description": "Rockstar Games finally announced GTA 6 after years of speculation. Trailer broke records. 2026 release window tentative. Gaming's most anticipated title.",
+      "category": "Entertainment",
+      "subcategory": "Gaming",
+      "probability": 0.71,
+      "volume": 823000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/gaming-gta6.jpg",
+      "tags": [
+        "GTA 6",
+        "Gaming",
+        "Rockstar",
+        "Video Games",
+        "Entertainment",
+        "Release"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.68
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.69
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.7
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.7
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.71
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.71
+        }
+      ]
+    },
+    {
+      "id": "solana-200-2026",
+      "title": "Will Solana (SOL) reach $200 in 2026?",
+      "description": "Solana recovered strongly from FTX collapse. Network upgrades and DeFi growth driving adoption. Competition with Ethereum intensifying.",
+      "category": "Crypto",
+      "subcategory": "Altcoins",
+      "probability": 0.48,
+      "volume": 667000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/crypto-solana.jpg",
+      "tags": [
+        "Crypto",
+        "Solana",
+        "SOL",
+        "Altcoin",
+        "Blockchain",
+        "DeFi",
+        "Trading"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.45
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.46
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.47
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.47
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.48
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.48
+        }
+      ]
+    },
+    {
+      "id": "threads-twitter-users-2026-hypothetical",
+      "title": "(Hypothetical) Will Threads surpass Twitter/X in daily users by 2026?",
+      "description": "Meta's Threads launched to challenge X (Twitter). Growth explosive initially but retention questioned. Zuckerberg versus Musk battle for social media dominance.",
+      "category": "Technology",
+      "subcategory": "Social Media",
+      "probability": 0.34,
+      "volume": 512000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-threads-twitter.jpg",
+      "tags": [
+        "Threads",
+        "Twitter",
+        "Social Media",
+        "Meta",
+        "X",
+        "Hypothetical",
+        "Technology"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.32
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.32
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.33
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.33
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.34
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.34
+        }
+      ]
+    },
+    {
+      "id": "openai-microsoft-acquisition-2026-hypothetical",
+      "title": "(Hypothetical) Will Microsoft fully acquire OpenAI in 2026?",
+      "description": "Microsoft's investment in OpenAI massive. Speculation about full acquisition constant. Sam Altman drama raised questions. This tracks acquisition possibility.",
+      "category": "Technology",
+      "subcategory": "M&A",
+      "probability": 0.22,
+      "volume": 734000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-microsoft-openai.jpg",
+      "tags": [
+        "Microsoft",
+        "OpenAI",
+        "M&A",
+        "Acquisition",
+        "Technology",
+        "Hypothetical",
+        "AI"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.2
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.21
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.21
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.22
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.22
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.22
+        }
+      ]
+    },
+    {
+      "id": "mcu-fantastic-four-box-office-2026",
+      "title": "Will Marvel's Fantastic Four movie gross $1B+ worldwide?",
+      "description": "MCU rebooting Fantastic Four with Pedro Pascal cast. Marvel's first family finally in MCU proper. High expectations after previous film disappointments.",
+      "category": "Entertainment",
+      "subcategory": "Movies",
+      "probability": 0.63,
+      "volume": 456000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/movies-fantastic-four.jpg",
+      "tags": [
+        "Marvel",
+        "MCU",
+        "Fantastic Four",
+        "Movies",
+        "Box Office",
+        "Entertainment",
+        "Superhero"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.6
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.61
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.62
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.62
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.63
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.63
+        }
+      ]
+    },
+    {
+      "id": "apple-ai-chip-2026",
+      "title": "Will Apple release custom AI chip in 2026?",
+      "description": "Apple developing in-house AI silicon to compete with NVIDIA. M-series chips impressive but specialized AI accelerator rumored. On-device AI processing focus.",
+      "category": "Technology",
+      "subcategory": "Hardware",
+      "probability": 0.56,
+      "volume": 478000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-apple-ai-chip.jpg",
+      "tags": [
+        "Apple",
+        "AI",
+        "Chips",
+        "Hardware",
+        "Technology",
+        "Silicon",
+        "Machine Learning"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.53
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.54
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.55
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.55
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.56
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.56
+        }
+      ]
+    },
+    {
+      "id": "tiktok-us-ban-2026",
+      "title": "Will TikTok be banned in the United States in 2026?",
+      "description": "Years-long TikTok ban debate continues. National security concerns versus free speech. ByteDance resisting forced sale. Political pressure mounting.",
+      "category": "Technology",
+      "subcategory": "Policy",
+      "probability": 0.38,
+      "volume": 623000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-tiktok-ban.jpg",
+      "tags": [
+        "TikTok",
+        "Ban",
+        "Technology",
+        "Policy",
+        "Social Media",
+        "China",
+        "USA"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.36
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.36
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.37
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.37
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.38
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.38
+        }
+      ]
+    },
+    {
+      "id": "nft-market-recovery-2026",
+      "title": "Will NFT trading volume exceed $50B in 2026?",
+      "description": "NFT market crashed from 2021-22 peaks. Speculation about comeback. New use cases emerging beyond profile pictures. Gaming and utility NFTs growing.",
+      "category": "Crypto",
+      "subcategory": "NFTs",
+      "probability": 0.31,
+      "volume": 445000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/crypto-nft-market.jpg",
+      "tags": [
+        "NFT",
+        "Crypto",
+        "Trading",
+        "Market",
+        "Digital Art",
+        "Blockchain",
+        "Volume"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.29
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.29
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.3
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.3
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.31
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.31
+        }
+      ]
+    },
+    {
+      "id": "streaming-wars-disney-profit-2026",
+      "title": "Will Disney+ become profitable in 2026?",
+      "description": "Disney streaming loses billions yearly. Price increases and password crackdown underway. Path to profitability crucial for Disney's future strategy.",
+      "category": "Entertainment",
+      "subcategory": "Streaming",
+      "probability": 0.72,
+      "volume": 534000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/streaming-disney-plus.jpg",
+      "tags": [
+        "Disney+",
+        "Streaming",
+        "Entertainment",
+        "Profitability",
+        "Technology",
+        "Movies"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.69
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.7
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.71
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.71
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.72
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.72
+        }
+      ]
+    },
+    {
+      "id": "ai-agent-startup-unicorn-2026",
+      "title": "Will an AI agent startup reach $1B valuation in 2026?",
+      "description": "AI agents are the next frontier. Startups building autonomous agents for various tasks. Massive VC interest. Next unicorn could emerge from this sector.",
+      "category": "Technology",
+      "subcategory": "Startups",
+      "probability": 0.76,
+      "volume": 567000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-ai-agents.jpg",
+      "tags": [
+        "AI",
+        "Agents",
+        "Startups",
+        "Unicorn",
+        "Technology",
+        "Venture Capital",
+        "Valuation"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.73
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.74
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.75
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.75
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.76
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.76
+        }
+      ]
+    },
+    {
+      "id": "quantum-computing-breakthrough-2026",
+      "title": "Will practical quantum computing breakthrough occur in 2026?",
+      "description": "Quantum computing hype versus reality. Google, IBM, and startups racing for advantage. Practical application beyond research still elusive.",
+      "category": "Technology",
+      "subcategory": "Quantum",
+      "probability": 0.34,
+      "volume": 412000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-quantum-computing.jpg",
+      "tags": [
+        "Quantum Computing",
+        "Technology",
+        "Science",
+        "IBM",
+        "Google",
+        "Breakthrough"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.32
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.32
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.33
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.33
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.34
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.34
+        }
+      ]
+    },
+    {
+      "id": "dune-part-3-announcement-2026-hypothetical",
+      "title": "(Hypothetical) Will Dune: Part Three be announced in 2026?",
+      "description": "Dune franchise massively successful. Denis Villeneuve hinted at trilogy. Part Three would adapt Dune Messiah. Fans eagerly awaiting confirmation.",
+      "category": "Entertainment",
+      "subcategory": "Movies",
+      "probability": 0.67,
+      "volume": 378000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/movies-dune-part3.jpg",
+      "tags": [
+        "Dune",
+        "Movies",
+        "Sci-Fi",
+        "Entertainment",
+        "Villeneuve",
+        "Hypothetical"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.64
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.65
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.66
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.66
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.67
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.67
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-paid-users-100m-2026",
+      "title": "Will ChatGPT reach 100M paid subscribers in 2026?",
+      "description": "ChatGPT Plus and Enterprise subscriptions growing rapidly. OpenAI printing money. Consumer AI subscriptions becoming mainstream.",
+      "category": "Technology",
+      "subcategory": "AI",
+      "probability": 0.54,
+      "volume": 623000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-chatgpt-subscribers.jpg",
+      "tags": [
+        "ChatGPT",
+        "OpenAI",
+        "AI",
+        "Subscriptions",
+        "Technology",
+        "Revenue",
+        "Users"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.51
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.52
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.53
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.53
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.54
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.54
+        }
+      ]
+    },
+    {
+      "id": "sam-altman-ceo-replaced-2026-hypothetical",
+      "title": "(Hypothetical) Will Sam Altman be replaced as OpenAI CEO in 2026?",
+      "description": "Drama at OpenAI in 2023 showed board tensions. Altman's leadership controversial but effective. Speculation about governance changes persists.",
+      "category": "Technology",
+      "subcategory": "Leadership",
+      "probability": 0.16,
+      "volume": 512000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-sam-altman.jpg",
+      "tags": [
+        "Sam Altman",
+        "OpenAI",
+        "CEO",
+        "Leadership",
+        "Technology",
+        "Hypothetical",
+        "AI"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.14
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.15
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.15
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.16
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.16
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.16
+        }
+      ]
+    },
+    {
+      "id": "rivian-profitability-2026",
+      "title": "Will Rivian achieve quarterly profitability in 2026?",
+      "description": "EV startup Rivian burning cash but production scaling. Amazon partnership key. Path to profitability crucial for survival in competitive EV market.",
+      "category": "Technology",
+      "subcategory": "EVs",
+      "probability": 0.48,
+      "volume": 445000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-rivian.jpg",
+      "tags": [
+        "Rivian",
+        "EVs",
+        "Electric Vehicles",
+        "Profitability",
+        "Technology",
+        "Startups",
+        "Amazon"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.45
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.46
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.47
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.47
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.48
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.48
+        }
+      ]
+    },
+    {
+      "id": "stranger-things-5-release-2026",
+      "title": "Will Stranger Things Season 5 release in 2026?",
+      "description": "Netflix's flagship show entering final season. Production delays have fans waiting. Series finale highly anticipated. 2026 release window confirmed but could slip.",
+      "category": "Entertainment",
+      "subcategory": "TV",
+      "probability": 0.78,
+      "volume": 512000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tv-stranger-things.jpg",
+      "tags": [
+        "Stranger Things",
+        "Netflix",
+        "TV",
+        "Entertainment",
+        "Streaming",
+        "Season 5"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.75
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.76
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.77
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.77
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.78
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.78
+        }
+      ]
+    },
+    {
+      "id": "dogecoin-1-dollar-2026-hypothetical",
+      "title": "(Hypothetical) Will Dogecoin reach $1 in 2026?",
+      "description": "Meme coin that refuses to die. Elon Musk's tweets still move price. Community strong but utility questioned. $1 DOGE would be massive market cap.",
+      "category": "Crypto",
+      "subcategory": "Meme Coins",
+      "probability": 0.27,
+      "volume": 678000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/crypto-dogecoin.jpg",
+      "tags": [
+        "Dogecoin",
+        "DOGE",
+        "Crypto",
+        "Meme Coin",
+        "Elon Musk",
+        "Hypothetical"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.25
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.25
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.26
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.26
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.27
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.27
+        }
+      ]
+    },
+    {
+      "id": "ai-generated-movie-mainstream-2026",
+      "title": "Will major studio release AI-generated movie in 2026?",
+      "description": "AI video generation advancing rapidly. Sora and competitors improving. Hollywood both threatened and intrigued. Full AI film still far but getting closer.",
+      "category": "Technology",
+      "subcategory": "AI",
+      "probability": 0.23,
+      "volume": 478000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-ai-movies.jpg",
+      "tags": [
+        "AI",
+        "Movies",
+        "Film",
+        "Technology",
+        "Entertainment",
+        "Generation",
+        "Hollywood"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.21
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.21
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.22
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.22
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.23
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.23
+        }
+      ]
+    },
+    {
+      "id": "airbnb-hotels-acquisition-2026-hypothetical",
+      "title": "(Hypothetical) Will Airbnb acquire major hotel chain in 2026?",
+      "description": "Airbnb exploring expansion beyond home rentals. Hotel industry consolidation ongoing. Speculation about Airbnb entering traditional hospitality via acquisition.",
+      "category": "Business",
+      "subcategory": "M&A",
+      "probability": 0.19,
+      "volume": 389000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/business-airbnb.jpg",
+      "tags": [
+        "Airbnb",
+        "Hotels",
+        "M&A",
+        "Business",
+        "Acquisition",
+        "Hypothetical",
+        "Travel"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.17
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.18
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.18
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.19
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.19
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.19
+        }
+      ]
+    },
+    {
+      "id": "humanoid-robots-consumer-2026",
+      "title": "Will consumer humanoid robot launch in 2026?",
+      "description": "Tesla Optimus, Figure AI, and others developing humanoid robots. Consumer applications still unclear. Price point and usefulness key questions.",
+      "category": "Technology",
+      "subcategory": "Robotics",
+      "probability": 0.36,
+      "volume": 512000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-humanoid-robots.jpg",
+      "tags": [
+        "Robotics",
+        "Humanoid",
+        "Technology",
+        "Tesla",
+        "AI",
+        "Optimus",
+        "Consumer"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.34
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.34
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.35
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.35
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.36
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.36
+        }
+      ]
+    },
+    {
+      "id": "minecraft-movie-box-office-2026",
+      "title": "Will Minecraft movie gross $500M+ worldwide?",
+      "description": "Minecraft movie finally releasing after years in development hell. Jack Black attached. Gaming adaptations having renaissance. Huge built-in audience.",
+      "category": "Entertainment",
+      "subcategory": "Movies",
+      "probability": 0.64,
+      "volume": 445000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/movies-minecraft.jpg",
+      "tags": [
+        "Minecraft",
+        "Movies",
+        "Gaming",
+        "Box Office",
+        "Entertainment",
+        "Jack Black"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.61
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.62
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.63
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.63
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.64
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.64
+        }
+      ]
+    },
+    {
+      "id": "neuralink-human-trials-2026",
+      "title": "Will Neuralink successfully complete 100+ human implants in 2026?",
+      "description": "Neuralink's brain-computer interface advancing. Initial trials promising but scaling up questioned. Elon Musk's ambitious timeline as always.",
+      "category": "Technology",
+      "subcategory": "Biotech",
+      "probability": 0.42,
+      "volume": 567000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-neuralink.jpg",
+      "tags": [
+        "Neuralink",
+        "BCI",
+        "Technology",
+        "Elon Musk",
+        "Biotech",
+        "Brain",
+        "Implant"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.39
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.4
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.41
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.41
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.42
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.42
+        }
+      ]
+    },
+    {
+      "id": "spotify-hi-fi-launch-2026-hypothetical",
+      "title": "(Hypothetical) Will Spotify finally launch HiFi tier in 2026?",
+      "description": "Spotify announced HiFi years ago then went silent. Competitors offering lossless audio. Fans demanding high-quality streaming option. Speculation continues.",
+      "category": "Entertainment",
+      "subcategory": "Music",
+      "probability": 0.51,
+      "volume": 312000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/music-spotify-hifi.jpg",
+      "tags": [
+        "Spotify",
+        "Music",
+        "HiFi",
+        "Streaming",
+        "Entertainment",
+        "Hypothetical",
+        "Audio"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.48
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.49
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.5
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.5
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.51
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.51
+        }
+      ]
+    },
+    {
+      "id": "openai-search-engine-2026",
+      "title": "Will OpenAI launch standalone search engine in 2026?",
+      "description": "ChatGPT search features improving. Competition with Google intensifying. Standalone search product rumored. Could disrupt traditional search market.",
+      "category": "Technology",
+      "subcategory": "Search",
+      "probability": 0.58,
+      "volume": 634000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-openai-search.jpg",
+      "tags": [
+        "OpenAI",
+        "Search",
+        "Technology",
+        "AI",
+        "Google",
+        "Search Engine",
+        "ChatGPT"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.55
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.56
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.57
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.57
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.58
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.58
+        }
+      ]
+    },
+    {
+      "id": "elder-scrolls-6-trailer-2026",
+      "title": "Will Elder Scrolls 6 gameplay trailer be shown in 2026?",
+      "description": "Bethesda's Elder Scrolls 6 announced years ago with nothing since. Fans desperate for updates. Starfield now released so ES6 could accelerate.",
+      "category": "Entertainment",
+      "subcategory": "Gaming",
+      "probability": 0.46,
+      "volume": 478000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/gaming-elder-scrolls.jpg",
+      "tags": [
+        "Elder Scrolls",
+        "Gaming",
+        "Bethesda",
+        "Video Games",
+        "RPG",
+        "Trailer"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.43
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.44
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.45
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.45
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.46
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.46
+        }
+      ]
+    },
+    {
+      "id": "amazon-twitch-ai-streamers-2026",
+      "title": "Will AI-generated streamers reach 1M+ Twitch followers in 2026?",
+      "description": "AI vtubers and virtual streamers emerging. Technology improving rapidly. Questions about authenticity versus entertainment value. Novel content category.",
+      "category": "Technology",
+      "subcategory": "AI",
+      "probability": 0.62,
+      "volume": 389000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-ai-streamers.jpg",
+      "tags": [
+        "AI",
+        "Twitch",
+        "Streaming",
+        "Technology",
+        "Vtuber",
+        "Entertainment",
+        "Virtual"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.59
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.6
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.61
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.61
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.62
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.62
+        }
+      ]
+    },
+    {
+      "id": "fusion-energy-breakthrough-2026",
+      "title": "Will commercial fusion energy achieve net gain in 2026?",
+      "description": "Fusion energy holy grail. Recent breakthroughs encouraging. Multiple approaches competing. Commercial viability still years away but progress accelerating.",
+      "category": "Technology",
+      "subcategory": "Energy",
+      "probability": 0.29,
+      "volume": 523000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-fusion-energy.jpg",
+      "tags": [
+        "Fusion",
+        "Energy",
+        "Technology",
+        "Science",
+        "Clean Energy",
+        "Breakthrough",
+        "Nuclear"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.27
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.27
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.28
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.28
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.29
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.29
+        }
+      ]
+    },
+    {
+      "id": "drake-kendrick-collab-2026-hypothetical",
+      "title": "(Hypothetical) Will Drake and Kendrick Lamar release collaboration in 2026?",
+      "description": "Hip-hop's two biggest stars have complicated relationship. Beef versus respect. Collaboration would break the internet. Fans dream but likelihood unclear.",
+      "category": "Entertainment",
+      "subcategory": "Music",
+      "probability": 0.14,
+      "volume": 445000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/music-drake-kendrick.jpg",
+      "tags": [
+        "Drake",
+        "Kendrick Lamar",
+        "Hip-Hop",
+        "Music",
+        "Collaboration",
+        "Hypothetical"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.12
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.13
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.13
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.14
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.14
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.14
+        }
+      ]
+    },
+    {
+      "id": "metaverse-platform-100m-users-2026",
+      "title": "Will any metaverse platform reach 100M monthly users in 2026?",
+      "description": "Metaverse hype faded but development continues. Roblox, Fortnite, and VR platforms competing. Mass adoption still elusive. Kids versus adults usage diverging.",
+      "category": "Technology",
+      "subcategory": "Metaverse",
+      "probability": 0.68,
+      "volume": 456000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-metaverse.jpg",
+      "tags": [
+        "Metaverse",
+        "VR",
+        "Technology",
+        "Gaming",
+        "Social",
+        "Virtual Worlds",
+        "Users"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.65
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.66
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.67
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.67
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.68
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.68
+        }
+      ]
+    },
+    {
+      "id": "reddit-ipo-success-2026",
+      "title": "Will Reddit stock double from IPO price by end of 2026?",
+      "description": "Reddit finally went public. Community-driven platform monetization challenged. Meme stock potential versus actual business fundamentals.",
+      "category": "Technology",
+      "subcategory": "Stocks",
+      "probability": 0.41,
+      "volume": 534000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-reddit-ipo.jpg",
+      "tags": [
+        "Reddit",
+        "IPO",
+        "Stocks",
+        "Technology",
+        "Social Media",
+        "Trading",
+        "Valuation"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.38
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.39
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.4
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.4
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.41
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.41
+        }
+      ]
+    },
+    {
+      "id": "lab-grown-meat-restaurant-2026",
+      "title": "Will lab-grown meat be available in 100+ US restaurants by 2026?",
+      "description": "Cultivated meat slowly gaining regulatory approval. Price dropping but still expensive. Sustainability pitch versus taste and cost questions.",
+      "category": "Technology",
+      "subcategory": "Food Tech",
+      "probability": 0.52,
+      "volume": 389000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-lab-meat.jpg",
+      "tags": [
+        "Lab-Grown Meat",
+        "Food Tech",
+        "Technology",
+        "Sustainability",
+        "Restaurants",
+        "Biotech"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.49
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.5
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.51
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.51
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.52
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.52
+        }
+      ]
+    },
+    {
+      "id": "apple-car-announcement-2026-hypothetical",
+      "title": "(Hypothetical) Will Apple announce electric car in 2026?",
+      "description": "Apple Car project rumored for years. Reports of cancellation then revival. If anyone can disrupt auto industry it's Apple. Massive speculation.",
+      "category": "Technology",
+      "subcategory": "Automotive",
+      "probability": 0.24,
+      "volume": 723000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-apple-car.jpg",
+      "tags": [
+        "Apple",
+        "Electric Car",
+        "EV",
+        "Technology",
+        "Automotive",
+        "Hypothetical",
+        "Apple Car"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.22
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.22
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.23
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.23
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.24
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.24
+        }
+      ]
+    },
+    {
+      "id": "vr-esports-mainstream-2026",
+      "title": "Will VR esports tournament have 10M+ viewers in 2026?",
+      "description": "VR gaming competitive scene growing. Unique spectator challenges. Technology improving. Could VR esports break into mainstream like traditional esports did?",
+      "category": "Entertainment",
+      "subcategory": "Esports",
+      "probability": 0.37,
+      "volume": 412000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/esports-vr.jpg",
+      "tags": [
+        "VR",
+        "Esports",
+        "Gaming",
+        "Entertainment",
+        "Competition",
+        "Streaming",
+        "Virtual Reality"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.35
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.35
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.36
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.36
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.37
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.37
+        }
+      ]
+    },
+    {
+      "id": "ai-nobel-prize-2026",
+      "title": "Will AI researchers win Nobel Prize in 2026?",
+      "description": "Geoffrey Hinton, Yann LeCun, and other AI pioneers deserve recognition. Nobel prizes lag current tech. Chemistry or Physics prize most likely category.",
+      "category": "Technology",
+      "subcategory": "Science",
+      "probability": 0.44,
+      "volume": 478000,
+      "resolutionDate": "2026-10-12",
+      "image": "static/images/science-nobel-ai.jpg",
+      "tags": [
+        "AI",
+        "Nobel Prize",
+        "Science",
+        "Awards",
+        "Technology",
+        "Research",
+        "Machine Learning"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.41
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.42
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.43
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.43
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.44
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.44
+        }
+      ]
+    },
+    {
+      "id": "china-ai-chatbot-global-2026",
+      "title": "Will Chinese AI chatbot reach 100M+ non-Chinese users in 2026?",
+      "description": "China's AI companies developing advanced models. Geopolitical tensions affect adoption. Can Chinese LLMs compete globally? Language barriers and trust issues.",
+      "category": "Technology",
+      "subcategory": "AI",
+      "probability": 0.33,
+      "volume": 445000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-china-ai.jpg",
+      "tags": [
+        "China",
+        "AI",
+        "Chatbot",
+        "Technology",
+        "Global",
+        "LLM",
+        "International"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.31
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.31
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.32
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.32
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.33
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.33
+        }
+      ]
+    },
+    {
+      "id": "squid-game-3-release-2026",
+      "title": "Will Squid Game Season 3 release in 2026?",
+      "description": "Netflix's global phenomenon returning. Season 2 releasing soon. Season 3 confirmed as finale. Production timeline suggests 2026 possible.",
+      "category": "Entertainment",
+      "subcategory": "TV",
+      "probability": 0.59,
+      "volume": 512000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tv-squid-game.jpg",
+      "tags": [
+        "Squid Game",
+        "Netflix",
+        "K-Drama",
+        "TV",
+        "Entertainment",
+        "Korean",
+        "Streaming"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.56
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.57
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.58
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.58
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.59
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.59
+        }
+      ]
+    },
+    {
+      "id": "personal-ai-assistant-device-2026",
+      "title": "Will new AI-first hardware device sell 1M+ units in 2026?",
+      "description": "Humane Pin, Rabbit R1, and others attempting AI hardware. Smartphone replacement narrative. Most failed but innovation continues. Next device could breakthrough.",
+      "category": "Technology",
+      "subcategory": "Hardware",
+      "probability": 0.38,
+      "volume": 423000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-ai-hardware.jpg",
+      "tags": [
+        "AI",
+        "Hardware",
+        "Gadgets",
+        "Technology",
+        "Assistant",
+        "Device",
+        "Consumer"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.36
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.36
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.37
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.37
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.38
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.38
+        }
+      ]
+    },
+    {
+      "id": "instagram-threads-integration-2026-hypothetical",
+      "title": "(Hypothetical) Will Instagram fully integrate with Threads in 2026?",
+      "description": "Meta pushing Threads-Instagram integration. Cross-posting and unified feeds rumored. Zuckerberg's super app vision. Could revolutionize Meta's social ecosystem.",
+      "category": "Technology",
+      "subcategory": "Social Media",
+      "probability": 0.66,
+      "volume": 412000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-instagram-threads.jpg",
+      "tags": [
+        "Instagram",
+        "Threads",
+        "Meta",
+        "Social Media",
+        "Integration",
+        "Hypothetical",
+        "Technology"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.63
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.64
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.65
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.65
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.66
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.66
+        }
+      ]
+    },
+    {
+      "id": "web3-gaming-breakthrough-2026",
+      "title": "Will a Web3 game reach 10M+ monthly active users in 2026?",
+      "description": "Web3 gaming promised revolution but most failed. New titles learning from mistakes. Play-to-earn evolving. Could 2026 bring the first true Web3 gaming hit?",
+      "category": "Technology",
+      "subcategory": "Gaming",
+      "probability": 0.39,
+      "volume": 478000,
+      "resolutionDate": "2026-12-31",
+      "image": "static/images/tech-web3-gaming.jpg",
+      "tags": [
+        "Web3",
+        "Gaming",
+        "Blockchain",
+        "Technology",
+        "Play-to-Earn",
+        "NFT",
+        "Crypto"
+      ],
+      "currents": [
+        {
+          "date": "2026-02-01",
+          "probability": 0.37
+        },
+        {
+          "date": "2026-02-04",
+          "probability": 0.37
+        },
+        {
+          "date": "2026-02-07",
+          "probability": 0.38
+        },
+        {
+          "date": "2026-02-09",
+          "probability": 0.38
+        },
+        {
+          "date": "2026-02-10",
+          "probability": 0.39
+        },
+        {
+          "date": "2026-02-11",
+          "probability": 0.39
+        }
+      ]
+    }
+  ]
+}

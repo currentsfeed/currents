@@ -1,0 +1,263 @@
+<!-- WalletConnect Integration Component -->
+<!-- Include this in base.html or individual pages -->
+
+<script src="https://cdn.jsdelivr.net/npm/@web3modal/wagmi@latest/dist/index.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@wagmi/core@latest/dist/index.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/viem@latest/dist/index.umd.js"></script>
+
+<script>
+// WalletConnect Configuration
+const projectId = '670912b433d703cd729372f0eac64a24'; // Roy's WalletConnect Project ID
+
+// Arbitrum configuration
+const chains = [{
+    id: 42161,
+    name: 'Arbitrum One',
+    network: 'arbitrum',
+    nativeCurrency: {
+        decimals: 18,
+        name: 'ETH',
+        symbol: 'ETH',
+    },
+    rpcUrls: {
+        default: 'https://arb1.arbitrum.io/rpc',
+    },
+    blockExplorers: {
+        default: { name: 'Arbiscan', url: 'https://arbiscan.io' },
+    },
+}];
+
+// Initialize Web3Modal
+let web3Modal;
+let provider;
+let signer;
+let userAddress;
+
+async function initWallet() {
+    try {
+        // Create Web3Modal instance
+        web3Modal = new Web3Modal.Web3Modal({
+            projectId,
+            chains,
+            defaultChain: chains[0]
+        });
+
+        // Check if already connected
+        const savedAddress = localStorage.getItem('walletAddress');
+        if (savedAddress) {
+            updateWalletUI(savedAddress, true);
+        }
+    } catch (error) {
+        console.error('Failed to initialize wallet:', error);
+    }
+}
+
+async function connectWallet() {
+    try {
+        // Show loading state
+        const connectBtn = document.getElementById('connect-wallet-btn');
+        if (connectBtn) {
+            connectBtn.textContent = 'Connecting...';
+            connectBtn.disabled = true;
+        }
+
+        // Open modal and get provider
+        const instance = await web3Modal.openModal();
+        provider = instance.provider;
+
+        // Get signer and address
+        const accounts = await provider.request({ method: 'eth_requestAccounts' });
+        userAddress = accounts[0];
+
+        // Save to localStorage
+        localStorage.setItem('walletAddress', userAddress);
+
+        // Update UI
+        updateWalletUI(userAddress, true);
+
+        // Listen for account changes
+        provider.on('accountsChanged', handleAccountsChanged);
+        provider.on('chainChanged', handleChainChanged);
+        provider.on('disconnect', handleDisconnect);
+
+        console.log('Wallet connected:', userAddress);
+    } catch (error) {
+        console.error('Failed to connect wallet:', error);
+        alert('Failed to connect wallet. Please try again.');
+        
+        // Reset button
+        const connectBtn = document.getElementById('connect-wallet-btn');
+        if (connectBtn) {
+            connectBtn.textContent = 'Connect Wallet';
+            connectBtn.disabled = false;
+        }
+    }
+}
+
+async function disconnectWallet() {
+    try {
+        if (provider && provider.disconnect) {
+            await provider.disconnect();
+        }
+        
+        // Clear state
+        provider = null;
+        signer = null;
+        userAddress = null;
+        localStorage.removeItem('walletAddress');
+        
+        // Update UI
+        updateWalletUI(null, false);
+        
+        console.log('Wallet disconnected');
+    } catch (error) {
+        console.error('Failed to disconnect wallet:', error);
+    }
+}
+
+function updateWalletUI(address, connected) {
+    // Update connect button
+    const connectBtn = document.getElementById('connect-wallet-btn');
+    if (connectBtn) {
+        if (connected && address) {
+            connectBtn.textContent = formatAddress(address);
+            connectBtn.classList.remove('bg-orange-600', 'hover:bg-orange-700');
+            connectBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+            connectBtn.onclick = () => showWalletMenu();
+        } else {
+            connectBtn.textContent = 'Connect Wallet';
+            connectBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+            connectBtn.classList.add('bg-orange-600', 'hover:bg-orange-700');
+            connectBtn.onclick = () => connectWallet();
+            connectBtn.disabled = false;
+        }
+    }
+
+    // Update mobile menu button if exists
+    const mobileBtn = document.getElementById('mobile-connect-wallet-btn');
+    if (mobileBtn) {
+        if (connected && address) {
+            mobileBtn.textContent = formatAddress(address);
+        } else {
+            mobileBtn.textContent = 'Connect Wallet';
+        }
+    }
+
+    // Enable/disable place position buttons
+    const placePositionBtns = document.querySelectorAll('[id^="place-position"]');
+    placePositionBtns.forEach(btn => {
+        if (connected) {
+            // Button will be enabled by option selection
+            btn.dataset.walletConnected = 'true';
+        } else {
+            btn.disabled = true;
+            btn.textContent = 'Connect Wallet to Continue';
+            btn.classList.remove('bg-orange-600');
+            btn.classList.add('bg-gray-700');
+        }
+    });
+}
+
+function formatAddress(address) {
+    if (!address) return '';
+    return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
+}
+
+function showWalletMenu() {
+    // Create dropdown menu
+    const menu = document.createElement('div');
+    menu.className = 'absolute right-0 mt-2 w-64 bg-gray-800 rounded-lg shadow-lg border border-gray-700 z-50';
+    menu.innerHTML = `
+        <div class="p-4">
+            <div class="text-xs text-gray-400 mb-1">Connected Address</div>
+            <div class="text-sm font-mono mb-3">${userAddress}</div>
+            <div class="flex gap-2">
+                <button onclick="copyAddress()" class="flex-1 px-3 py-2 bg-gray-700 hover:bg-gray-600 rounded text-sm">
+                    Copy Address
+                </button>
+                <button onclick="disconnectWallet(); this.parentElement.parentElement.parentElement.remove();" 
+                        class="flex-1 px-3 py-2 bg-red-600 hover:bg-red-700 rounded text-sm">
+                    Disconnect
+                </button>
+            </div>
+        </div>
+    `;
+    
+    // Position relative to button
+    const btn = document.getElementById('connect-wallet-btn');
+    const btnRect = btn.getBoundingClientRect();
+    menu.style.position = 'fixed';
+    menu.style.top = (btnRect.bottom + 8) + 'px';
+    menu.style.right = (window.innerWidth - btnRect.right) + 'px';
+    
+    // Close on click outside
+    setTimeout(() => {
+        document.addEventListener('click', function closeMenu(e) {
+            if (!menu.contains(e.target) && e.target !== btn) {
+                menu.remove();
+                document.removeEventListener('click', closeMenu);
+            }
+        });
+    }, 100);
+    
+    document.body.appendChild(menu);
+}
+
+function copyAddress() {
+    if (userAddress) {
+        navigator.clipboard.writeText(userAddress);
+        alert('Address copied to clipboard!');
+    }
+}
+
+// Event handlers
+function handleAccountsChanged(accounts) {
+    if (accounts.length === 0) {
+        handleDisconnect();
+    } else {
+        userAddress = accounts[0];
+        localStorage.setItem('walletAddress', userAddress);
+        updateWalletUI(userAddress, true);
+    }
+}
+
+function handleChainChanged(chainId) {
+    // Reload page on chain change
+    window.location.reload();
+}
+
+function handleDisconnect() {
+    disconnectWallet();
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+    initWallet();
+});
+
+// Export for use in other scripts
+window.walletConnect = {
+    connect: connectWallet,
+    disconnect: disconnectWallet,
+    getAddress: () => userAddress,
+    getProvider: () => provider,
+    isConnected: () => !!userAddress
+};
+</script>
+
+<style>
+/* WalletConnect Modal Overrides */
+w3m-modal {
+    z-index: 9999;
+}
+
+/* Wallet button styles */
+#connect-wallet-btn {
+    transition: all 0.3s ease;
+}
+
+#connect-wallet-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+</style>

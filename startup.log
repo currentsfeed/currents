@@ -1,0 +1,20 @@
+🌊 Starting Currents...
+🛑 Stopping old processes...
+🚀 Starting Currents app (port 5555)...
+🔍 Starting Database Viewer (port 5556)...
+🌐 Starting Currents tunnel...
+🌐 Starting Database Viewer tunnel...
+
+✅ Status Check:
+
+✅ Currents app: Running
+✅ Database Viewer: Running
+
+🌐 Tunnel URLs:
+
+🔑 Password: 35.172.150.243
+
+✅ Done! Currents is running.
+
+📊 Database: 103 markets loaded
+

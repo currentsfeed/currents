@@ -1,0 +1,185 @@
+<!-- 
+TEMPLATE CHANGES PREVIEW
+This shows the key sections that will be added/modified in index-v2.html
+-->
+
+<!-- ========================================
+     HERO SECTION (MODIFIED)
+     Add editorial description above title
+     ======================================== -->
+<section class="mb-8">
+    <a href="/market/{{ market.market_id }}" class="block group">
+        <div class="relative h-[600px] rounded-2xl overflow-hidden...">
+            <div class="absolute inset-0 p-12 flex flex-col justify-end">
+                
+                <!-- 🆕 NEW: Editorial Description (if available) -->
+                {% if market.editorial_description %}
+                <p class="text-gray-300 text-sm mb-4 max-w-3xl">
+                    {{ market.editorial_description }}
+                </p>
+                {% endif %}
+                
+                <!-- Title -->
+                <h1 class="text-6xl font-bold mb-6 leading-tight max-w-5xl">
+                    {{ market.title }}
+                </h1>
+                
+                <!-- Rest unchanged... -->
+            </div>
+        </div>
+    </a>
+</section>
+
+
+<!-- ========================================
+     🆕 FEATURED SECTION (NEW)
+     Add this between hero and category filters
+     ======================================== -->
+{% if grid and grid|length > 0 %}
+<section class="mb-8">
+    {% set featured = grid[0] %}
+    <a href="/market/{{ featured.market_id }}" class="block group">
+        <div class="relative h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-2 border-orange-500/30 hover:border-orange-500/60 transition-all">
+            
+            <!-- Background Image -->
+            {% if featured.image_url and not featured.image_url.startswith('data:') %}
+            <img src="{{ featured.image_url }}" 
+                 alt="{{ featured.title }}"
+                 class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:scale-105 transition duration-700"
+                 onerror="this.style.display='none'">
+            {% endif %}
+            
+            <!-- Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
+            
+            <!-- Content -->
+            <div class="absolute inset-0 p-8 flex flex-col justify-end">
+                
+                <!-- Probability Badge (top-right) -->
+                <div class="absolute top-6 right-6">
+                    <div class="bg-black/80 backdrop-blur px-5 py-3 rounded-xl border border-white/10">
+                        {% if featured.market_type == 'multiple' and featured.top_options %}
+                        <div class="text-3xl font-bold">{{ (featured.top_options[0]['probability'] * 100)|int }}%</div>
+                        <div class="text-xs text-gray-400 mt-1">{{ featured.top_options[0]['option_text'][:20] }}</div>
+                        <div class="text-green-500 text-sm font-medium mt-1">Leading</div>
+                        {% else %}
+                        <div class="text-3xl font-bold">{{ (featured.probability * 100)|int }}%</div>
+                        <div class="text-xs text-gray-400 mt-1">Lean to "{% if featured.probability > 0.5 %}Yes{% else %}No{% endif %}"</div>
+                        <div class="{% if featured.probability > 0.5 %}text-green-500{% else %}text-red-500{% endif %} text-sm font-medium mt-1">
+                            {% if featured.probability > 0.5 %}+{% endif %}{{ ((featured.probability - 0.5) * 20)|round(1) }}%
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Category Badge (top-left) -->
+                <div class="absolute top-6 left-6 px-4 py-1.5 bg-black/80 backdrop-blur rounded text-xs font-bold text-orange-500 uppercase tracking-wide">
+                    {{ featured.category }}
+                </div>
+                
+                <!-- 🆕 Editorial Description -->
+                {% if featured.editorial_description %}
+                <p class="text-gray-400 text-xs mb-3 max-w-2xl line-clamp-2">
+                    {{ featured.editorial_description }}
+                </p>
+                {% endif %}
+                
+                <!-- Title -->
+                <h2 class="text-4xl font-bold mb-4 leading-tight max-w-4xl">
+                    {{ featured.title }}
+                </h2>
+                
+                <!-- Belief Currents Chart (simplified) -->
+                <div class="bg-black/80 backdrop-blur-md rounded-xl p-2.5 max-w-3xl">
+                    <div class="flex items-center justify-between mb-1">
+                        <div class="text-[9px] text-gray-400 uppercase tracking-wider">BELIEF CURRENTS</div>
+                        <div class="text-[7px] text-gray-500">{{ featured.created_at[:10] }} → Now</div>
+                    </div>
+                    
+                    <div class="h-2.5 bg-gray-800 rounded-full overflow-hidden mb-1 relative">
+                        <div class="absolute inset-0 rounded-full" style="background: {{ featured|belief_gradient }}"></div>
+                    </div>
+                    
+                    <div class="flex justify-between text-xs text-gray-400 mt-2">
+                        <span>{{ (featured.volume_24h / 1000)|round(1) }}K votes</span>
+                        <span class="text-orange-500 font-medium">Featured Market</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</section>
+{% endif %}
+
+
+<!-- ========================================
+     CATEGORY FILTERS (UNCHANGED)
+     ======================================== -->
+<!-- ... existing category filters ... -->
+
+
+<!-- ========================================
+     GRID SECTION (MODIFIED)
+     Change: grid to grid[1:]
+     Add: editorial_description rendering
+     ======================================== -->
+<section class="mb-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {% for market in grid[1:] %}  <!-- 🔧 CHANGED: was 'grid', now 'grid[1:]' -->
+        <a href="/market/{{ market.market_id }}" class="block group">
+            <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-orange-500/50 transition-all">
+                <!-- Image -->
+                <div class="relative h-56">
+                    <img src="{{ market.image_url }}" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    
+                    <!-- Category Badge -->
+                    <div class="absolute top-3 left-3 px-3 py-1 bg-black/80 backdrop-blur rounded text-xs font-bold text-orange-500 uppercase tracking-wide">
+                        {{ market.category }}
+                    </div>
+                    
+                    <!-- Probability Badge -->
+                    <!-- ... existing probability badge code ... -->
+                </div>
+                
+                <!-- Content -->
+                <div class="p-5">
+                    
+                    <!-- 🆕 NEW: Editorial Description -->
+                    {% if market.editorial_description %}
+                    <p class="text-gray-500 text-xs mb-2 line-clamp-2">
+                        {{ market.editorial_description }}
+                    </p>
+                    {% endif %}
+                    
+                    <!-- Title -->
+                    <h3 class="font-bold text-base mb-3 line-clamp-2 min-h-[3rem] group-hover:text-orange-400 transition">
+                        {{ market.title }}
+                    </h3>
+                    
+                    <!-- Belief Currents -->
+                    <!-- ... existing belief currents code ... -->
+                    
+                    <!-- Stats -->
+                    <!-- ... existing stats code ... -->
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+
+<!-- ========================================
+     SUMMARY OF CHANGES
+     ======================================== -->
+<!-- 
+1. Hero section: Add editorial_description rendering above title (lines ~85)
+2. Featured section: NEW full section between hero and filters (lines ~170-240)
+3. Grid section: Change loop from 'grid' to 'grid[1:]' (line ~260)
+4. Grid cards: Add editorial_description above title (lines ~285)
+
+Total additions: ~80 lines
+Total modifications: ~10 lines
+Breaking changes: None (backwards compatible if editorial_description is missing)
+-->

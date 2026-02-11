@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currents - Connect Wallet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Try primary CDN -->
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js" 
+            onerror="this.onerror=null; this.src='https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js';">
+    </script>
+</head>
+<body class="bg-gray-900 text-white">
+    <div class="container mx-auto px-4 py-8 max-w-2xl">
+        <h1 class="text-3xl font-bold mb-8">🔗 Connect Your Wallet</h1>
+        
+        <!-- Status Panel -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-6 border border-gray-700">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold">Status</h2>
+                <div id="status-dot" class="w-3 h-3 rounded-full bg-red-500"></div>
+            </div>
+            
+            <div id="disconnected-view">
+                <p class="text-gray-400 mb-4">No wallet connected</p>
+                <button id="connect-metamask" 
+                        class="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-6 rounded-lg mb-3">
+                    🦊 Connect MetaMask
+                </button>
+                <p class="text-xs text-gray-500 text-center">MetaMask extension required</p>
+            </div>
+            
+            <div id="connected-view" class="hidden">
+                <div class="space-y-3 mb-4">
+                    <div>
+                        <label class="text-xs text-gray-400">Address</label>
+                        <div class="flex gap-2">
+                            <code id="wallet-address" class="text-sm font-mono bg-gray-900 px-3 py-2 rounded flex-1">-</code>
+                            <button id="copy-btn" class="px-3 py-2 bg-gray-700 hover:bg-gray-600 rounded text-sm">Copy</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400">Network</label>
+                        <div id="network-name" class="text-sm bg-gray-900 px-3 py-2 rounded">-</div>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400">Balance</label>
+                        <div id="balance" class="text-sm bg-gray-900 px-3 py-2 rounded">Loading...</div>
+                    </div>
+                </div>
+                <button id="disconnect-btn" 
+                        class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg">
+                    Disconnect
+                </button>
+            </div>
+        </div>
+
+        <!-- Event Log -->
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <h2 class="text-xl font-semibold mb-4">Event Log</h2>
+            <div id="log" class="space-y-2 max-h-64 overflow-y-auto font-mono text-xs"></div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="mt-6 p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg">
+            <h3 class="font-bold mb-2">📱 Instructions:</h3>
+            <ol class="text-sm space-y-1 list-decimal list-inside text-gray-300">
+                <li>Install MetaMask: <a href="https://metamask.io" target="_blank" class="text-blue-400 underline">metamask.io</a></li>
+                <li>Make sure MetaMask is unlocked</li>
+                <li>Switch to Arbitrum network (we'll help you switch)</li>
+                <li>Click "Connect MetaMask" above</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // Check if ethers is loaded
+        if (typeof ethers === 'undefined') {
+            alert('Error: Ethers.js library failed to load.\n\nPlease:\n1. Disable ad blocker\n2. Refresh page\n3. Try different browser');
+            console.error('❌ ethers is not defined - CDN blocked or failed');
+        }
+
+        const ARBITRUM_CHAIN_ID = 42161;
+        const ARBITRUM_CHAIN_ID_HEX = '0xa4b1';
+        
+        let provider = null;
+        let signer = null;
+        let address = null;
+        let chainId = null;
+
+        // Logging
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('log');
+            const time = new Date().toLocaleTimeString();
+            const colors = {
+                info: 'text-gray-400',
+                success: 'text-green-400',
+                error: 'text-red-400',
+                warning: 'text-yellow-400'
+            };
+            logDiv.innerHTML = `<div class="${colors[type]}">[${time}] ${message}</div>` + logDiv.innerHTML;
+        }
+
+        // UI Updates
+        function updateUI(connected) {
+            document.getElementById('status-dot').className = 
+                `w-3 h-3 rounded-full ${connected ? 'bg-green-500' : 'bg-red-500'}`;
+            
+            if (connected) {
+                document.getElementById('disconnected-view').classList.add('hidden');
+                document.getElementById('connected-view').classList.remove('hidden');
+                document.getElementById('wallet-address').textContent = 
+                    address.substring(0, 6) + '...' + address.substring(address.length - 4);
+                
+                getBalance();
+                getNetwork();
+            } else {
+                document.getElementById('disconnected-view').classList.remove('hidden');
+                document.getElementById('connected-view').classList.add('hidden');
+            }
+        }
+
+        // Check if MetaMask is installed
+        function checkMetaMask() {
+            if (typeof window.ethereum === 'undefined') {
+                log('❌ MetaMask not detected', 'error');
+                alert('MetaMask is not installed!\n\nPlease install from: https://metamask.io/download/');
+                return false;
+            }
+            return true;
+        }
+
+        // Connect wallet
+        async function connect() {
+            // Check if ethers is loaded
+            if (typeof ethers === 'undefined') {
+                log('❌ Ethers.js library not loaded', 'error');
+                alert('Error loading required library.\n\nPlease:\n1. Disable ad blocker\n2. Refresh page\n3. Try incognito window');
+                return;
+            }
+
+            if (!checkMetaMask()) return;
+
+            try {
+                log('Connecting to MetaMask...', 'info');
+                
+                provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
+                
+                // Request accounts
+                const accounts = await window.ethereum.request({ 
+                    method: 'eth_requestAccounts' 
+                });
+                
+                address = accounts[0];
+                signer = provider.getSigner();
+                
+                const network = await provider.getNetwork();
+                chainId = network.chainId;
+                
+                log(`✅ Connected: ${address}`, 'success');
+                
+                // Check if on Arbitrum
+                if (chainId !== ARBITRUM_CHAIN_ID) {
+                    log('⚠️ Wrong network detected', 'warning');
+                    await switchToArbitrum();
+                } else {
+                    log('✅ On Arbitrum network', 'success');
+                }
+                
+                setupListeners();
+                updateUI(true);
+                
+            } catch (error) {
+                log(`❌ Connection failed: ${error.message}`, 'error');
+                if (error.code === 4001) {
+                    alert('Connection cancelled. Please try again and approve the connection.');
+                }
+            }
+        }
+
+        // Switch to Arbitrum
+        async function switchToArbitrum() {
+            try {
+                log('Requesting network switch to Arbitrum...', 'info');
+                
+                await window.ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: ARBITRUM_CHAIN_ID_HEX }],
+                });
+                
+                log('✅ Switched to Arbitrum', 'success');
+                
+            } catch (error) {
+                // Chain not added, add it
+                if (error.code === 4902) {
+                    try {
+                        log('Adding Arbitrum network...', 'info');
+                        
+                        await window.ethereum.request({
+                            method: 'wallet_addEthereumChain',
+                            params: [{
+                                chainId: ARBITRUM_CHAIN_ID_HEX,
+                                chainName: 'Arbitrum Mainnet',
+                                nativeCurrency: {
+                                    name: 'ETH',
+                                    symbol: 'ETH',
+                                    decimals: 18
+                                },
+                                rpcUrls: ['https://arb1.arbitrum.io/rpc'],
+                                blockExplorerUrls: ['https://arbiscan.io']
+                            }]
+                        });
+                        
+                        log('✅ Arbitrum network added', 'success');
+                        
+                    } catch (addError) {
+                        log(`❌ Failed to add Arbitrum: ${addError.message}`, 'error');
+                    }
+                } else {
+                    log(`❌ Network switch failed: ${error.message}`, 'error');
+                }
+            }
+        }
+
+        // Get balance
+        async function getBalance() {
+            if (!provider || !address) return;
+            
+            try {
+                const balance = await provider.getBalance(address);
+                const balanceEth = ethers.utils.formatEther(balance);
+                document.getElementById('balance').textContent = 
+                    `${parseFloat(balanceEth).toFixed(4)} ETH`;
+                log(`Balance: ${parseFloat(balanceEth).toFixed(4)} ETH`, 'info');
+            } catch (error) {
+                log(`❌ Failed to get balance: ${error.message}`, 'error');
+            }
+        }
+
+        // Get network
+        async function getNetwork() {
+            if (!provider) return;
+            
+            try {
+                const network = await provider.getNetwork();
+                const names = {
+                    1: 'Ethereum Mainnet',
+                    42161: 'Arbitrum One',
+                    5: 'Goerli Testnet',
+                    80001: 'Mumbai Testnet'
+                };
+                const name = names[network.chainId] || `Chain ${network.chainId}`;
+                document.getElementById('network-name').textContent = 
+                    `${name} (${network.chainId})`;
+            } catch (error) {
+                log(`❌ Failed to get network: ${error.message}`, 'error');
+            }
+        }
+
+        // Disconnect
+        function disconnect() {
+            address = null;
+            chainId = null;
+            provider = null;
+            signer = null;
+            
+            updateUI(false);
+            log('Disconnected', 'info');
+        }
+
+        // Setup event listeners
+        function setupListeners() {
+            if (!window.ethereum) return;
+
+            window.ethereum.on('accountsChanged', (accounts) => {
+                if (accounts.length === 0) {
+                    log('⚠️ Disconnected from MetaMask', 'warning');
+                    disconnect();
+                } else {
+                    address = accounts[0];
+                    log(`Account changed: ${address}`, 'info');
+                    updateUI(true);
+                }
+            });
+
+            window.ethereum.on('chainChanged', (newChainId) => {
+                const chainIdNum = parseInt(newChainId, 16);
+                log(`Chain changed: ${chainIdNum}`, 'info');
+                
+                if (chainIdNum !== ARBITRUM_CHAIN_ID) {
+                    log('⚠️ Please switch back to Arbitrum', 'warning');
+                }
+                
+                // Reload to reinitialize
+                window.location.reload();
+            });
+        }
+
+        // Copy address
+        function copyAddress() {
+            if (!address) return;
+            navigator.clipboard.writeText(address);
+            log('✅ Address copied to clipboard', 'success');
+            
+            const btn = document.getElementById('copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = 'Copied!';
+            setTimeout(() => {
+                btn.textContent = originalText;
+            }, 2000);
+        }
+
+        // Button handlers
+        document.getElementById('connect-metamask').addEventListener('click', connect);
+        document.getElementById('disconnect-btn').addEventListener('click', disconnect);
+        document.getElementById('copy-btn').addEventListener('click', copyAddress);
+
+        // Auto-reconnect if already connected
+        window.addEventListener('load', async () => {
+            log('Page loaded', 'info');
+            
+            if (typeof window.ethereum !== 'undefined') {
+                log('✅ MetaMask detected', 'success');
+                
+                // Check if already connected
+                const accounts = await window.ethereum.request({ 
+                    method: 'eth_accounts' 
+                });
+                
+                if (accounts.length > 0) {
+                    log('Found existing connection, reconnecting...', 'info');
+                    await connect();
+                }
+            } else {
+                log('❌ MetaMask not detected', 'error');
+            }
+        });
+    </script>
+</body>
+</html>

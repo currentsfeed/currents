@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet Connection - WalletConnect v2 + Ethers.js</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+    <div class="container mx-auto px-4 py-8 max-w-2xl">
+        <h1 class="text-3xl font-bold mb-8">🔗 Wallet Connection (WalletConnect v2)</h1>
+        
+        <!-- Connection Status -->
+        <div id="status-panel" class="bg-gray-800 rounded-lg p-6 mb-6 border border-gray-700">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold">Connection Status</h2>
+                <div id="status-indicator" class="w-3 h-3 rounded-full bg-red-500"></div>
+            </div>
+            
+            <div id="disconnected-state">
+                <p class="text-gray-400 mb-4">No wallet connected</p>
+                <button id="connect-btn" 
+                        class="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-6 rounded-lg transition-all">
+                    Connect Wallet
+                </button>
+            </div>
+            
+            <div id="connected-state" class="hidden">
+                <div class="space-y-3 mb-4">
+                    <div>
+                        <label class="text-xs text-gray-400">Address</label>
+                        <div class="flex items-center gap-2">
+                            <code id="wallet-address" class="text-sm font-mono bg-gray-900 px-3 py-2 rounded flex-1">-</code>
+                            <button id="copy-address-btn" 
+                                    class="px-3 py-2 bg-gray-700 hover:bg-gray-600 rounded text-sm">
+                                Copy
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400">Network</label>
+                        <div id="network-info" class="text-sm bg-gray-900 px-3 py-2 rounded">-</div>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400">Balance</label>
+                        <div id="balance-info" class="text-sm bg-gray-900 px-3 py-2 rounded">Loading...</div>
+                    </div>
+                </div>
+                <button id="disconnect-btn" 
+                        class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-all">
+                    Disconnect
+                </button>
+            </div>
+        </div>
+        
+        <!-- Events Log -->
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <h2 class="text-xl font-semibold mb-4">Events Log</h2>
+            <div id="events-log" class="space-y-2 max-h-64 overflow-y-auto">
+                <p class="text-gray-400 text-sm">Waiting for events...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- WalletConnect v2 Standalone Provider + Ethers.js v5 -->
+    <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    
+    <script>
+        // ============================================
+        // WALLET MANAGER - Production Ready
+        // ============================================
+        
+        class WalletManager {
+            constructor() {
+                // Configuration
+                this.ARBITRUM_CHAIN_ID = 42161;
+                this.ARBITRUM_CHAIN_ID_HEX = "0xa4b1";
+                this.RPC_URL = 'https://arb1.arbitrum.io/rpc';
+                this.STORAGE_KEY = 'currents_wallet_connection';
+                
+                // State
+                this.wcProvider = null;
+                this.ethersProvider = null;
+                this.signer = null;
+                this.address = null;
+                this.chainId = null;
+                
+                // Bind methods
+                this.connect = this.connect.bind(this);
+                this.disconnect = this.disconnect.bind(this);
+                this.reconnect = this.reconnect.bind(this);
+            }
+            
+            // ========================================
+            // INITIALIZATION
+            // ========================================
+            
+            async init() {
+                this.log('Initializing wallet manager...');
+                
+                // Setup UI listeners
+                this.setupUIListeners();
+                
+                // Check for saved connection
+                const savedConnection = this.getSavedConnection();
+                if (savedConnection) {
+                    this.log('Found saved connection, attempting reconnect...');
+                    await this.reconnect();
+                } else {
+                    this.log('No saved connection found');
+                }
+            }
+            
+            // ========================================
+            // CONNECTION
+            // ========================================
+            
+            async connect() {
+                try {
+                    this.log('Connecting wallet...');
+                    this.setButtonLoading('connect-btn', true);
+                    
+                    // Create WalletConnect provider
+                    this.wcProvider = new WalletConnectProvider.default({
+                        projectId: '670912b433d703cd729372f0eac64a24',
+                        rpc: {
+                            [this.ARBITRUM_CHAIN_ID]: this.RPC_URL
+                        },
+                        chainId: this.ARBITRUM_CHAIN_ID,
+                        qrcodeModalOptions: {
+                            mobileLinks: [
+                                "metamask",
+                                "trust",
+                                "rainbow",
+                                "argent",
+                                "imtoken",
+                                "pillar"
+                            ],
+                        }
+                    });
+                    
+                    // Enable session (prompts QR code modal)
+                    await this.wcProvider.enable();
+                    
+                    // Setup ethers provider
+                    this.ethersProvider = new ethers.providers.Web3Provider(this.wcProvider);
+                    this.signer = this.ethersProvider.getSigner();
+                    
+                    // Get account info
+                    this.address = await this.signer.getAddress();
+                    const network = await this.ethersProvider.getNetwork();
+                    this.chainId = network.chainId;
+                    
+                    this.log(`Connected to ${this.address}`);
+                    
+                    // Validate network
+                    if (this.chainId !== this.ARBITRUM_CHAIN_ID) {
+                        this.log(`Wrong network detected (${this.chainId}), requesting switch to Arbitrum...`);
+                        await this.switchToArbitrum();
+                    }
+                    
+                    // Setup event listeners
+                    this.setupProviderListeners();
+                    
+                    // Save connection
+                    this.saveConnection();
+                    
+                    // Update UI
+                    this.updateUI();
+                    await this.updateBalance();
+                    
+                    return true;
+                } catch (error) {
+                    console.error('Connection error:', error);
+                    this.log(`❌ Connection failed: ${error.message}`, 'error');
+                    this.cleanup();
+                    return false;
+                } finally {
+                    this.setButtonLoading('connect-btn', false);
+                }
+            }
+            
+            async reconnect() {
+                try {
+                    this.log('Attempting to reconnect...');
+                    
+                    // Create provider with cached session
+                    this.wcProvider = new WalletConnectProvider.default({
+                        projectId: '670912b433d703cd729372f0eac64a24',
+                        rpc: {
+                            [this.ARBITRUM_CHAIN_ID]: this.RPC_URL
+                        },
+                        chainId: this.ARBITRUM_CHAIN_ID,
+                    });
+                    
+                    // Check if session exists
+                    if (!this.wcProvider.wc.connected) {
+                        this.log('No active WalletConnect session found');
+                        this.clearSavedConnection();
+                        return false;
+                    }
+                    
+                    // Enable existing session (no modal)
+                    await this.wcProvider.enable();
+                    
+                    // Setup ethers
+                    this.ethersProvider = new ethers.providers.Web3Provider(this.wcProvider);
+                    this.signer = this.ethersProvider.getSigner();
+                    this.address = await this.signer.getAddress();
+                    const network = await this.ethersProvider.getNetwork();
+                    this.chainId = network.chainId;
+                    
+                    this.log(`Reconnected to ${this.address}`);
+                    
+                    // Validate network
+                    if (this.chainId !== this.ARBITRUM_CHAIN_ID) {
+                        await this.switchToArbitrum();
+                    }
+                    
+                    // Setup listeners
+                    this.setupProviderListeners();
+                    
+                    // Update UI
+                    this.updateUI();
+                    await this.updateBalance();
+                    
+                    return true;
+                } catch (error) {
+                    console.error('Reconnection error:', error);
+                    this.log(`Reconnection failed: ${error.message}`, 'error');
+                    this.clearSavedConnection();
+                    this.cleanup();
+                    return false;
+                }
+            }
+            
+            async disconnect() {
+                try {
+                    this.log('Disconnecting wallet...');
+                    
+                    if (this.wcProvider) {
+                        await this.wcProvider.disconnect();
+                    }
+                    
+                    this.cleanup();
+                    this.clearSavedConnection();
+                    this.log('Disconnected successfully');
+                    
+                } catch (error) {
+                    console.error('Disconnect error:', error);
+                    this.log(`Disconnect error: ${error.message}`, 'error');
+                    // Force cleanup anyway
+                    this.cleanup();
+                    this.clearSavedConnection();
+                }
+            }
+            
+            cleanup() {
+                this.wcProvider = null;
+                this.ethersProvider = null;
+                this.signer = null;
+                this.address = null;
+                this.chainId = null;
+                this.updateUI();
+            }
+            
+            // ========================================
+            // NETWORK VALIDATION
+            // ========================================
+            
+            async switchToArbitrum() {
+                try {
+                    this.log('Requesting network switch to Arbitrum...');
+                    
+                    // Request switch to Arbitrum
+                    await this.wcProvider.request({
+                        method: 'wallet_switchEthereumChain',
+                        params: [{ chainId: this.ARBITRUM_CHAIN_ID_HEX }],
+                    });
+                    
+                    this.log('✅ Switched to Arbitrum successfully');
+                    
+                    // Update chain ID
+                    const network = await this.ethersProvider.getNetwork();
+                    this.chainId = network.chainId;
+                    
+                } catch (switchError) {
+                    // This error code indicates the chain hasn't been added
+                    if (switchError.code === 4902) {
+                        try {
+                            this.log('Arbitrum not found, adding network...');
+                            
+                            await this.wcProvider.request({
+                                method: 'wallet_addEthereumChain',
+                                params: [{
+                                    chainId: this.ARBITRUM_CHAIN_ID_HEX,
+                                    chainName: 'Arbitrum One',
+                                    nativeCurrency: {
+                                        name: 'ETH',
+                                        symbol: 'ETH',
+                                        decimals: 18
+                                    },
+                                    rpcUrls: [this.RPC_URL],
+                                    blockExplorerUrls: ['https://arbiscan.io/']
+                                }],
+                            });
+                            
+                            this.log('✅ Arbitrum network added successfully');
+                            
+                        } catch (addError) {
+                            console.error('Failed to add Arbitrum network:', addError);
+                            this.log(`❌ Failed to add Arbitrum network: ${addError.message}`, 'error');
+                            throw addError;
+                        }
+                    } else {
+                        console.error('Failed to switch network:', switchError);
+                        this.log(`❌ Failed to switch network: ${switchError.message}`, 'error');
+                        throw switchError;
+                    }
+                }
+            }
+            
+            // ========================================
+            // EVENT LISTENERS
+            // ========================================
+            
+            setupProviderListeners() {
+                if (!this.wcProvider) return;
+                
+                // Account changed
+                this.wcProvider.on('accountsChanged', (accounts) => {
+                    this.log(`Account changed: ${accounts[0]}`);
+                    if (accounts.length === 0) {
+                        this.disconnect();
+                    } else {
+                        this.address = accounts[0];
+                        this.updateUI();
+                        this.updateBalance();
+                    }
+                });
+                
+                // Chain changed
+                this.wcProvider.on('chainChanged', (chainIdHex) => {
+                    const newChainId = parseInt(chainIdHex, 16);
+                    this.log(`Chain changed: ${newChainId}`);
+                    this.chainId = newChainId;
+                    
+                    if (newChainId !== this.ARBITRUM_CHAIN_ID) {
+                        this.log(`⚠️ Wrong network! Please switch to Arbitrum (42161)`, 'warning');
+                    }
+                    
+                    this.updateUI();
+                    this.updateBalance();
+                });
+                
+                // Disconnected
+                this.wcProvider.on('disconnect', (code, reason) => {
+                    this.log(`Disconnected: ${reason}`);
+                    this.disconnect();
+                });
+            }
+            
+            setupUIListeners() {
+                document.getElementById('connect-btn')?.addEventListener('click', this.connect);
+                document.getElementById('disconnect-btn')?.addEventListener('click', this.disconnect);
+                document.getElementById('copy-address-btn')?.addEventListener('click', () => {
+                    if (this.address) {
+                        navigator.clipboard.writeText(this.address);
+                        this.log('Address copied to clipboard');
+                        this.showToast('Address copied!');
+                    }
+                });
+            }
+            
+            // ========================================
+            // BALANCE & DATA
+            // ========================================
+            
+            async updateBalance() {
+                if (!this.ethersProvider || !this.address) return;
+                
+                try {
+                    const balance = await this.ethersProvider.getBalance(this.address);
+                    const balanceFormatted = ethers.utils.formatEther(balance);
+                    
+                    const balanceEl = document.getElementById('balance-info');
+                    if (balanceEl) {
+                        balanceEl.textContent = `${parseFloat(balanceFormatted).toFixed(4)} ETH`;
+                    }
+                } catch (error) {
+                    console.error('Failed to fetch balance:', error);
+                    document.getElementById('balance-info').textContent = 'Error loading balance';
+                }
+            }
+            
+            // ========================================
+            // PERSISTENCE
+            // ========================================
+            
+            saveConnection() {
+                try {
+                    localStorage.setItem(this.STORAGE_KEY, JSON.stringify({
+                        address: this.address,
+                        chainId: this.chainId,
+                        timestamp: Date.now()
+                    }));
+                } catch (error) {
+                    console.error('Failed to save connection:', error);
+                }
+            }
+            
+            getSavedConnection() {
+                try {
+                    const saved = localStorage.getItem(this.STORAGE_KEY);
+                    if (!saved) return null;
+                    
+                    const data = JSON.parse(saved);
+                    
+                    // Expire after 7 days
+                    const MAX_AGE = 7 * 24 * 60 * 60 * 1000;
+                    if (Date.now() - data.timestamp > MAX_AGE) {
+                        this.clearSavedConnection();
+                        return null;
+                    }
+                    
+                    return data;
+                } catch (error) {
+                    console.error('Failed to load saved connection:', error);
+                    return null;
+                }
+            }
+            
+            clearSavedConnection() {
+                try {
+                    localStorage.removeItem(this.STORAGE_KEY);
+                } catch (error) {
+                    console.error('Failed to clear saved connection:', error);
+                }
+            }
+            
+            // ========================================
+            // UI UPDATES
+            // ========================================
+            
+            updateUI() {
+                const isConnected = !!this.address;
+                
+                // Toggle states
+                document.getElementById('disconnected-state').classList.toggle('hidden', isConnected);
+                document.getElementById('connected-state').classList.toggle('hidden', !isConnected);
+                
+                // Status indicator
+                const indicator = document.getElementById('status-indicator');
+                if (isConnected) {
+                    indicator.classList.remove('bg-red-500');
+                    indicator.classList.add('bg-green-500');
+                } else {
+                    indicator.classList.remove('bg-green-500');
+                    indicator.classList.add('bg-red-500');
+                }
+                
+                if (isConnected) {
+                    // Address
+                    const addressEl = document.getElementById('wallet-address');
+                    if (addressEl) {
+                        addressEl.textContent = this.address;
+                    }
+                    
+                    // Network
+                    const networkEl = document.getElementById('network-info');
+                    if (networkEl) {
+                        const isCorrectNetwork = this.chainId === this.ARBITRUM_CHAIN_ID;
+                        networkEl.innerHTML = isCorrectNetwork
+                            ? `<span class="text-green-400">✓</span> Arbitrum One (${this.chainId})`
+                            : `<span class="text-red-400">⚠</span> Wrong Network (${this.chainId})`;
+                    }
+                }
+            }
+            
+            setButtonLoading(btnId, loading) {
+                const btn = document.getElementById(btnId);
+                if (!btn) return;
+                
+                if (loading) {
+                    btn.disabled = true;
+                    btn.classList.add('opacity-50', 'cursor-not-allowed');
+                    btn.textContent = 'Connecting...';
+                } else {
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    btn.textContent = 'Connect Wallet';
+                }
+            }
+            
+            log(message, type = 'info') {
+                console.log(`[WalletManager] ${message}`);
+                
+                const logEl = document.getElementById('events-log');
+                if (!logEl) return;
+                
+                // Clear placeholder
+                if (logEl.querySelector('p.text-gray-400')) {
+                    logEl.innerHTML = '';
+                }
+                
+                const timestamp = new Date().toLocaleTimeString();
+                const colors = {
+                    info: 'text-blue-400',
+                    error: 'text-red-400',
+                    warning: 'text-yellow-400',
+                    success: 'text-green-400'
+                };
+                
+                const logEntry = document.createElement('div');
+                logEntry.className = `text-xs ${colors[type] || colors.info}`;
+                logEntry.innerHTML = `<span class="text-gray-500">[${timestamp}]</span> ${this.escapeHtml(message)}`;
+                
+                logEl.insertBefore(logEntry, logEl.firstChild);
+                
+                // Keep only last 50 entries
+                while (logEl.children.length > 50) {
+                    logEl.removeChild(logEl.lastChild);
+                }
+            }
+            
+            showToast(message) {
+                // Simple toast notification
+                const toast = document.createElement('div');
+                toast.className = 'fixed bottom-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+                toast.textContent = message;
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.remove();
+                }, 3000);
+            }
+            
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            // ========================================
+            // PUBLIC API
+            // ========================================
+            
+            isConnected() {
+                return !!this.address;
+            }
+            
+            getAddress() {
+                return this.address;
+            }
+            
+            getProvider() {
+                return this.ethersProvider;
+            }
+            
+            getSigner() {
+                return this.signer;
+            }
+            
+            getChainId() {
+                return this.chainId;
+            }
+        }
+        
+        // ============================================
+        // INITIALIZE
+        // ============================================
+        
+        let walletManager;
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            walletManager = new WalletManager();
+            await walletManager.init();
+            
+            // Export to window for external access
+            window.wallet = walletManager;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "install": "pip3 install -r requirements.txt && sqlite3 brain.db < schema.sql && python3 seed_data.py",
+  "start": "python3 app.py",
+  "watch": {
+    "ignore": [
+      "\\.pyc$",
+      "^__pycache__/",
+      "^\\.git/"
+    ],
+    "install": {
+      "include": [
+        "^requirements\\.txt$"
+      ]
+    },
+    "restart": {
+      "include": [
+        "\\.py$"
+      ]
+    }
+  }
+}

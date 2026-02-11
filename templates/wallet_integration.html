@@ -1,0 +1,246 @@
+<!-- Working Wallet Integration - NO external libraries needed! -->
+<script>
+    // Pure JavaScript + MetaMask API - Arbitrum Network
+    
+    const ARBITRUM_CHAIN_ID = 42161;
+    const ARBITRUM_CHAIN_ID_HEX = "0xa4b1";
+    
+    const walletConnect = {
+        address: null,
+        chainId: null,
+        isConnected: false,
+        
+        log(msg, type = 'info') {
+            console.log(`[WALLET ${type.toUpperCase()}] ${msg}`);
+        },
+        
+        updateButton() {
+            const btn = document.getElementById('connect-wallet-btn');
+            if (!btn) return;
+            
+            if (this.isConnected && this.address) {
+                const short = this.address.slice(0, 6) + '...' + this.address.slice(-4);
+                btn.textContent = short;
+                btn.className = 'px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg transition font-bold';
+                btn.onclick = () => this.disconnect();
+            } else {
+                btn.textContent = 'Connect Wallet';
+                btn.className = 'px-4 py-2 bg-orange-600 hover:bg-orange-700 rounded-lg transition font-bold';
+                btn.onclick = () => this.connect();
+            }
+        },
+        
+        checkMetaMask() {
+            if (typeof window.ethereum === 'undefined') {
+                this.log('MetaMask not found', 'error');
+                alert('MetaMask is not installed!\n\nInstall from: https://metamask.io/download/');
+                return false;
+            }
+            return true;
+        },
+        
+        async connect() {
+            if (!this.checkMetaMask()) return;
+            
+            try {
+                this.log('Requesting wallet connection...');
+                
+                // Request accounts (opens MetaMask popup)
+                const accounts = await window.ethereum.request({
+                    method: 'eth_requestAccounts'
+                });
+                
+                this.address = accounts[0];
+                
+                // Get chain ID
+                const chainId = await window.ethereum.request({
+                    method: 'eth_chainId'
+                });
+                this.chainId = parseInt(chainId, 16);
+                
+                this.log(`Connected: ${this.address}`, 'success');
+                
+                // Check network
+                if (this.chainId !== ARBITRUM_CHAIN_ID) {
+                    this.log('Wrong network - switching to Arbitrum...', 'warning');
+                    await this.switchToArbitrum();
+                } else {
+                    this.log('On Arbitrum network', 'success');
+                }
+                
+                this.isConnected = true;
+                this.setupListeners();
+                this.updateButton();
+                
+                // Dispatch custom event for other components
+                window.dispatchEvent(new CustomEvent('walletConnected', {
+                    detail: { address: this.address, chainId: this.chainId }
+                }));
+                
+            } catch (err) {
+                this.log(`Connection failed: ${err.message}`, 'error');
+                if (err.code === 4001) {
+                    alert('You cancelled the connection request.\nPlease try again and approve.');
+                }
+            }
+        },
+        
+        async switchToArbitrum() {
+            try {
+                await window.ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: ARBITRUM_CHAIN_ID_HEX }]
+                });
+                this.log('Switched to Arbitrum', 'success');
+                this.chainId = ARBITRUM_CHAIN_ID;
+            } catch (err) {
+                // Network not added
+                if (err.code === 4902) {
+                    try {
+                        await window.ethereum.request({
+                            method: 'wallet_addEthereumChain',
+                            params: [{
+                                chainId: ARBITRUM_CHAIN_ID_HEX,
+                                chainName: 'Arbitrum One',
+                                nativeCurrency: {
+                                    name: 'ETH',
+                                    symbol: 'ETH',
+                                    decimals: 18
+                                },
+                                rpcUrls: ['https://arb1.arbitrum.io/rpc'],
+                                blockExplorerUrls: ['https://arbiscan.io']
+                            }]
+                        });
+                        this.log('Arbitrum network added', 'success');
+                        this.chainId = ARBITRUM_CHAIN_ID;
+                    } catch (addErr) {
+                        this.log(`Failed to add Arbitrum: ${addErr.message}`, 'error');
+                    }
+                }
+            }
+        },
+        
+        disconnect() {
+            this.address = null;
+            this.chainId = null;
+            this.isConnected = false;
+            this.updateButton();
+            this.log('Disconnected');
+            
+            // Dispatch custom event
+            window.dispatchEvent(new CustomEvent('walletDisconnected'));
+        },
+        
+        setupListeners() {
+            window.ethereum.on('accountsChanged', (accounts) => {
+                if (accounts.length === 0) {
+                    this.log('Wallet disconnected', 'warning');
+                    this.disconnect();
+                } else {
+                    this.address = accounts[0];
+                    this.log(`Account changed: ${this.address}`);
+                    this.updateButton();
+                    
+                    window.dispatchEvent(new CustomEvent('walletAccountChanged', {
+                        detail: { address: this.address }
+                    }));
+                }
+            });
+            
+            window.ethereum.on('chainChanged', (chainId) => {
+                this.chainId = parseInt(chainId, 16);
+                this.log(`Chain changed: ${this.chainId}`);
+                
+                if (this.chainId !== ARBITRUM_CHAIN_ID) {
+                    this.log('Please switch back to Arbitrum', 'warning');
+                    alert('Please switch to Arbitrum network in MetaMask');
+                }
+                
+                // Reload page to reset state
+                setTimeout(() => window.location.reload(), 1000);
+            });
+        },
+        
+        // Auto-reconnect on page load
+        async init() {
+            this.log('Initializing wallet...');
+            
+            if (typeof window.ethereum !== 'undefined') {
+                this.log('MetaMask detected', 'success');
+                
+                // Check if already connected
+                try {
+                    const accounts = await window.ethereum.request({
+                        method: 'eth_accounts'
+                    });
+                    
+                    if (accounts.length > 0) {
+                        this.log('Found existing connection...');
+                        this.address = accounts[0];
+                        
+                        const chainId = await window.ethereum.request({
+                            method: 'eth_chainId'
+                        });
+                        this.chainId = parseInt(chainId, 16);
+                        
+                        this.isConnected = true;
+                        this.setupListeners();
+                        this.updateButton();
+                        
+                        this.log(`Auto-connected: ${this.address}`, 'success');
+                        
+                        window.dispatchEvent(new CustomEvent('walletConnected', {
+                            detail: { address: this.address, chainId: this.chainId }
+                        }));
+                    }
+                } catch (err) {
+                    this.log(`Init error: ${err.message}`, 'error');
+                }
+            } else {
+                this.log('MetaMask not installed', 'warning');
+            }
+        },
+        
+        // API compatibility methods
+        isConnected() {
+            return this.isConnected;
+        },
+        
+        getAddress() {
+            return this.address;
+        },
+        
+        getChainId() {
+            return this.chainId;
+        },
+        
+        // Helper: Place bet/position
+        async placeBet(marketAddress, amount, outcome) {
+            if (!this.isConnected) {
+                alert('Please connect your wallet first!');
+                return null;
+            }
+            
+            if (this.chainId !== ARBITRUM_CHAIN_ID) {
+                alert('Please switch to Arbitrum network!');
+                await this.switchToArbitrum();
+                return null;
+            }
+            
+            this.log(`Placing bet: ${amount} on outcome ${outcome}`, 'info');
+            
+            // TODO: Integrate with Rain SDK here
+            // For now, just return mock transaction
+            return {
+                success: true,
+                txHash: '0x' + Math.random().toString(16).slice(2),
+                message: 'Position placed successfully! (Demo mode - Rain SDK integration pending)'
+            };
+        }
+    };
+    
+    // Initialize on page load
+    window.addEventListener('load', () => {
+        walletConnect.init();
+    });
+</script>

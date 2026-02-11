@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRain Learning Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-900 text-white">
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex items-center justify-between mb-8">
+            <h1 class="text-4xl font-bold">🧠 BRain Learning Dashboard</h1>
+            <a href="/" class="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700">← Back to Currents</a>
+        </div>
+        
+        <!-- Users List -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">Active Users</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="text-left border-b border-gray-700">
+                            <th class="pb-2">User Key</th>
+                            <th class="pb-2">Total Interactions</th>
+                            <th class="pb-2">Last Active</th>
+                            <th class="pb-2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-list">
+                        <tr><td colspan="4" class="text-center text-gray-500 py-4">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- User Profile Detail (shows when user selected) -->
+        <div id="profile-detail" class="hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- Top Categories -->
+                <div class="bg-gray-800 rounded-lg p-6">
+                    <h3 class="text-xl font-bold mb-4">Top Categories</h3>
+                    <div id="categories-list" class="space-y-2">
+                        <p class="text-gray-500">No data yet</p>
+                    </div>
+                </div>
+                
+                <!-- Top Tags -->
+                <div class="bg-gray-800 rounded-lg p-6">
+                    <h3 class="text-xl font-bold mb-4">Top Tags</h3>
+                    <div id="tags-list" class="space-y-2">
+                        <p class="text-gray-500">No data yet</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Interactions -->
+            <div class="bg-gray-800 rounded-lg p-6 mb-8">
+                <h3 class="text-xl font-bold mb-4">Recent Actions</h3>
+                <div id="interactions-list" class="space-y-3">
+                    <p class="text-gray-500">No interactions yet</p>
+                </div>
+            </div>
+            
+            <!-- Score Evolution Chart -->
+            <div class="bg-gray-800 rounded-lg p-6">
+                <h3 class="text-xl font-bold mb-4">Score Evolution</h3>
+                <div class="mb-4">
+                    <label class="text-sm text-gray-400">Select Category/Tag:</label>
+                    <select id="evolution-selector" class="ml-2 bg-gray-700 text-white px-3 py-1 rounded">
+                        <option value="">-- Select --</option>
+                    </select>
+                </div>
+                <canvas id="evolution-chart" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentUser = null;
+        let chartInstance = null;
+        
+        // Load users list
+        async function loadUsers() {
+            const response = await fetch('/api/admin/users');
+            const users = await response.json();
+            
+            const tbody = document.getElementById('users-list');
+            tbody.innerHTML = users.map(user => `
+                <tr class="border-b border-gray-700 hover:bg-gray-700">
+                    <td class="py-3">${user.user_key}</td>
+                    <td class="py-3">${user.total_interactions || 0}</td>
+                    <td class="py-3">${user.last_active ? new Date(user.last_active).toLocaleString() : 'Never'}</td>
+                    <td class="py-3">
+                        <button onclick="loadUserProfile('${user.user_key}')" 
+                                class="px-3 py-1 bg-blue-600 rounded hover:bg-blue-700 text-sm">
+                            View Profile
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+        
+        // Load user profile
+        async function loadUserProfile(userKey) {
+            currentUser = userKey;
+            const response = await fetch(`/api/admin/profile/${userKey}`);
+            const profile = await response.json();
+            
+            document.getElementById('profile-detail').classList.remove('hidden');
+            
+            // Categories
+            const categoriesList = document.getElementById('categories-list');
+            if (profile.categories && profile.categories.length > 0) {
+                categoriesList.innerHTML = profile.categories.map(cat => `
+                    <div class="flex items-center justify-between">
+                        <span>${cat.topic_value}</span>
+                        <div class="flex items-center gap-2">
+                            <div class="w-32 bg-gray-700 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full" style="width: ${cat.score}%"></div>
+                            </div>
+                            <span class="text-sm text-gray-400">${Math.round(cat.score)}</span>
+                        </div>
+                    </div>
+                `).join('');
+                
+                // Populate evolution selector
+                const selector = document.getElementById('evolution-selector');
+                selector.innerHTML = '<option value="">-- Select --</option>' +
+                    profile.categories.map(cat => 
+                        `<option value="category:${cat.topic_value}">Category: ${cat.topic_value}</option>`
+                    ).join('');
+            } else {
+                categoriesList.innerHTML = '<p class="text-gray-500">No categories yet</p>';
+            }
+            
+            // Tags
+            const tagsList = document.getElementById('tags-list');
+            if (profile.tags && profile.tags.length > 0) {
+                tagsList.innerHTML = profile.tags.map(tag => `
+                    <div class="flex items-center justify-between">
+                        <span>${tag.topic_value}</span>
+                        <div class="flex items-center gap-2">
+                            <div class="w-32 bg-gray-700 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: ${tag.score}%"></div>
+                            </div>
+                            <span class="text-sm text-gray-400">${Math.round(tag.score)}</span>
+                        </div>
+                    </div>
+                `).join('');
+                
+                // Add tags to selector
+                const selector = document.getElementById('evolution-selector');
+                selector.innerHTML += profile.tags.map(tag => 
+                    `<option value="tag:${tag.topic_value}">Tag: ${tag.topic_value}</option>`
+                ).join('');
+            } else {
+                tagsList.innerHTML = '<p class="text-gray-500">No tags yet</p>';
+            }
+            
+            // Recent interactions
+            const interactionsList = document.getElementById('interactions-list');
+            if (profile.recent_interactions && profile.recent_interactions.length > 0) {
+                interactionsList.innerHTML = profile.recent_interactions.map(int => {
+                    const icon = {
+                        'participate': '💰',
+                        'click': '👆',
+                        'view_market': '👀',
+                        'dwell_30+': '⏱️',
+                        'dwell_5+': '⏱️',
+                        'share': '📤'
+                    }[int.event_type] || '•';
+                    
+                    return `
+                        <div class="flex items-center gap-3 text-sm">
+                            <span class="text-2xl">${icon}</span>
+                            <div class="flex-1">
+                                <div class="font-medium">${int.event_type.toUpperCase()}</div>
+                                <div class="text-gray-400">${int.market_title || int.market_id}</div>
+                            </div>
+                            <div class="text-gray-500 text-xs">
+                                ${new Date(int.ts).toLocaleTimeString()}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                interactionsList.innerHTML = '<p class="text-gray-500">No interactions yet</p>';
+            }
+        }
+        
+        // Load score evolution chart
+        document.getElementById('evolution-selector').addEventListener('change', async function(e) {
+            const value = e.target.value;
+            if (!value) return;
+            
+            const [topicType, topicValue] = value.split(':');
+            const response = await fetch(`/api/admin/evolution/${currentUser}/${topicType}/${topicValue}`);
+            const history = await response.json();
+            
+            // Destroy old chart
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            // Create new chart
+            const ctx = document.getElementById('evolution-chart').getContext('2d');
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: history.map(h => new Date(h.snapshot_ts).toLocaleTimeString()),
+                    datasets: [{
+                        label: `${topicType}: ${topicValue}`,
+                        data: history.map(h => h.score),
+                        borderColor: 'rgb(59, 130, 246)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        });
+        
+        // Auto-refresh every 10 seconds
+        setInterval(loadUsers, 10000);
+        
+        // Initial load
+        loadUsers();
+    </script>
+</body>
+</html>
