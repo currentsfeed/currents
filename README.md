@@ -1,244 +1,250 @@
-# Currents - Belief-Driven Prediction Market Discovery
+# Currents
 
-A full-stack prediction market platform with intelligent ranking powered by the **BRain** algorithm.
+**Belief-driven prediction market discovery platform**
 
-**✨ NEW: Rain Protocol Integration** - Now supports both Rain API and local database! See [INTEGRATION.md](INTEGRATION.md) for details.
-
-## 🌊 What is Currents?
-
-Currents surfaces the most interesting prediction markets using "belief intensity" - a combination of trading volume and contestedness. It shows you where collective belief is in motion, not just static probabilities.
-
-## 📡 Data Sources
-
-Currents supports two data sources (toggle in `config.py`):
-
-1. **Rain Protocol API** (Default) - Live data from Rain markets
-2. **Local SQLite Database** - 50 curated markets for development
-
-Current setup: **Rain API Mock** with 7 markets (5 binary, 2 multi-option)
-
-## 🧠 BRain Intelligence Layer
-
-The **BRain** ranking algorithm calculates:
-
-```
-belief_intensity = (volume_score * 0.6) + (contestedness * 0.4)
-
-where:
-  volume_score = volume_24h / 10000
-  contestedness = 1 - |0.5 - probability| * 2
-```
-
-This surfaces markets that are both **highly traded** and **highly contested** - the most interesting belief currents.
-
-## 📊 Current Status
-
-- **50 Total Markets**: 45 binary + 5 multi-option
-- **Categories**: Politics (11), Technology (10), Sports (10), Crypto (7), Economics (7), World (2), Entertainment (2), Markets (1)
-- **Features**: Hero section, grid view, stream feed, expandable options, bottom widgets
-
-## 🚀 Quick Start
-
-### Run Locally
-
-```bash
-# Navigate to project
-cd currents-full-local/
-
-# Start Flask server
-python3 -m flask run --host=0.0.0.0 --port=5555
-
-# Visit in browser
-http://localhost:5555
-```
-
-### Test API
-
-```bash
-# Run API test suite
-python3 test_api.py
-
-# Or test endpoints manually
-curl http://localhost:5555/api/v1/health
-curl http://localhost:5555/api/v1/feed
-curl "http://localhost:5555/api/v1/markets?category=Crypto&limit=5"
-```
-
-## 📁 Project Structure
-
-```
-currents-full-local/
-├── app.py              # Main Flask application
-├── api.py              # BRain API endpoints (v1)
-├── brain.db            # SQLite database (markets, options, history)
-├── templates/
-│   ├── base.html       # Base template with header/footer
-│   └── index-v2.html   # Homepage with hero/grid/stream
-├── API.md              # Complete API documentation
-├── test_api.py         # API test suite
-├── VERSION.md          # Version history
-└── README.md           # This file
-```
-
-## 🔌 API Endpoints
-
-Base URL: `http://localhost:5555/api/v1`
-
-### Core Endpoints
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/health` | GET | Health check |
-| `/markets` | GET | List all markets (filterable) |
-| `/markets/{id}` | GET | Get market details |
-| `/feed` | GET | Get ranked feed (hero/grid/stream) |
-| `/categories` | GET | List categories with counts |
-| `/trending` | GET | Top volume markets |
-
-### Example Requests
-
-```bash
-# Get crypto markets
-curl "http://localhost:5555/api/v1/markets?category=Crypto&limit=5"
-
-# Get specific market
-curl "http://localhost:5555/api/v1/markets/m_eth_flip"
-
-# Get ranked feed
-curl "http://localhost:5555/api/v1/feed"
-
-# Get trending markets
-curl "http://localhost:5555/api/v1/trending"
-```
-
-See [API.md](API.md) for complete documentation.
-
-## 🎨 UI Features
-
-### Hero Section
-- Large featured market with full details
-- Belief Currents timeline (color-coded gradient)
-- Top 3 options (multi-option markets)
-- Expandable "+2 more options"
-
-### Grid (8 markets)
-- Category badges (color-coded)
-- Probability badges (shows leading option for multi-option)
-- Compact Belief Currents chart
-- Uniform card heights
-
-### The Stream
-- 3-column grid of additional markets
-- Compact card layout
-- Quick stats (voices, votes)
-
-### Bottom Widgets
-- **On The Rise** 📈: High-probability markets gaining momentum
-- **Most Contested** ⚔️: Markets near 50/50
-- **Explore Currents** 🧭: Browse by category
-
-## 📈 Market Types
-
-### Binary Markets
-Yes/No questions with single probability:
-- "Will Bitcoin hit $100k by March 2026?"
-- Shows: Yes %, No %, Trend
-
-### Multi-Option Markets
-Multiple mutually-exclusive outcomes:
-- "Who will win Super Bowl LXI?"
-- Shows: Top 3-5 options with probabilities
-- Expandable to show more options
-
-## 🔧 Tech Stack
-
-- **Backend**: Python 3, Flask
-- **Database**: SQLite (with full schema)
-- **Frontend**: HTML, Tailwind CSS, Jinja2
-- **API**: RESTful JSON with CORS
-- **Fonts**: Inter (Google Fonts)
-
-## 🎯 Next Steps
-
-### Immediate
-1. ✅ Add real markets from Polymarket/Kalshi
-2. ✅ Build BRain API structure
-3. 🔄 Deploy to accessible URL
-
-### Near-term
-- Personalized feeds based on user interactions
-- Search functionality
-- User profiles and portfolios
-- Historical probability charts
-- Mobile optimization
-
-### Long-term
-- Real-time websocket updates
-- Rain protocol integration
-- Social features (comments, shares)
-- Advanced analytics dashboard
-
-## 📊 Database Schema
-
-### markets
-- Binary and multi-option market metadata
-- Probabilities, volumes, participants
-- Categories, images, descriptions
-
-### market_options
-- Options for multi-outcome markets
-- Individual probabilities per option
-
-### probability_history
-- Time-series probability data
-- Volume snapshots
-
-### market_tags
-- Flexible tagging system
-
-## 🌐 Deployment
-
-Currently running locally. For production:
-
-1. Use production WSGI server (gunicorn/uwsgi)
-2. Configure reverse proxy (nginx)
-3. Set up SSL/TLS
-4. Configure CORS for specific origins
-5. Add rate limiting
-6. Set up monitoring
-
-## 📝 Version History
-
-- **v21** (2026-02-09): Expandable options + The Stream section
-- **v20** (2026-02-09): Dynamic belief current colors + Figma matching
-- **v19** (2026-02-09): Multi-color options + category badges
-- **v18** (2026-02-09): Layout fixes (hero + grid heights)
-- **v17** (2026-02-09): Multi-option markets + dynamic sentiments
-- **v16** (2026-02-09): Rain logo + dynamic timelines
-- **v15** (2026-02-09): Version numbering + BELIEF CURRENTS
-
-See [VERSION.md](VERSION.md) for detailed changelog.
-
-## 📖 Documentation
-
-- [API.md](API.md) - Complete API reference
-- [VERSION.md](VERSION.md) - Detailed version history
-- [test_api.py](test_api.py) - API usage examples
-
-## 🤝 Contributing
-
-This is a demo project. For production deployment:
-1. Connect to real prediction market data sources
-2. Implement user authentication
-3. Add caching layer (Redis)
-4. Set up proper monitoring
-5. Add comprehensive test suite
-
-## 📄 License
-
-Demonstration project for the Rain protocol ecosystem.
+Currents is a personalized feed for prediction markets, using behavioral learning to surface the most relevant markets to each user.
 
 ---
 
-**Built with 🌊 by Currents + BRain**  
-*Powered by Rain Protocol*
+## 🚀 Features
+
+- **BRain v1 Personalization**: Tag-level behavioral learning
+- **Mobile-First UX**: TikTok-style vertical feed on mobile, grid layout on desktop
+- **353 Markets**: Sports, Technology, Politics, Economics, World events, Crypto, Entertainment, Culture
+- **Real-Time Trending**: Geographic-based trending with local/global blend
+- **Wallet Integration**: Arbitrum network support via WalletConnect
+- **Waitlist System**: Email collection with belief-based questions
+
+---
+
+## 📦 Tech Stack
+
+- **Backend**: Python 3.11 + Flask
+- **Database**: SQLite (with BRain v1 personalization engine)
+- **Frontend**: HTML/CSS/JS (Tailwind CSS)
+- **Deployment**: nginx + systemd + Let's Encrypt SSL
+- **Network**: Arbitrum One (Chain ID 42161)
+
+---
+
+## 🏗️ Architecture
+
+### Core Components:
+
+- **app.py**: Flask application with routing and API endpoints
+- **feed_composer.py**: BRain v1 feed composition (quota-based personalization)
+- **impression_tracker.py**: User interaction tracking
+- **compute_trending.py**: Trending market calculation
+- **brain_v1_config.json**: Configurable personalization parameters
+
+### Key Features:
+
+1. **Personalization Engine (BRain v1)**:
+   - 40% personal interests
+   - 25% global trending
+   - 12% local trending
+   - 8% fresh markets
+   - 15% exploration
+
+2. **Category Diversity**:
+   - 9 main categories
+   - Maximum 15% per category in candidate pools
+   - Round-robin distribution in feeds
+
+3. **Geo-Targeting**:
+   - IP-based country detection
+   - Region-specific markets (Japan, Israel)
+   - User overrides for testing
+
+4. **Special Access Markets**:
+   - URL parameter-based visibility
+   - Hero position override system
+
+---
+
+## 🚀 Quick Deployment
+
+### Prerequisites:
+- Ubuntu 22.04 server
+- Domain name
+- 2GB RAM minimum
+
+### One-Command Deploy:
+```bash
+./deploy-production.sh YOUR_DOMAIN.com
+```
+
+### What It Does:
+- Installs Python 3.11, nginx, certbot
+- Sets up virtual environment
+- Configures nginx reverse proxy
+- Obtains SSL certificate (Let's Encrypt)
+- Creates systemd service (auto-restart)
+- Starts application
+
+**Total time**: 15 minutes
+
+---
+
+## 📚 Documentation
+
+- **START_HERE.md**: Deployment overview
+- **DIGITALOCEAN_SETUP.md**: Complete step-by-step guide
+- **PRODUCTION_DEPLOYMENT_GUIDE.md**: Platform options and architecture
+- **CREDENTIALS_CHECKLIST.md**: Account and access tracking
+- **DEPLOYMENT_v205.md**: Latest deployment notes
+
+---
+
+## 🗄️ Database Schema
+
+### Key Tables:
+
+- **markets**: Market data (353 total)
+- **market_tags**: Tag associations for personalization
+- **user_interactions**: Clicks, trades, hides
+- **user_market_impressions**: Feed impression tracking
+- **user_taste**: Aggregated user preferences
+- **trending_cache**: Pre-computed trending scores
+- **waitlist_submissions**: Coming soon page signups
+
+---
+
+## 🌍 Market Distribution
+
+- **Sports**: 134 markets
+- **Technology**: 48 markets
+- **Politics**: 42 markets
+- **Economics**: 34 markets
+- **World**: 32 markets
+- **Crypto**: 23 markets
+- **Entertainment**: 16 markets
+- **Culture**: 14 markets
+- **Crime**: 9 markets
+- **Business**: 1 market
+
+---
+
+## ⚙️ Configuration
+
+### Environment Variables:
+```bash
+FLASK_ENV=production
+FLASK_DEBUG=0
+PORT=5555
+HOST=0.0.0.0
+DATABASE_PATH=brain.db
+```
+
+### BRain v1 Config:
+Edit `brain_v1_config.json` to tune:
+- Quota weights (personal/trending/fresh/exploration)
+- Category caps and diversity rules
+- Cooldown and frequency penalties
+- Trending decay rates
+
+---
+
+## 🔧 Management Commands
+
+```bash
+# View logs
+sudo journalctl -u currents.service -f
+
+# Restart application
+sudo systemctl restart currents.service
+
+# Check status
+sudo systemctl status currents.service
+
+# Restart nginx
+sudo systemctl restart nginx
+
+# Database location
+/var/www/currents/brain.db
+```
+
+---
+
+## 🌐 Production URLs
+
+### Main Site:
+- `https://YOUR_DOMAIN.com`
+- `https://www.YOUR_DOMAIN.com`
+
+### API Endpoints:
+- `GET /` - Main feed (mobile: TikTok, desktop: grid)
+- `GET /markets` - All markets page with category filter
+- `GET /market/<id>` - Market detail page
+- `POST /api/markets/feed` - Paginated markets API
+- `POST /api/brain/feed` - BRain v1 personalized feed
+- `GET /coming-soon` - Waitlist page
+
+---
+
+## 📊 Monitoring
+
+### Health Checks:
+- Systemd auto-restart on crash
+- Log rotation via journald
+- Nginx access/error logs
+
+### Recommended:
+- Uptime monitoring (UptimeRobot, StatusCake)
+- Error tracking (Sentry)
+- Analytics (Plausible, Simple Analytics)
+
+---
+
+## 🔒 Security
+
+- SSL/TLS via Let's Encrypt (auto-renewal)
+- Firewall: UFW or cloud platform firewall
+- Open ports: 22 (SSH), 80 (HTTP), 443 (HTTPS)
+- SSH key authentication recommended
+- Rate limiting on API endpoints
+
+---
+
+## 💰 Operating Costs
+
+**Monthly**:
+- Server (2GB): $12/month
+- Backups: $2/month
+- Domain: ~$1.25/month
+- **Total**: ~$15/month
+
+**One-time**:
+- Domain registration: $10-15/year
+- SSL certificate: $0 (Let's Encrypt)
+
+---
+
+## 🚀 Latest Updates (v205)
+
+**February 18, 2026**:
+- ✅ Removed 23 past-event sports markets
+- ✅ Added 20 new upcoming sports markets (Feb 19-24)
+- ✅ Added special access market system
+- ✅ Geo-targeting for regional content
+- ✅ Category diversity enforcement
+- ✅ Comprehensive backup system
+
+---
+
+## 📝 License
+
+Proprietary - Rain Protocol Ltd.
+
+---
+
+## 🤝 Support
+
+For deployment issues, see documentation:
+- DIGITALOCEAN_SETUP.md (step-by-step)
+- PRODUCTION_DEPLOYMENT_GUIDE.md (overview)
+- CREDENTIALS_CHECKLIST.md (setup tracking)
+
+---
+
+**Built with belief. Measured in certainty.**

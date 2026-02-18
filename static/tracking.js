@@ -11,10 +11,22 @@
     
     // Get or create user key
     function getUserKey() {
+        // Check for test user cookie first (from user switcher)
+        const testUserMatch = document.cookie.match(/currents_test_user=([^;]+)/);
+        if (testUserMatch) {
+            const testUser = testUserMatch[1];
+            console.log('[BRain Tracking] Test user detected:', testUser);
+            return testUser;  // Use test user key (e.g., 'roy', 'user2')
+        }
+        
+        // Otherwise, get or create anonymous key
         let key = localStorage.getItem('currents_user_key');
         if (!key) {
             key = 'anon_' + Math.random().toString(36).substr(2, 9);
             localStorage.setItem('currents_user_key', key);
+            console.log('[BRain Tracking] Created new anonymous key:', key);
+        } else {
+            console.log('[BRain Tracking] Using anonymous key:', key);
         }
         return key;
     }
@@ -27,10 +39,12 @@
             ...extraData
         };
         
+        console.log('[BRain Tracking] Event queued:', eventType, 'for market:', marketId || currentMarketId);
         eventQueue.push(event);
         
         // Send batch if queue is large enough or after delay
         if (eventQueue.length >= 5) {
+            console.log('[BRain Tracking] Queue full, sending batch now');
             sendBatch();
         } else {
             // Debounced send
@@ -47,6 +61,9 @@
         const events = [...eventQueue];
         eventQueue = [];
         
+        const displayKey = userKey.startsWith('anon_') ? 'anonymous' : userKey;
+        console.log('[BRain Tracking] Sending batch:', events.length, 'events for user:', displayKey);
+        
         fetch('/api/track/batch', {
             method: 'POST',
             headers: {
@@ -57,11 +74,27 @@
                 user_key: userKey,
                 events: events
             })
-        }).catch(err => console.error('Track error:', err));
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('[BRain Tracking] Batch sent successfully');
+            } else {
+                console.error('[BRain Tracking] Batch failed:', response.status);
+            }
+        })
+        .catch(err => console.error('[BRain Tracking] Network error:', err));
     }
     
     // Track page view on load
     window.addEventListener('load', function() {
+        const userKey = getUserKey();
+        const displayKey = userKey.startsWith('anon_') ? 'anonymous' : userKey;
+        console.log('[BRain Tracking] ===== SESSION START =====');
+        console.log('[BRain Tracking] Tracking as user:', displayKey);
+        console.log('[BRain Tracking] Test user cookie:', document.cookie.match(/currents_test_user=([^;]+)/) ? 'SET' : 'NOT SET');
+        console.log('[BRain Tracking] Mode:', userKey.startsWith('anon_') ? 'Anonymous' : 'Test User');
+        console.log('[BRain Tracking] ===========================');
+        
         // Check if we're on a market detail page
         const urlMatch = window.location.pathname.match(/\/market\/([^\/]+)/);
         if (urlMatch) {
@@ -116,6 +149,10 @@
     
     // Expose global tracking function for manual events
     window.trackCurrents = trackEvent;
+    window.trackEvent = trackEvent;  // Also expose as trackEvent for backward compatibility
     
-    console.log('📊 BRain tracking initialized');
+    // Log tracking initialization with user key
+    const userKey = getUserKey();
+    const isTestUser = document.cookie.match(/currents_test_user=([^;]+)/) ? true : false;
+    console.log(`📊 BRain tracking initialized | User: ${userKey}${isTestUser ? ' (test mode)' : ' (anonymous)'}`);
 })();

@@ -1,0 +1,35 @@
+# Phase 3 Batch 1: 28 images (Economics, Crypto, Sports)
+
+# Economics (6 markets) - financial/trading images
+521963|https://images.pexels.com/photos/534216/pexels-photo-534216.jpeg?auto=compress&cs=tinysrgb&w=1920
+537485|https://images.pexels.com/photos/159888/pexels-photo-159888.jpeg?auto=compress&cs=tinysrgb&w=1920
+537487|https://images.pexels.com/photos/187041/pexels-photo-187041.jpeg?auto=compress&cs=tinysrgb&w=1920
+537489|https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg?auto=compress&cs=tinysrgb&w=1920
+new_60041|https://images.pexels.com/photos/534216/pexels-photo-534216.jpeg?auto=compress&cs=tinysrgb&w=1920
+new_60043|https://images.pexels.com/photos/259249/pexels-photo-259249.jpeg?auto=compress&cs=tinysrgb&w=1920
+
+# Crypto (6 markets) - cryptocurrency images
+549870|https://images.pexels.com/photos/844124/pexels-photo-844124.jpeg?auto=compress&cs=tinysrgb&w=1920
+549871|https://images.pexels.com/photos/730547/pexels-photo-730547.jpeg?auto=compress&cs=tinysrgb&w=1920
+549872|https://images.pexels.com/photos/315788/pexels-photo-315788.jpeg?auto=compress&cs=tinysrgb&w=1920
+549874|https://images.pexels.com/photos/844127/pexels-photo-844127.jpeg?auto=compress&cs=tinysrgb&w=1920
+549876|https://images.pexels.com/photos/1447418/pexels-photo-1447418.jpeg?auto=compress&cs=tinysrgb&w=1920
+549877|https://images.pexels.com/photos/1036641/pexels-photo-1036641.jpeg?auto=compress&cs=tinysrgb&w=1920
+
+# Sports - NHL/NBA (16 markets)
+553832|https://images.pexels.com/photos/1618204/pexels-photo-1618204.jpeg?auto=compress&cs=tinysrgb&w=1920
+553847|https://images.pexels.com/photos/1618206/pexels-photo-1618206.jpeg?auto=compress&cs=tinysrgb&w=1920
+553851|https://images.pexels.com/photos/1618208/pexels-photo-1618208.jpeg?auto=compress&cs=tinysrgb&w=1920
+553855|https://images.pexels.com/photos/1618211/pexels-photo-1618211.jpeg?auto=compress&cs=tinysrgb&w=1920
+553859|https://images.pexels.com/photos/1374279/pexels-photo-1374279.jpeg?auto=compress&cs=tinysrgb&w=1920
+553864|https://images.pexels.com/photos/2271202/pexels-photo-2271202.jpeg?auto=compress&cs=tinysrgb&w=1920
+553833|https://images.pexels.com/photos/1618214/pexels-photo-1618214.jpeg?auto=compress&cs=tinysrgb&w=1920
+553846|https://images.pexels.com/photos/1618216/pexels-photo-1618216.jpeg?auto=compress&cs=tinysrgb&w=1920
+553850|https://images.pexels.com/photos/1618218/pexels-photo-1618218.jpeg?auto=compress&cs=tinysrgb&w=1920
+553852|https://images.pexels.com/photos/1618220/pexels-photo-1618220.jpeg?auto=compress&cs=tinysrgb&w=1920
+553863|https://images.pexels.com/photos/1080882/pexels-photo-1080882.jpeg?auto=compress&cs=tinysrgb&w=1920
+550706|https://images.pexels.com/photos/1884576/pexels-photo-1884576.jpeg?auto=compress&cs=tinysrgb&w=1920
+553837|https://images.pexels.com/photos/1618222/pexels-photo-1618222.jpeg?auto=compress&cs=tinysrgb&w=1920
+553843|https://images.pexels.com/photos/1618224/pexels-photo-1618224.jpeg?auto=compress&cs=tinysrgb&w=1920
+553844|https://images.pexels.com/photos/1618226/pexels-photo-1618226.jpeg?auto=compress&cs=tinysrgb&w=1920
+553860|https://images.pexels.com/photos/358042/pexels-photo-358042.jpeg?auto=compress&cs=tinysrgb&w=1920

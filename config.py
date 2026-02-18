@@ -8,6 +8,9 @@ import os
 USE_RAIN_API = os.getenv('USE_RAIN_API', 'false').lower() == 'true'
 RAIN_API_URL = os.getenv('RAIN_API_URL', 'http://localhost:5000/api/v1')
 
+# BRain v1 personalization toggle
+BRAIN_V1_ENABLED = os.getenv('BRAIN_V1_ENABLED', 'true').lower() == 'true'  # Set to False to rollback to v159
+
 # Database fallback
 DB_PATH = os.path.join(os.path.dirname(__file__), 'brain.db')
 

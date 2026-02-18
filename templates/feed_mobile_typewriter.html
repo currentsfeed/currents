@@ -1,0 +1,187 @@
+{% extends "feed_mobile.html" %}
+
+{% block extra_head %}
+<style>
+    /* Typewriter cursor blink */
+    @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+    }
+    
+    .typewriter-cursor {
+        display: inline-block;
+        width: 2px;
+        height: 1em;
+        background: var(--currents-red);
+        margin-left: 2px;
+        animation: blink 0.7s infinite;
+        vertical-align: middle;
+    }
+    
+    .typewriter-text {
+        display: inline;
+    }
+</style>
+{% endblock %}
+
+{% block card_description %}
+{% if market.editorial_description %}
+<p class="text-sm text-gray-300 mb-2">
+    <span class="typewriter-text" 
+          data-text="{{ market.editorial_description }}"
+          data-card-index="{{ loop.index0 }}">
+    </span>
+</p>
+{% endif %}
+{% endblock %}
+
+{% block card_title %}
+<h2 class="text-2xl font-bold mb-3 leading-tight">
+    <span class="typewriter-text" 
+          data-text="{{ market.title }}"
+          data-card-index="{{ loop.index0 }}"
+          data-is-title="true">
+    </span>
+</h2>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+// Typewriter effect - rather quick
+const TYPEWRITER_SPEED = 15; // ms per character (fast)
+const DELAY_BETWEEN = 100; // ms between description and title
+
+let currentCard = 0;
+let isTyping = false;
+let typewriterTimeouts = [];
+
+function clearAllTypewriters() {
+    typewriterTimeouts.forEach(timeout => clearTimeout(timeout));
+    typewriterTimeouts = [];
+    isTyping = false;
+}
+
+function typewriterEffect(element, text, speed, callback) {
+    if (!element || !text) {
+        if (callback) callback();
+        return;
+    }
+    
+    let i = 0;
+    element.textContent = '';
+    
+    // Add cursor
+    const cursor = document.createElement('span');
+    cursor.className = 'typewriter-cursor';
+    element.appendChild(cursor);
+    
+    function type() {
+        if (i < text.length) {
+            // Insert character before cursor
+            const textNode = document.createTextNode(text.charAt(i));
+            element.insertBefore(textNode, cursor);
+            i++;
+            
+            const timeout = setTimeout(type, speed);
+            typewriterTimeouts.push(timeout);
+        } else {
+            // Remove cursor when done
+            const timeout = setTimeout(() => {
+                if (cursor.parentNode) {
+                    cursor.remove();
+                }
+                if (callback) callback();
+            }, 200);
+            typewriterTimeouts.push(timeout);
+        }
+    }
+    
+    type();
+}
+
+function typeCard(cardIndex) {
+    if (isTyping) return;
+    isTyping = true;
+    
+    clearAllTypewriters();
+    
+    // Find description and title for this card
+    const descriptions = document.querySelectorAll(`.typewriter-text[data-card-index="${cardIndex}"]:not([data-is-title])`);
+    const titles = document.querySelectorAll(`.typewriter-text[data-card-index="${cardIndex}"][data-is-title="true"]`);
+    
+    const description = descriptions[0];
+    const title = titles[0];
+    
+    // Type description first, then title
+    if (description) {
+        const descText = description.getAttribute('data-text');
+        typewriterEffect(description, descText, TYPEWRITER_SPEED, () => {
+            // After description, type title
+            if (title) {
+                const timeout = setTimeout(() => {
+                    const titleText = title.getAttribute('data-text');
+                    typewriterEffect(title, titleText, TYPEWRITER_SPEED, () => {
+                        isTyping = false;
+                    });
+                }, DELAY_BETWEEN);
+                typewriterTimeouts.push(timeout);
+            } else {
+                isTyping = false;
+            }
+        });
+    } else if (title) {
+        // No description, just type title
+        const titleText = title.getAttribute('data-text');
+        typewriterEffect(title, titleText, TYPEWRITER_SPEED, () => {
+            isTyping = false;
+        });
+    } else {
+        isTyping = false;
+    }
+}
+
+// Detect which card is visible
+const container = document.querySelector('.snap-container');
+const cards = document.querySelectorAll('.snap-card');
+
+let scrollTimeout;
+function onScroll() {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+        const containerRect = container.getBoundingClientRect();
+        const centerY = containerRect.height / 2;
+        
+        let closestCard = 0;
+        let closestDistance = Infinity;
+        
+        cards.forEach((card, index) => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenterY = cardRect.top + (cardRect.height / 2);
+            const distance = Math.abs(cardCenterY - centerY);
+            
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestCard = index;
+            }
+        });
+        
+        if (closestCard !== currentCard) {
+            currentCard = closestCard;
+            typeCard(currentCard);
+        }
+    }, 150); // Debounce scroll events
+}
+
+container.addEventListener('scroll', onScroll);
+
+// Type the first card on load
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        typeCard(0);
+    }, 300);
+});
+
+// Clean up on page unload
+window.addEventListener('beforeunload', clearAllTypewriters);
+</script>
+{% endblock %}

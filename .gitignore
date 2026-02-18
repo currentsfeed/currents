@@ -1,13 +1,49 @@
+# Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
+*.py[cod]
+*$py.class
 *.so
-*.egg
-*.egg-info/
-dist/
-build/
-.venv/
+.Python
 venv/
-ENV/
+env/
+*.egg-info/
+.pytest_cache/
+
+# Database (too large for git)
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Logs
+*.log
+logs/
+/tmp/
+
+# Deployment packages
+*.tar.gz
+*.zip
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Backups
+backups/
+*.backup
+*.bak
+
+# Temporary files
+nohup.out
+*.tmp

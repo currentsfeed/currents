@@ -1,0 +1,363 @@
+{% extends "base.html" %}
+
+{% block title %}All Markets - Currents{% endblock %}
+
+{% block content %}
+
+<!-- Category Filter Tags -->
+<div class="bg-gray-900/50 border-b border-gray-800 py-4 sticky top-0 z-10 backdrop-blur-md">
+    <div class="container mx-auto px-4">
+        <div class="flex items-center gap-2 overflow-x-auto pb-2">
+            <!-- All Markets (Black & White) -->
+            <button onclick="filterCategory('all')" 
+                    id="filter-all"
+                    class="category-filter px-3 py-1 rounded-xl text-xs font-medium uppercase tracking-wide whitespace-nowrap transition-all flex-shrink-0 bg-white text-black ring-2 ring-white">
+                All Markets
+            </button>
+            
+            <!-- Category Tags (Existing Design) -->
+            <button onclick="filterCategory('Sports')" 
+                    id="filter-Sports"
+                    class="category-filter px-3 py-1 rounded-xl text-xs font-medium uppercase tracking-wide whitespace-nowrap transition-all flex-shrink-0 bg-green-400 text-black hover:ring-2 hover:ring-green-400">
+                Sports
+            </button>
+            
+            <button onclick="filterCategory('Economics')" 
+                    id="filter-Economics"
+                    class="category-filter px-3 py-1 rounded-xl text-xs font-medium uppercase tracking-wide whitespace-nowrap transition-all flex-shrink-0 bg-blue-400 text-black hover:ring-2 hover:ring-blue-400">
+                Economics
+            </button>
+            
+            <button onclick="filterCategory('Crypto')" 
+                    id="filter-Crypto"
+                    class="category-filter px-3 py-1 rounded-xl text-xs font-medium uppercase tracking-wide whitespace-nowrap transition-all flex-shrink-0 bg-yellow-400 text-black hover:ring-2 hover:ring-yellow-400">
+                Crypto
+            </button>
+            
+            <button onclick="filterCategory('Politics')" 
+                    id="filter-Politics"
+                    class="category-filter px-3 py-1 rounded-xl text-xs font-medium uppercase tracking-wide whitespace-nowrap transition-all flex-shrink-0 bg-orange-400 text-black hover:ring-2 hover:ring-orange-400">
+                Politics
+            </button>
+            
+            <button onclick="filterCategory('Crime')" 
+                    id="filter-Crime"
+                    class="category-filter px-3 py-1 rounded-xl text-xs font-medium uppercase tracking-wide whitespace-nowrap transition-all flex-shrink-0 bg-red-400 text-black hover:ring-2 hover:ring-red-400">
+                Crime
+            </button>
+            
+            <button onclick="filterCategory('Entertainment')" 
+                    id="filter-Entertainment"
+                    class="category-filter px-3 py-1 rounded-xl text-xs font-medium uppercase tracking-wide whitespace-nowrap transition-all flex-shrink-0 bg-pink-400 text-black hover:ring-2 hover:ring-pink-400">
+                Entertainment
+            </button>
+            
+            <button onclick="filterCategory('Technology')" 
+                    id="filter-Technology"
+                    class="category-filter px-3 py-1 rounded-xl text-xs font-medium uppercase tracking-wide whitespace-nowrap transition-all flex-shrink-0 bg-purple-400 text-black hover:ring-2 hover:ring-purple-400">
+                Technology
+            </button>
+            
+            <button onclick="filterCategory('Culture')" 
+                    id="filter-Culture"
+                    class="category-filter px-3 py-1 rounded-xl text-xs font-medium uppercase tracking-wide whitespace-nowrap transition-all flex-shrink-0 bg-indigo-400 text-black hover:ring-2 hover:ring-indigo-400">
+                Culture
+            </button>
+            
+            <button onclick="filterCategory('World')" 
+                    id="filter-World"
+                    class="category-filter px-3 py-1 rounded-xl text-xs font-medium uppercase tracking-wide whitespace-nowrap transition-all flex-shrink-0 bg-cyan-400 text-black hover:ring-2 hover:ring-cyan-400">
+                World
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Markets Grid -->
+<div class="container mx-auto px-4 py-8">
+    <!-- Loading State -->
+    <div id="loading" class="text-center py-12">
+        <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-currents-red"></div>
+        <p class="mt-4 text-gray-400">Loading markets...</p>
+    </div>
+    
+    <!-- Markets Container -->
+    <div id="markets-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 hidden">
+        <!-- Markets will be inserted here -->
+    </div>
+    
+    <!-- See More Button -->
+    <div id="see-more-container" class="text-center mt-8 hidden">
+        <button onclick="loadMore()" id="see-more-btn" class="px-8 py-3 bg-currents-red hover:bg-currents-red-hover rounded-lg font-semibold transition">
+            See More
+        </button>
+    </div>
+    
+    <!-- No More Markets -->
+    <div id="no-more" class="text-center py-8 text-gray-500 hidden">
+        No more markets to show
+    </div>
+</div>
+
+<script>
+// State
+let currentCategory = 'all';
+let currentOffset = 0;
+let loading = false;
+let hasMore = true;
+const BATCH_SIZE = 60;  // Load 60 at a time
+const DISPLAY_SIZE = 20;  // Show 20 at a time
+let loadedMarkets = [];  // All loaded markets
+let displayedCount = 0;  // How many are currently displayed
+
+// User key from Flask
+const USER_KEY = '{{ user_key }}';
+
+// Category filter
+function filterCategory(category) {
+    if (loading) return;
+    
+    currentCategory = category;
+    currentOffset = 0;
+    loadedMarkets = [];
+    displayedCount = 0;
+    hasMore = true;
+    
+    // Update button states
+    document.querySelectorAll('.category-filter').forEach(btn => {
+        if (btn.id === `filter-${category}`) {
+            btn.classList.add('ring-2', 'ring-white');
+        } else {
+            btn.classList.remove('ring-2', 'ring-white');
+        }
+    });
+    
+    // Clear and reload
+    document.getElementById('markets-container').innerHTML = '';
+    loadMarkets();
+}
+
+// Load markets from API
+async function loadMarkets() {
+    if (loading || !hasMore) return;
+    
+    loading = true;
+    document.getElementById('loading').classList.remove('hidden');
+    
+    try {
+        const response = await fetch('/api/markets/feed', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                user_key: USER_KEY,
+                category: currentCategory,
+                offset: currentOffset,
+                limit: BATCH_SIZE
+            })
+        });
+        
+        const data = await response.json();
+        
+        // Add to loaded markets
+        loadedMarkets = loadedMarkets.concat(data.markets);
+        hasMore = data.has_more;
+        currentOffset += BATCH_SIZE;
+        
+        // Display first batch
+        displayNextBatch();
+        
+    } catch (err) {
+        console.error('Failed to load markets:', err);
+        alert('Failed to load markets. Please refresh the page.');
+    } finally {
+        loading = false;
+        document.getElementById('loading').classList.add('hidden');
+    }
+}
+
+// Display next batch of markets
+function displayNextBatch() {
+    const container = document.getElementById('markets-container');
+    const start = displayedCount;
+    const end = Math.min(start + DISPLAY_SIZE, loadedMarkets.length);
+    
+    // Render markets
+    for (let i = start; i < end; i++) {
+        const market = loadedMarkets[i];
+        container.appendChild(createMarketCard(market));
+    }
+    
+    displayedCount = end;
+    
+    // Show container
+    container.classList.remove('hidden');
+    
+    // Show/hide see more button
+    if (displayedCount < loadedMarkets.length) {
+        // More markets in loaded batch
+        document.getElementById('see-more-container').classList.remove('hidden');
+    } else if (hasMore) {
+        // Need to load more from server
+        document.getElementById('see-more-container').classList.remove('hidden');
+    } else {
+        // No more markets
+        document.getElementById('see-more-container').classList.add('hidden');
+        if (displayedCount > 0) {
+            document.getElementById('no-more').classList.remove('hidden');
+        }
+    }
+}
+
+// Load more button handler
+function loadMore() {
+    // If we have loaded markets to display, show them
+    if (displayedCount < loadedMarkets.length) {
+        displayNextBatch();
+    } else {
+        // Load more from server
+        loadMarkets();
+    }
+}
+
+// Create market card element
+function createMarketCard(market) {
+    const card = document.createElement('div');
+    card.className = 'bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-currents-red/50 transition-all';
+    
+    // Get category color class
+    const categoryColors = {
+        'Sports': 'bg-green-400 text-black',
+        'Economics': 'bg-blue-400 text-black',
+        'Crypto': 'bg-yellow-400 text-black',
+        'Politics': 'bg-orange-400 text-black',
+        'Crime': 'bg-red-400 text-black',
+        'Entertainment': 'bg-pink-400 text-black',
+        'Technology': 'bg-purple-400 text-black',
+        'Culture': 'bg-indigo-400 text-black',
+        'World': 'bg-cyan-400 text-black'
+    };
+    const categoryColor = categoryColors[market.category] || 'bg-gray-400 text-black';
+    
+    // Generate belief gradient (simplified version of server-side logic)
+    const prob = market.probability;
+    let gradient;
+    if (prob > 0.75) {
+        gradient = "linear-gradient(to right, #F59E0B 0%, #10B981 15%, #10B981 60%, #22C55E 100%)";
+    } else if (prob > 0.6) {
+        gradient = "linear-gradient(to right, #EF4444 0%, #F59E0B 25%, #10B981 60%, #22C55E 100%)";
+    } else if (prob > 0.4) {
+        gradient = "linear-gradient(to right, #EF4444 0%, #F59E0B 20%, #10B981 40%, #F59E0B 60%, #EF4444 80%, #F59E0B 100%)";
+    } else if (prob > 0.25) {
+        gradient = "linear-gradient(to right, #10B981 0%, #F59E0B 30%, #EF4444 70%, #DC2626 100%)";
+    } else {
+        gradient = "linear-gradient(to right, #F59E0B 0%, #EF4444 20%, #EF4444 60%, #DC2626 100%)";
+    }
+    
+    card.innerHTML = `
+        <a href="/market/${market.market_id}" class="block group">
+            <div class="relative h-64">
+                <!-- Image -->
+                ${market.image_url ? `
+                    <img src="${market.image_url}" 
+                         alt="${market.title}"
+                         class="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+                         onerror="this.style.display='none'">
+                ` : ''}
+                
+                <!-- Gradient Overlay (Darker Bottom) -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/90 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/95 to-transparent"></div>
+                
+                
+                <!-- Category Badge (Top Left) -->
+                <div class="absolute top-3 left-3">
+                    <span class="px-2.5 py-1 ${categoryColor} text-[9px] font-medium rounded-lg uppercase tracking-wide backdrop-blur-sm">
+                        ${market.category || 'Other'}
+                    </span>
+                </div>
+                
+                <!-- Probability Badge (Top Right) -->
+                <div class="absolute top-3 right-3 px-2 py-1 bg-black/90 backdrop-blur-lg rounded-lg border border-white/10">
+                    <div class="text-2xl font-bold">${Math.round(market.probability * 100)}%</div>
+                    <div class="text-[9px] font-semibold ${market.probability > 0.5 ? 'text-green-500' : 'text-red-500'}">Lean "${market.probability > 0.5 ? 'Yes' : 'No'}"</div>
+                </div>
+                
+                <!-- Content (Bottom) -->
+                <div class="absolute bottom-0 left-0 right-0 p-4">
+                    <!-- Title with Heart -->
+                    <div class="flex items-start gap-2 mb-2">
+                        <h3 class="font-semibold text-sm tracking-tight flex-1 line-clamp-2 group-hover:text-currents-red transition">
+                            ${market.title}
+                        </h3>
+                        <button onclick="likeMarket('${market.market_id}', this); event.preventDefault(); event.stopPropagation();" 
+                                class="like-btn flex-shrink-0 group/like"
+                                data-market-id="${market.market_id}">
+                            <svg class="w-4 h-4 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path class="text-gray-400 group-hover/like:text-red-400 transition" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Belief Currents with Gradient -->
+                    <div class="bg-black/40 rounded-lg p-2 mb-2">
+                        <div class="flex items-center justify-between mb-1">
+                            <div class="text-[8px] text-gray-400 uppercase tracking-wider font-semibold">CURRENTS</div>
+                        </div>
+                        
+                        <!-- Probability Bar with Gradient -->
+                        <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden mb-1 relative">
+                            <div class="absolute inset-0 rounded-full" style="background: ${gradient}"></div>
+                        </div>
+                        
+                        <!-- Percentages -->
+                        <div class="flex justify-between text-[8px]">
+                            <span class="text-green-500 font-semibold">${Math.round(market.probability * 100)}%</span>
+                            <span class="text-red-500 font-semibold">${Math.round((1 - market.probability) * 100)}%</span>
+                        </div>
+                    </div>
+                    
+                    <!-- CTA Button -->
+                    <button class="w-full bg-currents-red hover:bg-currents-red-hover text-white font-semibold py-2 px-4 rounded-lg transition text-sm">
+                        View Market
+                    </button>
+                </div>
+            </div>
+        </a>
+    `;
+    
+    return card;
+}
+
+// Initial load
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if category filter in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryParam = urlParams.get('category');
+    
+    if (categoryParam) {
+        filterCategory(categoryParam);
+    } else {
+        filterCategory('all');
+    }
+});
+</script>
+
+<style>
+/* Smooth scrolling for category tags */
+.overflow-x-auto::-webkit-scrollbar {
+    height: 6px;
+}
+.overflow-x-auto::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+.overflow-x-auto::-webkit-scrollbar-thumb {
+    background: #3a3a3a;
+    border-radius: 3px;
+}
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+    background: #4a4a4a;
+}
+</style>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+# 11 Remaining Images to Fix
+# 7 Failed + 4 Duplicates
+
+# Failed downloads - need different Pexels URLs
+553835|Washington Capitals|https://images.pexels.com/photos/1618304/pexels-photo-1618304.jpeg?auto=compress&cs=tinysrgb&w=1920
+553839|Utah Mammoth|https://images.pexels.com/photos/976873/pexels-photo-976873.jpeg?auto=compress&cs=tinysrgb&w=1920
+553841|Vancouver Canucks|https://images.pexels.com/photos/1277378/pexels-photo-1277378.jpeg?auto=compress&cs=tinysrgb&w=1920
+553830|Tampa Bay Lightning|https://images.pexels.com/photos/1618197/pexels-photo-1618197.jpeg?auto=compress&cs=tinysrgb&w=1920
+553834|Toronto Maple Leafs|https://images.pexels.com/photos/1618210/pexels-photo-1618210.jpeg?auto=compress&cs=tinysrgb&w=1920
+553853|Seattle Kraken|https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1920
+553856|Oklahoma City Thunder|https://images.pexels.com/photos/2277981/pexels-photo-2277981.jpeg?auto=compress&cs=tinysrgb&w=1920
+
+# Duplicates - need unique replacements
+new_60017|Jake Paul Canelo (boxing)|https://images.pexels.com/photos/4761352/pexels-photo-4761352.jpeg?auto=compress&cs=tinysrgb&w=1920
+553848|Anaheim Ducks (hockey)|https://images.pexels.com/photos/1618198/pexels-photo-1618198.jpeg?auto=compress&cs=tinysrgb&w=1920
+new_60015|Michigan Football|https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1920
+new_60012|Connor McDavid|https://images.pexels.com/photos/262524/pexels-photo-262524.jpeg?auto=compress&cs=tinysrgb&w=1920

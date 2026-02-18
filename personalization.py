@@ -29,8 +29,8 @@ PERSONAL_WEIGHTS = {
 }
 
 FINAL_WEIGHTS = {
-    'trending': 0.25,
-    'rising': 0.20,
+    'trending': 0.40,  # Roy's requirement: 40% of feed should be trending (was 0.25)
+    'rising': 0.15,    # Reduced from 0.20 to balance
     'editorial': 0.05
 }
 
@@ -125,10 +125,11 @@ class PersonalizationEngine:
         conn.close()
         return markets
     
-    def get_personalized_feed(self, user_key: Optional[str] = None, limit: int = 20) -> Dict:
+    def get_personalized_feed(self, user_key: Optional[str] = None, limit: int = 20, user_country: Optional[str] = None) -> Dict:
         """
         Get personalized feed for user
         If user_key is None or user has no profile, return global ranking
+        Supports geo-based prioritization via user_country parameter
         """
         # Fetch markets from local database
         markets = self._fetch_markets_from_db(limit=200)
@@ -161,7 +162,7 @@ class PersonalizationEngine:
         if has_profile:
             ranked_markets = self._rank_personalized(cursor, user_key, markets)
         else:
-            ranked_markets = self._rank_global(markets)
+            ranked_markets = self._rank_global(markets, user_country=user_country)
         
         conn.close()
         
@@ -191,6 +192,16 @@ class PersonalizationEngine:
         user_scores = self._get_user_scores(cursor, user_key)
         recent_viewed = self._get_recent_viewed(cursor, user_key)
         
+        # Get user's geo location (from most recent interaction)
+        cursor.execute("""
+            SELECT geo_country FROM user_interactions
+            WHERE user_key = ? AND geo_country IS NOT NULL AND geo_country != ''
+            ORDER BY ts DESC
+            LIMIT 1
+        """, (user_key,))
+        row = cursor.fetchone()
+        user_geo = row[0] if row else None
+        
         scored_markets = []
         for market in markets:
             # Calculate PersonalScore components
@@ -213,8 +224,8 @@ class PersonalizationEngine:
                 PERSONAL_WEIGHTS['diversity'] * diversity
             )
             
-            # Get trending score
-            trending = self._get_trending_score(cursor, market['market_id'])
+            # Get trending score (blended localized + global based on user's geo)
+            trending = self._get_trending_score(cursor, market['market_id'], user_geo)
             
             # Get rising score (belief change)
             rising = self._calculate_rising(market)
@@ -225,7 +236,7 @@ class PersonalizationEngine:
             # NEWS BOOST: Prioritize fresh news and sports (same as global ranking)
             news_boost = 0.0
             NEWS_CATEGORIES = ['Politics', 'Entertainment', 'World', 'Crime', 'Economics', 'Culture',
-                              'Basketball', 'Soccer', 'Hockey', 'Baseball', 'Rugby', 'Australian Football']
+                              'Sports']
             if market.get('category') in NEWS_CATEGORIES:
                 created_at = market.get('created_at', '')
                 if created_at:
@@ -244,7 +255,7 @@ class PersonalizationEngine:
             
             # SPORTS BOOST: Extra boost for upcoming sports games (resolving in next 2-3 days)
             sports_boost = 0.0
-            if market.get('category') in ['Basketball', 'Soccer', 'Hockey', 'Baseball', 'Rugby', 'Australian Football']:
+            if market.get('category') in ['Sports']:
                 try:
                     resolution_date = market.get('resolution_date', '')
                     if resolution_date:
@@ -253,7 +264,7 @@ class PersonalizationEngine:
                         
                         # Big boost for games in next 1-3 days
                         if 0 <= days_until <= 3:
-                            sports_boost = 1.5  # HUGE boost for upcoming games
+                            sports_boost = 0.5  # Moderate boost for upcoming games
                 except:
                     pass
             
@@ -290,9 +301,12 @@ class PersonalizationEngine:
         # Apply diversity penalty
         scored_markets = self._apply_diversity_penalty(scored_markets)
         
+        # Enforce category diversity in top 9 (prevent sports-only feeds)
+        scored_markets = self._enforce_category_diversity(scored_markets, top_n=9)
+        
         return scored_markets
     
-    def _rank_global(self, markets: List[Dict]) -> List[Dict]:
+    def _rank_global(self, markets: List[Dict], user_country: Optional[str] = None) -> List[Dict]:
         """
         Global ranking (no personalization) - belief intensity + trending + NEWS BOOST
         Prioritizes fresh news items (politics, entertainment, world events)
@@ -303,7 +317,7 @@ class PersonalizationEngine:
         
         # News categories that get freshness boost (including sports)
         NEWS_CATEGORIES = ['Politics', 'Entertainment', 'World', 'Crime', 'Economics', 'Culture',
-                          'Basketball', 'Soccer', 'Hockey', 'Baseball', 'Rugby', 'Australian Football']
+                          'Sports']
         
         for market in markets:
             # Belief intensity (volume + contestedness)
@@ -342,7 +356,7 @@ class PersonalizationEngine:
             
             # SPORTS BOOST: Extra boost for upcoming sports games (resolving in next 2-3 days)
             sports_boost = 0.0
-            if market.get('category') in ['Basketball', 'Soccer', 'Hockey', 'Baseball', 'Rugby', 'Australian Football']:
+            if market.get('category') in ['Sports']:
                 try:
                     resolution_date = market.get('resolution_date', '')
                     if resolution_date:
@@ -351,11 +365,16 @@ class PersonalizationEngine:
                         
                         # Big boost for games in next 1-3 days
                         if 0 <= days_until <= 3:
-                            sports_boost = 1.5  # HUGE boost for upcoming games
+                            sports_boost = 0.5  # Moderate boost for upcoming games
                 except:
                     pass
             
-            final_score = belief_intensity + FINAL_WEIGHTS['trending'] * trending + FINAL_WEIGHTS['rising'] * rising + news_boost + sports_boost
+            # GEO-BASED BOOST: REMOVED - Trending local/global blend handles geographic relevance
+            # Previous geo_boost (1.5 for Israeli content) was overwhelming trending weight (0.4)
+            # Trust the trending_cache's local/global blend (40% local + 60% global) instead
+            geo_boost = 0.0
+            
+            final_score = belief_intensity + FINAL_WEIGHTS['trending'] * trending + FINAL_WEIGHTS['rising'] * rising + news_boost + sports_boost + geo_boost
             
             market['scores'] = {
                 'final': final_score,
@@ -363,11 +382,16 @@ class PersonalizationEngine:
                 'trending': trending,
                 'rising': rising,
                 'news_boost': news_boost,
-                'sports_boost': sports_boost
+                'sports_boost': sports_boost,
+                'geo_boost': geo_boost
             }
         
         conn.close()
         markets.sort(key=lambda x: x['scores']['final'], reverse=True)
+        
+        # Enforce category diversity in top 9 (prevent sports-only feeds)
+        markets = self._enforce_category_diversity(markets, top_n=9)
+        
         return markets
     
     def _get_user_scores(self, cursor, user_key: str) -> Dict:
@@ -516,17 +540,38 @@ class PersonalizationEngine:
         
         return penalty
     
-    def _get_trending_score(self, cursor, market_id: str) -> float:
+    def _get_trending_score(self, cursor, market_id: str, user_geo: Optional[str] = None) -> float:
         """
         Get trending score from cache
+        Blends localized (70%) + global (30%) if user_geo available
         """
+        # Get global trending
         cursor.execute("""
             SELECT score FROM trending_cache
             WHERE market_id = ? AND scope = 'global' AND window = '24h'
         """, (market_id,))
         
         row = cursor.fetchone()
-        return row[0] if row else 0.0
+        global_score = row[0] if row else 0.0
+        
+        # If no geo or no localized data, return global only
+        if not user_geo or user_geo in ['UNKNOWN', 'LOCAL', '']:
+            return global_score
+        
+        # Get localized trending for user's country
+        cursor.execute("""
+            SELECT score FROM trending_cache
+            WHERE market_id = ? AND scope = ? AND window = '24h'
+        """, (market_id, f'local:{user_geo}'))
+        
+        row = cursor.fetchone()
+        local_score = row[0] if row else 0.0
+        
+        # Blend: 40% local + 60% global (balance local relevance with global diversity)
+        # Changed from 70/30 to prevent over-indexing on local markets
+        blended_score = 0.4 * local_score + 0.6 * global_score
+        
+        return blended_score
     
     def _calculate_rising(self, market: Dict) -> float:
         """
@@ -561,6 +606,65 @@ class PersonalizationEngine:
         # Re-sort after penalty
         markets.sort(key=lambda x: x['scores']['final'], reverse=True)
         return markets
+    
+    def _enforce_category_diversity(self, markets: List[Dict], top_n: int = 9) -> List[Dict]:
+        """
+        Enforce category diversity in top N results
+        Ensures at least 3-4 different categories in top 9 markets
+        Prevents sports-only or single-category domination
+        """
+        if len(markets) <= top_n:
+            return markets
+        
+        # Get top N candidates (top 30 to have pool for swapping)
+        top_candidates = markets[:min(30, len(markets))]
+        remaining = markets[min(30, len(markets)):]
+        
+        # Count categories in top N
+        top_n_markets = top_candidates[:top_n]
+        category_counts = defaultdict(int)
+        for m in top_n_markets:
+            category_counts[m.get('category', 'unknown')] += 1
+        
+        # If we have good diversity (4+ categories), return as is
+        num_categories = len(category_counts)
+        if num_categories >= 4:
+            return markets
+        
+        # Need more diversity - swap out some duplicate categories
+        max_per_category = max(3, top_n // 3)  # Max 3 markets per category in top 9
+        
+        final_top_n = []
+        category_usage = defaultdict(int)
+        swapped = []
+        
+        for market in top_n_markets:
+            category = market.get('category', 'unknown')
+            
+            # If this category has too many already, skip it for now
+            if category_usage[category] >= max_per_category:
+                swapped.append(market)
+                continue
+            
+            final_top_n.append(market)
+            category_usage[category] += 1
+        
+        # Fill remaining slots with diverse categories from candidates/remaining
+        available_pool = [m for m in top_candidates[top_n:] + remaining if m not in swapped]
+        
+        for market in available_pool:
+            if len(final_top_n) >= top_n:
+                break
+            
+            category = market.get('category', 'unknown')
+            
+            # Prefer categories we haven't used yet or used least
+            if category_usage[category] < max_per_category:
+                final_top_n.append(market)
+                category_usage[category] += 1
+        
+        # Combine: diverse top N + swapped + rest
+        return final_top_n + swapped + available_pool
 
 # Global instance
 personalizer = PersonalizationEngine()

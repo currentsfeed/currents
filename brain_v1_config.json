@@ -1,0 +1,75 @@
+{
+  "feed_quotas": {
+    "personal": 0.4,
+    "trending_global": 0.25,
+    "trending_local": 0.12,
+    "fresh_new": 0.08,
+    "exploration": 0.15
+  },
+  "scoring": {
+    "new_user": {
+      "trend_weight": 0.55,
+      "session_weight": 0.3,
+      "fresh_weight": 0.15
+    },
+    "known_user": {
+      "long_term_weight": 0.45,
+      "session_weight": 0.25,
+      "trend_weight": 0.2,
+      "fresh_weight": 0.1
+    },
+    "trend_blend": {
+      "global_weight": 0.7,
+      "local_weight": 0.3
+    }
+  },
+  "penalties": {
+    "cooldown": {
+      "2h": 0.1,
+      "6h": 0.35,
+      "24h": 0.7,
+      "default": 1.0
+    },
+    "frequency": {
+      "0": 1.0,
+      "1": 0.8,
+      "2": 0.6,
+      "3": 0.4,
+      "4+": 0.25
+    },
+    "hide_suppression_days": 7
+  },
+  "changed_logic": {
+    "odds_change_threshold": 0.03,
+    "ending_soon_hours": 0,
+    "changed_boost": 0.0,
+    "changed_cooldown_floor": 0.6,
+    "changed_freq_floor": 0.6
+  },
+  "bonuses": {
+    "owned_boost": 0.05,
+    "owned_days": 7
+  },
+  "diversity": {
+    "max_consecutive_same_category": 2,
+    "max_category_share": 0.35,
+    "max_tag_cluster_share": 0.25
+  },
+  "session": {
+    "timeout_minutes": 60,
+    "decay_multiplier": 0.9
+  },
+  "user_types": {
+    "new_user_threshold": 10
+  },
+  "freshness": {
+    "decay_hours": 72.0
+  },
+  "candidate_pool": {
+    "personal": 120,
+    "trending_global": 80,
+    "trending_local": 50,
+    "fresh_new": 30,
+    "exploration": 20
+  }
+}

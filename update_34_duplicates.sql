@@ -1,0 +1,39 @@
+-- Fix 34 duplicate images
+-- Generated: 2026-02-12 15:04:16
+
+UPDATE markets SET image_url = '/static/images/economics_521946.jpg' WHERE market_id = '521946';
+UPDATE markets SET image_url = '/static/images/economics_537486.jpg' WHERE market_id = '537486';
+UPDATE markets SET image_url = '/static/images/economics_537488.jpg' WHERE market_id = '537488';
+UPDATE markets SET image_url = '/static/images/economics_537490.jpg' WHERE market_id = '537490';
+UPDATE markets SET image_url = '/static/images/economics_new_60040.jpg' WHERE market_id = 'new_60040';
+UPDATE markets SET image_url = '/static/images/economics_new_60042.jpg' WHERE market_id = 'new_60042';
+UPDATE markets SET image_url = '/static/images/economics_new_60044.jpg' WHERE market_id = 'new_60044';
+UPDATE markets SET image_url = '/static/images/economics_new_60045.jpg' WHERE market_id = 'new_60045';
+UPDATE markets SET image_url = '/static/images/entertainment_540843.jpg' WHERE market_id = '540843';
+UPDATE markets SET image_url = '/static/images/entertainment_540844.jpg' WHERE market_id = '540844';
+UPDATE markets SET image_url = '/static/images/crime_544094.jpg' WHERE market_id = '544094';
+UPDATE markets SET image_url = '/static/images/crime_544095.jpg' WHERE market_id = '544095';
+UPDATE markets SET image_url = '/static/images/crime_544096.jpg' WHERE market_id = '544096';
+UPDATE markets SET image_url = '/static/images/technology_546612.jpg' WHERE market_id = '546612';
+UPDATE markets SET image_url = '/static/images/technology_multi_002.jpg' WHERE market_id = 'multi_002';
+UPDATE markets SET image_url = '/static/images/technology_new_60027.jpg' WHERE market_id = 'new_60027';
+UPDATE markets SET image_url = '/static/images/technology_new_60029.jpg' WHERE market_id = 'new_60029';
+UPDATE markets SET image_url = '/static/images/technology_new_60030.jpg' WHERE market_id = 'new_60030';
+UPDATE markets SET image_url = '/static/images/technology_new_60033.jpg' WHERE market_id = 'new_60033';
+UPDATE markets SET image_url = '/static/images/crypto_new_60020.jpg' WHERE market_id = 'new_60020';
+UPDATE markets SET image_url = '/static/images/crypto_new_60021.jpg' WHERE market_id = 'new_60021';
+UPDATE markets SET image_url = '/static/images/crypto_new_60022.jpg' WHERE market_id = 'new_60022';
+UPDATE markets SET image_url = '/static/images/crypto_new_60023.jpg' WHERE market_id = 'new_60023';
+UPDATE markets SET image_url = '/static/images/crypto_new_60025.jpg' WHERE market_id = 'new_60025';
+UPDATE markets SET image_url = '/static/images/sports_553838.jpg' WHERE market_id = '553838';
+UPDATE markets SET image_url = '/static/images/sports_new_60010.jpg' WHERE market_id = 'new_60010';
+UPDATE markets SET image_url = '/static/images/politics_multi_003.jpg' WHERE market_id = 'multi_003';
+UPDATE markets SET image_url = '/static/images/politics_new_60004.jpg' WHERE market_id = 'new_60004';
+UPDATE markets SET image_url = '/static/images/politics_new_60007.jpg' WHERE market_id = 'new_60007';
+UPDATE markets SET image_url = '/static/images/politics_new_60008.jpg' WHERE market_id = 'new_60008';
+UPDATE markets SET image_url = '/static/images/culture_new_60036.jpg' WHERE market_id = 'new_60036';
+UPDATE markets SET image_url = '/static/images/culture_new_60038.jpg' WHERE market_id = 'new_60038';
+UPDATE markets SET image_url = '/static/images/culture_new_60039.jpg' WHERE market_id = 'new_60039';
+UPDATE markets SET image_url = '/static/images/world_new_60048.jpg' WHERE market_id = 'new_60048';
+UPDATE markets SET image_url = '/static/images/world_new_60050.jpg' WHERE market_id = 'new_60050';
+UPDATE markets SET image_url = '/static/images/sports_nhl_rangers_bruins_feb12.jpg' WHERE market_id = 'nhl-rangers-bruins-feb12';

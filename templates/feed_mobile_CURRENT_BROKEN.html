@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Currents - Mobile Feed</title>
+    
+    <style>
+        /* Currents Brand Colors */
+        :root {
+            --currents-red: #FF5757;
+            --currents-red-hover: #FF3B3B;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+            color: #fff;
+        }
+        
+        /* Snap scrolling container */
+        .snap-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            -webkit-overflow-scrolling: touch;
+            /* Don't block touches on child elements */
+            touch-action: pan-y !important;
+        }
+        
+        /* Each card takes full screen */
+        .snap-card {
+            height: 100vh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        /* Full screen background image */
+        .card-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none; /* Pure visual, don't block touches */
+        }
+        
+        .card-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Gradient overlays for readability */
+        .card-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.4) 0%,
+                rgba(0,0,0,0.2) 30%,
+                rgba(0,0,0,0.4) 50%,
+                rgba(0,0,0,0.85) 85%,
+                rgba(0,0,0,0.95) 100%
+            );
+            z-index: 1;
+            pointer-events: none; /* Pure visual, don't block touches */
+        }
+        
+        /* Content overlay */
+        .card-content {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            padding-bottom: 140px; /* Increased space to prevent spillage */
+            pointer-events: none; /* Don't block header/sidebar */
+        }
+        
+        .card-content > * {
+            pointer-events: auto; /* Re-enable for children */
+        }
+        
+        /* Floating header */
+        .floating-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            pointer-events: auto;
+        }
+        
+        .floating-header img {
+            height: 24px;
+        }
+        
+        .header-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(59, 153, 252, 0.2);
+            border: 1px solid rgba(59, 153, 252, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+            pointer-events: auto !important;
+            position: relative;
+            z-index: 51;
+            touch-action: manipulation !important;
+            cursor: pointer;
+        }
+        
+        .header-btn:active {
+            transform: scale(0.95);
+            background: rgba(59, 153, 252, 0.3);
+        }
+        
+        /* Sidebar actions (right side) - Scrolls with content */
+        .sidebar-actions {
+            position: absolute;
+            right: 16px;
+            bottom: 180px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+        }
+        
+        .action-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            z-index: 10000;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .action-btn:active {
+            transform: scale(1.2);
+            background: rgba(0,0,0,0.8);
+        }
+        
+        /* Make card background clickable */
+        .card-clickable {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            cursor: pointer;
+        }
+        
+        /* Hide scrollbar but keep functionality */
+        .snap-container::-webkit-scrollbar {
+            display: none;
+        }
+        .snap-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Swipe up indicator */
+        .swipe-indicator {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            animation: bounce 2s infinite;
+            opacity: 0.6;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+        
+        /* Probability pill */
+        .probability-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 12px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* Category badge */
+        .category-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(255,87,87,0.2);
+            border: 1px solid rgba(255,87,87,0.4);
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--currents-red);
+            margin-bottom: 12px;
+        }
+    
+        
+        </style>
+</head>
+<body>
+    <!-- Floating minimal header -->
+    <div class="floating-header">
+        <a href="/">
+            <img src="/static/images/currents-logo-horizontal.jpg" alt="Currents">
+        </a>
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <button onclick="document.getElementById('menu-modal').style.display='flex'; return false;" class="header-btn" aria-label="Connect Wallet">
+                <svg style="width: 20px; height: 20px;" viewBox="0 0 300 185" fill="none">
+                    <path d="M61.4385 36.2562C99.3514 -1.65668 160.9 -1.65668 198.813 36.2562L203.445 40.8883C205.412 42.8545 205.412 46.0534 203.445 48.0196L188.302 63.1622C187.319 64.1453 185.709 64.1453 184.726 63.1622L178.251 56.6874C153.311 31.7476 111.942 31.7476 87.002 56.6874L80.0915 63.598C79.1084 64.5811 77.4981 64.5811 76.515 63.598L61.3724 48.4554C59.4062 46.4892 59.4062 43.2903 61.3724 41.3241L61.4385 36.2562ZM231.028 69.0695L244.132 82.1736C246.098 84.1398 246.098 87.3387 244.132 89.3049L186.963 146.474C185.664 147.773 183.391 147.773 182.092 146.474L130.166 94.5481C129.675 94.0569 128.864 94.0569 128.373 94.5481L76.4476 146.474C75.1488 147.773 72.8759 147.773 71.5771 146.474L14.3966 89.2937C12.4304 87.3275 12.4304 84.1286 14.3966 82.1624L27.5007 69.0583C28.7995 67.7595 31.0724 67.7595 32.3712 69.0583L84.2967 120.984C84.7879 121.475 85.5991 121.475 86.0903 120.984L138.016 69.0583C139.315 67.7595 141.588 67.7595 142.887 69.0583L194.812 120.984C195.303 121.475 196.115 121.475 196.606 120.984L248.531 69.0583C249.83 67.7595 252.103 67.7595 253.402 69.0583L231.028 69.0695Z" fill="#3B99FC"/>
+                </svg>
+            </button>
+            <button onclick="document.getElementById('menu-modal').style.display='flex'; return false;" class="header-btn" aria-label="Menu">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Menu Modal -->
+    <div id="menu-modal" class="fixed inset-0 bg-black/95 backdrop-blur-sm z-50 items-start justify-center pt-16" style="display: none !important;" onclick="this.style.display='none';">
+        <div class="bg-gray-900 rounded-2xl max-w-md w-full mx-4 p-6 border border-gray-700" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold">Menu</h2>
+                <button onclick="closeMenu(); return false;" class="text-gray-400 hover:text-white text-3xl leading-none">&times;</button>
+            </div>
+            
+            <div class="space-y-3">
+                <a href="/?desktop=1" class="flex items-center gap-4 p-4 bg-gray-800 hover:bg-gray-700 rounded-xl transition">
+                    <svg class="w-6 h-6 text-currents-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    <div class="flex-1">
+                        <div class="font-bold">Desktop View</div>
+                        <div class="text-sm text-gray-400">Full features + wallet</div>
+                    </div>
+                </a>
+                
+                <button onclick="showWalletModal(); closeMenu();" class="w-full flex items-center gap-4 p-4 bg-gray-800 hover:bg-gray-700 rounded-xl transition">
+                    <svg class="w-6 h-6 text-currents-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                    </svg>
+                    <div class="flex-1 text-left">
+                        <div class="font-bold">Connect Wallet</div>
+                        <div class="text-sm text-gray-400">Trade & place positions</div>
+                    </div>
+                </button>
+                
+                <a href="/brain-viewer" target="_blank" class="flex items-center gap-4 p-4 bg-gray-800 hover:bg-gray-700 rounded-xl transition">
+                    <svg class="w-6 h-6 text-currents-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                    <div class="flex-1">
+                        <div class="font-bold">Analytics</div>
+                        <div class="text-sm text-gray-400">View market data</div>
+                    </div>
+                </a>
+                
+                <!-- User Switcher Section -->
+                <div class="pt-3 mt-3 border-t border-gray-700">
+                    <div class="text-xs text-gray-500 uppercase tracking-wider mb-3 px-1">Switch User</div>
+                    
+                    <button onclick="switchUser('roy')" class="w-full flex items-center gap-4 p-4 {% if user_key == 'roy' %}bg-currents-red/20 border border-currents-red{% else %}bg-gray-800 hover:bg-gray-700{% endif %} rounded-xl transition mb-2">
+                        <svg class="w-6 h-6 text-currents-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                        <div class="flex-1 text-left">
+                            <div class="font-bold">Roy {% if user_key == 'roy' %}✓{% endif %}</div>
+                            <div class="text-sm text-gray-400">Primary user</div>
+                        </div>
+                    </button>
+                    
+                    <button onclick="switchUser('user2')" class="w-full flex items-center gap-4 p-4 {% if user_key == 'user2' %}bg-blue-400/20 border border-blue-400{% else %}bg-gray-800 hover:bg-gray-700{% endif %} rounded-xl transition mb-2">
+                        <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                        <div class="flex-1 text-left">
+                            <div class="font-bold">User 2 {% if user_key == 'user2' %}✓{% endif %}</div>
+                            <div class="text-sm text-gray-400">Test profile</div>
+                        </div>
+                    </button>
+                    
+                    <button onclick="switchUser('user3')" class="w-full flex items-center gap-4 p-4 {% if user_key == 'user3' %}bg-green-400/20 border border-green-400{% else %}bg-gray-800 hover:bg-gray-700{% endif %} rounded-xl transition mb-2">
+                        <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                        <div class="flex-1 text-left">
+                            <div class="font-bold">User 3 {% if user_key == 'user3' %}✓{% endif %}</div>
+                            <div class="text-sm text-gray-400">Test profile</div>
+                        </div>
+                    </button>
+                    
+                    <button onclick="switchUser('user4')" class="w-full flex items-center gap-4 p-4 {% if user_key == 'user4' %}bg-purple-400/20 border border-purple-400{% else %}bg-gray-800 hover:bg-gray-700{% endif %} rounded-xl transition">
+                        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                        <div class="flex-1 text-left">
+                            <div class="font-bold">User 4 {% if user_key == 'user4' %}✓{% endif %}</div>
+                            <div class="text-sm text-gray-400">Test profile</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Snap scrolling container -->
+    <div class="snap-container" id="feed-container">
+        {% for market in markets %}
+        <div class="snap-card" data-market-id="{{ market.market_id }}">
+            <!-- Background image -->
+            <div class="card-bg">
+                <img src="{{ market.image_url }}" alt="{{ market.title }}" loading="lazy">
+            </div>
+            
+            <!-- Gradient overlay -->
+            <div class="card-gradient"></div>
+            
+            <!-- Content -->
+            <div class="card-content">
+                <div style="max-width: calc(100% - 80px);">
+                    <span class="inline-block px-2 py-1 mb-2 rounded-full text-xs font-semibold {{ market.category|category_color }}">
+                        {{ market.category }}
+                    </span>
+                    
+                    {% if market.editorial_description %}
+                    <p class="text-sm text-gray-300 mb-2 line-clamp-5">
+                        {{ market.editorial_description }}
+                    </p>
+                    {% endif %}
+                    
+                    <h2 class="text-2xl font-bold mb-3 leading-tight">
+                        {{ market.title }}
+                    </h2>
+                    
+                    <!-- Belief Currents Chart -->
+                    <div class="bg-black/60 backdrop-blur-md rounded-lg p-2.5 mb-3">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <div class="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">BELIEF CURRENTS</div>
+                            <div class="text-[8px] text-gray-500">{{ market.created_at[:10] }} → Now</div>
+                        </div>
+                        
+                        <!-- Time-based flowing gradient -->
+                        <div class="h-2.5 bg-gray-800 rounded-full overflow-hidden mb-1.5 relative">
+                            <div class="absolute inset-0 rounded-full" style="background: {{ market|belief_gradient }}"></div>
+                        </div>
+                        
+                        <!-- Timeline labels -->
+                        {% set points = market.created_at|timeline_points %}
+                        <div class="flex items-center justify-between text-[8px] text-gray-500 mb-2 px-0.5">
+                            {% for point in points %}
+                                <span>{{ point }}</span>
+                                {% if not loop.last %}
+                                    <span class="text-gray-700">|</span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        
+                        <!-- Current belief -->
+                        <div class="flex items-center gap-3">
+                            {% if market.market_type == 'multiple' and market.top_options %}
+                            <div class="probability-pill">
+                                <span class="text-green-400">{{ market.top_options[0]['option_text'][:15] }}</span>
+                                <span>{{ (market.top_options[0]['probability'] * 100)|int }}%</span>
+                            </div>
+                            {% else %}
+                            <div class="probability-pill">
+                                <span class="{% if market.probability > 0.5 %}text-green-400{% else %}text-red-400{% endif %}">
+                                    {% if market.probability > 0.5 %}YES{% else %}NO{% endif %}
+                                </span>
+                                <span>{{ (market.probability * 100)|int }}%</span>
+                            </div>
+                            {% endif %}
+                            
+                            {% if market.volume %}
+                            <div class="text-xs text-gray-400">
+                                💰 ${{ (market.volume / 1000)|round(1) }}K
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <a href="/market/{{ market.market_id }}" 
+                       class="inline-block px-6 py-3 rounded-full font-semibold text-sm"
+                       style="background: var(--currents-red);">
+                        Place Position →
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Sidebar actions -->
+            <div class="sidebar-actions">
+                <button class="action-btn like-btn" data-market-id="{{ market.market_id }}" onclick="
+                    var btn = this;
+                    var svg = btn.querySelector('svg');
+                    var liked = btn.classList.contains('liked');
+                    if (liked) {
+                        btn.classList.remove('liked');
+                        svg.setAttribute('fill', 'none');
+                        svg.setAttribute('stroke', 'currentColor');
+                    } else {
+                        btn.classList.add('liked');
+                        svg.setAttribute('fill', '#ef4444');
+                        svg.setAttribute('stroke', 'none');
+                    }
+                    return false;">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                </button>
+                
+                <a href="/market/{{ market.market_id }}" class="action-btn" onclick="
+                    if (navigator.share) {
+                        navigator.share({
+                            title: 'Check out this market',
+                            url: this.href
+                        });
+                        return false;
+                    }
+                    return true;">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                    </svg>
+                </a>
+                
+                <a href="/market/{{ market.market_id }}" class="action-btn">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </a>
+            </div>
+            
+            <!-- Swipe up indicator (only on first card) -->
+            {% if loop.first %}
+            <div class="swipe-indicator">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                </svg>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    
+    <!-- Tracking -->
+    <script src="/static/tracking.js"></script>
+    
+    <script>
+        // Function to save scroll position
+        function saveScrollPosition() {
+            const container = document.getElementById('feed-container');
+            if (container) {
+                sessionStorage.setItem('feedScrollPosition', container.scrollTop);
+                console.log('[TikTok Feed] Saved scroll position:', container.scrollTop);
+            }
+        }
+        
+        // Save scroll position when leaving page
+        window.addEventListener('beforeunload', saveScrollPosition);
+        
+        // Save scroll position when clicking links
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="/market/"]');
+            links.forEach(link => {
+                link.addEventListener('click', saveScrollPosition);
+            });
+        });
+        
+        // Restore scroll position on page load
+        window.addEventListener('load', function() {
+            const container = document.getElementById('feed-container');
+            const savedPosition = sessionStorage.getItem('feedScrollPosition');
+            
+            if (container && savedPosition) {
+                // Use setTimeout to ensure DOM is fully loaded
+                setTimeout(function() {
+                    container.scrollTop = parseInt(savedPosition);
+                    console.log('[TikTok Feed] Restored scroll position:', savedPosition);
+                }, 100);
+            }
+        });
+    </script>
+    
+    <script>
+        // Track scroll events
+        let currentCard = 0;
+        const container = document.getElementById('feed-container');
+        const cards = document.querySelectorAll('.snap-card');
+        
+        container.addEventListener('scroll', () => {
+            const scrollTop = container.scrollTop;
+            const cardHeight = window.innerHeight;
+            const newCard = Math.round(scrollTop / cardHeight);
+            
+            if (newCard !== currentCard) {
+                currentCard = newCard;
+                const marketId = cards[newCard]?.dataset.marketId;
+                if (marketId) {
+                    console.log('[TikTok Feed] Viewing:', marketId);
+                    trackEvent('view_market', marketId, { section: 'tiktok_feed', position: newCard });
+                }
+            }
+        });
+        
+        // Hide swipe indicator after first swipe
+        container.addEventListener('scroll', () => {
+            const indicator = document.querySelector('.swipe-indicator');
+            if (indicator) {
+                indicator.style.display = 'none';
+            }
+        }, { once: true });
+        
+        // Toggle like button
+        function toggleLike(marketId, button) {
+            const svg = button.querySelector('svg');
+            const isLiked = button.classList.contains('liked');
+            
+            // Get current liked markets from localStorage
+            let likedMarkets = [];
+            try {
+                likedMarkets = JSON.parse(localStorage.getItem('currents_liked_markets') || '[]');
+            } catch (e) {
+                likedMarkets = [];
+            }
+            
+            if (isLiked) {
+                // Unlike
+                button.classList.remove('liked');
+                svg.setAttribute('fill', 'none');
+                svg.setAttribute('stroke', 'currentColor');
+                
+                // Remove from localStorage
+                likedMarkets = likedMarkets.filter(id => id !== marketId);
+                localStorage.setItem('currents_liked_markets', JSON.stringify(likedMarkets));
+            } else {
+                // Like
+                button.classList.add('liked');
+                svg.setAttribute('fill', '#ef4444');
+                svg.setAttribute('stroke', 'none');
+                
+                // Add to localStorage
+                if (!likedMarkets.includes(marketId)) {
+                    likedMarkets.push(marketId);
+                    localStorage.setItem('currents_liked_markets', JSON.stringify(likedMarkets));
+                }
+            }
+            
+            // Track the interaction
+            if (typeof trackEvent !== 'undefined') {
+                trackEvent('bookmark', marketId, {
+                    section: 'tiktok_feed',
+                    value: isLiked ? -1 : 1
+                });
+            }
+        }
+        
+        // Share market
+        function shareMarket(marketId) {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Check out this market on Currents',
+                    url: window.location.origin + '/market/' + marketId
+                }).catch(err => console.log('Share cancelled'));
+            } else {
+                // Fallback: copy to clipboard
+                const url = window.location.origin + '/market/' + marketId;
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(url);
+                    alert('Link copied to clipboard!');
+                } else {
+                    alert('Share: ' + url);
+                }
+            }
+        }
+        
+        // Go to market page (when clicking card background, not buttons)
+        function goToMarket(marketId, event) {
+            // Check if click was on a button or inside a button
+            let target = event.target;
+            while (target) {
+                if (target.tagName === 'BUTTON' || target.classList.contains('action-btn') || target.tagName === 'A') {
+                    // Click was on a button or link, don't navigate
+                    return;
+                }
+                target = target.parentElement;
+            }
+            
+            // Click was on background, navigate to market
+            window.location.href = '/market/' + marketId;
+        }
+        
+        // Show menu
+        function showMenu() {
+            const modal = document.getElementById('menu-modal');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Close menu
+        function closeMenu() {
+            const modal = document.getElementById('menu-modal');
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+        
+        // Switch user (set persistent cookie)
+        function switchUser(userId) {
+            // Set cookie that persists for 30 days
+            const expires = new Date();
+            expires.setTime(expires.getTime() + (30 * 24 * 60 * 60 * 1000)); // 30 days
+            document.cookie = 'currents_test_user=' + userId + '; expires=' + expires.toUTCString() + '; path=/';
+            
+            console.log('[User Switch] Switched to:', userId);
+            
+            // Reload page to apply new user
+            window.location.href = '/';
+        }
+        
+        // Wallet modal - mobile connection support
+        async function showWalletModal() {
+            // Check if already in MetaMask's in-app browser or MetaMask extension installed
+            if (typeof window.ethereum !== 'undefined') {
+                // MetaMask is available - connect directly
+                try {
+                    // Request accounts
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const address = accounts[0];
+                    
+                    // Switch to Arbitrum network
+                    try {
+                        await window.ethereum.request({
+                            method: 'wallet_switchEthereumChain',
+                            params: [{ chainId: '0xa4b1' }], // Arbitrum One
+                        });
+                    } catch (switchError) {
+                        // Network not added, try to add it
+                        if (switchError.code === 4902) {
+                            await window.ethereum.request({
+                                method: 'wallet_addEthereumChain',
+                                params: [{
+                                    chainId: '0xa4b1',
+                                    chainName: 'Arbitrum One',
+                                    nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
+                                    rpcUrls: ['https://arb1.arbitrum.io/rpc'],
+                                    blockExplorerUrls: ['https://arbiscan.io']
+                                }]
+                            });
+                        }
+                    }
+                    
+                    // Get USDT balance (Arbitrum USDT contract)
+                    const usdtContract = '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9';
+                    const balanceHex = await window.ethereum.request({
+                        method: 'eth_call',
+                        params: [{
+                            to: usdtContract,
+                            data: '0x70a08231' + address.slice(2).padStart(64, '0')
+                        }, 'latest']
+                    });
+                    const balanceUsdt = (parseInt(balanceHex, 16) / 1e6).toFixed(2);
+                    
+                    // Request signature
+                    const message = `Connect to Currents\\n\\nAddress: ${address}\\nTime: ${new Date().toISOString()}`;
+                    const signature = await window.ethereum.request({
+                        method: 'personal_sign',
+                        params: [message, address]
+                    });
+                    
+                    // Store connection
+                    sessionStorage.setItem('walletAddress', address);
+                    sessionStorage.setItem('walletBalance', balanceUsdt);
+                    sessionStorage.setItem('walletSignature', signature);
+                    
+                    // Show success
+                    alert(`Wallet Connected!\\n\\nAddress: ${address.slice(0,6)}...${address.slice(-4)}\\nUSDT Balance: $${balanceUsdt}`);
+                    
+                    // Reload to update UI
+                    window.location.reload();
+                } catch (err) {
+                    console.error('Wallet connection error:', err);
+                    alert('Failed to connect wallet: ' + err.message);
+                }
+                return;
+            }
+            
+            // Not in wallet browser - open with deep link
+            const currentUrl = window.location.href;
+            const metamaskDeepLink = `https://metamask.app.link/dapp/${currentUrl.replace(/^https?:\\/\\//, '')}`;
+            
+            // Show instruction modal
+            const shouldOpen = confirm('To connect your wallet:\\n\\n1. MetaMask app will open\\n2. Browse to this site in MetaMask\\n3. Click wallet button again to connect\\n\\nTap OK to open MetaMask app');
+            
+            if (shouldOpen) {
+                window.location.href = metamaskDeepLink;
+            }
+        }
+        
+        // Initialize like button states on page load
+        window.addEventListener('load', function() {
+            // Get liked markets from localStorage
+            let likedMarkets = [];
+            try {
+                likedMarkets = JSON.parse(localStorage.getItem('currents_liked_markets') || '[]');
+            } catch (e) {
+                console.error('Error loading liked markets:', e);
+            }
+            
+            if (likedMarkets.length > 0) {
+                console.log('[TikTok Feed] Initializing', likedMarkets.length, 'liked markets');
+                
+                // Find all like buttons and mark them if they're in the liked list
+                const allButtons = document.querySelectorAll('.action-btn');
+                allButtons.forEach(button => {
+                    // Check if this is a like button by looking for the heart icon
+                    const onclick = button.getAttribute('onclick');
+                    if (onclick && onclick.includes('toggleLike')) {
+                        // Extract market ID from onclick
+                        const match = onclick.match(/toggleLike\('([^']+)'/);
+                        if (match && likedMarkets.includes(match[1])) {
+                            button.classList.add('liked');
+                            const svg = button.querySelector('svg');
+                            if (svg) {
+                                svg.setAttribute('fill', '#ef4444');
+                                svg.setAttribute('stroke', 'none');
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Check wallet connection and update UI
+            const savedAddress = sessionStorage.getItem('walletAddress');
+            if (savedAddress) {
+                const savedBalance = sessionStorage.getItem('walletBalance');
+                console.log('[Wallet] Restoring connection:', savedAddress);
+                
+                // Update wallet button to show connected state
+                const walletBtn = document.getElementById('mobile-wallet-btn');
+                if (walletBtn) {
+                    // Change to show address
+                    const svg = walletBtn.querySelector('svg');
+                    if (svg) {
+                        svg.setAttribute('fill', '#10b981'); // Green when connected
+                    }
+                    console.log('[Wallet] Mobile wallet button updated (connected)');
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

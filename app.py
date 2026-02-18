@@ -8,10 +8,13 @@ from flask_cors import CORS
 import sqlite3
 import os
 import logging
+import time
+import requests
+from datetime import datetime, timedelta
 from collections import defaultdict
 
 # Import config and Rain client
-from config import USE_RAIN_API, RAIN_API_URL
+from config import USE_RAIN_API, RAIN_API_URL, BRAIN_V1_ENABLED
 from rain_client import RainClient
 from brain_algorithm import calculate_belief_intensity
 from tracking_engine import tracker
@@ -26,6 +29,43 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger(__name__)
+
+# Geo-IP lookup cache (to avoid repeated API calls)
+GEO_CACHE = {}
+
+# Rate limiting for waitlist submissions
+# Format: {ip_address: [timestamp1, timestamp2, ...]}
+WAITLIST_RATE_LIMIT = defaultdict(list)
+RATE_LIMIT_WINDOW = 3600  # 1 hour in seconds
+RATE_LIMIT_MAX = 3  # Max 3 submissions per hour per IP
+
+def get_country_from_ip(ip_address):
+    """
+    Get country code from IP address using ip-api.com (free, supports IPv6)
+    Falls back to 'UNKNOWN' if lookup fails
+    """
+    # Skip private IPs
+    if ip_address in ['127.0.0.1', 'localhost'] or ip_address.startswith('192.168.') or ip_address.startswith('10.'):
+        return 'LOCAL'
+    
+    # Check cache
+    if ip_address in GEO_CACHE:
+        return GEO_CACHE[ip_address]
+    
+    try:
+        # Use ip-api.com free API (no key needed, supports IPv6, 45 req/min limit)
+        response = requests.get(f'http://ip-api.com/json/{ip_address}?fields=countryCode', timeout=2)
+        if response.status_code == 200:
+            data = response.json()
+            country_code = data.get('countryCode')
+            if country_code and len(country_code) == 2:
+                GEO_CACHE[ip_address] = country_code
+                logger.info(f"Geo lookup: {ip_address} -> {country_code}")
+                return country_code
+    except Exception as e:
+        logger.warning(f"Geo lookup failed for {ip_address}: {e}")
+    
+    return 'UNKNOWN'
 
 app = Flask(__name__)
 
@@ -253,6 +293,12 @@ def timeline_points(created_at):
             ]
     except Exception as e:
         return ['Start', '25%', '50%', '75%', 'Now']
+
+@app.template_filter('market_rules')
+def market_rules(market):
+    """Generate market-specific resolution rules"""
+    from market_rules_generator import get_market_rules
+    return get_market_rules(market)
 
 class BRain:
     """BRain intelligence layer - supports both local DB and Rain API"""
@@ -516,7 +562,26 @@ brain = BRain()
 # Routes
 @app.route('/')
 def index():
-    """Homepage - Personalized Feed"""
+    """Homepage - Personalized Feed (Mobile: TikTok feed, Desktop: Grid)"""
+    # Check for bypass parameter (from "Go to site" link)
+    bypass_redirect = request.args.get('bypass')
+    
+    # If bypass parameter is present, set cookie and continue
+    if bypass_redirect:
+        from flask import make_response, redirect
+        response = make_response(redirect('/'))
+        # Set cookie that lasts for 7 days
+        response.set_cookie('currents_bypass_coming_soon', 'true', max_age=7*24*60*60)
+        return response
+    
+    # Check if user has bypass cookie (from clicking "Go to site")
+    has_bypass = request.cookies.get('currents_bypass_coming_soon') == 'true'
+    
+    # Coming Soon redirect DISABLED - keep page but don't redirect
+    # if not has_bypass:
+    #     from flask import redirect
+    #     return redirect('/coming-soon')
+    
     # Check for URL parameter (?user=user2) to set cookie
     url_user = request.args.get('user')
     
@@ -524,13 +589,521 @@ def index():
     test_user = request.cookies.get('currents_test_user')
     user_key = url_user or test_user or request.headers.get('X-User-Key') or request.cookies.get('currents_user_key') or None
     
-    # Get personalized feed
-    feed = personalizer.get_personalized_feed(user_key=user_key, limit=20)
+    # Generate anonymous user key if none exists
+    if not user_key:
+        import random
+        import string
+        user_key = 'anon_' + ''.join(random.choices(string.ascii_lowercase + string.digits, k=10))
     
-    logger.info(f"Homepage: user={user_key}, test_mode={test_user is not None}, personalized={feed.get('personalized', False)}")
+    # Detect mobile device from User-Agent
+    user_agent = request.headers.get('User-Agent', '').lower()
+    is_mobile = any(x in user_agent for x in ['mobile', 'android', 'iphone', 'ipad', 'tablet'])
+    
+    # Force desktop mode with ?desktop=1 parameter (for menu link)
+    force_desktop = request.args.get('desktop') == '1'
+    
+    # Check for special Yaniv market access parameter (?yaniv=1)
+    show_yaniv = request.args.get('yaniv') == '1'
+    
+    # Get user's country for geo-based trending
+    client_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    if client_ip:
+        client_ip = client_ip.split(',')[0].strip()
+    user_country = get_country_from_ip(client_ip)
+    
+    # OVERRIDE: user4 is always from Japan
+    if user_key == 'user4':
+        user_country = 'JP'
+        logger.info(f"🇯🇵 User4 country override: JP (always Japanese)")
+    
+    logger.info(f"User location: IP={client_ip}, Country={user_country}")
+    
+    # Check if BRain v1 is enabled
+    if BRAIN_V1_ENABLED:
+        # BRain v1 personalized feed
+        try:
+            from feed_composer import feed_composer
+            from impression_tracker import impression_tracker
+            
+            # Get limit based on device
+            limit = 50 if is_mobile and not force_desktop else 30
+            
+            # Compose feed with BRain v1
+            result = feed_composer.compose_feed(
+                user_key=user_key,
+                geo_bucket=user_country,
+                limit=limit,
+                exclude_ids=[],
+                debug=False
+            )
+            
+            # Extract markets from items
+            all_markets = [item['market'] for item in result['items']]
+            
+            # HERO MARKET OVERRIDE - DISABLED (Joni is now normal market)
+            # Joni market will appear in normal personalized feed position
+            joni_market_id = 'joni-token-april-2026'
+            
+            # Remove Joni market from list (will re-add only for Israeli users)
+            # DISABLED - no longer removing or promoting Joni
+            joni_market = None
+            if False:
+                for market in all_markets[:]:  # Create copy to safely remove during iteration
+                    if market.get('market_id') == joni_market_id:
+                        joni_market = market
+                        all_markets.remove(market)
+                        break
+            
+            # Only show Joni market to users from Israel
+            # DISABLED
+            if False:  # was: user_country == 'IL'
+                # If Joni market not in list, fetch it from database
+                if not joni_market:
+                    try:
+                        conn = sqlite3.connect('brain.db')
+                        conn.row_factory = sqlite3.Row
+                        cursor = conn.cursor()
+                        cursor.execute("""
+                            SELECT * FROM markets WHERE market_id = ?
+                        """, (joni_market_id,))
+                        row = cursor.fetchone()
+                        if row:
+                            joni_market = dict(row)
+                            # Fetch options for multi-choice market
+                            cursor.execute("""
+                                SELECT * FROM market_options WHERE market_id = ? ORDER BY position
+                            """, (joni_market_id,))
+                            options = [dict(opt) for opt in cursor.fetchall()]
+                            joni_market['outcomes'] = options
+                        conn.close()
+                    except Exception as e:
+                        logger.error(f"Error fetching Joni hero market: {e}")
+                
+                # Insert Joni market as first (hero position)
+                if joni_market:
+                    all_markets.insert(0, joni_market)
+                    logger.info(f"🇮🇱 HERO OVERRIDE (Israel only): Joni market promoted to position 0")
+            else:
+                # Non-Israeli users: Joni market already removed from list
+                logger.info(f"🌍 Joni market hidden for non-Israeli user: country={user_country}")
+            
+            # GEO-FILTER JAPANESE MARKETS: Show only to JP users
+            if user_country != 'JP':
+                # Remove all Japanese markets (japan-* prefix)
+                japanese_markets = [m for m in all_markets if m.get('market_id', '').startswith('japan-')]
+                for jp_market in japanese_markets:
+                    all_markets.remove(jp_market)
+                if japanese_markets:
+                    logger.info(f"🌍 Filtered {len(japanese_markets)} Japanese markets for non-JP user: country={user_country}")
+            else:
+                logger.info(f"🇯🇵 Japanese user detected - showing all JP markets")
+            
+            # YANIV MARKET SPECIAL ACCESS: Show only with ?yaniv=1 URL parameter
+            yaniv_market_id = 'yaniv-rain-march-2026'
+            yaniv_market = None
+            
+            # Remove Yaniv market from list (will re-add only if show_yaniv=True)
+            for market in all_markets[:]:  # Create copy to safely remove during iteration
+                if market.get('market_id') == yaniv_market_id:
+                    yaniv_market = market
+                    all_markets.remove(market)
+                    break
+            
+            # If show_yaniv parameter present, show as hero market
+            if show_yaniv:
+                # If Yaniv market not in list, fetch it from database
+                if not yaniv_market:
+                    try:
+                        conn = sqlite3.connect('brain.db')
+                        conn.row_factory = sqlite3.Row
+                        cursor = conn.cursor()
+                        cursor.execute("""
+                            SELECT * FROM markets WHERE market_id = ?
+                        """, (yaniv_market_id,))
+                        row = cursor.fetchone()
+                        if row:
+                            yaniv_market = dict(row)
+                        conn.close()
+                    except Exception as e:
+                        logger.error(f"Error fetching Yaniv hero market: {e}")
+                
+                # Insert Yaniv market as first (hero position)
+                if yaniv_market:
+                    all_markets.insert(0, yaniv_market)
+                    logger.info(f"🔐 HERO OVERRIDE (Special access): Yaniv market promoted to position 0")
+            else:
+                # Normal users: Yaniv market hidden
+                if yaniv_market:
+                    logger.info(f"🔒 Yaniv market hidden (no ?yaniv=1 parameter)")
+            
+            # IRAN ATTACK MARKET: Visible to all users, trending in Israel
+            # (No geo-filtering - appears in normal feed based on personalization)
+            
+            # Log impressions server-side
+            shown_ids = [item['market_id'] for item in result['items']]
+            impression_tracker.log_impressions(user_key, shown_ids)
+            
+            logger.info(f"BRain v1 feed: user={user_key}, geo={user_country}, items={len(all_markets)}, quotas={result['meta']['quotas_used']}")
+            
+        except Exception as e:
+            logger.error(f"BRain v1 feed error, falling back to old system: {e}")
+            import traceback
+            traceback.print_exc()
+            # Fallback to old system
+            feed = personalizer.get_personalized_feed(user_key=user_key, limit=50 if is_mobile else 20, user_country=user_country)
+            all_markets = []
+            if feed['hero']:
+                all_markets.extend(feed['hero'])
+            if feed['grid']:
+                all_markets.extend(feed['grid'])
+            if feed['stream']:
+                all_markets.extend(feed['stream'])
+    else:
+        # Old system (v159)
+        logger.info(f"Using old personalizer (BRain v1 disabled)")
+        feed = personalizer.get_personalized_feed(user_key=user_key, limit=50 if is_mobile else 20, user_country=user_country)
+        all_markets = []
+        if feed['hero']:
+            all_markets.extend(feed['hero'])
+        if feed['grid']:
+            all_markets.extend(feed['grid'])
+        if feed['stream']:
+            all_markets.extend(feed['stream'])
+    
+    # HERO MARKET OVERRIDE - DISABLED (Joni is now normal market)
+    # Joni market will appear in normal personalized feed position
+    joni_market_id = 'joni-token-april-2026'
+    
+    # Remove Joni market from list (will re-add only for Israeli users)
+    # DISABLED - no longer removing or promoting Joni
+    joni_market = None
+    if False:
+        for market in all_markets[:]:  # Create copy to safely remove during iteration
+            if market.get('market_id') == joni_market_id:
+                joni_market = market
+                all_markets.remove(market)
+                break
+    
+    # Only show Joni market to users from Israel
+    # DISABLED
+    if False:  # was: user_country == 'IL'
+        # If Joni market not in list, fetch it from database
+        if not joni_market:
+            try:
+                conn = sqlite3.connect('brain.db')
+                conn.row_factory = sqlite3.Row
+                cursor = conn.cursor()
+                cursor.execute("""
+                    SELECT * FROM markets WHERE market_id = ?
+                """, (joni_market_id,))
+                row = cursor.fetchone()
+                if row:
+                    joni_market = dict(row)
+                    # Fetch options for multi-choice market
+                    cursor.execute("""
+                        SELECT * FROM market_options WHERE market_id = ? ORDER BY position
+                    """, (joni_market_id,))
+                    options = [dict(opt) for opt in cursor.fetchall()]
+                    joni_market['outcomes'] = options
+                conn.close()
+            except Exception as e:
+                logger.error(f"Error fetching Joni hero market: {e}")
+        
+        # Insert Joni market as first (hero position)
+        if joni_market:
+            all_markets.insert(0, joni_market)
+            logger.info(f"🇮🇱 HERO OVERRIDE (Israel only): Joni market promoted to position 0")
+    else:
+        # Non-Israeli users: Joni market already removed from list
+        logger.info(f"🌍 Joni market hidden for non-Israeli user: country={user_country}")
+    
+    # GEO-FILTER JAPANESE MARKETS: Show only to JP users
+    if user_country != 'JP':
+        # Remove all Japanese markets (japan-* prefix)
+        japanese_markets = [m for m in all_markets if m.get('market_id', '').startswith('japan-')]
+        for jp_market in japanese_markets:
+            all_markets.remove(jp_market)
+        if japanese_markets:
+            logger.info(f"🌍 Filtered {len(japanese_markets)} Japanese markets for non-JP user: country={user_country}")
+    else:
+        logger.info(f"🇯🇵 Japanese user detected - showing all JP markets")
+    
+    # YANIV MARKET SPECIAL ACCESS (FALLBACK): Show only with ?yaniv=1 URL parameter
+    yaniv_market_id = 'yaniv-rain-march-2026'
+    yaniv_market = None
+    
+    # Remove Yaniv market from list (will re-add only if show_yaniv=True)
+    for market in all_markets[:]:  # Create copy to safely remove during iteration
+        if market.get('market_id') == yaniv_market_id:
+            yaniv_market = market
+            all_markets.remove(market)
+            break
+    
+    # If show_yaniv parameter present, show as hero market
+    if show_yaniv:
+        # If Yaniv market not in list, fetch it from database
+        if not yaniv_market:
+            try:
+                conn = sqlite3.connect('brain.db')
+                conn.row_factory = sqlite3.Row
+                cursor = conn.cursor()
+                cursor.execute("""
+                    SELECT * FROM markets WHERE market_id = ?
+                """, (yaniv_market_id,))
+                row = cursor.fetchone()
+                if row:
+                    yaniv_market = dict(row)
+                conn.close()
+            except Exception as e:
+                logger.error(f"Error fetching Yaniv hero market: {e}")
+        
+        # Insert Yaniv market as first (hero position)
+        if yaniv_market:
+            all_markets.insert(0, yaniv_market)
+            logger.info(f"🔐 HERO OVERRIDE (Special access - fallback): Yaniv market promoted to position 0")
+    else:
+        # Normal users: Yaniv market hidden
+        if yaniv_market:
+            logger.info(f"🔒 Yaniv market hidden (no ?yaniv=1 parameter - fallback)")
+    
+    # IRAN ATTACK MARKET: Visible to all users, trending in Israel
+    # (No geo-filtering - appears in normal feed based on personalization)
+    
+    # Mobile users get TikTok feed (unless ?desktop=1)
+    if is_mobile and not force_desktop:
+        logger.info(f"Mobile detected - serving TikTok feed: user={user_key}")
+        
+        response = app.make_response(render_template('feed_mobile.html',
+                             markets=all_markets,
+                             user_key=user_key))
+    else:
+        # Desktop users get grid layout
+        logger.info(f"Desktop mode - serving grid: user={user_key}, test_mode={test_user is not None}")
+        
+        # Split markets into hero/grid/stream for desktop layout
+        hero = all_markets[:1] if all_markets else []
+        grid = all_markets[1:9] if len(all_markets) > 1 else []
+        stream = all_markets[9:] if len(all_markets) > 9 else []
+        
+        # Create response
+        response = app.make_response(render_template('index-v2.html',
+                             hero=hero,
+                             grid=grid,
+                             stream=stream,
+                             personalized=True,
+                             user_key=user_key,
+                             test_mode=(test_user is not None)))
+    
+    # If URL parameter provided, set cookie for future visits
+    if url_user and url_user in ['user1', 'user2', 'user3', 'user4', 'roy']:
+        response.set_cookie('currents_test_user', url_user, max_age=7*24*60*60)  # 7 days
+        logger.info(f"Set cookie for user: {url_user}")
+    
+    return response
+
+
+@app.route('/feed')
+def feed_mobile():
+    """TikTok-style vertical scrolling feed (MOBILE ONLY)"""
+    # Get user key for personalization
+    test_user = request.cookies.get('currents_test_user')
+    user_key = test_user or request.headers.get('X-User-Key') or request.cookies.get('currents_user_key') or None
+    
+    # Generate anonymous user key if none exists
+    if not user_key:
+        import random
+        import string
+        user_key = 'anon_' + ''.join(random.choices(string.ascii_lowercase + string.digits, k=10))
+    
+    # Check for special Yaniv market access parameter (?yaniv=1)
+    show_yaniv = request.args.get('yaniv') == '1'
+    
+    # Get user's country for geo-based trending
+    client_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    if client_ip:
+        client_ip = client_ip.split(',')[0].strip()
+    user_country = get_country_from_ip(client_ip)
+    
+    # OVERRIDE: user4 is always from Japan
+    if user_key == 'user4':
+        user_country = 'JP'
+        logger.info(f"🇯🇵 User4 country override: JP (always Japanese)")
+    
+    # Check if BRain v1 is enabled
+    if BRAIN_V1_ENABLED:
+        # BRain v1 personalized feed
+        try:
+            from feed_composer import feed_composer
+            from impression_tracker import impression_tracker
+            
+            # Compose feed with BRain v1
+            result = feed_composer.compose_feed(
+                user_key=user_key,
+                geo_bucket=user_country,
+                limit=50,
+                exclude_ids=[],
+                debug=False
+            )
+            
+            # Extract markets from items
+            all_markets = [item['market'] for item in result['items']]
+            
+            # HERO MARKET OVERRIDE - DISABLED (Joni is now normal market)
+            # Joni market will appear in normal personalized feed position
+            joni_market_id = 'joni-token-april-2026'
+            
+            # Remove Joni market from list (will re-add only for Israeli users)
+            # DISABLED - no longer removing or promoting Joni
+            joni_market = None
+            if False:
+                for market in all_markets[:]:  # Create copy to safely remove during iteration
+                    if market.get('market_id') == joni_market_id:
+                        joni_market = market
+                        all_markets.remove(market)
+                        break
+            
+            # Only show Joni market to users from Israel
+            # DISABLED
+            if False:  # was: user_country == 'IL'
+                # If Joni market not in list, fetch it from database
+                if not joni_market:
+                    try:
+                        conn = sqlite3.connect('brain.db')
+                        conn.row_factory = sqlite3.Row
+                        cursor = conn.cursor()
+                        cursor.execute("""
+                            SELECT * FROM markets WHERE market_id = ?
+                        """, (joni_market_id,))
+                        row = cursor.fetchone()
+                        if row:
+                            joni_market = dict(row)
+                            # Fetch options for multi-choice market
+                            cursor.execute("""
+                                SELECT * FROM market_options WHERE market_id = ? ORDER BY position
+                            """, (joni_market_id,))
+                            options = [dict(opt) for opt in cursor.fetchall()]
+                            joni_market['outcomes'] = options
+                        conn.close()
+                    except Exception as e:
+                        logger.error(f"Error fetching Joni hero market: {e}")
+                
+                # Insert Joni market as first (hero position)
+                if joni_market:
+                    all_markets.insert(0, joni_market)
+                    logger.info(f"🇮🇱 HERO OVERRIDE (mobile, Israel only): Joni market promoted to position 0")
+            else:
+                # Non-Israeli users: Joni market already removed from list
+                logger.info(f"🌍 Joni market hidden for non-Israeli mobile user: country={user_country}")
+            
+            # GEO-FILTER JAPANESE MARKETS: Show only to JP users
+            if user_country != 'JP':
+                # Remove all Japanese markets (japan-* prefix)
+                japanese_markets = [m for m in all_markets if m.get('market_id', '').startswith('japan-')]
+                for jp_market in japanese_markets:
+                    all_markets.remove(jp_market)
+                if japanese_markets:
+                    logger.info(f"🌍 Filtered {len(japanese_markets)} Japanese markets for non-JP mobile user: country={user_country}")
+            else:
+                logger.info(f"🇯🇵 Japanese mobile user detected - showing all JP markets")
+            
+            # YANIV MARKET SPECIAL ACCESS (MOBILE): Show only with ?yaniv=1 URL parameter
+            yaniv_market_id = 'yaniv-rain-march-2026'
+            yaniv_market = None
+            
+            # Remove Yaniv market from list (will re-add only if show_yaniv=True)
+            for market in all_markets[:]:  # Create copy to safely remove during iteration
+                if market.get('market_id') == yaniv_market_id:
+                    yaniv_market = market
+                    all_markets.remove(market)
+                    break
+            
+            # If show_yaniv parameter present, show as hero market
+            if show_yaniv:
+                # If Yaniv market not in list, fetch it from database
+                if not yaniv_market:
+                    try:
+                        conn = sqlite3.connect('brain.db')
+                        conn.row_factory = sqlite3.Row
+                        cursor = conn.cursor()
+                        cursor.execute("""
+                            SELECT * FROM markets WHERE market_id = ?
+                        """, (yaniv_market_id,))
+                        row = cursor.fetchone()
+                        if row:
+                            yaniv_market = dict(row)
+                        conn.close()
+                    except Exception as e:
+                        logger.error(f"Error fetching Yaniv hero market: {e}")
+                
+                # Insert Yaniv market as first (hero position)
+                if yaniv_market:
+                    all_markets.insert(0, yaniv_market)
+                    logger.info(f"🔐 HERO OVERRIDE (Mobile special access): Yaniv market promoted to position 0")
+            else:
+                # Normal users: Yaniv market hidden
+                if yaniv_market:
+                    logger.info(f"🔒 Yaniv market hidden (no ?yaniv=1 parameter - mobile)")
+            
+            # IRAN ATTACK MARKET: Visible to all users, trending in Israel
+            # (No geo-filtering - appears in normal feed based on personalization)
+            
+            # Log impressions server-side
+            shown_ids = [item['market_id'] for item in result['items']]
+            impression_tracker.log_impressions(user_key, shown_ids)
+            
+            logger.info(f"BRain v1 mobile feed: user={user_key}, geo={user_country}, items={len(all_markets)}")
+            
+        except Exception as e:
+            logger.error(f"BRain v1 feed error, falling back: {e}")
+            # Fallback to old system
+            feed = personalizer.get_personalized_feed(user_key=user_key, limit=50, user_country=user_country)
+            all_markets = []
+            if feed['hero']:
+                all_markets.extend(feed['hero'])
+            if feed['grid']:
+                all_markets.extend(feed['grid'])
+            if feed['stream']:
+                all_markets.extend(feed['stream'])
+    else:
+        # Old system (v159)
+        feed = personalizer.get_personalized_feed(user_key=user_key, limit=50, user_country=user_country)
+        all_markets = []
+        if feed['hero']:
+            all_markets.extend(feed['hero'])
+        if feed['grid']:
+            all_markets.extend(feed['grid'])
+        if feed['stream']:
+            all_markets.extend(feed['stream'])
+    
+    logger.info(f"Mobile Feed: user={user_key}, markets={len(all_markets)}")
+    
+    return render_template('feed_mobile.html',
+                         markets=all_markets,
+                         user_key=user_key)
+
+@app.route('/alt')
+def index_alt():
+    """Alternative Homepage - Full Card Images with Text Overlay"""
+    # Check for URL parameter (?user=user2) to set cookie
+    url_user = request.args.get('user')
+    
+    # Get user key: prioritize URL param, then test user cookie, then regular user key
+    test_user = request.cookies.get('currents_test_user')
+    user_key = url_user or test_user or request.headers.get('X-User-Key') or request.cookies.get('currents_user_key') or None
+    
+    # Get user's country for geo-based trending
+    client_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    if client_ip:
+        client_ip = client_ip.split(',')[0].strip()
+    user_country = get_country_from_ip(client_ip)
+    
+    # Get personalized feed
+    feed = personalizer.get_personalized_feed(user_key=user_key, limit=20, user_country=user_country)
+    
+    logger.info(f"Alternative Homepage: user={user_key}, test_mode={test_user is not None}, personalized={feed.get('personalized', False)}")
     
     # Create response
-    response = app.make_response(render_template('index-v2.html',
+    response = app.make_response(render_template('index-alt.html',
                          hero=feed['hero'],
                          grid=feed['grid'],
                          stream=feed['stream'],
@@ -539,11 +1112,119 @@ def index():
                          test_mode=(test_user is not None)))
     
     # If URL parameter provided, set cookie for future visits
-    if url_user and url_user in ['roy', 'user2', 'user3', 'user4']:
+    if url_user and url_user in ['user1', 'user2', 'user3', 'user4', 'roy']:
         response.set_cookie('currents_test_user', url_user, max_age=7*24*60*60)  # 7 days
         logger.info(f"Set cookie for user: {url_user}")
     
     return response
+
+
+@app.route('/markets')
+def all_markets():
+    """All Markets page with category filtering"""
+    # Get user key
+    test_user = request.cookies.get('currents_test_user')
+    user_key = test_user or request.headers.get('X-User-Key') or request.cookies.get('currents_user_key') or None
+    
+    # Get category filter from URL (if any)
+    category_filter = request.args.get('category')
+    
+    # Detect mobile
+    user_agent = request.headers.get('User-Agent', '').lower()
+    is_mobile = any(x in user_agent for x in ['mobile', 'android', 'iphone', 'ipad', 'tablet'])
+    force_desktop = request.args.get('desktop') == '1'
+    
+    # Get user's country for personalization
+    client_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    if client_ip:
+        client_ip = client_ip.split(',')[0].strip()
+    user_country = get_country_from_ip(client_ip)
+    
+    logger.info(f"All Markets: user={user_key}, category={category_filter}, mobile={is_mobile and not force_desktop}")
+    
+    # Render appropriate template
+    if is_mobile and not force_desktop:
+        return render_template('markets_mobile.html',
+                             user_key=user_key,
+                             category_filter=category_filter)
+    else:
+        return render_template('markets.html',
+                             user_key=user_key,
+                             category_filter=category_filter)
+
+
+@app.route('/api/markets/feed', methods=['POST'])
+def api_markets_feed():
+    """API: Get paginated markets feed with category filtering"""
+    try:
+        data = request.json or {}
+        user_key = data.get('user_key')
+        category = data.get('category')  # None = all markets
+        offset = data.get('offset', 0)
+        limit = data.get('limit', 60)
+        
+        # Get ALL markets from database
+        conn = brain._get_conn()
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        
+        # Filter by category if specified
+        if category and category != 'all':
+            cursor.execute("""
+                SELECT * FROM markets 
+                WHERE status = 'open' AND category = ?
+                ORDER BY created_at DESC
+            """, (category,))
+            all_markets = [dict(row) for row in cursor.fetchall()]
+        else:
+            # For "all" category, implement round-robin distribution for diversity
+            cursor.execute("""
+                SELECT * FROM markets 
+                WHERE status = 'open'
+                ORDER BY created_at DESC
+            """)
+            all_markets_raw = [dict(row) for row in cursor.fetchall()]
+            
+            # Group by category
+            from collections import defaultdict
+            markets_by_category = defaultdict(list)
+            for market in all_markets_raw:
+                markets_by_category[market['category']].append(market)
+            
+            # Round-robin distribution for perfect diversity
+            all_markets = []
+            categories = list(markets_by_category.keys())
+            max_per_category = max(len(markets) for markets in markets_by_category.values())
+            
+            for i in range(max_per_category):
+                for cat in categories:
+                    if i < len(markets_by_category[cat]):
+                        all_markets.append(markets_by_category[cat][i])
+        
+        conn.close()
+        
+        # FILTER OUT YANIV MARKET: Hidden from All Markets page (API endpoint)
+        # Only accessible via main feed with ?yaniv=1 parameter
+        yaniv_market_id = 'yaniv-rain-march-2026'
+        all_markets = [m for m in all_markets if m.get('market_id') != yaniv_market_id]
+        
+        # Paginate
+        total = len(all_markets)
+        paginated = all_markets[offset:offset + limit]
+        has_more = offset + limit < total
+        
+        logger.info(f"Markets feed: category={category}, offset={offset}, limit={limit}, total={total}, returned={len(paginated)}")
+        
+        return jsonify({
+            'markets': paginated,
+            'total': total,
+            'has_more': has_more
+        })
+            
+    except Exception as e:
+        logger.error(f"Markets feed error: {e}", exc_info=True)
+        return jsonify({'error': str(e)}), 500
+
 
 @app.route('/market/<market_id>')
 def market_detail(market_id):
@@ -558,6 +1239,23 @@ def market_detail(market_id):
         if not market:
             logger.info(f"Market not found: {market_id}")
             return "Market not found", 404
+        
+        # DISABLED: Auto-fetch creates mock content from placeholder API endpoints
+        # Re-enable when web_search/web_fetch tools are properly integrated
+        # from article_fetcher import should_refresh_article
+        # try:
+        #     if should_refresh_article(market):
+        #         # Trigger background fetch (non-blocking)
+        #         import threading
+        #         def fetch_bg():
+        #             from article_fetcher import fetch_article_for_market
+        #             fetch_article_for_market(market_id, market['title'])
+        #         
+        #         thread = threading.Thread(target=fetch_bg)
+        #         thread.daemon = True
+        #         thread.start()
+        # except Exception as e:
+        #     logger.warning(f"Article fetch trigger failed: {e}")
         
         related = brain.get_related_markets(market_id)
         return render_template('detail.html',
@@ -613,6 +1311,22 @@ def health():
     """Health check"""
     return jsonify({"status": "ok", "service": "currents-local"})
 
+@app.route('/my-location')
+def my_location():
+    """Show detected IP and country for debugging"""
+    client_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    if client_ip:
+        client_ip = client_ip.split(',')[0].strip()
+    
+    country = get_country_from_ip(client_ip)
+    
+    return jsonify({
+        "ip": client_ip,
+        "country": country,
+        "israel_detected": country == 'IL',
+        "geo_boost_active": country == 'IL'
+    })
+
 @app.route('/filter-test')
 def filter_test():
     """Test page for Jinja filters"""
@@ -639,6 +1353,13 @@ def track_interaction():
         if not market_id or not event_type:
             return jsonify({"error": "market_id and event_type required"}), 400
         
+        # Get geo location from IP
+        client_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+        if client_ip:
+            # X-Forwarded-For can be comma-separated list, get first IP
+            client_ip = client_ip.split(',')[0].strip()
+        geo_country = get_country_from_ip(client_ip)
+        
         # Record interaction
         interaction_id = tracker.record_interaction(
             user_key=user_key,
@@ -646,7 +1367,8 @@ def track_interaction():
             event_type=event_type,
             dwell_ms=dwell_ms,
             section=section,
-            position=position
+            position=position,
+            geo_country=geo_country
         )
         
         logger.info(f"Tracked: {event_type} on {market_id} by {user_key}")
@@ -670,6 +1392,12 @@ def track_batch():
         user_key = data.get('user_key') or request.remote_addr
         events = data.get('events', [])
         
+        # Get geo location once for batch
+        client_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+        if client_ip:
+            client_ip = client_ip.split(',')[0].strip()
+        geo_country = get_country_from_ip(client_ip)
+        
         interaction_ids = []
         for event in events:
             interaction_id = tracker.record_interaction(
@@ -678,7 +1406,8 @@ def track_batch():
                 event_type=event.get('event_type'),
                 dwell_ms=event.get('dwell_ms'),
                 section=event.get('section'),
-                position=event.get('position')
+                position=event.get('position'),
+                geo_country=geo_country
             )
             interaction_ids.append(interaction_id)
         
@@ -750,6 +1479,625 @@ def brain_viewer(subpath=''):
     except Exception as e:
         return f"Database Viewer not available. Make sure db_viewer.py is running on port 5556. Error: {e}", 503
 
+@app.route('/api/trade', methods=['POST'])
+def api_trade():
+    """
+    Simulated trading endpoint (replaces mock Rain API)
+    Client-side JavaScript calls this to simulate trades
+    """
+    try:
+        data = request.get_json()
+        
+        # Extract trade parameters
+        market_id = data.get('market_id')
+        outcome = data.get('outcome')
+        amount = data.get('amount', 0)
+        wallet_address = data.get('wallet_address')
+        wallet_balance = data.get('wallet_balance', 0)
+        
+        # Validation
+        if not market_id or not outcome or not wallet_address:
+            return jsonify({
+                'success': False,
+                'error': 'Missing required fields: market_id, outcome, wallet_address'
+            }), 400
+        
+        if amount <= 0:
+            return jsonify({
+                'success': False,
+                'error': 'Amount must be greater than 0'
+            }), 400
+        
+        if amount > wallet_balance:
+            return jsonify({
+                'success': False,
+                'error': f'Insufficient balance. You have {wallet_balance} USDT but need {amount} USDT'
+            }), 400
+        
+        # Get market probability from database
+        conn = sqlite3.connect('brain.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT probability, title FROM markets WHERE market_id = ?", (market_id,))
+        row = cursor.fetchone()
+        conn.close()
+        
+        if not row:
+            return jsonify({
+                'success': False,
+                'error': f'Market not found: {market_id}'
+            }), 404
+        
+        probability, market_title = row
+        
+        # Calculate simulated trade details
+        # For YES: price = probability, for NO: price = 1 - probability
+        if outcome.upper() == 'YES':
+            execution_price = probability
+        elif outcome.upper() == 'NO':
+            execution_price = 1 - probability
+        else:
+            execution_price = probability  # Default
+        
+        # Calculate shares (simplified: amount / price)
+        shares = round(amount / max(execution_price, 0.01), 2)
+        
+        # Simulated trade result
+        trade_result = {
+            'trade_id': f'sim_{int(time.time() * 1000)}',
+            'market_id': market_id,
+            'market_title': market_title,
+            'outcome': outcome,
+            'amount': amount,
+            'shares': shares,
+            'execution_price': round(execution_price, 4),
+            'timestamp': datetime.now().isoformat(),
+            'status': 'simulated',
+            'wallet_address': wallet_address
+        }
+        
+        app.logger.info(f"Simulated trade: {wallet_address} bought {shares} shares of {outcome} on {market_id} for {amount} USDT")
+        
+        return jsonify({
+            'success': True,
+            'trade': trade_result,
+            'message': 'Trade simulated successfully (no real transaction occurred)'
+        })
+        
+    except Exception as e:
+        app.logger.error(f"Trade error: {str(e)}")
+        return jsonify({
+            'success': False,
+            'error': f'Trade failed: {str(e)}'
+        }), 500
+
+# ============================================
+# Web Search/Fetch API (for article fetcher)
+# ============================================
+
+@app.route('/api/web-search', methods=['POST'])
+def api_web_search():
+    """Search the web using integrated web_search"""
+    try:
+        data = request.json
+        query = data.get('query', '')
+        count = data.get('count', 5)
+        
+        if not query:
+            return jsonify({'error': 'Query required'}), 400
+        
+        # Placeholder - in production this would call actual web_search tool
+        # For now, return mock results
+        return jsonify({
+            'results': [
+                {
+                    'title': f'Article about {query}',
+                    'url': f'https://example.com/article-{query.lower().replace(" ", "-")}',
+                    'snippet': f'This is a comprehensive article about {query}...'
+                }
+            ]
+        })
+    except Exception as e:
+        logger.error(f"Web search error: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/web-fetch', methods=['POST'])
+def api_web_fetch():
+    """Fetch content from URL"""
+    try:
+        data = request.json
+        url = data.get('url', '')
+        
+        if not url:
+            return jsonify({'error': 'URL required'}), 400
+        
+        # Placeholder - in production this would call actual web_fetch tool
+        # For now, return mock content
+        return jsonify({
+            'content': f'# Full article content from {url}\n\nThis is a detailed article about the topic...'
+        })
+    except Exception as e:
+        logger.error(f"Web fetch error: {e}")
+        return jsonify({'error': str(e)}), 500
+
+# ============================================
+# BRain v1 API Endpoints
+# ============================================
+
+@app.route('/api/brain/feed', methods=['POST'])
+def api_brain_feed():
+    """
+    BRain v1 - Get personalized feed with quota enforcement
+    
+    POST /api/brain/feed
+    {
+        "user_key": "wallet_or_userid_or_cookie",
+        "geo_country": "IL",
+        "limit": 30,
+        "cursor": null,
+        "context": {"surface": "home"},
+        "exclude_market_ids": ["m123"],
+        "debug": false
+    }
+    
+    Returns ranked feed + logs impressions server-side
+    """
+    # Check if BRain v1 is enabled
+    if not BRAIN_V1_ENABLED:
+        return jsonify({
+            'error': 'BRain v1 is disabled. Use /api/homepage for old system.',
+            'rollback': True
+        }), 503
+    
+    try:
+        # Import BRain v1 components
+        from feed_composer import feed_composer
+        from impression_tracker import impression_tracker
+        
+        data = request.get_json()
+        
+        user_key = data.get('user_key')
+        if not user_key:
+            return jsonify({'error': 'user_key required'}), 400
+        
+        geo_country = data.get('geo_country')
+        if not geo_country:
+            # Try to get from IP
+            client_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+            if client_ip:
+                client_ip = client_ip.split(',')[0].strip()
+            geo_country = get_country_from_ip(client_ip)
+        
+        limit = data.get('limit', 30)
+        exclude_ids = data.get('exclude_market_ids', [])
+        debug = data.get('debug', False)
+        
+        # Compose feed
+        result = feed_composer.compose_feed(
+            user_key=user_key,
+            geo_bucket=geo_country,
+            limit=limit,
+            exclude_ids=exclude_ids,
+            debug=debug
+        )
+        
+        # Log impressions server-side
+        shown_market_ids = [item['market_id'] for item in result['items']]
+        impression_tracker.log_impressions(user_key, shown_market_ids)
+        
+        app.logger.info(f"[BRain v1] Feed: user={user_key}, geo={geo_country}, items={len(result['items'])}")
+        
+        return jsonify(result)
+        
+    except Exception as e:
+        app.logger.error(f"BRain feed error: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/brain/user/<user_key>', methods=['GET'])
+def api_brain_user(user_key):
+    """
+    BRain v1 - Get user profile for debugging
+    
+    Returns long-term + session state
+    """
+    # Check if BRain v1 is enabled
+    if not BRAIN_V1_ENABLED:
+        return jsonify({
+            'error': 'BRain v1 is disabled',
+            'rollback': True
+        }), 503
+    
+    try:
+        from session_manager import session_manager
+        import sqlite3
+        
+        conn = sqlite3.connect('brain.db')
+        cursor = conn.cursor()
+        
+        # Get long-term scores
+        cursor.execute("""
+            SELECT topic_type, topic_value, score
+            FROM user_topic_scores
+            WHERE user_key = ?
+            ORDER BY score DESC
+        """, (user_key,))
+        
+        long_term = defaultdict(list)
+        for row in cursor.fetchall():
+            topic_type, topic_value, score = row
+            long_term[topic_type].append({
+                'value': topic_value,
+                'score': score
+            })
+        
+        # Get session state
+        session_weights = session_manager.get_session_weights(user_key)
+        
+        # Get interaction counts
+        cutoff_7d = (datetime.now() - timedelta(days=7)).isoformat()
+        cutoff_30d = (datetime.now() - timedelta(days=30)).isoformat()
+        
+        cursor.execute("""
+            SELECT COUNT(*) FROM user_interactions
+            WHERE user_key = ? AND event_type != 'impression' AND ts > ?
+        """, (user_key, cutoff_7d))
+        interactions_7d = cursor.fetchone()[0]
+        
+        cursor.execute("""
+            SELECT COUNT(*) FROM user_interactions
+            WHERE user_key = ? AND event_type != 'impression' AND ts > ?
+        """, (user_key, cutoff_30d))
+        interactions_30d = cursor.fetchone()[0]
+        
+        # Get recently shown markets
+        cursor.execute("""
+            SELECT market_id, impressions_24h, last_shown_at
+            FROM user_market_impressions
+            WHERE user_key = ?
+            ORDER BY last_shown_at DESC
+            LIMIT 20
+        """, (user_key,))
+        
+        recent_shown = [
+            {
+                'market_id': row[0],
+                'impressions_24h': row[1],
+                'last_shown_at': row[2]
+            }
+            for row in cursor.fetchall()
+        ]
+        
+        conn.close()
+        
+        return jsonify({
+            'user_key': user_key,
+            'long_term': {
+                'categories': long_term['category'][:10],
+                'tags': long_term['tag'][:20]
+            },
+            'session': session_weights,
+            'interactions': {
+                '7d': interactions_7d,
+                '30d': interactions_30d
+            },
+            'recent_shown': recent_shown
+        })
+        
+    except Exception as e:
+        app.logger.error(f"BRain user error: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/brain/trending', methods=['GET'])
+def api_brain_trending():
+    """
+    BRain v1 - Get trending markets
+    
+    GET /api/brain/trending?scope=global&geo_country=IL&window=1h
+    """
+    # Check if BRain v1 is enabled
+    if not BRAIN_V1_ENABLED:
+        return jsonify({
+            'error': 'BRain v1 is disabled',
+            'rollback': True
+        }), 503
+    
+    try:
+        scope = request.args.get('scope', 'global')
+        geo_country = request.args.get('geo_country', '')
+        limit = int(request.args.get('limit', 50))
+        
+        # Build geo_bucket
+        if scope == 'local' and geo_country:
+            geo_bucket = geo_country
+        else:
+            geo_bucket = 'GLOBAL'
+        
+        conn = sqlite3.connect('brain.db')
+        cursor = conn.cursor()
+        
+        cursor.execute("""
+            SELECT m.market_id, m.title, m.category,
+                   v.trades_1h, v.views_1h, v.odds_change_1h
+            FROM market_velocity_rollups v
+            JOIN markets m ON v.market_id = m.market_id
+            WHERE v.geo_bucket = ?
+            ORDER BY (v.trades_1h * 0.7 + v.views_1h * 0.3) DESC
+            LIMIT ?
+        """, (geo_bucket, limit))
+        
+        trending = [
+            {
+                'market_id': row[0],
+                'title': row[1],
+                'category': row[2],
+                'trades_1h': row[3],
+                'views_1h': row[4],
+                'odds_change_1h': row[5]
+            }
+            for row in cursor.fetchall()
+        ]
+        
+        conn.close()
+        
+        return jsonify({
+            'trending': trending,
+            'geo_bucket': geo_bucket
+        })
+        
+    except Exception as e:
+        app.logger.error(f"BRain trending error: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/coming-soon')
+def coming_soon():
+    """Coming Soon / Waiting List page"""
+    # Get user IP (handle proxy headers from ngrok)
+    user_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    if user_ip and ',' in user_ip:
+        user_ip = user_ip.split(',')[0].strip()
+    
+    # Check if user is from Israel
+    country_code = get_country_from_ip(user_ip)
+    show_site_link = (country_code == 'IL')
+    
+    logger.info(f"Coming Soon page: IP={user_ip}, Country={country_code}, ShowLink={show_site_link}")
+    
+    return render_template('coming_soon.html', show_site_link=show_site_link)
+
+
+@app.route('/api/waitlist/submit', methods=['POST'])
+def waitlist_submit():
+    """
+    Submit waitlist entry with belief choice and email
+    Handles test email override and duplicate checking
+    """
+    try:
+        data = request.json
+        email = data.get('email', '').strip().lower()
+        belief_choice = data.get('belief_choice', '').upper()
+        device_type = data.get('device_type', 'unknown')
+        locale = data.get('locale', 'en-US')
+        
+        # Validate belief choice
+        if belief_choice not in ['YES', 'NO', 'MARCH', 'APRIL', 'MAY', 'LATER']:
+            return jsonify({'error': 'Invalid belief choice'}), 400
+        
+        # Check for test email override
+        is_test = (email == 'testtt')
+        
+        # Email validation (skip for test email)
+        if not is_test:
+            if not email or '@' not in email or '.' not in email.split('@')[1]:
+                return jsonify({'error': 'Please enter a valid email address'}), 400
+        
+        # Get request metadata
+        user_agent = request.headers.get('User-Agent', '')
+        ip_address = request.headers.get('X-Forwarded-For', request.remote_addr)
+        if ip_address:
+            ip_address = ip_address.split(',')[0].strip()
+        
+        # Rate limiting (skip for test email)
+        if not is_test:
+            current_time = time.time()
+            
+            # Clean old timestamps outside the window
+            WAITLIST_RATE_LIMIT[ip_address] = [
+                ts for ts in WAITLIST_RATE_LIMIT[ip_address] 
+                if current_time - ts < RATE_LIMIT_WINDOW
+            ]
+            
+            # Check if limit exceeded
+            if len(WAITLIST_RATE_LIMIT[ip_address]) >= RATE_LIMIT_MAX:
+                app.logger.warning(f"⚠️  Rate limit exceeded for IP: {ip_address}")
+                return jsonify({
+                    'error': 'Too many submissions from this location. Please try again in an hour.'
+                }), 429
+            
+            # Add current timestamp
+            WAITLIST_RATE_LIMIT[ip_address].append(current_time)
+        
+        conn = sqlite3.connect('brain.db')
+        cursor = conn.cursor()
+        
+        # Check for duplicates (skip for test email)
+        if not is_test:
+            cursor.execute("""
+                SELECT id FROM waitlist_submissions 
+                WHERE email = ? AND is_test_submission = 0
+            """, (email,))
+            
+            existing = cursor.fetchone()
+            if existing:
+                conn.close()
+                return jsonify({
+                    'error': 'This email is already on the Currents waiting list.',
+                    'secondary': 'We\'ll notify you when the outcome is known.'
+                }), 409
+        
+        # Insert submission
+        cursor.execute("""
+            INSERT INTO waitlist_submissions 
+            (email, belief_choice, device_type, locale, is_test_submission, user_agent, ip_address)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (email, belief_choice, device_type, locale, 1 if is_test else 0, user_agent, ip_address))
+        
+        submission_id = cursor.lastrowid
+        
+        # Get waitlist position (count of ALL submissions + 0 to start at 50 with seed data)
+        cursor.execute("""
+            SELECT COUNT(*) FROM waitlist_submissions
+        """)
+        total_count = cursor.fetchone()[0]
+        waitlist_position = total_count
+        
+        # Get belief percentages (all submissions including test)
+        cursor.execute("""
+            SELECT belief_choice, COUNT(*) as count
+            FROM waitlist_submissions
+            GROUP BY belief_choice
+        """)
+        belief_counts = {row[0]: row[1] for row in cursor.fetchall()}
+        march_count = belief_counts.get('MARCH', 0)
+        april_count = belief_counts.get('APRIL', 0)
+        may_count = belief_counts.get('MAY', 0)
+        later_count = belief_counts.get('LATER', 0)
+        total = march_count + april_count + may_count + later_count
+        
+        march_percentage = round((march_count / total * 100)) if total > 0 else 25
+        april_percentage = round((april_count / total * 100)) if total > 0 else 25
+        may_percentage = round((may_count / total * 100)) if total > 0 else 25
+        later_percentage = round((later_count / total * 100)) if total > 0 else 25
+        
+        conn.commit()
+        conn.close()
+        
+        app.logger.info(f"✅ Waitlist submission: {email} → {belief_choice} (test={is_test}, id={submission_id}, position={waitlist_position}, march={march_percentage}%, april={april_percentage}%, may={may_percentage}%, later={later_percentage}%)")
+        
+        # TODO: Send confirmation email
+        # If is_test=True, send to roy@rain.one
+        # Otherwise send to the actual email
+        
+        return jsonify({
+            'success': True,
+            'submission_id': submission_id,
+            'belief': belief_choice,
+            'position': waitlist_position,
+            'march_percentage': march_percentage,
+            'april_percentage': april_percentage,
+            'may_percentage': may_percentage,
+            'later_percentage': later_percentage
+        }), 200
+        
+    except Exception as e:
+        app.logger.error(f"❌ Waitlist submission error: {str(e)}")
+        return jsonify({'error': 'An error occurred. Please try again.'}), 500
+
+
+@app.route('/api/waitlist/percentages')
+def waitlist_percentages():
+    """Get current belief percentages (for displaying on buttons)"""
+    try:
+        conn = sqlite3.connect('brain.db')
+        cursor = conn.cursor()
+        
+        # Get belief counts (all submissions including test)
+        cursor.execute("""
+            SELECT belief_choice, COUNT(*) as count
+            FROM waitlist_submissions
+            GROUP BY belief_choice
+        """)
+        belief_counts = {row[0]: row[1] for row in cursor.fetchall()}
+        
+        conn.close()
+        
+        march_count = belief_counts.get('MARCH', 0)
+        april_count = belief_counts.get('APRIL', 0)
+        may_count = belief_counts.get('MAY', 0)
+        later_count = belief_counts.get('LATER', 0)
+        total = march_count + april_count + may_count + later_count
+        
+        march_percentage = round((march_count / total * 100)) if total > 0 else 25
+        april_percentage = round((april_count / total * 100)) if total > 0 else 25
+        may_percentage = round((may_count / total * 100)) if total > 0 else 25
+        later_percentage = round((later_count / total * 100)) if total > 0 else 25
+        
+        return jsonify({
+            'march_percentage': march_percentage,
+            'april_percentage': april_percentage,
+            'may_percentage': may_percentage,
+            'later_percentage': later_percentage,
+            'march_count': march_count,
+            'april_count': april_count,
+            'may_count': may_count,
+            'later_count': later_count,
+            'total_submissions': total
+        })
+        
+    except Exception as e:
+        app.logger.error(f"Waitlist percentages error: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/waitlist/stats')
+def waitlist_stats():
+    """Get waitlist statistics (for admin/monitoring)"""
+    try:
+        conn = sqlite3.connect('brain.db')
+        cursor = conn.cursor()
+        
+        # Total submissions (excluding test)
+        cursor.execute("""
+            SELECT COUNT(*) FROM waitlist_submissions 
+            WHERE is_test_submission = 0
+        """)
+        total = cursor.fetchone()[0]
+        
+        # YES count
+        cursor.execute("""
+            SELECT COUNT(*) FROM waitlist_submissions 
+            WHERE belief_choice = 'YES' AND is_test_submission = 0
+        """)
+        yes_count = cursor.fetchone()[0]
+        
+        # NO count
+        cursor.execute("""
+            SELECT COUNT(*) FROM waitlist_submissions 
+            WHERE belief_choice = 'NO' AND is_test_submission = 0
+        """)
+        no_count = cursor.fetchone()[0]
+        
+        # Device breakdown
+        cursor.execute("""
+            SELECT device_type, COUNT(*) 
+            FROM waitlist_submissions 
+            WHERE is_test_submission = 0
+            GROUP BY device_type
+        """)
+        devices = {row[0]: row[1] for row in cursor.fetchall()}
+        
+        conn.close()
+        
+        return jsonify({
+            'total': total,
+            'yes': yes_count,
+            'no': no_count,
+            'yes_percentage': round(yes_count / total * 100, 1) if total > 0 else 0,
+            'no_percentage': round(no_count / total * 100, 1) if total > 0 else 0,
+            'devices': devices
+        })
+        
+    except Exception as e:
+        app.logger.error(f"Waitlist stats error: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/diagnostic')
+def diagnostic():
+    """Diagnostic page for troubleshooting mobile feed"""
+    return render_template('diagnostic.html')
+
 if __name__ == '__main__':
     print("🌊 Currents starting...")
     
@@ -784,3 +2132,4 @@ if __name__ == '__main__':
     print("")
     
     app.run(host=host, port=port, debug=debug)
+

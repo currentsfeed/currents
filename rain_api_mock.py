@@ -301,16 +301,70 @@ def platform_stats():
         "avg_market_volume": round(sum(m['volume_24h'] for m in FAKE_MARKETS.values()) / len(FAKE_MARKETS), 2)
     })
 
+@app.route('/api/v1/trade', methods=['POST'])
+def place_trade():
+    """Simulated trade placement - checks balance but doesn't execute on chain"""
+    data = request.get_json()
+    
+    # Required fields
+    market_id = data.get('market_id')
+    outcome = data.get('outcome')
+    amount = float(data.get('amount', 0))
+    wallet_address = data.get('wallet_address')
+    wallet_balance = float(data.get('wallet_balance', 0))
+    
+    # Validation
+    if not all([market_id, outcome, amount, wallet_address]):
+        return jsonify({
+            "success": False,
+            "error": "Missing required fields: market_id, outcome, amount, wallet_address"
+        }), 400
+    
+    # Check if enough balance
+    if amount > wallet_balance:
+        return jsonify({
+            "success": False,
+            "error": f"Insufficient balance. You have {wallet_balance} ETH but need {amount} ETH",
+            "balance_check": False
+        }), 400
+    
+    # Simulate successful trade
+    trade_id = f"trade_{random.randint(100000, 999999)}"
+    execution_price = round(random.uniform(0.4, 0.7), 4)
+    shares = round(amount / execution_price, 2)
+    
+    # Store fake trade
+    fake_trade = {
+        "trade_id": trade_id,
+        "market_id": market_id,
+        "outcome": outcome,
+        "amount": amount,
+        "shares": shares,
+        "execution_price": execution_price,
+        "wallet_address": wallet_address,
+        "timestamp": datetime.now().isoformat(),
+        "status": "simulated"  # Not a real blockchain transaction
+    }
+    FAKE_TRADES.append(fake_trade)
+    
+    return jsonify({
+        "success": True,
+        "trade": fake_trade,
+        "balance_check": True,
+        "message": f"Trade simulated successfully! Bought {shares} shares of '{outcome}' for {amount} ETH"
+    }), 200
+
 if __name__ == '__main__':
     print("🌧️  Rain Protocol Mock API starting...")
     print("📊 Generated {} fake markets".format(len(FAKE_MARKETS)))
     print("🚀 Running on http://0.0.0.0:5000")
     print("📖 Endpoints:")
-    print("   GET /api/v1/health")
-    print("   GET /api/v1/markets")
-    print("   GET /api/v1/markets/{market_id}")
-    print("   GET /api/v1/user/{user_id}/positions")
-    print("   GET /api/v1/trades")
-    print("   GET /api/v1/leaderboard")
-    print("   GET /api/v1/stats")
+    print("   GET  /api/v1/health")
+    print("   GET  /api/v1/markets")
+    print("   GET  /api/v1/markets/{market_id}")
+    print("   GET  /api/v1/user/{user_id}/positions")
+    print("   GET  /api/v1/trades")
+    print("   GET  /api/v1/leaderboard")
+    print("   GET  /api/v1/stats")
+    print("   POST /api/v1/trade (simulated trading)")
     app.run(host='0.0.0.0', port=5000, debug=False)

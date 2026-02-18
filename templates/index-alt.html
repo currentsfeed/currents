@@ -1,0 +1,780 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- User Switcher (Test Mode) -->
+{% include 'user_switcher.html' %}
+
+<!-- Ticker Bar -->
+<div class="bg-gray-900/50 border-b border-gray-800 overflow-hidden">
+    <div class="ticker-scroll flex items-center gap-8 py-2 px-4">
+        {% for market in grid[:6] %}
+        <a href="/market/{{ market.market_id }}" class="flex items-center gap-3 whitespace-nowrap hover:opacity-75 transition">
+            <span class="text-sm text-gray-400">{{ market.title[:50] }}...</span>
+            {% if market.probability > 0.5 %}
+            <span class="text-green-400 font-medium">{{ (market.probability * 100)|int }}%</span>
+            <span class="text-green-500 text-xs">+{{ ((market.probability - 0.5) * 20)|round(1) }}%</span>
+            {% else %}
+            <span class="text-red-400 font-medium">{{ (market.probability * 100)|int }}%</span>
+            <span class="text-red-500 text-xs">{{ ((market.probability - 0.5) * 20)|round(1) }}%</span>
+            {% endif %}
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.ticker-scroll {
+    animation: scroll 30s linear infinite;
+}
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+</style>
+
+<!-- Personalization Indicator -->
+{% if personalized %}
+<div class="bg-gradient-to-r from-orange-900/30 to-blue-900/30 border-b border-orange-500/20 py-2">
+    <div class="container mx-auto px-4">
+        <div class="flex items-center justify-center gap-2 text-sm">
+            <span class="text-orange-400">🎯</span>
+            <span class="text-gray-300">Personalized feed based on your interests</span>
+            <a href="/tracking-admin" class="text-blue-400 hover:text-blue-300 text-xs underline ml-2">View your profile</a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Hero Section (Full Width) -->
+{% if hero %}
+{% for market in hero %}
+<section class="mb-4 w-full">
+    <a href="/market/{{ market.market_id }}" class="block group" data-tags="{{ market.tags|join(',') if market.tags else '' }}" data-category="{{ market.category }}">
+        <!-- Responsive height: MUCH smaller on mobile, larger on desktop -->
+        <div class="relative h-[350px] sm:h-[450px] md:h-[550px] lg:h-[600px] w-full overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+            <!-- Background Image (if available) -->
+            {% if market.image_url and not market.image_url.startswith('data:') %}
+            <img src="{{ market.image_url }}" 
+                 alt="{{ market.title }}"
+                 class="absolute inset-0 w-full h-full object-cover opacity-90 brightness-110 group-hover:scale-105 transition duration-700"
+                 onerror="this.style.display='none'">
+            {% endif %}
+            
+            <!-- Multi-layer vignette overlay (Figma reference) -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent"></div>
+            
+            <!-- Content: Responsive padding -->
+            <div class="absolute inset-0 p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-end">
+                <!-- Probability Badge: Responsive positioning and sizing -->
+                <div class="absolute top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8">
+                    <div class="bg-black/70 backdrop-blur-lg px-1.5 py-0.5 sm:px-2 sm:py-1 md:px-2.5 md:py-1.5 rounded-xl border border-white/10">
+                        {% if market.market_type == 'multiple' and market.top_options %}
+                        <!-- Multi-option: show leading option -->
+                        <div class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">{{ (market.top_options[0]['probability'] * 100)|int }}%</div>
+                        <div class="text-xs sm:text-sm text-gray-400 mt-0.5 md:mt-1">{{ market.top_options[0]['option_text'][:15] }}</div>
+                        <div class="text-green-500 text-sm sm:text-base md:text-lg font-medium mt-0.5 md:mt-1">Leading</div>
+                        {% else %}
+                        <!-- Binary: show Yes/No -->
+                        <div class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">{{ (market.probability * 100)|int }}%</div>
+                        <div class="text-xs sm:text-sm text-gray-400 mt-0.5 md:mt-1 line-clamp-1">Lean "{% if market.probability > 0.5 %}Yes{% else %}No{% endif %}"</div>
+                        <div class="{% if market.probability > 0.5 %}text-green-500{% else %}text-red-500{% endif %} text-sm sm:text-base md:text-lg font-medium mt-0.5 md:mt-1">
+                            {% if market.probability > 0.5 %}+{% endif %}{{ ((market.probability - 0.5) * 20)|round(1) }}%
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Title with Like Button: Smaller on mobile, better line breaks -->
+                <div class="flex items-start gap-3 mb-2 sm:mb-3 md:mb-6 max-w-[85%] sm:max-w-4xl md:max-w-5xl pr-4 sm:pr-8 md:pr-0">
+                    <h1 class="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight flex-1">
+                        {{ market.title }}
+                    </h1>
+                    <button onclick="likeMarket('{{ market.market_id }}', this); event.preventDefault();" 
+                            class="like-btn flex-shrink-0 mt-1 group"
+                            data-market-id="{{ market.market_id }}">
+                        <svg class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path class="text-gray-400 group-hover:text-red-400 transition" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Description: Hide on very small screens, show on sm+ -->
+                <p class="hidden sm:block text-white/80 text-xs sm:text-sm md:text-base font-normal mb-3 sm:mb-4 md:mb-6 max-w-xl md:max-w-2xl">
+                    {{ market.description[:150] }}...
+                </p>
+                
+                <!-- Belief Currents Chart - Roy's Dynamic Version - Mobile Responsive -->
+                <div class="bg-black/80 backdrop-blur-md rounded-lg md:rounded-xl p-2 sm:p-3 max-w-full sm:max-w-3xl md:max-w-4xl mb-2">
+                    <div class="flex items-center justify-between mb-1">
+                        <div class="text-xs text-gray-400 uppercase tracking-wider">BELIEF CURRENTS</div>
+                        <div class="text-[8px] text-gray-500">{{ market.created_at[:10] }} → Now</div>
+                    </div>
+                    
+                    <!-- Time-based flowing gradient (dynamic based on market behavior) -->
+                    <div class="h-3 bg-gray-800 rounded-full overflow-hidden mb-1 relative">
+                        <div class="absolute inset-0 rounded-full" style="background: {{ market|belief_gradient }}"></div>
+                    </div>
+                    
+                    <!-- Timeline labels with dividers (dynamically calculated) -->
+                    {% set points = market.created_at|timeline_points %}
+                    <div class="flex items-center justify-between text-[8px] text-gray-500 mb-1 px-1">
+                        {% for point in points %}
+                            <span>{{ point }}</span>
+                            {% if not loop.last %}
+                                <span class="text-gray-700">|</span>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Current belief breakdown -->
+                    {% if market.market_type == 'multiple' and market.top_options %}
+                    <!-- Multi-option market: show top 3 options with dynamic colors -->
+                    <div class="grid grid-cols-3 gap-1.5 mb-0.5">
+                        {% for opt in market.top_options[:3] %}
+                        <div>
+                            <div class="flex items-center gap-1 mb-0">
+                                <div class="w-2 h-2 rounded-full bg-gradient-to-r {{ loop.index0|option_color }}"></div>
+                                <span class="text-xs text-gray-300">{{ opt['option_text'][:15] }}</span>
+                            </div>
+                            <div class="text-sm font-bold">{{ (opt['probability'] * 100)|int }}%</div>
+                            <div class="h-1 bg-gray-800 rounded-full overflow-hidden mt-0.5">
+                                <div class="h-full bg-gradient-to-r {{ loop.index0|option_color }}" 
+                                     style="width: {{ (opt['probability'] * 100) }}%"></div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <!-- Binary market: Yes/No/Trend -->
+                    <div class="grid grid-cols-3 gap-2 mb-0.5">
+                        <div>
+                            <div class="flex items-center gap-1 mb-0">
+                                <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                <span class="text-sm text-gray-300">Yes</span>
+                            </div>
+                            <div class="text-2xl font-bold">{{ (market.probability * 100)|int }}%</div>
+                            <div class="text-green-500 text-sm">+{{ ((market.probability - 0.5) * 20)|round(1) }}%</div>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1 mb-0">
+                                <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                                <span class="text-sm text-gray-300">No</span>
+                            </div>
+                            <div class="text-2xl font-bold">{{ ((1 - market.probability) * 100)|int }}%</div>
+                            <div class="text-red-500 text-sm">{{ ((market.probability - 0.5) * -20)|round(1) }}%</div>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1 mb-0">
+                                <div class="w-2 h-2 rounded-full bg-gray-500"></div>
+                                <span class="text-sm text-gray-300">Trend</span>
+                            </div>
+                            <div class="text-xs font-bold text-green-400">↗ Rising</div>
+                            <div class="text-xs text-gray-500">Belief strengthening</div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Stats -->
+                    <div class="flex items-center justify-between mt-0.5">
+                        <div class="flex items-center gap-4 text-xs text-gray-400">
+                            <span class="flex items-center gap-2">
+                                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                                </svg>
+                                {{ market.participant_count|format_number }} voices
+                            </span>
+                            <span class="flex items-center gap-2">
+                                <span>💰</span>
+                                ${{ (market.volume_total / 1000000)|round(1) }}M volume
+                            </span>
+                        </div>
+                        <button class="px-3 py-1 bg-orange-600 hover:bg-orange-700 rounded-md font-medium text-xs transition flex items-center gap-2">
+                            Place Position →
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Timestamp -->
+                <div class="text-gray-500 text-sm mt-4">
+                    ⏱ Updated just now
+                </div>
+            </div>
+        </div>
+    </a>
+</section>
+{% endfor %}
+{% endif %}
+
+<!-- Content Container -->
+<div class="container mx-auto px-4 py-8">
+
+<!-- Category Filters -->
+<div class="flex items-center gap-3 mb-8">
+    <button class="px-5 py-2 bg-orange-600 text-white rounded-full font-medium text-sm hover:bg-orange-700 transition">
+        All
+    </button>
+    <button class="px-5 py-2 bg-gray-800 text-gray-300 rounded-full font-medium text-sm hover:bg-gray-700 transition">
+        World
+    </button>
+    <button class="px-5 py-2 bg-gray-800 text-gray-300 rounded-full font-medium text-sm hover:bg-gray-700 transition">
+        Technology
+    </button>
+    <button class="px-5 py-2 bg-gray-800 text-gray-300 rounded-full font-medium text-sm hover:bg-gray-700 transition">
+        Markets
+    </button>
+    <button class="px-5 py-2 bg-gray-800 text-gray-300 rounded-full font-medium text-sm hover:bg-gray-700 transition">
+        Politics
+    </button>
+    <button class="px-5 py-2 bg-gray-800 text-gray-300 rounded-full font-medium text-sm hover:bg-gray-700 transition">
+        Sports
+    </button>
+</div>
+
+<!-- Featured + Grid Section -->
+{% if grid and grid|length >= 5 %}
+<section class="mb-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+        <!-- Featured Market (Left) - ALTERNATIVE: Full Card Image with Text Overlay -->
+        <a href="/market/{{ grid[0].market_id }}" class="block group">
+            <div class="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-orange-500/50 transition-all h-full">
+                <!-- Full Card Image with Text Overlay -->
+                <div class="relative h-[600px]">
+                <img src="{{ grid[0].image_url }}" 
+                     class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                
+                <!-- Strong Gradient Overlay (MUCH darker at bottom for text readability) -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-black/85 to-transparent"></div>
+                
+                <!-- Category Badge -->
+                <div class="absolute top-4 left-4">
+                    <span class="px-2.5 py-1 {{ grid[0].category|category_color }} text-[10px] font-medium rounded-lg uppercase tracking-wide backdrop-blur-sm">
+                        {{ grid[0].category }}
+                    </span>
+                </div>
+                
+                <!-- Probability Badge -->
+                <div class="absolute top-4 right-4 px-2.5 py-1.5 bg-black/90 backdrop-blur-lg rounded-xl border border-white/10">
+                    {% if grid[0].market_type == 'multiple' and grid[0].top_options %}
+                    <div class="text-3xl font-bold">{{ (grid[0].top_options[0]['probability'] * 100)|int }}%</div>
+                    <div class="text-xs text-gray-400 truncate max-w-[100px]">
+                        {{ grid[0].top_options[0]['option_text'][:15] }}
+                    </div>
+                    <div class="text-green-500 text-sm font-medium">Leading</div>
+                    {% else %}
+                    <div class="text-3xl font-bold">{{ (grid[0].probability * 100)|int }}%</div>
+                    <div class="text-xs text-gray-400">
+                        Lean to {% if grid[0].probability > 0.5 %}"Yes"{% else %}"No"{% endif %}
+                    </div>
+                    <div class="{% if grid[0].probability > 0.5 %}text-green-500{% else %}text-red-500{% endif %} text-sm font-medium">
+                        {% if grid[0].probability > 0.5 %}+{% endif %}{{ ((grid[0].probability - 0.5) * 20)|round(1) }}%
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Content Overlay (at bottom in dark gradient area) -->
+                <div class="absolute bottom-0 left-0 right-0 p-6">
+                <!-- Editorial Description -->
+                {% if grid[0].editorial_description %}
+                <p class="text-sm text-white/75 font-normal mb-3 leading-relaxed">
+                    {{ grid[0].editorial_description }}
+                </p>
+                {% endif %}
+                
+                <div class="flex items-start gap-2 mb-3">
+                    <h2 class="font-semibold text-xl tracking-tight flex-1 group-hover:text-orange-400 transition">
+                        {{ grid[0].title }}
+                    </h2>
+                    <button onclick="likeMarket('{{ grid[0].market_id }}', this); event.preventDefault();" 
+                            class="like-btn flex-shrink-0 group/like"
+                            data-market-id="{{ grid[0].market_id }}">
+                        <svg class="w-5 h-5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path class="text-gray-400 group-hover/like:text-red-400 transition" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Belief Currents (larger version) -->
+                <div class="bg-black/40 rounded-lg p-2.5 mb-3">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold">BELIEF CURRENTS</div>
+                        <div class="text-[8px] text-gray-500">{{ grid[0].created_at[:10] }} → Now</div>
+                    </div>
+                    
+                    <div class="h-2.5 bg-gray-800 rounded-full overflow-hidden mb-1.5 relative">
+                        <div class="absolute inset-0 rounded-full" style="background: {{ grid[0]|belief_gradient }}"></div>
+                    </div>
+                    
+                    {% set points = grid[0].created_at|timeline_points %}
+                    <div class="flex items-center justify-between text-[8px] text-gray-500 mb-2">
+                        {% for point in points %}
+                            <span>{{ point }}</span>
+                            {% if not loop.last %}<span class="text-gray-700">|</span>{% endif %}
+                        {% endfor %}
+                    </div>
+                    
+                    {% if grid[0].market_type == 'multiple' and grid[0].top_options %}
+                    <div class="grid grid-cols-3 gap-2">
+                        {% for opt in grid[0].top_options[:3] %}
+                        <div class="text-center">
+                            <div class="w-3 h-3 rounded-full mx-auto mb-1" style="background: {{ loop.index0|option_color }}"></div>
+                            <div class="text-xs font-semibold">{{ (opt['probability'] * 100)|int }}%</div>
+                            <div class="text-[8px] text-gray-500 truncate">{{ opt['option_text'][:10] }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="flex justify-between text-xs">
+                        <div class="flex items-center gap-1.5">
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <span class="font-semibold">Yes {{ (grid[0].probability * 100)|int }}%</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <span class="font-semibold">No {{ ((1 - grid[0].probability) * 100)|int }}%</span>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Stats -->
+                <div class="flex justify-between text-xs text-white/60">
+                    <span>{{ (grid[0].volume_24h / 1000)|round(1) }}K volume</span>
+                    <span class="flex items-center gap-1">
+                        {% if grid[0].probability > 0.5 %}
+                        <span class="text-green-500">▲</span>
+                        {% else %}
+                        <span class="text-red-500">▼</span>
+                        {% endif %}
+                        Rising
+                    </span>
+                </div>
+                </div>
+                <!-- End Content Overlay -->
+            </div>
+            <!-- End Full Card Image -->
+        </div>
+        </a>
+        
+        <!-- 2x2 Grid (Right) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {% for market in grid[1:5] %}
+            <a href="/market/{{ market.market_id }}" class="block group" data-tags="{{ market.tags|join(',') if market.tags else '' }}" data-category="{{ market.category }}">
+                <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-orange-500/50 transition-all h-full">
+                    <!-- Full Card Image with Text Overlay -->
+                    <div class="relative h-[400px]">
+                        <img src="{{ market.image_url }}" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                        
+                        <!-- Strong Gradient Overlay (darker at bottom) -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        
+                        <!-- Category Badge -->
+                        <div class="absolute top-3 left-3">
+                            <span class="px-2 py-0.5 {{ market.category|category_color }} text-[9px] font-medium rounded-lg uppercase tracking-wide backdrop-blur-sm">
+                                {{ market.category }}
+                            </span>
+                        </div>
+                        
+                        <!-- Probability Badge -->
+                        <div class="absolute top-3 right-3 px-2 py-1 bg-black/90 backdrop-blur-lg rounded-lg border border-white/10">
+                            {% if market.market_type == 'multiple' and market.top_options %}
+                            <div class="text-2xl font-bold">{{ (market.top_options[0]['probability'] * 100)|int }}%</div>
+                            <div class="text-[9px] text-gray-400 truncate max-w-[80px]">
+                                {{ market.top_options[0]['option_text'][:12] }}
+                            </div>
+                            <div class="text-green-500 text-[10px] font-medium">Leading</div>
+                            {% else %}
+                            <div class="text-2xl font-bold">{{ (market.probability * 100)|int }}%</div>
+                            <div class="text-[9px] text-gray-400">
+                                {% if market.probability > 0.5 %}"Yes"{% else %}"No"{% endif %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Content Overlay (at bottom) -->
+                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                        <!-- Editorial Description -->
+                        {% if market.editorial_description %}
+                        <p class="text-[10px] text-white/75 font-normal mb-2 line-clamp-2 leading-relaxed">
+                            {{ market.editorial_description }}
+                        </p>
+                        {% endif %}
+                        
+                        <div class="flex items-start gap-2 mb-2">
+                            <h3 class="font-semibold text-sm tracking-tight flex-1 line-clamp-2 group-hover:text-orange-400 transition">
+                                {{ market.title }}
+                            </h3>
+                            <button onclick="likeMarket('{{ market.market_id }}', this); event.preventDefault();" 
+                                    class="like-btn flex-shrink-0 group/like"
+                                    data-market-id="{{ market.market_id }}">
+                                <svg class="w-4 h-4 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path class="text-gray-400 group-hover/like:text-red-400 transition" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <!-- Belief Currents (compact) -->
+                        <div class="bg-black/40 rounded-lg p-2 mb-2">
+                            <div class="flex items-center justify-between mb-1">
+                                <div class="text-[8px] text-gray-400 uppercase tracking-wider font-semibold">CURRENTS</div>
+                                <div class="text-[6px] text-gray-500">{{ market.created_at[:10] }}</div>
+                            </div>
+                            
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden mb-1 relative">
+                                <div class="absolute inset-0 rounded-full" style="background: {{ market|belief_gradient }}"></div>
+                            </div>
+                            
+                            {% if market.market_type == 'multiple' and market.top_options %}
+                            <div class="flex gap-1 justify-center">
+                                {% for opt in market.top_options[:3] %}
+                                <div class="text-center">
+                                    <div class="w-1.5 h-1.5 rounded-full mx-auto" style="background: {{ loop.index0|option_color }}"></div>
+                                    <div class="text-[7px] font-semibold">{{ (opt['probability'] * 100)|int }}%</div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            <div class="flex justify-between text-[8px]">
+                                <span class="text-green-500 font-semibold">{{ (market.probability * 100)|int }}%</span>
+                                <span class="text-red-500 font-semibold">{{ ((1 - market.probability) * 100)|int }}%</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Stats -->
+                        <div class="flex justify-between text-[10px] text-white/60">
+                            <span>${{ (market.volume_24h / 1000)|round(1) }}K volume</span>
+                            <span class="flex items-center gap-1">
+                                {% if market.probability > 0.5 %}
+                                <span class="text-green-500">▲</span>
+                                {% else %}
+                                <span class="text-red-500">▼</span>
+                                {% endif %}
+                                Rising
+                            </span>
+                        </div>
+                        </div>
+                        <!-- End Content Overlay -->
+                    </div>
+                    <!-- End Full Card Image -->
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Remaining Grid Section -->
+<section class="mb-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {% for market in grid[5:] %}
+        <a href="/market/{{ market.market_id }}" class="block group" data-tags="{{ market.tags|join(',') if market.tags else '' }}" data-category="{{ market.category }}">
+            <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-orange-500/50 transition-all h-full">
+                <!-- Full Card Image with Text Overlay -->
+                <div class="relative h-[450px]">
+                    <img src="{{ market.image_url }}" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                    
+                    <!-- Strong Gradient Overlay (darker at bottom) -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    
+                    <!-- Category Badge -->
+                    <div class="absolute top-3 left-3">
+                        <span class="px-2 py-0.5 {{ market.category|category_color }} text-[10px] font-medium rounded-lg uppercase tracking-wide backdrop-blur-sm">
+                            {{ market.category }}
+                        </span>
+                    </div>
+                    
+                    <!-- Probability Badge -->
+                    <div class="absolute top-3 right-3 px-2 py-1 bg-black/90 backdrop-blur-lg rounded-lg border border-white/10">
+                        {% if market.market_type == 'multiple' and market.top_options %}
+                        <!-- Multi-option: show leading option -->
+                        <div class="text-2xl font-bold">{{ (market.top_options[0]['probability'] * 100)|int }}%</div>
+                        <div class="text-xs text-gray-400 truncate max-w-[100px]">
+                            {{ market.top_options[0]['option_text'][:15] }}
+                        </div>
+                        <div class="text-green-500 text-sm font-medium">Leading</div>
+                        {% else %}
+                        <!-- Binary: show Yes/No -->
+                        <div class="text-2xl font-bold">{{ (market.probability * 100)|int }}%</div>
+                        <div class="text-xs text-gray-400">
+                            Lean to {% if market.probability > 0.5 %}"Yes"{% else %}"No"{% endif %}
+                        </div>
+                        {% if market.probability > 0.5 %}
+                        <div class="text-green-500 text-sm font-medium">
+                            +{{ ((market.probability - 0.5) * 20)|round(1) }}%
+                        </div>
+                        {% else %}
+                        <div class="text-red-500 text-sm font-medium">
+                            {{ ((market.probability - 0.5) * 20)|round(1) }}%
+                        </div>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Content Overlay (at bottom) -->
+                    <div class="absolute bottom-0 left-0 right-0 p-4">
+                    <!-- Editorial Description -->
+                    {% if market.editorial_description %}
+                    <p class="text-xs text-white/75 font-normal mb-2 line-clamp-2 leading-relaxed">
+                        {{ market.editorial_description }}
+                    </p>
+                    {% endif %}
+                    
+                    <div class="flex items-start gap-2 mb-3">
+                        <h3 class="font-semibold text-base tracking-tight flex-1 line-clamp-2 {% if market.editorial_description %}min-h-0{% else %}min-h-[3rem]{% endif %} group-hover:text-orange-400 transition">
+                            {{ market.title }}
+                        </h3>
+                        <button onclick="likeMarket('{{ market.market_id }}', this); event.preventDefault();" 
+                                class="like-btn flex-shrink-0 group/like"
+                                data-market-id="{{ market.market_id }}">
+                            <svg class="w-4 h-4 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path class="text-gray-400 group-hover/like:text-red-400 transition" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Belief Currents -->
+                    <div class="bg-black/40 rounded-lg p-2.5 mb-3">
+                        <div class="flex items-center justify-between mb-1">
+                            <div class="text-[9px] text-gray-400 uppercase tracking-wider font-semibold">BELIEF CURRENTS</div>
+                            <div class="text-[7px] text-gray-500">{{ market.created_at[:10] }} → Now</div>
+                        </div>
+                        
+                        <!-- Dynamic flowing gradient -->
+                        <div class="h-2 bg-gray-800 rounded-full overflow-hidden mb-1 relative">
+                            <div class="absolute inset-0 rounded-full" style="background: {{ market|belief_gradient }}"></div>
+                        </div>
+                        
+                        <!-- Timeline labels -->
+                        {% set points = market.created_at|timeline_points %}
+                        <div class="flex items-center justify-between text-[7px] text-gray-500 mb-1">
+                            {% for point in points %}
+                                <span>{{ point }}</span>
+                                {% if not loop.last %}
+                                    <span class="text-gray-700">|</span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        
+                        <!-- Current belief breakdown -->
+                        {% if market.market_type == 'multiple' and market.top_options %}
+                        <div class="grid grid-cols-3 gap-1">
+                            {% for opt in market.top_options[:3] %}
+                            <div class="text-center">
+                                <div class="w-2 h-2 rounded-full mx-auto mb-0.5" style="background: {{ loop.index0|option_color }}"></div>
+                                <div class="text-[7px] font-semibold">{{ (opt['probability'] * 100)|int }}%</div>
+                                <div class="text-[6px] text-gray-500 truncate">{{ opt['option_text'][:8] }}</div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <div class="flex justify-between text-[8px]">
+                            <div class="flex items-center gap-1">
+                                <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                <span class="font-semibold">Yes {{ (market.probability * 100)|int }}%</span>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                                <span class="font-semibold">No {{ ((1 - market.probability) * 100)|int }}%</span>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="flex justify-between text-xs text-white/60">
+                        <span>{{ (market.volume_24h / 1000)|round(1) }}K volume</span>
+                        <span class="flex items-center gap-1">
+                            {% if market.probability > 0.5 %}
+                            <span class="text-green-500">▲</span>
+                            {% else %}
+                            <span class="text-red-500">▼</span>
+                            {% endif %}
+                            Rising
+                        </span>
+                    </div>
+                    </div>
+                    <!-- End Content Overlay -->
+                </div>
+                <!-- End Full Card Image -->
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- The Stream Section -->
+<section class="mb-16">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-2">
+        <div>
+            <h2 class="text-3xl font-semibold tracking-tight">The Stream</h2>
+            <p class="text-sm text-white/60 font-normal mt-1">Every question, a narrative in motion</p>
+        </div>
+        <a href="#" class="text-sm text-orange-500 hover:text-orange-400 transition flex items-center gap-1">
+            View all <span class="text-xs">→</span>
+        </a>
+    </div>
+    
+    <!-- 3-Column Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+        {% for market in stream %}
+        <a href="/market/{{ market.market_id }}" 
+           class="block group" 
+           data-tags="{{ market.tags|join(',') if market.tags else '' }}" 
+           data-category="{{ market.category }}">
+            <div class="bg-gray-900/50 rounded-lg overflow-hidden border border-gray-800 hover:border-orange-500/50 transition-all h-full">
+                <div class="flex gap-3 p-3">
+                    <!-- Small Thumbnail -->
+                    <div class="relative w-20 h-20 flex-shrink-0 rounded overflow-hidden">
+                        <img src="{{ market.image_url }}" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    
+                    <!-- Content -->
+                    <div class="flex-1 min-w-0 flex flex-col">
+                        <!-- Category Badge -->
+                        <div class="mb-1">
+                            <span class="text-[9px] {{ market.category|category_color }} px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">
+                                {{ market.category }}
+                            </span>
+                        </div>
+                        
+                        <!-- Title -->
+                        <h3 class="text-sm font-semibold line-clamp-2 mb-2 group-hover:text-orange-400 transition leading-tight">
+                            {{ market.title }}
+                        </h3>
+                        
+                        <!-- Metadata -->
+                        <div class="text-[10px] text-gray-500 mt-auto">
+                            2 stances • {{ market.participant_count|format_number }} voices • <span class="{% if market.probability > 0.5 %}text-green-500{% else %}text-red-500{% endif %}">↑</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Probability (right side) -->
+                    <div class="flex-shrink-0 flex flex-col items-end justify-start">
+                        <div class="text-2xl font-bold">
+                            {% if market.market_type == 'multiple' and market.top_options %}
+                                {{ (market.top_options[0]['probability'] * 100)|int }}%
+                            {% else %}
+                                {{ (market.probability * 100)|int }}%
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Three Column Sidebar Sections -->
+<section class="mb-16">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- On The Rise -->
+        <div>
+            <div class="flex items-center gap-2 mb-4">
+                <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                </svg>
+                <h3 class="text-xl font-bold">On The Rise</h3>
+            </div>
+            
+            <div class="space-y-3">
+                {% for market in grid[:5] %}
+                <a href="/market/{{ market.market_id }}" class="flex items-center gap-3 group">
+                    <img src="{{ market.image_url }}" class="w-12 h-12 rounded object-cover">
+                    <div class="flex-1 min-w-0">
+                        <div class="text-sm font-semibold group-hover:text-orange-400 transition line-clamp-1">
+                            {{ market.title[:40] }}...
+                        </div>
+                        <div class="text-xs text-gray-500 truncate">
+                            {{ market.title[41:80] if market.title|length > 40 else '' }}
+                        </div>
+                    </div>
+                    <div class="text-green-500 font-bold text-sm">+{{ ((market.probability - 0.5) * 10)|round(1) }}%</div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Most Conflicted -->
+        <div>
+            <div class="flex items-center gap-2 mb-4">
+                <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+                <h3 class="text-xl font-bold">Most Conflicted</h3>
+            </div>
+            
+            <div class="space-y-4">
+                {% set conflicted = grid|sort(attribute='probability')|reverse|list %}
+                {% for market in conflicted[:3] if (market.probability > 0.4 and market.probability < 0.6) %}
+                <a href="/market/{{ market.market_id }}" class="block group">
+                    <div class="flex items-start gap-3 mb-2">
+                        <img src="{{ market.image_url }}" class="w-12 h-12 rounded object-cover">
+                        <div class="flex-1 min-w-0">
+                            <div class="text-sm font-semibold group-hover:text-orange-400 transition line-clamp-2">
+                                {{ market.title }}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Probability Bar -->
+                    <div class="h-2 bg-gray-800 rounded-full overflow-hidden flex">
+                        <div class="bg-green-500" style="width: {{ market.probability * 100 }}%"></div>
+                        <div class="bg-red-500" style="width: {{ (1 - market.probability) * 100 }}%"></div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Explore Currents -->
+        <div>
+            <div class="flex items-center gap-2 mb-4">
+                <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                </svg>
+                <h3 class="text-xl font-bold">Explore Currents</h3>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-3">
+                {% set category_counts = {'Technology': 0, 'Markets': 0, 'Politics': 0, 'Economics': 0, 'Sports': 0, 'Healthcare': 0} %}
+                {% for market in grid %}
+                    {% if market.category in category_counts %}
+                        {% set _ = category_counts.update({market.category: category_counts[market.category] + 1}) %}
+                    {% endif %}
+                {% endfor %}
+                
+                {% for cat_name, count in [('Technology', category_counts.get('Technology', 0)), ('Markets', category_counts.get('Crypto', 0)), ('Politics', category_counts.get('Politics', 0)), ('Economics', category_counts.get('Economics', 0)), ('Sports', category_counts.get('Sports', 0)), ('Healthcare', category_counts.get('World', 0))] %}
+                <a href="#{{ cat_name|lower }}" class="bg-gray-900/50 rounded-lg p-4 hover:bg-gray-800 transition group">
+                    <div class="flex items-center justify-center mb-2">
+                        <svg class="w-8 h-8 text-gray-400 group-hover:text-orange-400 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <div class="font-semibold text-sm mb-1">{{ cat_name }}</div>
+                        <div class="text-xs text-gray-500">{{ count }} question{{ 's' if count != 1 else '' }}</div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+</div>
+<!-- End Content Container -->
+
+{% endblock %}

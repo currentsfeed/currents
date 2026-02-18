@@ -1,33 +1,52 @@
-<!-- User Switcher (Test Only) -->
-<div class="bg-gradient-to-r from-purple-900/40 to-blue-900/40 border-b border-purple-500/30">
-    <div class="container mx-auto px-4 py-3">
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-            <div class="text-xs text-gray-400 uppercase tracking-wider">🧪 Test Mode:</div>
-            <div class="flex flex-wrap items-center gap-2">
-                <button onclick="switchUser('roy')" 
-                        class="test-user-btn px-3 py-1.5 rounded-lg text-sm font-medium transition"
-                        data-user="roy">
-                    👨‍💼 Roy
-                </button>
-                <button onclick="switchUser('user2')" 
-                        class="test-user-btn px-3 py-1.5 rounded-lg text-sm font-medium transition"
-                        data-user="user2">
-                    👩‍💼 User 2
-                </button>
-                <button onclick="switchUser('user3')" 
-                        class="test-user-btn px-3 py-1.5 rounded-lg text-sm font-medium transition"
-                        data-user="user3">
-                    👨‍🎨 User 3
-                </button>
-                <button onclick="switchUser('user4')" 
-                        class="test-user-btn px-3 py-1.5 rounded-lg text-sm font-medium transition"
-                        data-user="user4">
-                    👩‍🔬 User 4
-                </button>
-            </div>
-            <div class="text-xs text-gray-500">
-                Current: <span id="current-user-display" class="text-orange-400 font-medium"></span>
-            </div>
+<!-- User Switcher (Minimal Debug Mode) -->
+<div id="debug-switcher" class="fixed top-20 right-4 z-50">
+    <!-- Collapsed: Just arrow + "debug" + current user -->
+    <button id="debug-toggle" 
+            onclick="toggleDebugPanel()"
+            class="flex items-center gap-1.5 px-2 py-1 bg-gray-900/80 backdrop-blur border border-gray-700 rounded-lg hover:bg-gray-800 transition">
+        <svg id="debug-arrow" class="w-3 h-3 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+        <span class="text-[10px] text-gray-500 uppercase">debug</span>
+        <span id="current-user-badge" class="text-[10px] font-medium px-1.5 py-0.5 rounded bg-orange-600/20 text-orange-400 border border-orange-600/30"></span>
+    </button>
+    
+    <!-- Expanded: Full panel -->
+    <div id="debug-panel" class="hidden mt-2 bg-gray-900/95 backdrop-blur border border-gray-700 rounded-lg p-3 min-w-[200px]">
+        <div class="text-[10px] text-gray-500 uppercase tracking-wider mb-2">Test Users:</div>
+        <div class="flex flex-col gap-1.5">
+            <button onclick="switchUser('user1')" 
+                    class="test-user-btn px-2 py-1 rounded text-xs font-medium transition text-left"
+                    data-user="user1">
+                👤 User 1
+            </button>
+            <button onclick="switchUser('user2')" 
+                    class="test-user-btn px-2 py-1 rounded text-xs font-medium transition text-left"
+                    data-user="user2">
+                👤 User 2
+            </button>
+            <button onclick="switchUser('user3')" 
+                    class="test-user-btn px-2 py-1 rounded text-xs font-medium transition text-left"
+                    data-user="user3">
+                👤 User 3
+            </button>
+            <button onclick="switchUser('user4')" 
+                    class="test-user-btn px-2 py-1 rounded text-xs font-medium transition text-left"
+                    data-user="user4">
+                👤 User 4
+            </button>
+            <button onclick="switchUser('roy')" 
+                    class="test-user-btn px-2 py-1 rounded text-xs font-medium transition text-left"
+                    data-user="roy">
+                👨‍💼 Roy
+            </button>
+            <button onclick="clearTestUser()" 
+                    class="px-2 py-1 rounded text-xs font-medium transition text-left bg-gray-700 text-gray-300 hover:bg-gray-600">
+                🔓 Anonymous Mode
+            </button>
+        </div>
+        <div class="text-[10px] text-gray-500 mt-2 pt-2 border-t border-gray-700">
+            Current: <span id="current-user-display" class="text-orange-400 font-medium"></span>
         </div>
     </div>
 </div>
@@ -53,10 +72,24 @@
 </style>
 
 <script>
-// Get current user from cookie or default to 'roy'
+// Toggle debug panel
+function toggleDebugPanel() {
+    const panel = document.getElementById('debug-panel');
+    const arrow = document.getElementById('debug-arrow');
+    
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        arrow.style.transform = 'rotate(180deg)';
+    } else {
+        panel.classList.add('hidden');
+        arrow.style.transform = 'rotate(0deg)';
+    }
+}
+
+// Get current user from cookie (null if anonymous)
 function getCurrentUser() {
     const match = document.cookie.match(/currents_test_user=([^;]+)/);
-    return match ? match[1] : 'roy';
+    return match ? match[1] : null;
 }
 
 // Set user cookie and reload
@@ -65,7 +98,23 @@ function switchUser(userId) {
     const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString();
     document.cookie = `currents_test_user=${userId}; expires=${expires}; path=/`;
     
+    // Clear any old anonymous user key from localStorage
+    localStorage.removeItem('currents_user_key');
+    
+    console.log('[User Switcher] Switched to:', userId, '- Cookie set, localStorage cleared');
+    
     // Reload to apply personalization
+    window.location.reload();
+}
+
+// Clear test user and go to anonymous mode
+function clearTestUser() {
+    // Delete the test user cookie
+    document.cookie = 'currents_test_user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    
+    console.log('[User Switcher] Cleared test user - Now in anonymous mode');
+    
+    // Reload to apply anonymous tracking
     window.location.reload();
 }
 
@@ -73,8 +122,34 @@ function switchUser(userId) {
 document.addEventListener('DOMContentLoaded', function() {
     const currentUser = getCurrentUser();
     
-    // Update display
-    document.getElementById('current-user-display').textContent = currentUser;
+    // Update badge in collapsed state
+    const badgeEl = document.getElementById('current-user-badge');
+    if (badgeEl) {
+        if (currentUser) {
+            badgeEl.textContent = currentUser;
+            badgeEl.classList.remove('bg-gray-600/20', 'text-gray-400', 'border-gray-600/30');
+            badgeEl.classList.add('bg-orange-600/20', 'text-orange-400', 'border-orange-600/30');
+        } else {
+            // Show "anonymous" for any anonymous user (there can be multiple)
+            badgeEl.textContent = 'anonymous';
+            badgeEl.classList.remove('bg-orange-600/20', 'text-orange-400', 'border-orange-600/30');
+            badgeEl.classList.add('bg-gray-600/20', 'text-gray-400', 'border-gray-600/30');
+        }
+    }
+    
+    // Update display in expanded panel
+    const displayEl = document.getElementById('current-user-display');
+    if (displayEl) {
+        if (currentUser) {
+            displayEl.textContent = currentUser;
+            displayEl.classList.remove('text-gray-400');
+            displayEl.classList.add('text-orange-400');
+        } else {
+            displayEl.textContent = 'anonymous';
+            displayEl.classList.remove('text-orange-400');
+            displayEl.classList.add('text-gray-400');
+        }
+    }
     
     // Highlight active button
     document.querySelectorAll('.test-user-btn').forEach(btn => {
@@ -84,5 +159,8 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.classList.remove('active');
         }
     });
+    
+    // Log to console for debugging
+    console.log('[User Switcher] Current tracking user:', currentUser || 'anonymous');
 });
 </script>

@@ -1,12 +1,21 @@
 """
 BRain Tracking Engine
 Captures user interactions and updates profile scores in real-time
+Integrates with BRain v1: impression tracking + session state
 """
 import sqlite3
 import json
 import math
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
+
+# BRain v1 imports
+try:
+    from impression_tracker import impression_tracker
+    from session_manager import session_manager
+    BRAIN_V1_ENABLED = True
+except ImportError:
+    BRAIN_V1_ENABLED = False
 
 DB_PATH = 'brain.db'
 
@@ -54,27 +63,68 @@ class TrackingEngine:
         """
         Record a user interaction event
         Returns: interaction_id
+        
+        BRain v1: Also updates impression_tracker and session_manager
         """
         conn = self._get_conn()
         cursor = conn.cursor()
+        
+        timestamp = datetime.now()
         
         # Insert interaction
         cursor.execute("""
             INSERT INTO user_interactions 
             (user_key, market_id, event_type, ts, dwell_ms, section, position, geo_country)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        """, (user_key, market_id, event_type, datetime.now().isoformat(),
+        """, (user_key, market_id, event_type, timestamp.isoformat(),
               dwell_ms, section, position, geo_country))
         
         interaction_id = cursor.lastrowid
         
-        # Update profile immediately
+        # Update profile immediately (long-term)
         self._update_profile_from_interaction(
             cursor, user_key, market_id, event_type, dwell_ms
         )
         
         conn.commit()
         conn.close()
+        
+        # BRain v1: Update impression tracker for click/trade/hide
+        if BRAIN_V1_ENABLED and event_type in ['click', 'participate', 'hide']:
+            interaction_map = {
+                'click': 'click',
+                'participate': 'trade',
+                'hide': 'hide'
+            }
+            impression_tracker.update_interaction_timestamp(
+                user_key, market_id, interaction_map[event_type], timestamp
+            )
+        
+        # BRain v1: Update session state (short-term)
+        if BRAIN_V1_ENABLED and event_type not in ['impression', 'scroll_past', 'skip_fast']:
+            # Get market data for session update
+            cursor = self._get_conn().cursor()
+            cursor.execute("SELECT category FROM markets WHERE market_id = ?", (market_id,))
+            row = cursor.fetchone()
+            if row:
+                category = row[0]
+                cursor.execute("SELECT tag FROM market_tags WHERE market_id = ?", (market_id,))
+                tags = [r[0] for r in cursor.fetchall()]
+                
+                # Get event weight
+                event_weight = ACTION_WEIGHTS.get(event_type, 1.0)
+                
+                # Apply dwell multiplier if applicable
+                if dwell_ms and dwell_ms >= 5000:
+                    event_weight *= (1.2 if dwell_ms >= 30000 else 1.1)
+                
+                # Update session
+                session_manager.update_session_weights(
+                    user_key,
+                    {'category': category, 'tags': tags},
+                    event_weight
+                )
+            cursor.close()
         
         return interaction_id
     

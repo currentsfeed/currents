@@ -2,8 +2,8 @@
 # Version tracking for regression prevention
 # Update this file whenever you add/modify features
 
-version: 88
-last_updated: "2026-02-11"
+version: 106
+last_updated: "2026-02-12"
 
 features:
   # ===== HOMEPAGE FEATURES =====
@@ -19,6 +19,20 @@ features:
           - selector: "h2"
             description: "Market title present"
   
+  - id: featured-card-aspect
+    name: "Featured Card (Large Left) - Proper Aspect Ratio"
+    added_version: 103
+    updated_version: 103
+    description: "Featured card uses aspect-[4/5] instead of fixed height to prevent distortion"
+    pages:
+      homepage:
+        enabled: true
+        elements:
+          - selector: ".aspect-\\[4\\/5\\]"
+            description: "Featured card container with 4:5 aspect ratio"
+          - selector: ".aspect-\\[4\\/5\\] img.absolute.inset-0"
+            description: "Image properly positioned with absolute inset"
+  
   - id: editorial-descriptions
     name: "Editorial Descriptions (1-2 sentence narrative)"
     added_version: 78
@@ -32,7 +46,7 @@ features:
       detail-page:
         enabled: true
         elements:
-          - selector: ".text-base.text-gray-300.mb-4.leading-relaxed"
+          - selector: "p.text-base.leading-relaxed"
             description: "Editorial text in hero (above title)"
   
   - id: like-buttons
@@ -82,17 +96,22 @@ features:
             description: "Stats sidebar with category"
   
   - id: user-switcher
-    name: "Test User Switcher (Purple Bar)"
+    name: "Test User Switcher (Minimal Debug)"
     added_version: 82
+    updated_version: 106
+    description: "Minimal debug panel - collapsed by default, shows arrow + 'debug' text"
     pages:
       homepage:
-        enabled: false  # Test mode only - not in production
-        test_only: true
+        enabled: true  # Always visible but minimal
         elements:
-          - selector: "#test-user-switcher"
-            description: "Purple test mode bar at top"
+          - selector: "#debug-switcher"
+            description: "Fixed position debug toggle (top-right)"
+          - selector: "#debug-toggle"
+            description: "Arrow + 'debug' button"
+          - selector: "#debug-panel"
+            description: "Expandable panel with test users + anonymous mode"
       detail-page:
-        enabled: false  # Not needed on detail pages
+        enabled: true  # Available on all pages
   
   - id: the-stream
     name: "The Stream Section (Markets 10-20)"
@@ -117,7 +136,7 @@ features:
         elements:
           - selector: ".h-96.rounded-2xl.overflow-hidden"
             description: "Hero image with gradient overlay"
-          - selector: ".text-4xl.font-bold"
+          - selector: ".text-4xl.font-semibold"
             description: "Market title"
   
   - id: yes-no-labels
@@ -133,14 +152,14 @@ features:
             description: "NO percentage label"
   
   - id: connect-wallet-link
-    name: "Connect Wallet Link"
+    name: "Connect Wallet Button/Modal"
     added_version: 80
     pages:
       detail-page:
-        enabled: true
+        enabled: false  # Wallet is now inline modal in header, not detail-specific
         elements:
-          - selector: "a[href='/wallet']"
-            description: "Orange CTA button to wallet"
+          - selector: "button[onclick*='showWalletModal']"
+            description: "Connect wallet button in header"
   
   - id: related-markets
     name: "Related Markets Sidebar"

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Currents Mobile Feed - Diagnostic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: monospace; padding: 20px; background: #000; color: #0f0; }
+        .test { border: 1px solid #0f0; padding: 10px; margin: 10px 0; }
+        .pass { color: #0f0; }
+        .fail { color: #f00; }
+    </style>
+</head>
+<body>
+    <h1>Currents Mobile Feed Diagnostic</h1>
+    <div class="test">
+        <h2>Server Status</h2>
+        <p id="server-status">Testing...</p>
+    </div>
+    <div class="test">
+        <h2>JavaScript Status</h2>
+        <p class="pass">✅ JavaScript is working</p>
+    </div>
+    <div class="test">
+        <h2>User Agent</h2>
+        <p id="ua"></p>
+    </div>
+    <div class="test">
+        <h2>Screen Info</h2>
+        <p id="screen"></p>
+    </div>
+    <div class="test">
+        <h2>Feed Test</h2>
+        <p id="feed-status">Loading...</p>
+        <button onclick="testFeed()">Test Mobile Feed</button>
+    </div>
+    
+    <script>
+        document.getElementById('ua').textContent = navigator.userAgent;
+        document.getElementById('screen').textContent = 
+            `Width: ${window.innerWidth}px, Height: ${window.innerHeight}px, Pixel Ratio: ${window.devicePixelRatio}`;
+        
+        // Test server
+        fetch('/api/markets')
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('server-status').innerHTML = 
+                    `<span class="pass">✅ Server responding</span><br>Markets: ${data.length || 'N/A'}`;
+            })
+            .catch(e => {
+                document.getElementById('server-status').innerHTML = 
+                    `<span class="fail">❌ Server error: ${e.message}</span>`;
+            });
+        
+        function testFeed() {
+            document.getElementById('feed-status').textContent = 'Loading feed...';
+            fetch('/', {
+                headers: {'User-Agent': navigator.userAgent}
+            })
+                .then(r => r.text())
+                .then(html => {
+                    const hasCards = html.includes('snap-card');
+                    const hasContainer = html.includes('snap-container');
+                    const size = (html.length / 1024).toFixed(0);
+                    
+                    document.getElementById('feed-status').innerHTML = 
+                        `<span class="${hasCards && hasContainer ? 'pass' : 'fail'}">
+                            ${hasCards && hasContainer ? '✅' : '❌'} Feed HTML: ${size}KB
+                        </span><br>
+                        Cards: ${hasCards}<br>
+                        Container: ${hasContainer}<br>
+                        <a href="/" style="color: #0ff;">Click to view actual feed →</a>`;
+                })
+                .catch(e => {
+                    document.getElementById('feed-status').innerHTML = 
+                        `<span class="fail">❌ ${e.message}</span>`;
+                });
+        }
+        
+        // Auto-test on load
+        setTimeout(testFeed, 1000);
+    </script>
+</body>
+</html>

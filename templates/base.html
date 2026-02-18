@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Currents - Belief-Driven Information{% endblock %}</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/static/images/favicon.png">
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -13,6 +16,12 @@
     
     <!-- Custom styles -->
     <style>
+        /* Currents Brand Colors */
+        :root {
+            --currents-red: #FF5757;
+            --currents-red-hover: #FF3B3B;
+        }
+        
         body {
             background-color: #0a0a0a;
             color: #ffffff;
@@ -20,33 +29,84 @@
         .probability-bar {
             transition: width 0.3s ease;
         }
+        
+        /* Currents Red Button Styles */
+        .bg-currents-red {
+            background-color: var(--currents-red) !important;
+        }
+        .hover\:bg-currents-red-hover:hover {
+            background-color: var(--currents-red-hover) !important;
+        }
+        .text-currents-red {
+            color: var(--currents-red) !important;
+        }
+        .border-currents-red {
+            border-color: var(--currents-red) !important;
+        }
+        
+        /* Force hide mobile buttons on desktop */
+        @media (min-width: 768px) {
+            #mobile-wallet-btn {
+                display: none !important;
+            }
+            #mobile-menu-btn {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen">
     <!-- Header -->
     <header class="border-b border-gray-800 bg-black/50 backdrop-blur">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex items-center justify-between">
-                <a href="/" class="flex items-center gap-3 text-2xl font-bold group">
-                    <!-- Currents Logo: Flowing waves -->
-                    <svg width="32" height="32" viewBox="0 0 32 32" class="group-hover:scale-110 transition">
-                        <path d="M4 16 Q8 10, 12 16 T20 16 T28 16" 
-                              stroke="#60a5fa" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <path d="M4 22 Q8 16, 12 22 T20 22 T28 22" 
-                              stroke="#3b82f6" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7"/>
-                        <path d="M4 10 Q8 4, 12 10 T20 10 T28 10" 
-                              stroke="#93c5fd" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.5"/>
-                    </svg>
-                    <span class="text-blue-400">Currents</span>
-                </a>
-                <nav class="flex gap-6">
+        <div class="container mx-auto px-2 sm:px-4 py-2 sm:py-4">
+            <div class="flex items-center justify-between gap-2">
+                <!-- Left: Logo + Wallet Icon (Mobile) -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <a href="/" class="flex items-center group">
+                        <!-- Currents Logo -->
+                        <img src="/static/images/currents-logo-horizontal.jpg" 
+                             alt="Currents" 
+                             class="h-6 sm:h-8 group-hover:scale-105 transition-transform duration-200">
+                    </a>
+                    <!-- Mobile Buttons (Wallet + Hamburger Menu) - MOBILE ONLY -->
+                    <button onclick="showWalletModal()" id="mobile-wallet-btn" 
+                            class="md:!hidden bg-blue-600/20 hover:bg-blue-600/40 border border-blue-600/50 rounded transition"
+                            style="width: 32px !important; height: 32px !important; min-width: 32px; min-height: 32px; max-width: 32px; max-height: 32px; padding: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"
+                            aria-label="Connect Wallet">
+                        <svg style="width: 18px; height: 18px; display: block;" viewBox="0 0 300 185" fill="none">
+                            <path d="M61.4385 36.2562C99.3514 -1.65668 160.9 -1.65668 198.813 36.2562L203.445 40.8883C205.412 42.8545 205.412 46.0534 203.445 48.0196L188.302 63.1622C187.319 64.1453 185.709 64.1453 184.726 63.1622L178.251 56.6874C153.311 31.7476 111.942 31.7476 87.002 56.6874L80.0915 63.598C79.1084 64.5811 77.4981 64.5811 76.515 63.598L61.3724 48.4554C59.4062 46.4892 59.4062 43.2903 61.3724 41.3241L61.4385 36.2562ZM231.028 69.0695L244.132 82.1736C246.098 84.1398 246.098 87.3387 244.132 89.3049L186.963 146.474C185.664 147.773 183.391 147.773 182.092 146.474L130.166 94.5481C129.675 94.0569 128.864 94.0569 128.373 94.5481L76.4476 146.474C75.1488 147.773 72.8759 147.773 71.5771 146.474L14.3966 89.2937C12.4304 87.3275 12.4304 84.1286 14.3966 82.1624L27.5007 69.0583C28.7995 67.7595 31.0724 67.7595 32.3712 69.0583L84.2967 120.984C84.7879 121.475 85.5991 121.475 86.0903 120.984L138.016 69.0583C139.315 67.7595 141.588 67.7595 142.887 69.0583L194.812 120.984C195.303 121.475 196.115 121.475 196.606 120.984L248.531 69.0583C249.83 67.7595 252.103 67.7595 253.402 69.0583L231.028 69.0695Z" fill="#3B99FC"/>
+                        </svg>
+                    </button>
+                    <button onclick="showMobileMenu()" id="mobile-menu-btn"
+                            class="md:!hidden bg-gray-600/20 hover:bg-gray-600/40 border border-gray-600/50 rounded transition"
+                            style="width: 32px !important; height: 32px !important; min-width: 32px; min-height: 32px; max-width: 32px; max-height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"
+                            aria-label="Menu">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Center: Navigation -->
+                <nav class="hidden md:flex gap-6">
                     <a href="/" class="text-gray-400 hover:text-white transition">Feed</a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">Categories</a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">Following</a>
+                    <a href="/markets" class="text-gray-400 hover:text-white transition">All Markets</a>
                 </nav>
-                <a href="/wallet" class="px-4 py-2 bg-orange-600 hover:bg-orange-700 rounded-lg transition inline-block">
-                    Connect Wallet
-                </a>
+                
+                <!-- Right: Wallet Button + Menu (Desktop) -->
+                <div class="hidden md:flex items-center gap-3">
+                    <button onclick="showWalletModal()" id="header-wallet-btn" 
+                            class="px-4 py-2 bg-currents-red hover:bg-currents-red-hover rounded-lg transition font-semibold">
+                        Connect Wallet
+                    </button>
+                    <button onclick="showMobileMenu()" 
+                            class="p-2 bg-gray-600/20 hover:bg-gray-600/40 border border-gray-600/50 rounded transition"
+                            aria-label="Menu">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -60,9 +120,9 @@
     <footer class="border-t border-gray-800 mt-16 py-8">
         <div class="container mx-auto px-4 text-center text-gray-500">
             <p>Currents © 2026 - Belief-Driven Information</p>
-            <p class="text-sm mt-2 text-gray-600">v87 • Feb 11, 2026</p>
+            <p class="text-sm mt-2 text-gray-600">v191 • Feb 16, 2026</p>
             <p class="text-sm mt-3 space-x-4">
-                <a href="/tracking-admin" target="_blank" class="text-orange-400 hover:text-orange-300 transition">
+                <a href="/tracking-admin" target="_blank" class="text-currents-red hover:text-currents-red-hover transition">
                     📊 Learning Dashboard
                 </a>
                 <span class="text-gray-700">|</span>
@@ -72,6 +132,48 @@
             </p>
         </div>
     </footer>
+    
+    <!-- Mobile Menu Modal (for detail pages) -->
+    <div id="mobile-menu-modal" class="fixed inset-0 bg-black/95 backdrop-blur-sm z-50 hidden items-start justify-center pt-16" onclick="closeMobileMenu()">
+        <div class="bg-gray-900 rounded-2xl max-w-md w-full mx-4 p-6 border border-gray-700" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold">Menu</h2>
+                <button onclick="closeMobileMenu()" class="text-gray-400 hover:text-white text-3xl leading-none">&times;</button>
+            </div>
+            
+            <div class="space-y-3">
+                <a href="/" class="flex items-center gap-4 p-4 bg-gray-800 hover:bg-gray-700 rounded-xl transition">
+                    <svg class="w-6 h-6 text-currents-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                    <div class="flex-1">
+                        <div class="font-bold">Back to Feed</div>
+                        <div class="text-sm text-gray-400">Return to main page</div>
+                    </div>
+                </a>
+                
+                <a href="/?desktop=1" class="flex items-center gap-4 p-4 bg-gray-800 hover:bg-gray-700 rounded-xl transition">
+                    <svg class="w-6 h-6 text-currents-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    <div class="flex-1">
+                        <div class="font-bold">Desktop View</div>
+                        <div class="text-sm text-gray-400">Full features</div>
+                    </div>
+                </a>
+                
+                <a href="/brain-viewer" target="_blank" class="flex items-center gap-4 p-4 bg-gray-800 hover:bg-gray-700 rounded-xl transition">
+                    <svg class="w-6 h-6 text-currents-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                    <div class="flex-1">
+                        <div class="font-bold">Analytics</div>
+                        <div class="text-sm text-gray-400">View market data</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
     
     <!-- BRain Tracking -->
     <script src="/static/tracking.js"></script>
@@ -84,33 +186,502 @@
         const path = svg.querySelector('path');
         const isLiked = button.classList.contains('liked');
         
+        // Get current liked markets from localStorage
+        let likedMarkets = [];
+        try {
+            likedMarkets = JSON.parse(localStorage.getItem('currents_liked_markets') || '[]');
+        } catch (e) {
+            console.error('Error loading liked markets:', e);
+        }
+        
         if (isLiked) {
             // Unlike
             button.classList.remove('liked');
             svg.setAttribute('fill', 'none');
-            path.classList.remove('text-red-500');
-            path.classList.add('text-gray-400');
+            svg.setAttribute('stroke', 'currentColor');
+            path.setAttribute('class', 'text-gray-400 group-hover:text-red-400 transition');
+            
+            // Remove from localStorage
+            likedMarkets = likedMarkets.filter(id => id !== marketId);
+            localStorage.setItem('currents_liked_markets', JSON.stringify(likedMarkets));
+            
+            console.log('❤️ Unliked - SVG fill=none, stroke=currentColor');
         } else {
             // Like
             button.classList.add('liked');
             svg.setAttribute('fill', 'currentColor');
-            path.classList.remove('text-gray-400');
-            path.classList.add('text-red-500');
+            svg.setAttribute('stroke', 'none');
+            path.setAttribute('class', 'text-red-500 transition');
+            
+            // Add to localStorage
+            if (!likedMarkets.includes(marketId)) {
+                likedMarkets.push(marketId);
+                localStorage.setItem('currents_liked_markets', JSON.stringify(likedMarkets));
+            }
             
             // Animate
             svg.style.transform = 'scale(1.3)';
             setTimeout(() => {
                 svg.style.transform = 'scale(1)';
             }, 200);
+            console.log('❤️ Liked - SVG fill=currentColor, stroke=none');
         }
         
         // Track the interaction (bookmark action = like)
         if (typeof trackEvent !== 'undefined') {
-            trackEvent({
-                action: 'bookmark',
-                market_id: marketId,
+            trackEvent('bookmark', marketId, {
                 value: isLiked ? -1 : 1
             });
+            console.log('📊 Tracked bookmark event for market:', marketId);
+        }
+        
+        console.log(`❤️ ${isLiked ? 'Unliked' : 'Liked'} market: ${marketId}`);
+    }
+    
+    // Wallet Modal - Available on all pages
+    function showWalletModal() {
+        // Detect mobile device
+        const isMobile = /mobile|android|iphone|ipad|tablet/i.test(navigator.userAgent);
+        
+        // On mobile, try MetaMask mobile connection
+        if (isMobile) {
+            // Check if already in MetaMask's in-app browser
+            if (typeof window.ethereum !== 'undefined') {
+                // Already in wallet browser - connect directly
+                connectMetaMask();
+                return;
+            }
+            
+            // Not in wallet browser - open with deep link
+            const currentUrl = window.location.href;
+            const metamaskDeepLink = `https://metamask.app.link/dapp/${currentUrl.replace(/^https?:\/\//, '')}`;
+            
+            // Show instruction modal
+            const shouldOpen = confirm('To connect your wallet on mobile:\\n\\n1. MetaMask app will open\\n2. Browse to this site in MetaMask\\n3. Connect your wallet\\n\\nTap OK to open MetaMask app');
+            
+            if (shouldOpen) {
+                window.location.href = metamaskDeepLink;
+            }
+            
+            return;
+        }
+        
+        // Remove any existing modal
+        const existing = document.getElementById('wallet-modal');
+        if (existing) existing.remove();
+        
+        // Create modal backdrop
+        const modal = document.createElement('div');
+        modal.id = 'wallet-modal';
+        modal.className = 'fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4';
+        modal.onclick = function(e) {
+            if (e.target === modal) closeWalletModal();
+        };
+        
+        // Modal content
+        modal.innerHTML = `
+            <div class="bg-gray-900 rounded-2xl max-w-md w-full p-6 border border-gray-700 shadow-2xl" onclick="event.stopPropagation()">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold">Connect Wallet</h2>
+                    <button onclick="closeWalletModal()" class="text-gray-400 hover:text-white text-2xl leading-none">&times;</button>
+                </div>
+                
+                <div class="space-y-3">
+                    <!-- MetaMask -->
+                    <button onclick="connectMetaMask()" class="w-full flex items-center gap-4 p-4 bg-gray-800 hover:bg-gray-700 rounded-xl transition border border-gray-700 hover:border-currents-red">
+                        <div class="w-12 h-12 rounded-lg flex items-center justify-center text-2xl" style="background: linear-gradient(to bottom right, var(--currents-red), var(--currents-red-hover));">
+                            🦊
+                        </div>
+                        <div class="flex-1 text-left">
+                            <div class="font-bold">MetaMask</div>
+                            <div class="text-sm text-gray-400">Connect with MetaMask</div>
+                        </div>
+                    </button>
+                    
+                    <!-- WalletConnect -->
+                    <button onclick="connectWalletConnect()" class="w-full flex items-center gap-4 p-4 bg-gray-800 hover:bg-gray-700 rounded-xl transition border border-gray-700 hover:border-currents-red">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-2xl">
+                            🔗
+                        </div>
+                        <div class="flex-1 text-left">
+                            <div class="font-bold">WalletConnect</div>
+                            <div class="text-sm text-gray-400">Scan with mobile wallet</div>
+                        </div>
+                    </button>
+                    
+                    <!-- Coinbase Wallet -->
+                    <button onclick="connectCoinbase()" class="w-full flex items-center gap-4 p-4 bg-gray-800 hover:bg-gray-700 rounded-xl transition border border-gray-700 hover:border-currents-red">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center text-2xl">
+                            💼
+                        </div>
+                        <div class="flex-1 text-left">
+                            <div class="font-bold">Coinbase Wallet</div>
+                            <div class="text-sm text-gray-400">Connect with Coinbase</div>
+                        </div>
+                    </button>
+                </div>
+                
+                <div class="mt-6 p-3 bg-blue-900/20 border border-blue-500/30 rounded-lg">
+                    <p class="text-xs text-gray-400">
+                        <span class="text-blue-400 font-bold">Network:</span> Arbitrum One
+                    </p>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeWalletModal() {
+        const modal = document.getElementById('wallet-modal');
+        if (modal) {
+            modal.remove();
+            document.body.style.overflow = '';
+        }
+    }
+
+    // Wallet connection handlers
+    const ARBITRUM_CHAIN_ID = 42161;
+    const ARBITRUM_CHAIN_ID_HEX = "0xa4b1";
+
+    async function connectMetaMask() {
+        if (typeof window.ethereum === 'undefined') {
+            alert('MetaMask is not installed!\\n\\nInstall from: https://metamask.io/download/');
+            return;
+        }
+        
+        try {
+            // Request accounts
+            const accounts = await window.ethereum.request({
+                method: 'eth_requestAccounts'
+            });
+            const address = accounts[0];
+            
+            // Check network
+            const chainId = await window.ethereum.request({
+                method: 'eth_chainId'
+            });
+            const currentChainId = parseInt(chainId, 16);
+            
+            if (currentChainId !== ARBITRUM_CHAIN_ID) {
+                await switchToArbitrum();
+            }
+            
+            // Request signature for authentication
+            const message = `Sign this message to authenticate with Currents.\\n\\nAddress: ${address}\\nTimestamp: ${Date.now()}`;
+            const signature = await window.ethereum.request({
+                method: 'personal_sign',
+                params: [message, address]
+            });
+            
+            // Get USDT balance (Arbitrum) - Tether USD
+            const USDT_ADDRESS = '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9';
+            
+            // Call USDT balanceOf using eth_call
+            // Properly encode address: remove 0x, pad to 64 chars (32 bytes)
+            const addressParam = address.slice(2).toLowerCase().padStart(64, '0');
+            const data = '0x70a08231' + addressParam;
+            console.log('Calling USDT contract:', USDT_ADDRESS);
+            console.log('For address:', address);
+            console.log('Call data:', data);
+            
+            const balanceHex = await window.ethereum.request({
+                method: 'eth_call',
+                params: [{
+                    to: USDT_ADDRESS,
+                    data: data
+                }, 'latest']
+            });
+            
+            console.log('Balance hex response:', balanceHex);
+            const balanceRaw = parseInt(balanceHex, 16);
+            console.log('Balance raw:', balanceRaw);
+            const balanceUsdt = (balanceRaw / 1e6).toFixed(2);
+            console.log('Balance USDT:', balanceUsdt);
+            
+            // Success
+            const shortAddress = address.slice(0, 6) + '...' + address.slice(-4);
+            
+            closeWalletModal();
+            
+            // Update all wallet buttons on page - make clickable for disconnect
+            document.querySelectorAll('button[onclick*="showWalletModal"]').forEach(btn => {
+                if (btn.id === 'mobile-wallet-btn') {
+                    // Mobile icon button: show WalletConnect logo in green
+                    btn.innerHTML = `
+                        <svg style="width: 18px; height: 18px; display: block;" viewBox="0 0 300 185" fill="none">
+                            <path d="M61.4385 36.2562C99.3514 -1.65668 160.9 -1.65668 198.813 36.2562L203.445 40.8883C205.412 42.8545 205.412 46.0534 203.445 48.0196L188.302 63.1622C187.319 64.1453 185.709 64.1453 184.726 63.1622L178.251 56.6874C153.311 31.7476 111.942 31.7476 87.002 56.6874L80.0915 63.598C79.1084 64.5811 77.4981 64.5811 76.515 63.598L61.3724 48.4554C59.4062 46.4892 59.4062 43.2903 61.3724 41.3241L61.4385 36.2562ZM231.028 69.0695L244.132 82.1736C246.098 84.1398 246.098 87.3387 244.132 89.3049L186.963 146.474C185.664 147.773 183.391 147.773 182.092 146.474L130.166 94.5481C129.675 94.0569 128.864 94.0569 128.373 94.5481L76.4476 146.474C75.1488 147.773 72.8759 147.773 71.5771 146.474L14.3966 89.2937C12.4304 87.3275 12.4304 84.1286 14.3966 82.1624L27.5007 69.0583C28.7995 67.7595 31.0724 67.7595 32.3712 69.0583L84.2967 120.984C84.7879 121.475 85.5991 121.475 86.0903 120.984L138.016 69.0583C139.315 67.7595 141.588 67.7595 142.887 69.0583L194.812 120.984C195.303 121.475 196.115 121.475 196.606 120.984L248.531 69.0583C249.83 67.7595 252.103 67.7595 253.402 69.0583L231.028 69.0695Z" fill="#10B981"/>
+                        </svg>
+                    `;
+                    btn.classList.add('bg-green-600/20', 'border-green-600/50');
+                    btn.classList.remove('bg-blue-600/20', 'border-blue-600/50');
+                } else {
+                    // Desktop button: show address + balance
+                    btn.innerHTML = `
+                        <div class="flex items-center justify-between w-full gap-2">
+                            <span>💚 ${shortAddress}</span>
+                            <span class="text-sm">${balanceUsdt} USDT</span>
+                        </div>
+                    `;
+                    btn.classList.add('bg-green-600', 'hover:bg-green-700');
+                    btn.classList.remove('bg-currents-red', 'hover:bg-currents-red-hover');
+                }
+                btn.onclick = function() { showDisconnectModal(); };
+            });
+            
+            // Store wallet info
+            sessionStorage.setItem('walletAddress', address);
+            sessionStorage.setItem('walletBalance', balanceUsdt);
+            sessionStorage.setItem('walletSignature', signature);
+            
+            console.log('Wallet connected:', address);
+            console.log('USDT Balance:', balanceUsdt, 'USDT');
+            
+            // Check if user had selected an outcome before connecting wallet
+            const savedOutcome = sessionStorage.getItem('selectedOutcome');
+            if (savedOutcome) {
+                // Re-trigger outcome selection to show trade box
+                setTimeout(() => {
+                    const outcomeElement = document.querySelector(`[data-outcome="${savedOutcome}"]`);
+                    if (outcomeElement && typeof selectOutcome === 'function') {
+                        selectOutcome(outcomeElement);
+                        console.log('Restored outcome selection:', savedOutcome);
+                    }
+                }, 500); // Small delay to ensure UI updates
+            }
+            
+            // Show notification
+            showNotification(`Wallet connected! Balance: ${balanceUsdt} USDT`, 'success');
+            
+        } catch (err) {
+            console.error('Connection failed:', err);
+            if (err.code === 4001) {
+                alert('You rejected the connection request.\\nPlease try again and approve both the connection and signature.');
+            } else {
+                alert('Failed to connect wallet: ' + err.message);
+            }
+        }
+    }
+
+    async function switchToArbitrum() {
+        try {
+            await window.ethereum.request({
+                method: 'wallet_switchEthereumChain',
+                params: [{ chainId: ARBITRUM_CHAIN_ID_HEX }]
+            });
+        } catch (err) {
+            if (err.code === 4902) {
+                await window.ethereum.request({
+                    method: 'wallet_addEthereumChain',
+                    params: [{
+                        chainId: ARBITRUM_CHAIN_ID_HEX,
+                        chainName: 'Arbitrum One',
+                        nativeCurrency: {
+                            name: 'ETH',
+                            symbol: 'ETH',
+                            decimals: 18
+                        },
+                        rpcUrls: ['https://arb1.arbitrum.io/rpc'],
+                        blockExplorerUrls: ['https://arbiscan.io']
+                    }]
+                });
+            }
+        }
+    }
+
+    async function connectWalletConnect() {
+        alert('WalletConnect integration coming soon!\\n\\nFor now, please use MetaMask.');
+    }
+
+    async function connectCoinbase() {
+        alert('Coinbase Wallet integration coming soon!\\n\\nFor now, please use MetaMask.');
+    }
+
+    function showDisconnectModal() {
+        // Create modal backdrop
+        const modal = document.createElement('div');
+        modal.id = 'disconnect-modal';
+        modal.className = 'fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4';
+        modal.onclick = function(e) {
+            if (e.target === modal) closeDisconnectModal();
+        };
+        
+        const savedAddress = sessionStorage.getItem('walletAddress');
+        const savedBalance = sessionStorage.getItem('walletBalance');
+        const shortAddress = savedAddress ? savedAddress.slice(0, 6) + '...' + savedAddress.slice(-4) : '';
+        
+        // Modal content
+        modal.innerHTML = `
+            <div class="bg-gray-900 rounded-2xl max-w-md w-full p-6 border border-gray-700 shadow-2xl" onclick="event.stopPropagation()">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold">Wallet Connected</h2>
+                    <button onclick="closeDisconnectModal()" class="text-gray-400 hover:text-white text-2xl leading-none">&times;</button>
+                </div>
+                
+                <div class="bg-gray-800 rounded-xl p-4 mb-6">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center text-2xl">
+                            💚
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-sm text-gray-400">Address</div>
+                            <div class="font-mono font-bold">${shortAddress}</div>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-700 pt-3">
+                        <div class="text-sm text-gray-400">Balance</div>
+                        <div class="text-2xl font-bold text-green-400">${savedBalance} USDT</div>
+                    </div>
+                </div>
+                
+                <button onclick="disconnectWallet()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-xl transition">
+                    Disconnect Wallet
+                </button>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeDisconnectModal() {
+        const modal = document.getElementById('disconnect-modal');
+        if (modal) {
+            modal.remove();
+            document.body.style.overflow = '';
+        }
+    }
+
+    function disconnectWallet() {
+        // Close modal first
+        closeDisconnectModal();
+        
+        // Clear stored wallet info
+        sessionStorage.removeItem('walletAddress');
+        sessionStorage.removeItem('walletBalance');
+        sessionStorage.removeItem('walletSignature');
+        
+        // Reset all wallet buttons
+        document.querySelectorAll('button[onclick*="showDisconnectModal"]').forEach(btn => {
+            if (btn.id === 'mobile-wallet-btn') {
+                // Mobile icon button: restore WalletConnect logo
+                btn.innerHTML = `
+                    <svg style="width: 18px; height: 18px; display: block;" viewBox="0 0 300 185" fill="none">
+                        <path d="M61.4385 36.2562C99.3514 -1.65668 160.9 -1.65668 198.813 36.2562L203.445 40.8883C205.412 42.8545 205.412 46.0534 203.445 48.0196L188.302 63.1622C187.319 64.1453 185.709 64.1453 184.726 63.1622L178.251 56.6874C153.311 31.7476 111.942 31.7476 87.002 56.6874L80.0915 63.598C79.1084 64.5811 77.4981 64.5811 76.515 63.598L61.3724 48.4554C59.4062 46.4892 59.4062 43.2903 61.3724 41.3241L61.4385 36.2562ZM231.028 69.0695L244.132 82.1736C246.098 84.1398 246.098 87.3387 244.132 89.3049L186.963 146.474C185.664 147.773 183.391 147.773 182.092 146.474L130.166 94.5481C129.675 94.0569 128.864 94.0569 128.373 94.5481L76.4476 146.474C75.1488 147.773 72.8759 147.773 71.5771 146.474L14.3966 89.2937C12.4304 87.3275 12.4304 84.1286 14.3966 82.1624L27.5007 69.0583C28.7995 67.7595 31.0724 67.7595 32.3712 69.0583L84.2967 120.984C84.7879 121.475 85.5991 121.475 86.0903 120.984L138.016 69.0583C139.315 67.7595 141.588 67.7595 142.887 69.0583L194.812 120.984C195.303 121.475 196.115 121.475 196.606 120.984L248.531 69.0583C249.83 67.7595 252.103 67.7595 253.402 69.0583L231.028 69.0695Z" fill="#3B99FC"/>
+                    </svg>
+                `;
+                btn.classList.remove('bg-green-600/20', 'border-green-600/50');
+                btn.classList.add('bg-blue-600/20', 'border-blue-600/50');
+            } else {
+                // Desktop button: restore text
+                btn.innerHTML = 'Connect Wallet';
+                btn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                btn.classList.add('bg-currents-red', 'hover:bg-currents-red-hover');
+            }
+            btn.onclick = function() { showWalletModal(); };
+        });
+        
+        // Show notification
+        showNotification('Wallet disconnected', 'info');
+        console.log('Wallet disconnected');
+    }
+
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `fixed top-4 right-4 z-50 px-6 py-4 rounded-lg shadow-lg ${
+            type === 'success' ? 'bg-green-600' : 'bg-currents-red'
+        } text-white font-bold max-w-md`;
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            notification.style.transition = 'opacity 0.3s';
+            setTimeout(() => notification.remove(), 300);
+        }, 4000);
+    }
+
+    // Restore wallet connection on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedAddress = sessionStorage.getItem('walletAddress');
+        const savedBalance = sessionStorage.getItem('walletBalance');
+        
+        if (savedAddress && savedBalance) {
+            const shortAddress = savedAddress.slice(0, 6) + '...' + savedAddress.slice(-4);
+            
+            document.querySelectorAll('button[onclick*="showWalletModal"]').forEach(btn => {
+                if (btn.id === 'mobile-wallet-btn') {
+                    // Mobile icon button: show WalletConnect logo in green
+                    btn.innerHTML = `
+                        <svg style="width: 18px; height: 18px; display: block;" viewBox="0 0 300 185" fill="none">
+                            <path d="M61.4385 36.2562C99.3514 -1.65668 160.9 -1.65668 198.813 36.2562L203.445 40.8883C205.412 42.8545 205.412 46.0534 203.445 48.0196L188.302 63.1622C187.319 64.1453 185.709 64.1453 184.726 63.1622L178.251 56.6874C153.311 31.7476 111.942 31.7476 87.002 56.6874L80.0915 63.598C79.1084 64.5811 77.4981 64.5811 76.515 63.598L61.3724 48.4554C59.4062 46.4892 59.4062 43.2903 61.3724 41.3241L61.4385 36.2562ZM231.028 69.0695L244.132 82.1736C246.098 84.1398 246.098 87.3387 244.132 89.3049L186.963 146.474C185.664 147.773 183.391 147.773 182.092 146.474L130.166 94.5481C129.675 94.0569 128.864 94.0569 128.373 94.5481L76.4476 146.474C75.1488 147.773 72.8759 147.773 71.5771 146.474L14.3966 89.2937C12.4304 87.3275 12.4304 84.1286 14.3966 82.1624L27.5007 69.0583C28.7995 67.7595 31.0724 67.7595 32.3712 69.0583L84.2967 120.984C84.7879 121.475 85.5991 121.475 86.0903 120.984L138.016 69.0583C139.315 67.7595 141.588 67.7595 142.887 69.0583L194.812 120.984C195.303 121.475 196.115 121.475 196.606 120.984L248.531 69.0583C249.83 67.7595 252.103 67.7595 253.402 69.0583L231.028 69.0695Z" fill="#10B981"/>
+                        </svg>
+                    `;
+                    btn.classList.add('bg-green-600/20', 'border-green-600/50');
+                    btn.classList.remove('bg-blue-600/20', 'border-blue-600/50');
+                } else {
+                    // Desktop button: show address + balance
+                    btn.innerHTML = `
+                        <div class="flex items-center justify-between w-full">
+                            <span>💚 ${shortAddress}</span>
+                            <span class="text-sm">${savedBalance} USDT</span>
+                        </div>
+                    `;
+                    btn.classList.add('bg-green-600', 'hover:bg-green-700');
+                    btn.classList.remove('bg-currents-red', 'hover:bg-currents-red-hover');
+                }
+                btn.onclick = function() { showDisconnectModal(); };
+            });
+        }
+    });
+    
+    // Initialize like button states on page load for desktop grid
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get liked markets from localStorage
+        let likedMarkets = [];
+        try {
+            likedMarkets = JSON.parse(localStorage.getItem('currents_liked_markets') || '[]');
+        } catch (e) {
+            console.error('Error loading liked markets:', e);
+        }
+        
+        if (likedMarkets.length > 0) {
+            console.log('[Desktop Grid] Initializing', likedMarkets.length, 'liked markets');
+            
+            // Set liked state for all liked markets on page
+            likedMarkets.forEach(marketId => {
+                const buttons = document.querySelectorAll('.like-btn[data-market-id="' + marketId + '"]');
+                buttons.forEach(button => {
+                    const svg = button.querySelector('svg');
+                    const path = svg.querySelector('path');
+                    
+                    button.classList.add('liked');
+                    svg.setAttribute('fill', 'currentColor');
+                    svg.setAttribute('stroke', 'none');
+                    path.setAttribute('class', 'text-red-500 transition');
+                });
+            });
+        }
+    });
+    
+    // Mobile menu functions (for detail pages)
+    function showMobileMenu() {
+        const modal = document.getElementById('mobile-menu-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+    
+    function closeMobileMenu() {
+        const modal = document.getElementById('mobile-menu-modal');
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
         }
     }
     </script>

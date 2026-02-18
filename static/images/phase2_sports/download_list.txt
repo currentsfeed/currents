@@ -1,0 +1,43 @@
+# Phase 2 Batch 1: Sports Duplicates (33 images)
+# NHL Teams, NBA Teams, and other sports
+
+# NHL Teams (will need to find team-specific or hockey action photos)
+# Using Pexels hockey images - each unique
+
+553826|Edmonton Oilers|https://images.pexels.com/photos/1202723/pexels-photo-1202723.jpeg?auto=compress&cs=tinysrgb&w=1920
+553829|Vegas Golden Knights|https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1920
+553840|St Louis Blues|https://images.pexels.com/photos/1618200/pexels-photo-1618200.jpeg?auto=compress&cs=tinysrgb&w=1920
+553848|Anaheim Ducks|https://images.pexels.com/photos/262524/pexels-photo-262524.jpeg?auto=compress&cs=tinysrgb&w=1920
+553849|Montreal Canadiens|https://images.pexels.com/photos/1432039/pexels-photo-1432039.jpeg?auto=compress&cs=tinysrgb&w=1920
+553824|Carolina Hurricanes|https://images.pexels.com/photos/1277397/pexels-photo-1277397.jpeg?auto=compress&cs=tinysrgb&w=1920
+553827|Dallas Stars|https://images.pexels.com/photos/1618269/pexels-photo-1618269.jpeg?auto=compress&cs=tinysrgb&w=1920
+553835|Washington Capitals|https://images.pexels.com/photos/33703/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1920
+553836|New York Rangers|https://images.pexels.com/photos/1574623/pexels-photo-1574623.jpeg?auto=compress&cs=tinysrgb&w=1920
+553839|Utah Mammoth|https://images.pexels.com/photos/33703/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1920
+553841|Vancouver Canucks|https://images.pexels.com/photos/593313/pexels-photo-593313.jpeg?auto=compress&cs=tinysrgb&w=1920
+553854|Chicago Blackhawks|https://images.pexels.com/photos/209956/pexels-photo-209956.jpeg?auto=compress&cs=tinysrgb&w=1920
+553825|Florida Panthers|https://images.pexels.com/photos/1618195/pexels-photo-1618195.jpeg?auto=compress&cs=tinysrgb&w=1920
+553828|Colorado Avalanche|https://images.pexels.com/photos/1618304/pexels-photo-1618304.jpeg?auto=compress&cs=tinysrgb&w=1920
+553830|Tampa Bay Lightning|https://images.pexels.com/photos/1181115/pexels-photo-1181115.jpeg?auto=compress&cs=tinysrgb&w=1920
+553834|Toronto Maple Leafs|https://images.pexels.com/photos/33703/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1920
+553845|Calgary Flames|https://images.pexels.com/photos/1277396/pexels-photo-1277396.jpeg?auto=compress&cs=tinysrgb&w=1920
+553853|Seattle Kraken|https://images.pexels.com/photos/33703/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1920
+
+# NBA Teams
+553858|New York Knicks|https://images.pexels.com/photos/358042/pexels-photo-358042.jpeg?auto=compress&cs=tinysrgb&w=1920
+553861|Indiana Pacers|https://images.pexels.com/photos/1040482/pexels-photo-1040482.jpeg?auto=compress&cs=tinysrgb&w=1920
+553862|Boston Celtics|https://images.pexels.com/photos/1080882/pexels-photo-1080882.jpeg?auto=compress&cs=tinysrgb&w=1920
+553856|Oklahoma City Thunder|https://images.pexels.com/photos/1766996/pexels-photo-1766996.jpeg?auto=compress&cs=tinysrgb&w=1920
+553857|Cleveland Cavaliers|https://images.pexels.com/photos/2269393/pexels-photo-2269393.jpeg?auto=compress&cs=tinysrgb&w=1920
+
+# Other Sports
+new_60011|Yankees 2026 World Series|https://images.pexels.com/photos/1374279/pexels-photo-1374279.jpeg?auto=compress&cs=tinysrgb&w=1920
+new_60013|Tiger Woods Masters|https://images.pexels.com/photos/1325735/pexels-photo-1325735.jpeg?auto=compress&cs=tinysrgb&w=1920
+new_60014|Simone Biles Olympics|https://images.pexels.com/photos/3775566/pexels-photo-3775566.jpeg?auto=compress&cs=tinysrgb&w=1920
+new_60015|Michigan College Football|https://images.pexels.com/photos/1618200/pexels-photo-1618200.jpeg?auto=compress&cs=tinysrgb&w=1920
+new_60016|Saquon Barkley 2000 yards|https://images.pexels.com/photos/260024/pexels-photo-260024.jpeg?auto=compress&cs=tinysrgb&w=1920
+new_60009|Caitlin Clark MVP|https://images.pexels.com/photos/3761502/pexels-photo-3761502.jpeg?auto=compress&cs=tinysrgb&w=1920
+550703|Sweden FIFA 2026|https://images.pexels.com/photos/262524/pexels-photo-262524.jpeg?auto=compress&cs=tinysrgb&w=1920
+multi_001|NBA Championship 2026|https://images.pexels.com/photos/1080882/pexels-photo-1080882.jpeg?auto=compress&cs=tinysrgb&w=1920
+new_60012|Connor McDavid Stanley Cup|https://images.pexels.com/photos/1618269/pexels-photo-1618269.jpeg?auto=compress&cs=tinysrgb&w=1920
+new_60017|Jake Paul Canelo|https://images.pexels.com/photos/260024/pexels-photo-260024.jpeg?auto=compress&cs=tinysrgb&w=1920

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currents - Coming Soon</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    
+    <!-- Mobile Responsive Fixes -->
+    <link rel="stylesheet" href="/static/css/mobile.css">
+    
+    <style>
+        /* Currents Brand Colors */
+        :root {
+            --currents-red: #FF5757;
+            --currents-red-hover: #FF3B3B;
+        }
+        
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+        }
+        
+        .belief-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .belief-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 87, 87, 0.3);
+        }
+        
+        .belief-btn.selected {
+            background: var(--currents-red);
+            border-color: var(--currents-red);
+            box-shadow: 0 0 30px rgba(255, 87, 87, 0.5);
+        }
+        
+        .belief-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .bg-currents-red {
+            background-color: var(--currents-red);
+        }
+        
+        .text-currents-red {
+            color: var(--currents-red);
+        }
+        
+        .border-currents-red {
+            border-color: var(--currents-red);
+        }
+        
+        .hover\:bg-currents-red-hover:hover {
+            background-color: var(--currents-red-hover);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    
+    <!-- Header (matching main site) -->
+    <header class="border-b border-gray-800 bg-black/50 backdrop-blur">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-end gap-2">
+                    <a href="/" class="flex items-center group">
+                        <img src="/static/images/currents-logo-horizontal.jpg" 
+                             alt="Currents" 
+                             class="h-8 group-hover:scale-105 transition-transform duration-200">
+                    </a>
+                    <p class="text-white font-medium italic hidden sm:block" style="padding-bottom: 2px; font-size: 10.8px;">News, measured in belief</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-12 md:py-20 flex flex-col items-center justify-center min-h-[calc(100vh-200px)]">
+        
+        <!-- State A & B: Question + Belief Selection -->
+        <div id="state-question" class="text-center mb-8 max-w-4xl">
+            <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tight text-currents-red" id="coming-soon-title">
+                Coming Soon
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-400 italic mb-6 md:mb-8">(But when, exactly?)</p>
+            <style>
+                #coming-soon-title {
+                    margin-top: 25.6px;
+                    margin-bottom: 20px;
+                }
+                @media (min-width: 768px) {
+                    #coming-soon-title {
+                        margin-top: 38.4px;
+                        margin-bottom: 24px;
+                    }
+                }
+            </style>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 md:mb-6 leading-tight tracking-tight text-white">
+                When will the Currents website go live:
+            </h2>
+            
+            <!-- 4 Option Buttons -->
+            <div class="grid grid-cols-2 gap-3 md:gap-4 mb-3 max-w-2xl mx-auto">
+                <button id="btn-march" onclick="selectBelief('MARCH')" 
+                        class="belief-btn py-5 md:py-6 px-6 md:px-8 text-xl md:text-2xl font-bold rounded-xl border-2 border-gray-700 bg-gray-900/50 hover:border-currents-red transition-all backdrop-blur-sm relative">
+                    <span class="option-text"><span id="march-percentage">25%</span> believe <span class="text-blue-400">March</span></span>
+                    <span class="checkmark hidden absolute top-2 right-2 text-green-500 text-sm">✓ Your belief</span>
+                </button>
+                <button id="btn-april" onclick="selectBelief('APRIL')" 
+                        class="belief-btn py-5 md:py-6 px-6 md:px-8 text-xl md:text-2xl font-bold rounded-xl border-2 border-gray-700 bg-gray-900/50 hover:border-currents-red transition-all backdrop-blur-sm relative">
+                    <span class="option-text"><span id="april-percentage">25%</span> believe <span class="text-green-500">April</span></span>
+                    <span class="checkmark hidden absolute top-2 right-2 text-green-500 text-sm">✓ Your belief</span>
+                </button>
+                <button id="btn-may" onclick="selectBelief('MAY')" 
+                        class="belief-btn py-5 md:py-6 px-6 md:px-8 text-xl md:text-2xl font-bold rounded-xl border-2 border-gray-700 bg-gray-900/50 hover:border-currents-red transition-all backdrop-blur-sm relative">
+                    <span class="option-text"><span id="may-percentage">25%</span> believe <span class="text-yellow-400">May</span></span>
+                    <span class="checkmark hidden absolute top-2 right-2 text-green-500 text-sm">✓ Your belief</span>
+                </button>
+                <button id="btn-later" onclick="selectBelief('LATER')" 
+                        class="belief-btn py-5 md:py-6 px-6 md:px-8 text-xl md:text-2xl font-bold rounded-xl border-2 border-gray-700 bg-gray-900/50 hover:border-currents-red transition-all backdrop-blur-sm relative">
+                    <span class="option-text"><span id="later-percentage">25%</span> believe <span class="text-red-400">Later</span></span>
+                    <span class="checkmark hidden absolute top-2 right-2 text-green-500 text-sm">✓ Your belief</span>
+                </button>
+            </div>
+            
+            <!-- Microcopy below buttons -->
+            <p class="text-sm text-gray-500 italic mb-12 md:mb-16">Beliefs update as people join.</p>
+            
+            <!-- Sentiment Graph (State A) -->
+            <div id="sentiment-graph-section" class="w-full max-w-md mx-auto mb-8">
+                <h3 class="text-sm font-semibold text-gray-300 mb-3">How beliefs are shifting</h3>
+                <div class="bg-gray-800/50 rounded-lg p-4">
+                    <canvas id="sentimentChart" height="200"></canvas>
+                </div>
+                <p class="text-xs text-gray-500 mt-2 text-center"><span id="participant-count">0</span> people have already shared their belief</p>
+            </div>
+            
+            <!-- State B: Post-Selection Message + Email Input -->
+            <div id="post-selection-section" class="hidden fade-in w-full max-w-md mx-auto mb-8">
+                <!-- Post-Selection Message -->
+                <div id="post-selection" class="mb-6">
+                    <p class="text-lg md:text-xl text-gray-300 mb-6 pulse-animation font-light">
+                        We'll record your belief and notify you when the outcome is known.
+                    </p>
+                </div>
+                
+                <!-- State C: Email Input -->
+                <div id="state-email" class="fade-in">
+                    <form id="email-form" onsubmit="submitEmail(event)">
+                        <div class="mb-4">
+                            <input type="text" id="email-input" placeholder="your@email.com"
+                                   class="w-full px-6 py-4 text-lg rounded-xl bg-gray-900/80 border-2 border-gray-800 focus:border-currents-red focus:outline-none transition backdrop-blur-sm">
+                        </div>
+                        <button type="submit" id="submit-btn"
+                                class="w-full py-4 px-8 text-xl font-bold rounded-xl bg-currents-red hover:bg-currents-red-hover transition transform hover:scale-[1.02]">
+                            Save my belief
+                        </button>
+                        
+                        <!-- Error Message -->
+                        <div id="error-message" class="hidden mt-4 p-4 bg-red-900/30 border border-red-600/50 rounded-lg text-center backdrop-blur-sm">
+                            <p class="text-red-300 text-sm"></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- State D: Confirmation -->
+        <div id="state-confirmation" class="hidden fade-in text-center max-w-2xl">
+            <div class="mb-6">
+                <svg class="w-20 h-20 md:w-24 md:h-24 mx-auto text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <h2 class="text-2xl md:text-4xl font-bold mb-4">Your belief has been recorded.</h2>
+            <p class="text-currents-red text-xl md:text-2xl font-semibold mb-4" id="waitlist-position"></p>
+            <p class="text-gray-400 text-base md:text-lg mb-2 font-light">
+                Correct believers will receive early access and a founding-session perk at launch.
+            </p>
+            <p class="text-gray-500 text-sm md:text-base font-light">
+                We'll email you when the answer is known.
+            </p>
+        </div>
+        
+    </div>
+    
+    <!-- Footer (matching main site style) -->
+    <footer class="border-t border-gray-800 mt-16 py-8">
+        <div class="container mx-auto px-4 text-center text-gray-500">
+            {% if show_site_link %}
+            <p class="text-sm">
+                <a href="/?bypass=1" class="text-gray-400 hover:text-currents-red transition">
+                    Go to site
+                </a>
+            </p>
+            {% endif %}
+        </div>
+    </footer>
+    
+    <script>
+        let selectedBelief = null;
+        
+        // Fetch and display current percentages on page load
+        async function loadPercentages() {
+            try {
+                const response = await fetch('/api/waitlist/percentages');
+                const data = await response.json();
+                
+                if (data.march_percentage !== undefined) {
+                    document.getElementById('march-percentage').textContent = data.march_percentage;
+                    document.getElementById('april-percentage').textContent = data.april_percentage;
+                    document.getElementById('may-percentage').textContent = data.may_percentage;
+                    document.getElementById('later-percentage').textContent = data.later_percentage;
+                    
+                    // Calculate and display total participant count
+                    const total = data.march_count + data.april_count + data.may_count + data.later_count;
+                    document.getElementById('participant-count').textContent = total.toLocaleString();
+                }
+            } catch (error) {
+                console.error('Error loading percentages:', error);
+            }
+        }
+        
+        // Create animated sentiment chart
+        function createSentimentChart() {
+            const ctx = document.getElementById('sentimentChart');
+            
+            // Historical data: Feb 13 -> Feb 16 (today)
+            // Progression: March 42%, April 33%, May 20%, Later 5%
+            const dates = ['Feb 13', 'Feb 14', 'Feb 15', 'Feb 16'];
+            const marchData = [38, 40, 41, 42];   // March percentages
+            const aprilData = [35, 34, 34, 33];   // April percentages
+            const mayData = [22, 21, 20, 20];     // May percentages
+            const laterData = [5, 5, 5, 5];       // Later percentages
+            
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [
+                        {
+                            label: 'March',
+                            data: marchData,
+                            borderColor: '#60a5fa',
+                            backgroundColor: 'rgba(96, 165, 250, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: [0, 0, 0, 6],
+                            pointBackgroundColor: ['', '', '', '#60a5fa'],
+                            pointBorderColor: ['', '', '', '#fff'],
+                            pointBorderWidth: [0, 0, 0, 2],
+                            pointHoverRadius: 4,
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderWidth: 2
+                        },
+                        {
+                            label: 'April',
+                            data: aprilData,
+                            borderColor: '#34d399',
+                            backgroundColor: 'rgba(52, 211, 153, 0.1)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: 0,
+                            pointHoverRadius: 4,
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderWidth: 2
+                        },
+                        {
+                            label: 'May',
+                            data: mayData,
+                            borderColor: '#fbbf24',
+                            backgroundColor: 'rgba(251, 191, 36, 0.1)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: 0,
+                            pointHoverRadius: 4,
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderWidth: 2
+                        },
+                        {
+                            label: 'Later',
+                            data: laterData,
+                            borderColor: '#f87171',
+                            backgroundColor: 'rgba(248, 113, 113, 0.1)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: 0,
+                            pointHoverRadius: 4,
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeInOutQuart'
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                color: '#9ca3af',
+                                font: {
+                                    size: 11
+                                },
+                                usePointStyle: false,
+                                padding: 10,
+                                boxWidth: 20,
+                                boxHeight: 3
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: '#3b82f6',
+                            borderWidth: 1,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y.toFixed(0) + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'rgba(107, 114, 128, 0.1)',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#6b7280',
+                                maxRotation: 45,
+                                minRotation: 0,
+                                font: {
+                                    size: 11
+                                }
+                            }
+                        },
+                        y: {
+                            min: 0,
+                            max: 100,
+                            grid: {
+                                color: 'rgba(107, 114, 128, 0.1)',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#6b7280',
+                                callback: function(value) {
+                                    return value + '%';
+                                },
+                                font: {
+                                    size: 11
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Load percentages and chart when page loads
+        loadPercentages();
+        createSentimentChart();
+        
+        function selectBelief(choice) {
+            selectedBelief = choice;
+            
+            // Lock all buttons and apply opacity/checkmark effects
+            const buttons = ['march', 'april', 'may', 'later'];
+            buttons.forEach(btn => {
+                const button = document.getElementById(`btn-${btn}`);
+                button.disabled = true;
+                
+                if (choice === btn.toUpperCase()) {
+                    // Selected button: keep full opacity, show checkmark
+                    button.classList.add('selected');
+                    button.querySelector('.checkmark').classList.remove('hidden');
+                } else {
+                    // Other buttons: fade to 40% opacity
+                    button.style.opacity = '0.4';
+                }
+            });
+            
+            // Hide sentiment graph
+            document.getElementById('sentiment-graph-section').classList.add('hidden');
+            
+            // Show post-selection section (contains message + email form)
+            document.getElementById('post-selection-section').classList.remove('hidden');
+            
+            // Focus email input after brief animation delay
+            setTimeout(() => {
+                document.getElementById('email-input').focus();
+            }, 500);
+        }
+        
+        async function submitEmail(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email-input').value.trim();
+            const errorDiv = document.getElementById('error-message');
+            const errorText = errorDiv.querySelector('p');
+            const submitBtn = document.getElementById('submit-btn');
+            
+            // Hide previous errors
+            errorDiv.classList.add('hidden');
+            
+            // Client-side validation (but skip for test email)
+            if (email.toLowerCase() !== 'testtt') {
+                if (!email || email.length === 0) {
+                    errorText.textContent = 'Please enter your email address';
+                    errorDiv.classList.remove('hidden');
+                    return;
+                }
+                
+                // Basic email format check (not for testtt)
+                if (!email.includes('@') || !email.includes('.') || email.indexOf('@') > email.lastIndexOf('.')) {
+                    errorText.textContent = 'Please enter a valid email address';
+                    errorDiv.classList.remove('hidden');
+                    return;
+                }
+            }
+            
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Saving...';
+            
+            try {
+                // Get device type
+                const deviceType = /Mobile|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'mobile' : 'desktop';
+                
+                const response = await fetch('/api/waitlist/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        belief_choice: selectedBelief,
+                        device_type: deviceType,
+                        locale: navigator.language || 'en-US'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Success - show confirmation with position
+                    const positionElement = document.getElementById('waitlist-position');
+                    positionElement.textContent = `You're #${data.position} on the waiting list`;
+                    
+                    // Show confirmation
+                    document.getElementById('state-question').classList.add('hidden');
+                    document.getElementById('state-email').classList.add('hidden');
+                    document.getElementById('state-confirmation').classList.remove('hidden');
+                } else {
+                    // Error - show message
+                    errorText.textContent = data.error || 'An error occurred. Please try again.';
+                    errorDiv.classList.remove('hidden');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Save my belief';
+                }
+            } catch (error) {
+                console.error('Submission error:', error);
+                errorText.textContent = 'Network error. Please check your connection and try again.';
+                errorDiv.classList.remove('hidden');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Save my belief';
+            }
+        }
+    </script>
+</body>
+</html>

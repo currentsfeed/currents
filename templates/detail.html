@@ -4,6 +4,14 @@
 
 {% block content %}
 
+<!-- Mobile Back to Feed Button -->
+<a href="/" class="fixed top-20 left-4 z-50 md:hidden flex items-center gap-2 px-4 py-2 bg-gray-900/90 backdrop-blur-md rounded-full border border-gray-700 hover:border-gray-600 transition">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+    </svg>
+    <span class="text-sm font-semibold">Feed</span>
+</a>
+
 <div class="max-w-6xl mx-auto">
     <!-- Hero Section -->
     <section class="mb-8">
@@ -12,18 +20,18 @@
                  alt="{{ market.title }}"
                  class="w-full h-full object-cover">
             
-            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent">
             </div>
             
-            <div class="absolute bottom-0 left-0 right-0 p-8">
+            <div class="absolute bottom-0 left-0 right-0 p-6 pb-8 md:p-8">
                 {% if market.editorial_description %}
-                <p class="text-base text-gray-300 mb-4 leading-relaxed max-w-3xl">
+                <p class="text-sm md:text-base text-white/75 font-normal mb-3 md:mb-4 leading-relaxed max-w-2xl md:max-w-3xl">
                     {{ market.editorial_description }}
                 </p>
                 {% endif %}
                 
-                <div class="flex items-start gap-4 mb-6">
-                    <h1 class="text-4xl font-bold flex-1">{{ market.title }}</h1>
+                <div class="flex items-start gap-4 mb-4 md:mb-6">
+                    <h1 class="text-2xl md:text-4xl font-semibold tracking-tight flex-1">{{ market.title }}</h1>
                     <button onclick="likeMarket('{{ market.market_id }}', this)" 
                             class="like-btn flex-shrink-0 group/like mt-1"
                             data-market-id="{{ market.market_id }}">
@@ -55,16 +63,16 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <!-- Main Content (Left) -->
         <div class="lg:col-span-2">
-            <!-- Description -->
+            <!-- Market Rules -->
             <section class="bg-gray-900 rounded-xl p-6 mb-6">
-                <h2 class="text-xl font-bold mb-4">About This Market</h2>
-                <p class="text-gray-300">{{ market.description }}</p>
+                <h2 class="text-xl font-semibold tracking-tight mb-4">Market Rules</h2>
+                {{ market|market_rules|safe }}
             </section>
 
             <!-- Belief Currents Chart -->
             <section class="bg-gray-900 rounded-xl p-6 mb-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-xl font-bold">BELIEF CURRENTS</h2>
+                    <h2 class="text-xl font-semibold tracking-tight">BELIEF CURRENTS</h2>
                     <span class="text-xs text-gray-500">{{ market.created_at[:10] }} → Now</span>
                 </div>
                 
@@ -102,27 +110,210 @@
                     </div>
                 </div>
                 
-                <!-- Recent history points -->
+                <!-- Probability Graph -->
                 <div class="mt-6">
-                    <h3 class="text-sm font-bold text-gray-400 mb-3">RECENT MOVEMENT</h3>
-                    <div class="space-y-2">
-                        {% for point in market.probability_history[-5:] %}
-                        <div class="flex items-center gap-4">
-                            <span class="text-xs text-gray-500 w-24">{{ point.timestamp[:10] }}</span>
-                            <div class="flex-1 h-2 bg-gray-800 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-green-500 to-red-500" 
-                                     style="width: 100%; opacity: 0.3;"></div>
-                                <div class="h-full bg-green-500 -mt-2" 
-                                     style="width: {{ point.probability * 100 }}%"></div>
-                            </div>
-                            <span class="text-sm font-bold w-12 {% if point.probability > 0.5 %}text-green-400{% else %}text-red-400{% endif %}">
-                                {{ (point.probability * 100)|int }}%
-                            </span>
+                    <h3 class="text-sm font-bold text-gray-400 mb-3">PROBABILITY OVER TIME</h3>
+                    <div class="bg-gray-800/50 rounded-lg p-4">
+                        <canvas id="probabilityChart" height="200"></canvas>
+                    </div>
+                </div>
+                
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+                <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const ctx = document.getElementById('probabilityChart').getContext('2d');
+                    
+                    // Prepare data from Flask
+                    const historyData = {{ market.probability_history|tojson|safe }};
+                    
+                    // Extract timestamps and probabilities
+                    const labels = historyData.map(point => {
+                        const date = new Date(point.timestamp);
+                        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                    });
+                    const probabilities = historyData.map(point => point.probability * 100);
+                    
+                    // Create gradient for line color (green above 50%, red below)
+                    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+                    gradient.addColorStop(0, '#10b981'); // Green at top (100%)
+                    gradient.addColorStop(0.5, '#6b7280'); // Gray at 50%
+                    gradient.addColorStop(1, '#ef4444'); // Red at bottom (0%)
+                    
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Probability',
+                                data: probabilities,
+                                borderColor: gradient,
+                                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: true,
+                                pointRadius: 0,
+                                pointHoverRadius: 4,
+                                pointHoverBackgroundColor: '#fff',
+                                pointHoverBorderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false },
+                                tooltip: {
+                                    mode: 'index',
+                                    intersect: false,
+                                    callbacks: {
+                                        label: function(context) {
+                                            return 'Probability: ' + context.parsed.y.toFixed(1) + '%';
+                                        }
+                                    },
+                                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                    titleColor: '#fff',
+                                    bodyColor: '#fff',
+                                    borderColor: '#3b82f6',
+                                    borderWidth: 1
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    min: 0,
+                                    max: 100,
+                                    title: {
+                                        display: true,
+                                        text: '{% if market.outcomes|length > 0 %}{{ market.outcomes[0].name }}{% else %}Yes{% endif %}',
+                                        color: '#9ca3af',
+                                        font: {
+                                            size: 12,
+                                            weight: '600'
+                                        },
+                                        padding: { top: 0, bottom: 10 }
+                                    },
+                                    ticks: {
+                                        color: '#6b7280',
+                                        callback: function(value) {
+                                            return value + '%';
+                                        }
+                                    },
+                                    grid: {
+                                        color: 'rgba(107, 114, 128, 0.1)',
+                                        drawBorder: false
+                                    }
+                                },
+                                x: {
+                                    ticks: {
+                                        color: '#6b7280',
+                                        maxRotation: 45,
+                                        minRotation: 0
+                                    },
+                                    grid: {
+                                        display: false
+                                    }
+                                }
+                            },
+                            interaction: {
+                                mode: 'nearest',
+                                axis: 'x',
+                                intersect: false
+                            }
+                        }
+                    });
+                });
+                </script>
+            </section>
+
+            <!-- Read More Article -->
+            <section class="bg-gray-900 rounded-xl p-6 mb-6">
+                <button onclick="toggleArticle()" id="readMoreBtn" class="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition group">
+                    <svg id="articleIcon" class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                    <span class="font-semibold">Read more about this topic</span>
+                </button>
+                
+                <div id="articleContent" class="hidden mt-6 pt-6 border-t border-gray-800">
+                    <!-- Article Title -->
+                    <h3 class="text-xl font-semibold tracking-tight mb-4">Context & Analysis</h3>
+                    
+                    <!-- Source Badge -->
+                    <div class="flex items-center gap-2 mb-6 text-xs">
+                        <div class="flex items-center gap-2 px-3 py-1.5 bg-gray-800 rounded-full border border-gray-700">
+                            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                            </svg>
+                            <span class="text-gray-400">Source:</span>
+                            <span class="text-white font-medium">{{ market.article_source or 'Web Article' }}</span>
                         </div>
-                        {% endfor %}
+                        <div class="text-gray-500">
+                            {% if market.article_fetched_at %}
+                            Updated {{ market.article_fetched_at[:10] }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Article Content with Better Structure -->
+                    <div class="space-y-6">
+                        {% if market.article_text %}
+                        <div class="prose prose-invert max-w-none">
+                            <!-- Custom styling for markdown sections -->
+                            <style>
+                                .prose h2 {
+                                    @apply text-lg font-bold text-white mb-3 mt-6 first:mt-0;
+                                }
+                                .prose h3 {
+                                    @apply text-base font-semibold text-white/90 mb-2 mt-4;
+                                }
+                                .prose p {
+                                    @apply text-white/75 text-sm leading-relaxed mb-4;
+                                }
+                                .prose strong {
+                                    @apply text-white font-semibold;
+                                }
+                                .prose ul, .prose ol {
+                                    @apply text-white/75 text-sm space-y-2 mb-4;
+                                }
+                                .prose li {
+                                    @apply leading-relaxed;
+                                }
+                                .prose a {
+                                    @apply text-blue-400 hover:text-blue-300 underline;
+                                }
+                                /* Add subtle dividers between major sections */
+                                .prose > h2:not(:first-child) {
+                                    @apply border-t border-gray-800 pt-6;
+                                }
+                            </style>
+                            {{ market.article_text|safe }}
+                        </div>
+                        {% else %}
+                        <p class="text-gray-500 italic text-sm">Article content will be fetched shortly. Please refresh the page.</p>
+                        {% endif %}
                     </div>
                 </div>
             </section>
+            
+            <script>
+            function toggleArticle() {
+                const content = document.getElementById('articleContent');
+                const icon = document.getElementById('articleIcon');
+                const btn = document.getElementById('readMoreBtn');
+                
+                if (content.classList.contains('hidden')) {
+                    content.classList.remove('hidden');
+                    icon.style.transform = 'rotate(180deg)';
+                    
+                    // Smooth scroll to article
+                    setTimeout(() => {
+                        content.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 100);
+                } else {
+                    content.classList.add('hidden');
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            }
+            </script>
 
             <!-- Outcomes -->
             <section class="bg-gray-900 rounded-xl p-6">
@@ -140,7 +331,47 @@
                     {% endfor %}
                 </div>
                 
-                <button onclick="showWalletModal()" class="block w-full mt-4 px-6 py-3 bg-orange-600 hover:bg-orange-700 rounded-lg font-bold transition text-center">
+                <!-- Place Trade Box -->
+                <div id="tradeBox" class="mt-6 p-4 bg-gray-800 rounded-lg border border-gray-700 hidden">
+                    <h3 class="text-lg font-bold mb-4">Place Trade</h3>
+                    
+                    <!-- Selected Outcome Display -->
+                    <div class="mb-4 p-3 bg-gray-900 rounded-lg">
+                        <div class="text-sm text-gray-400 mb-1">Trading on:</div>
+                        <div id="selectedOutcomeDisplay" class="text-lg font-bold text-currents-red"></div>
+                    </div>
+                    
+                    <!-- Amount Input -->
+                    <div class="mb-4">
+                        <label class="block text-sm text-gray-400 mb-2">Amount (USDT)</label>
+                        <input type="number" 
+                               id="tradeAmount" 
+                               placeholder="0.00" 
+                               min="1" 
+                               step="1"
+                               class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:border-currents-red focus:outline-none">
+                        <div class="text-xs text-gray-500 mt-1">Min: 1 USDT</div>
+                    </div>
+                    
+                    <!-- Your Balance -->
+                    <div class="mb-4 flex justify-between text-sm">
+                        <span class="text-gray-400">Your Balance:</span>
+                        <span id="walletBalance" class="text-white font-medium">--</span>
+                    </div>
+                    
+                    <!-- Place Trade Button -->
+                    <button id="placeTradeBtn" 
+                            onclick="placeTrade()" 
+                            class="w-full px-6 py-3 bg-currents-red hover:bg-currents-red-hover rounded-lg font-bold transition disabled:opacity-50 disabled:cursor-not-allowed">
+                        Place Trade
+                    </button>
+                    
+                    <!-- Trade Result Messages -->
+                    <div id="tradeResult" class="mt-4 p-3 rounded-lg hidden"></div>
+                </div>
+                
+                <!-- Connect Wallet Button (shown when not connected) -->
+                <button id="connectWalletBtn" onclick="showWalletModal()" class="block w-full mt-4 px-6 py-3 bg-currents-red hover:bg-currents-red-hover rounded-lg font-bold transition text-center">
                     Connect Wallet to Trade
                 </button>
             </section>
@@ -170,7 +401,7 @@
                     </div>
                     <div class="flex justify-between">
                         <span class="text-gray-500">Resolves</span>
-                        <span class="font-bold">{{ market.resolution_date[:10] }}</span>
+                        <span class="font-bold">{{ market.resolution_date[:10] }} 11:59 PM EST</span>
                     </div>
                 </div>
             </section>
@@ -210,18 +441,31 @@
 function selectOutcome(element) {
     // Remove selection from all outcomes
     document.querySelectorAll('.outcome-choice').forEach(choice => {
-        choice.classList.remove('border-orange-500', 'bg-gray-700', 'ring-2', 'ring-orange-500/50');
+        choice.classList.remove('border-currents-red', 'bg-gray-700', 'ring-2', 'ring-currents-red/50');
         choice.classList.add('border-transparent');
     });
     
     // Highlight selected outcome
     element.classList.remove('border-transparent');
-    element.classList.add('border-orange-500', 'bg-gray-700', 'ring-2', 'ring-orange-500/50');
+    element.classList.add('border-currents-red', 'bg-gray-700', 'ring-2', 'ring-currents-red/50');
     
-    // Store selection (for later use with wallet integration)
+    // Store selection
     const outcomeName = element.getAttribute('data-outcome');
     sessionStorage.setItem('selectedOutcome', outcomeName);
-    console.log('Selected outcome:', outcomeName);
+    
+    // Update trade box with selected outcome
+    const tradeBox = document.getElementById('tradeBox');
+    const selectedDisplay = document.getElementById('selectedOutcomeDisplay');
+    const walletAddress = sessionStorage.getItem('walletAddress');
+    
+    if (selectedDisplay) {
+        selectedDisplay.textContent = outcomeName;
+    }
+    
+    // Show trade box only if wallet is connected
+    if (tradeBox && walletAddress) {
+        tradeBox.classList.remove('hidden');
+    }
     
     // Track selection event
     if (typeof trackEvent === 'function') {
@@ -230,226 +474,168 @@ function selectOutcome(element) {
             outcome: outcomeName
         });
     }
+    
+    console.log('Selected outcome:', outcomeName);
 }
 
-// Restore previous selection on page load
+// Check wallet connection and update UI on page load
 document.addEventListener('DOMContentLoaded', function() {
+    const savedAddress = sessionStorage.getItem('walletAddress');
+    const savedBalance = sessionStorage.getItem('walletBalance');
     const savedOutcome = sessionStorage.getItem('selectedOutcome');
-    if (savedOutcome) {
-        const outcomeElement = document.querySelector(`[data-outcome="${savedOutcome}"]`);
-        if (outcomeElement) {
-            selectOutcome(outcomeElement);
+    
+    if (savedAddress && savedBalance) {
+        // Wallet is connected - hide connect button, show trade box
+        const connectBtn = document.getElementById('connectWalletBtn');
+        if (connectBtn) {
+            connectBtn.classList.add('hidden');
+        }
+        
+        // Update balance display
+        const balanceDisplay = document.getElementById('walletBalance');
+        if (balanceDisplay) {
+            balanceDisplay.textContent = savedBalance + ' USDT';
+        }
+        
+        // If outcome was previously selected, restore it and show trade box
+        if (savedOutcome) {
+            const outcomeElement = document.querySelector(`[data-outcome="${savedOutcome}"]`);
+            if (outcomeElement) {
+                selectOutcome(outcomeElement);
+            }
+        }
+    } else {
+        // No wallet connected - restore outcome selection but hide trade box
+        if (savedOutcome) {
+            const outcomeElement = document.querySelector(`[data-outcome="${savedOutcome}"]`);
+            if (outcomeElement) {
+                // Highlight the outcome without showing trade box
+                document.querySelectorAll('.outcome-choice').forEach(choice => {
+                    choice.classList.remove('border-currents-red', 'bg-gray-700', 'ring-2', 'ring-currents-red/50');
+                    choice.classList.add('border-transparent');
+                });
+                outcomeElement.classList.remove('border-transparent');
+                outcomeElement.classList.add('border-currents-red', 'bg-gray-700', 'ring-2', 'ring-currents-red/50');
+            }
         }
     }
 });
 
-// Wallet connection modal
-function showWalletModal() {
-    // Create modal backdrop
-    const modal = document.createElement('div');
-    modal.id = 'wallet-modal';
-    modal.className = 'fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4';
-    modal.onclick = function(e) {
-        if (e.target === modal) closeWalletModal();
-    };
+// Place trade function
+async function placeTrade() {
+    const amount = document.getElementById('tradeAmount').value;
+    const selectedOutcome = sessionStorage.getItem('selectedOutcome');
+    const walletAddress = sessionStorage.getItem('walletAddress');
+    const walletBalance = parseFloat(sessionStorage.getItem('walletBalance'));
+    const placeTradeBtn = document.getElementById('placeTradeBtn');
+    const tradeResult = document.getElementById('tradeResult');
     
-    // Modal content
-    modal.innerHTML = `
-        <div class="bg-gray-900 rounded-2xl max-w-md w-full p-6 border border-gray-700 shadow-2xl" onclick="event.stopPropagation()">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold">Connect Wallet</h2>
-                <button onclick="closeWalletModal()" class="text-gray-400 hover:text-white text-2xl leading-none">&times;</button>
-            </div>
-            
-            <div class="space-y-3">
-                <!-- MetaMask -->
-                <button onclick="connectMetaMask()" class="w-full flex items-center gap-4 p-4 bg-gray-800 hover:bg-gray-700 rounded-xl transition border border-gray-700 hover:border-orange-500">
-                    <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center text-2xl">
-                        🦊
-                    </div>
-                    <div class="flex-1 text-left">
-                        <div class="font-bold">MetaMask</div>
-                        <div class="text-sm text-gray-400">Connect with MetaMask</div>
-                    </div>
-                </button>
-                
-                <!-- WalletConnect -->
-                <button onclick="connectWalletConnect()" class="w-full flex items-center gap-4 p-4 bg-gray-800 hover:bg-gray-700 rounded-xl transition border border-gray-700 hover:border-orange-500">
-                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-2xl">
-                        🔗
-                    </div>
-                    <div class="flex-1 text-left">
-                        <div class="font-bold">WalletConnect</div>
-                        <div class="text-sm text-gray-400">Scan with mobile wallet</div>
-                    </div>
-                </button>
-                
-                <!-- Coinbase Wallet -->
-                <button onclick="connectCoinbase()" class="w-full flex items-center gap-4 p-4 bg-gray-800 hover:bg-gray-700 rounded-xl transition border border-gray-700 hover:border-orange-500">
-                    <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center text-2xl">
-                        💼
-                    </div>
-                    <div class="flex-1 text-left">
-                        <div class="font-bold">Coinbase Wallet</div>
-                        <div class="text-sm text-gray-400">Connect with Coinbase</div>
-                    </div>
-                </button>
-            </div>
-            
-            <div class="mt-6 p-3 bg-blue-900/20 border border-blue-500/30 rounded-lg">
-                <p class="text-xs text-gray-400">
-                    <span class="text-blue-400 font-bold">Network:</span> Arbitrum One
-                </p>
-            </div>
-        </div>
-    `;
+    // Clear previous results
+    tradeResult.classList.add('hidden');
+    tradeResult.className = 'mt-4 p-3 rounded-lg hidden';
     
-    document.body.appendChild(modal);
-    document.body.style.overflow = 'hidden';
-}
-
-function closeWalletModal() {
-    const modal = document.getElementById('wallet-modal');
-    if (modal) {
-        modal.remove();
-        document.body.style.overflow = '';
-    }
-}
-
-// Wallet connection handlers
-const ARBITRUM_CHAIN_ID = 42161;
-const ARBITRUM_CHAIN_ID_HEX = "0xa4b1";
-
-async function connectMetaMask() {
-    if (typeof window.ethereum === 'undefined') {
-        alert('MetaMask is not installed!\n\nInstall from: https://metamask.io/download/');
+    // Validation
+    if (!selectedOutcome) {
+        showTradeResult('error', 'Please select an outcome (YES/NO) first');
         return;
     }
     
+    if (!amount || parseFloat(amount) < 1) {
+        showTradeResult('error', 'Please enter amount (minimum 1 USDT)');
+        return;
+    }
+    
+    const tradeAmount = parseFloat(amount);
+    
+    if (tradeAmount > walletBalance) {
+        showTradeResult('error', `Insufficient balance. You have ${walletBalance} USDT`);
+        return;
+    }
+    
+    // Disable button during request
+    placeTradeBtn.disabled = true;
+    placeTradeBtn.textContent = 'Placing Trade...';
+    
+    // Call mock Rain API
     try {
-        // Request accounts
-        const accounts = await window.ethereum.request({
-            method: 'eth_requestAccounts'
-        });
-        const address = accounts[0];
-        
-        // Check network
-        const chainId = await window.ethereum.request({
-            method: 'eth_chainId'
-        });
-        const currentChainId = parseInt(chainId, 16);
-        
-        if (currentChainId !== ARBITRUM_CHAIN_ID) {
-            await switchToArbitrum();
-        }
-        
-        // Request signature for authentication
-        const message = `Sign this message to authenticate with Currents.\n\nAddress: ${address}\nTimestamp: ${Date.now()}`;
-        const signature = await window.ethereum.request({
-            method: 'personal_sign',
-            params: [message, address]
+        const response = await fetch('/api/trade', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                market_id: '{{ market.market_id }}',
+                outcome: selectedOutcome,
+                amount: tradeAmount,
+                wallet_address: walletAddress,
+                wallet_balance: walletBalance
+            })
         });
         
-        console.log('Signature received:', signature);
+        const result = await response.json();
         
-        // Get balance
-        const balanceHex = await window.ethereum.request({
-            method: 'eth_getBalance',
-            params: [address, 'latest']
-        });
-        const balanceWei = parseInt(balanceHex, 16);
-        const balanceEth = (balanceWei / 1e18).toFixed(4);
-        
-        // Success - close modal and update UI
-        const shortAddress = address.slice(0, 6) + '...' + address.slice(-4);
-        
-        closeWalletModal();
-        
-        // Update button to show connected state with balance
-        const btn = document.querySelector('button[onclick="showWalletModal()"]');
-        if (btn) {
-            btn.innerHTML = `
-                <div class="flex items-center justify-between w-full">
-                    <span>💚 ${shortAddress}</span>
-                    <span class="text-sm">${balanceEth} ETH</span>
-                </div>
-            `;
-            btn.classList.add('bg-green-600', 'hover:bg-green-700');
-            btn.classList.remove('bg-orange-600', 'hover:bg-orange-700');
-            btn.onclick = null; // Disable clicking when connected
-        }
-        
-        // Store wallet info
-        sessionStorage.setItem('walletAddress', address);
-        sessionStorage.setItem('walletBalance', balanceEth);
-        sessionStorage.setItem('walletSignature', signature);
-        
-        console.log('Wallet connected:', address);
-        console.log('Balance:', balanceEth, 'ETH');
-        
-        // Show success message
-        showNotification(`Wallet connected! Balance: ${balanceEth} ETH`, 'success');
-        
-    } catch (err) {
-        console.error('Connection failed:', err);
-        if (err.code === 4001) {
-            alert('You rejected the connection request.\nPlease try again and approve both the connection and signature.');
+        if (result.success) {
+            // Show success message
+            const message = `✅ Trade Simulated Successfully!\n\nShares: ${result.trade.shares}\nOutcome: "${selectedOutcome}"\nAmount: ${tradeAmount} USDT\nPrice: ${result.trade.execution_price}\n\n(This is a simulation - no real transaction)`;
+            showTradeResult('success', message);
+            
+            // Reset form
+            document.getElementById('tradeAmount').value = '';
+            
+            console.log('Simulated trade:', result.trade);
         } else {
-            alert('Failed to connect wallet: ' + err.message);
+            showTradeResult('error', 'Trade failed: ' + result.error);
         }
-    }
-}
-
-function showNotification(message, type = 'info') {
-    const notification = document.createElement('div');
-    notification.className = `fixed top-4 right-4 z-50 px-6 py-4 rounded-lg shadow-lg ${
-        type === 'success' ? 'bg-green-600' : 'bg-orange-600'
-    } text-white font-bold max-w-md`;
-    notification.textContent = message;
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.style.opacity = '0';
-        notification.style.transition = 'opacity 0.3s';
-        setTimeout(() => notification.remove(), 300);
-    }, 4000);
-}
-
-async function switchToArbitrum() {
-    try {
-        await window.ethereum.request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: ARBITRUM_CHAIN_ID_HEX }]
-        });
     } catch (err) {
-        // Network not added
-        if (err.code === 4902) {
-            await window.ethereum.request({
-                method: 'wallet_addEthereumChain',
-                params: [{
-                    chainId: ARBITRUM_CHAIN_ID_HEX,
-                    chainName: 'Arbitrum One',
-                    nativeCurrency: {
-                        name: 'ETH',
-                        symbol: 'ETH',
-                        decimals: 18
-                    },
-                    rpcUrls: ['https://arb1.arbitrum.io/rpc'],
-                    blockExplorerUrls: ['https://arbiscan.io']
-                }]
-            });
-        }
+        console.error('Trade error:', err);
+        showTradeResult('error', 'Trade simulation failed: ' + err.message);
+    } finally {
+        // Re-enable button
+        placeTradeBtn.disabled = false;
+        placeTradeBtn.textContent = 'Place Trade';
     }
 }
 
-async function connectWalletConnect() {
-    alert('WalletConnect integration coming soon!\n\nFor now, please use MetaMask.');
+function showTradeResult(type, message) {
+    const tradeResult = document.getElementById('tradeResult');
+    tradeResult.classList.remove('hidden', 'bg-green-900/30', 'border-green-500', 'text-green-400', 'bg-red-900/30', 'border-red-500', 'text-red-400');
+    
+    if (type === 'success') {
+        tradeResult.classList.add('bg-green-900/30', 'border', 'border-green-500', 'text-green-400');
+    } else {
+        tradeResult.classList.add('bg-red-900/30', 'border', 'border-red-500', 'text-red-400');
+    }
+    
+    tradeResult.textContent = message;
+    tradeResult.classList.remove('hidden');
 }
 
-async function connectCoinbase() {
-    alert('Coinbase Wallet integration coming soon!\n\nFor now, please use MetaMask.');
-}
+// Initialize like button state on page load
+window.addEventListener('load', function() {
+    const marketId = '{{ market.market_id }}';
+    const likeButton = document.querySelector('.like-btn[data-market-id="' + marketId + '"]');
+    
+    if (likeButton) {
+        // Check localStorage for liked markets
+        let likedMarkets = [];
+        try {
+            likedMarkets = JSON.parse(localStorage.getItem('currents_liked_markets') || '[]');
+        } catch (e) {
+            console.error('Error loading liked markets:', e);
+        }
+        
+        // If this market is liked, set the button state
+        if (likedMarkets.includes(marketId)) {
+            const svg = likeButton.querySelector('svg');
+            const path = svg.querySelector('path');
+            
+            likeButton.classList.add('liked');
+            svg.setAttribute('fill', 'currentColor');
+            svg.setAttribute('stroke', 'none');
+            path.setAttribute('class', 'text-red-500 transition');
+            
+            console.log('✅ Market already liked on page load:', marketId);
+        }
+    }
+});
 </script>
 
 {% endblock %}
