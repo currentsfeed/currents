@@ -42,12 +42,21 @@
     <a href="/market/{{ market.market_id }}" class="block group" data-tags="{{ market.tags|join(',') if market.tags else '' }}" data-category="{{ market.category }}">
         <!-- Responsive height: MUCH smaller on mobile, larger on desktop. Desktop heights increased to compensate for removed ticker -->
         <div class="relative h-[350px] sm:h-[450px] md:h-[600px] lg:h-[650px] w-full overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-            <!-- Background Image (if available) -->
+            <!-- Background Media (Image/Video/GIF) -->
             {% if market.image_url and not market.image_url.startswith('data:') %}
-            <img src="{{ market.image_url }}" 
-                 alt="{{ market.title }}"
-                 class="absolute inset-0 w-full h-full object-cover opacity-90 brightness-110 group-hover:scale-105 transition duration-700"
-                 onerror="this.style.display='none'">
+                {% if market.image_url|is_video %}
+                    <!-- Video Background -->
+                    <video autoplay muted loop playsinline
+                           class="absolute inset-0 w-full h-full object-cover opacity-90 brightness-110 group-hover:scale-105 transition duration-700">
+                        <source src="{{ market.image_url }}" type="video/mp4">
+                    </video>
+                {% else %}
+                    <!-- Image/GIF Background -->
+                    <img src="{{ market.image_url }}" 
+                         alt="{{ market.title }}"
+                         class="absolute inset-0 w-full h-full object-cover opacity-90 brightness-110 group-hover:scale-105 transition duration-700"
+                         onerror="this.style.display='none'">
+                {% endif %}
             {% endif %}
             
             <!-- Multi-layer vignette overlay (Figma reference) -->

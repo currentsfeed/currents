@@ -381,9 +381,15 @@
     <div class="snap-container" id="feed-container">
         {% for market in markets %}
         <div class="snap-card" data-market-id="{{ market.market_id }}">
-            <!-- Background image -->
+            <!-- Background media (image/video/GIF) -->
             <div class="card-bg">
-                <img src="{{ market.image_url }}" alt="{{ market.title }}" loading="lazy">
+                {% if market.image_url|is_video %}
+                    <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
+                        <source src="{{ market.image_url }}" type="video/mp4">
+                    </video>
+                {% else %}
+                    <img src="{{ market.image_url }}" alt="{{ market.title }}" loading="lazy">
+                {% endif %}
             </div>
             
             <!-- Gradient overlay -->

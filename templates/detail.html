@@ -16,9 +16,15 @@
     <!-- Hero Section -->
     <section class="mb-8">
         <div class="relative h-96 rounded-2xl overflow-hidden">
-            <img src="{{ market.image_url }}" 
-                 alt="{{ market.title }}"
-                 class="w-full h-full object-cover">
+            {% if market.image_url|is_video %}
+                <video autoplay muted loop playsinline class="w-full h-full object-cover">
+                    <source src="{{ market.image_url }}" type="video/mp4">
+                </video>
+            {% else %}
+                <img src="{{ market.image_url }}" 
+                     alt="{{ market.title }}"
+                     class="w-full h-full object-cover">
+            {% endif %}
             
             <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent">
             </div>

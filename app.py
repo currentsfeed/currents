@@ -69,6 +69,22 @@ def get_country_from_ip(ip_address):
 
 app = Flask(__name__)
 
+# Custom Jinja2 filters
+@app.template_filter('is_video')
+def is_video_filter(url):
+    """Check if URL is a video file"""
+    if not url:
+        return False
+    video_extensions = ('.mp4', '.webm', '.mov', '.avi')
+    return any(url.lower().endswith(ext) for ext in video_extensions)
+
+@app.template_filter('is_gif')
+def is_gif_filter(url):
+    """Check if URL is a GIF"""
+    if not url:
+        return False
+    return url.lower().endswith('.gif')
+
 # CORS configuration - only allow specific origins
 CORS(app, resources={
     r"/api/*": {
