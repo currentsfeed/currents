@@ -1,0 +1,36 @@
+# Currents - Block all crawlers during development
+# This will be updated when site goes public
+
+User-agent: *
+Disallow: /
+
+# Block all common search engines
+User-agent: Googlebot
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: Slurp
+Disallow: /
+
+User-agent: DuckDuckBot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
+
+User-agent: Sogou
+Disallow: /
+
+User-agent: Exabot
+Disallow: /
+
+User-agent: facebot
+Disallow: /
+
+User-agent: ia_archiver
+Disallow: /

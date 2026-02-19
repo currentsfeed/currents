@@ -92,6 +92,13 @@ DB_PATH = os.path.join(os.path.dirname(__file__), 'brain.db')
 # Initialize Rain client (used when USE_RAIN_API = True)
 rain_client = RainClient(RAIN_API_URL) if USE_RAIN_API else None
 
+# Robots.txt route (block crawlers during development)
+@app.route('/robots.txt')
+def robots():
+    """Serve robots.txt file to block web crawlers"""
+    from flask import send_from_directory
+    return send_from_directory('static', 'robots.txt', mimetype='text/plain')
+
 # Error handlers
 @app.errorhandler(404)
 def not_found(error):
