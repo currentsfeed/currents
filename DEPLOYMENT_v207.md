@@ -1,132 +1,74 @@
-# Deployment v207 - Iran Market Geo-Restriction Removed
+# Deployment v207 - Google Analytics & Tag Manager
 
-**Date**: February 18, 2026 05:06 UTC  
-**Status**: ✅ DEPLOYED
+**Deployed**: February 22, 2026 11:38 UTC
+**Commit**: 2a3f731
 
-## Overview
-Removed geo-restriction from Iran military attack market per Roy's clarification. Market now visible to all users globally, with natural trending boost in Israel through personalization algorithm.
+## Changes
 
-## Change Summary
+### ✅ Google Analytics & Tag Manager Integration
 
-**Before (v206)**:
-- Iran market hidden from non-Israeli users
-- Only visible in Israel (country code 'IL')
-- Explicit geo-filtering logic
+Added both Google Analytics (GA4) and Google Tag Manager to all pages via `base.html`:
 
-**After (v207)**:
-- Iran market visible to ALL users globally
-- Appears based on normal personalization algorithm
-- May trend higher in Israel naturally due to relevance/engagement
+**1. Google Tag Manager (GTM)**
+- **GTM ID**: GTM-TR6MMVG3
+- Script added at top of `<head>` section (as high as possible)
+- Noscript fallback added immediately after `<body>` tag
+- Will track all page views and enable advanced tracking configurations
 
-## Implementation
-
-Removed geo-filtering blocks from **3 locations**:
-
-1. **Desktop feed (BRain v1)** - Line ~698
-2. **Desktop feed (fallback)** - Line ~799
-3. **Mobile feed (BRain v1)** - Line ~927
-
-**Code Change**:
-```python
-# BEFORE (v206)
-# GEO-FILTER IRAN ATTACK MARKET: Show only to IL users (trending in Israel)
-iran_market_id = 'us-iran-military-attack-feb19-2026'
-if user_country != 'IL':
-    # Remove Iran attack market for non-Israeli users
-    iran_markets = [m for m in all_markets if m.get('market_id') == iran_market_id]
-    for iran_market in iran_markets:
-        all_markets.remove(iran_market)
-    if iran_markets:
-        logger.info(f"🌍 Filtered Iran attack market for non-IL user: country={user_country}")
-else:
-    logger.info(f"🇮🇱 Israeli user detected - showing Iran attack market")
-
-# AFTER (v207)
-# IRAN ATTACK MARKET: Visible to all users, trending in Israel
-# (No geo-filtering - appears in normal feed based on personalization)
-```
-
-## Market Details (Unchanged)
-
-**Market ID**: `us-iran-military-attack-feb19-2026`  
-**Title**: "Will the US launch a military attack on Iran on February 19th?"  
-**Probability**: 9%  
-**Volume**: $78,000  
-**Category**: World  
-
-## User Visibility Matrix
-
-| User Location | Visibility | How It Appears |
-|--------------|-----------|----------------|
-| 🇮🇱 Israel | ✅ Visible | May rank higher due to local engagement/relevance |
-| 🇺🇸 US | ✅ Visible | Standard personalization |
-| 🇯🇵 Japan | ✅ Visible | Standard personalization |
-| 🌍 All Others | ✅ Visible | Standard personalization |
-
-## Natural Trending in Israel
-
-**Why it may trend in Israel without geo-restriction**:
-
-1. **Geo-based trending component** (40% of feed):
-   - BRain v1 has `geo_bucket` parameter
-   - Markets with Israeli engagement get local trending boost
-   - Natural organic discovery by Israeli users
-
-2. **Topic relevance**:
-   - Middle East conflict naturally relevant to Israeli users
-   - Personalization learns user interests
-   - Tag-based learning (Iran, Military, Middle East tags)
-
-3. **User engagement patterns**:
-   - Israeli users more likely to trade/view
-   - Creates positive feedback loop
-   - Boosts local trending score
+**2. Google Analytics (GA4)**
+- **Tracking ID**: G-8PYXZ8VMLN
+- Script added in `<head>` section after GTM
+- Will track standard page views and user behavior
 
 ## Files Modified
-- `app.py` - Removed Iran market geo-filtering (3 locations)
 
-## Roy's Clarification
+- `templates/base.html`:
+  - Added GTM script at top of `<head>`
+  - Added GA4 script after GTM
+  - Added GTM noscript iframe after `<body>` tag
 
-**Original instruction**: "Focus on showing this in Israel as it is trending topic here"  
-**Clarification**: "Don't hide for other users. Just a normal trending market in Israel"
+## Technical Details
 
-**Interpretation**: 
-- Market should be globally visible ✅
-- Natural trending mechanics will boost it in Israel ✅
-- No artificial geo-restriction needed ✅
+**Placement Order** (as per Google's best practices):
+1. GTM script (top of `<head>`)
+2. GA4 script (in `<head>`)
+3. GTM noscript iframe (immediately after `<body>`)
+
+**Coverage**: Since all pages inherit from `base.html`, tracking is now active on:
+- Homepage/Feed
+- All Markets page
+- Market detail pages
+- Coming Soon page
+- All other pages
 
 ## Testing
 
-### All Users (Any Country):
+Verified tracking codes are present:
 ```bash
-# Access from any location
-curl https://proliferative-daleyza-benthonic.ngrok-free.dev/
-
-✅ Iran market may appear in feed
-✅ Depends on personalization algorithm
-✅ No geo-filtering applied
-✅ Israeli users may see it rank higher naturally
+curl -s http://localhost:5555/ | grep -A 3 "Google Tag Manager"
+curl -s http://localhost:5555/ | grep -A 2 "gtag"
 ```
 
-## Performance Impact
-- ✅ Reduced complexity (removed filtering logic)
-- ✅ No impact on feed generation speed
-- ✅ Market eligible for all personalization channels
+Both scripts confirmed in HTML output.
 
-## Rollback Instructions
+## Service Status
 
-**To re-enable Israel-only restriction** (if needed):
 ```bash
-# Restore v206 geo-filtering code in 3 locations
-# See DEPLOYMENT_v206.md for original code
-sudo systemctl restart currents.service
+sudo systemctl restart currents
+sudo systemctl status currents
 ```
 
----
+Service running successfully.
 
-**Next Version**: v208 (TBD)
+## Next Steps
 
-**Note**: This demonstrates the flexibility of the geo-targeting system - markets can be:
-1. Globally visible with no restrictions (Iran market now)
-2. Geo-restricted to specific countries (Japanese markets)
-3. Hero-promoted in specific countries (Joni was doing this, now disabled)
+1. Verify in Google Analytics dashboard (data may take 24-48 hours to appear)
+2. Test GTM in Tag Manager preview mode if needed
+3. Configure custom events/triggers in GTM as needed
+
+## Notes
+
+- Tracking codes will now collect data for all site visitors
+- GA4 provides standard analytics (page views, sessions, user flow)
+- GTM enables advanced tracking without code changes (conversion tracking, custom events, etc.)
+- Both services are free and complement each other
