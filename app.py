@@ -628,6 +628,9 @@ def index():
     # Check for special Yaniv market access parameter (?yaniv=1)
     show_yaniv = request.args.get('yaniv') == '1'
     
+    # Check for Nigeria feed parameter (?nigeria=1)
+    show_nigeria_feed = request.args.get('nigeria') == '1'
+    
     # Get user's country for geo-based trending
     client_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
     if client_ip:
@@ -759,6 +762,78 @@ def index():
                 if yaniv_market:
                     logger.info(f"🔒 Yaniv market hidden (no ?yaniv=1 parameter)")
             
+            # NIGERIA FEED: Show Nigeria-focused markets when ?nigeria=1 parameter present
+            if show_nigeria_feed:
+                # Nigeria market IDs (90% sports, 10% other)
+                nigeria_sports_ids = [
+                    'nigeria-afcon-2027',  # HERO MARKET
+                    'osimhen-goals-2026',
+                    'nigeria-transfer-record',
+                    'nigeria-caf-player',
+                    'nigeria-top5-club',
+                    'epl-ucl-winner',
+                    'epl-weekend-goals',
+                    'epl-unbeaten-run',
+                    'epl-promoted-survival',
+                    'afcon-goals-total',
+                    'epl-red-cards-2026',
+                    'epl-underdog-wins',
+                ]
+                nigeria_nonsports_ids = [
+                    'footballer-afrobeats-video',
+                    'footballer-fashion-brand',
+                    'afrobeats-football-final',
+                    'nigeria-inflation-2027',
+                ]
+                
+                # Filter markets to Nigeria-related only
+                nigeria_hero = None
+                nigeria_sports = []
+                nigeria_nonsports = []
+                
+                # Fetch markets from database if not in current list
+                nigeria_all_ids = ['nigeria-afcon-2027'] + nigeria_sports_ids + nigeria_nonsports_ids
+                conn = sqlite3.connect('brain.db')
+                conn.row_factory = sqlite3.Row
+                cursor = conn.cursor()
+                
+                for market_id in nigeria_all_ids:
+                    # Check if already in all_markets
+                    found = next((m for m in all_markets if m.get('market_id') == market_id), None)
+                    if not found:
+                        # Fetch from database
+                        cursor.execute("SELECT * FROM markets WHERE market_id = ?", (market_id,))
+                        row = cursor.fetchone()
+                        if row:
+                            found = dict(row)
+                    
+                    if found:
+                        if market_id == 'nigeria-afcon-2027':
+                            nigeria_hero = found
+                        elif market_id in nigeria_sports_ids:
+                            nigeria_sports.append(found)
+                        elif market_id in nigeria_nonsports_ids:
+                            nigeria_nonsports.append(found)
+                
+                conn.close()
+                
+                # Build Nigeria feed: 90% sports, 10% other
+                # For feed of ~30 markets: 27 sports, 3 non-sports
+                import random
+                random.shuffle(nigeria_sports)
+                random.shuffle(nigeria_nonsports)
+                
+                # Take 27 sports + 3 non-sports
+                nigeria_feed = []
+                if nigeria_hero:
+                    nigeria_feed.append(nigeria_hero)
+                nigeria_feed.extend(nigeria_sports[:min(27, len(nigeria_sports))])
+                nigeria_feed.extend(nigeria_nonsports[:min(3, len(nigeria_nonsports))])
+                
+                # Replace all_markets with Nigeria-specific feed
+                all_markets = nigeria_feed
+                logger.info(f"🇳🇬 NIGERIA FEED: Showing {len(all_markets)} Nigeria-focused markets (hero + {len(nigeria_sports[:27])} sports + {len(nigeria_nonsports[:3])} other)")
+            
             # IRAN ATTACK MARKET: Visible to all users, trending in Israel
             # (No geo-filtering - appears in normal feed based on personalization)
             
@@ -889,6 +964,77 @@ def index():
         if yaniv_market:
             logger.info(f"🔒 Yaniv market hidden (no ?yaniv=1 parameter - fallback)")
     
+    # NIGERIA FEED (Fallback path): Show Nigeria-focused markets when ?nigeria=1 parameter present
+    if show_nigeria_feed:
+        # Nigeria market IDs (90% sports, 10% other)
+        nigeria_sports_ids = [
+            'nigeria-afcon-2027',  # HERO MARKET
+            'osimhen-goals-2026',
+            'nigeria-transfer-record',
+            'nigeria-caf-player',
+            'nigeria-top5-club',
+            'epl-ucl-winner',
+            'epl-weekend-goals',
+            'epl-unbeaten-run',
+            'epl-promoted-survival',
+            'afcon-goals-total',
+            'epl-red-cards-2026',
+            'epl-underdog-wins',
+        ]
+        nigeria_nonsports_ids = [
+            'footballer-afrobeats-video',
+            'footballer-fashion-brand',
+            'afrobeats-football-final',
+            'nigeria-inflation-2027',
+        ]
+        
+        # Filter markets to Nigeria-related only
+        nigeria_hero = None
+        nigeria_sports = []
+        nigeria_nonsports = []
+        
+        # Fetch markets from database if not in current list
+        nigeria_all_ids = ['nigeria-afcon-2027'] + nigeria_sports_ids + nigeria_nonsports_ids
+        conn = sqlite3.connect('brain.db')
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        
+        for market_id in nigeria_all_ids:
+            # Check if already in all_markets
+            found = next((m for m in all_markets if m.get('market_id') == market_id), None)
+            if not found:
+                # Fetch from database
+                cursor.execute("SELECT * FROM markets WHERE market_id = ?", (market_id,))
+                row = cursor.fetchone()
+                if row:
+                    found = dict(row)
+            
+            if found:
+                if market_id == 'nigeria-afcon-2027':
+                    nigeria_hero = found
+                elif market_id in nigeria_sports_ids:
+                    nigeria_sports.append(found)
+                elif market_id in nigeria_nonsports_ids:
+                    nigeria_nonsports.append(found)
+        
+        conn.close()
+        
+        # Build Nigeria feed: 90% sports, 10% other
+        import random
+        random.shuffle(nigeria_sports)
+        random.shuffle(nigeria_nonsports)
+        
+        # Take 27 sports + 3 non-sports
+        nigeria_feed = []
+        if nigeria_hero:
+            nigeria_feed.append(nigeria_hero)
+        nigeria_feed.extend(nigeria_sports[:min(27, len(nigeria_sports))])
+        nigeria_feed.extend(nigeria_nonsports[:min(3, len(nigeria_nonsports))])
+        
+        # Replace all_markets with Nigeria-specific feed
+        all_markets = nigeria_feed
+        logger.info(f"🇳🇬 NIGERIA FEED (Fallback): Showing {len(all_markets)} Nigeria-focused markets (hero + {len(nigeria_sports[:27])} sports + {len(nigeria_nonsports[:3])} other)")
+    
     # IRAN ATTACK MARKET: Visible to all users, trending in Israel
     # (No geo-filtering - appears in normal feed based on personalization)
     
@@ -940,6 +1086,9 @@ def feed_mobile():
     
     # Check for special Yaniv market access parameter (?yaniv=1)
     show_yaniv = request.args.get('yaniv') == '1'
+    
+    # Check for Nigeria feed parameter (?nigeria=1)
+    show_nigeria_feed = request.args.get('nigeria') == '1'
     
     # Get user's country for geo-based trending
     client_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
@@ -1066,6 +1215,77 @@ def feed_mobile():
                 # Normal users: Yaniv market hidden
                 if yaniv_market:
                     logger.info(f"🔒 Yaniv market hidden (no ?yaniv=1 parameter - mobile)")
+            
+            # NIGERIA FEED (Mobile): Show Nigeria-focused markets when ?nigeria=1 parameter present
+            if show_nigeria_feed:
+                # Nigeria market IDs (90% sports, 10% other)
+                nigeria_sports_ids = [
+                    'nigeria-afcon-2027',  # HERO MARKET
+                    'osimhen-goals-2026',
+                    'nigeria-transfer-record',
+                    'nigeria-caf-player',
+                    'nigeria-top5-club',
+                    'epl-ucl-winner',
+                    'epl-weekend-goals',
+                    'epl-unbeaten-run',
+                    'epl-promoted-survival',
+                    'afcon-goals-total',
+                    'epl-red-cards-2026',
+                    'epl-underdog-wins',
+                ]
+                nigeria_nonsports_ids = [
+                    'footballer-afrobeats-video',
+                    'footballer-fashion-brand',
+                    'afrobeats-football-final',
+                    'nigeria-inflation-2027',
+                ]
+                
+                # Filter markets to Nigeria-related only
+                nigeria_hero = None
+                nigeria_sports = []
+                nigeria_nonsports = []
+                
+                # Fetch markets from database if not in current list
+                nigeria_all_ids = ['nigeria-afcon-2027'] + nigeria_sports_ids + nigeria_nonsports_ids
+                conn = sqlite3.connect('brain.db')
+                conn.row_factory = sqlite3.Row
+                cursor = conn.cursor()
+                
+                for market_id in nigeria_all_ids:
+                    # Check if already in all_markets
+                    found = next((m for m in all_markets if m.get('market_id') == market_id), None)
+                    if not found:
+                        # Fetch from database
+                        cursor.execute("SELECT * FROM markets WHERE market_id = ?", (market_id,))
+                        row = cursor.fetchone()
+                        if row:
+                            found = dict(row)
+                    
+                    if found:
+                        if market_id == 'nigeria-afcon-2027':
+                            nigeria_hero = found
+                        elif market_id in nigeria_sports_ids:
+                            nigeria_sports.append(found)
+                        elif market_id in nigeria_nonsports_ids:
+                            nigeria_nonsports.append(found)
+                
+                conn.close()
+                
+                # Build Nigeria feed: 90% sports, 10% other
+                import random
+                random.shuffle(nigeria_sports)
+                random.shuffle(nigeria_nonsports)
+                
+                # Take 45 sports + 5 non-sports for mobile (longer feed)
+                nigeria_feed = []
+                if nigeria_hero:
+                    nigeria_feed.append(nigeria_hero)
+                nigeria_feed.extend(nigeria_sports[:min(45, len(nigeria_sports))])
+                nigeria_feed.extend(nigeria_nonsports[:min(5, len(nigeria_nonsports))])
+                
+                # Replace all_markets with Nigeria-specific feed
+                all_markets = nigeria_feed
+                logger.info(f"🇳🇬 NIGERIA FEED (Mobile): Showing {len(all_markets)} Nigeria-focused markets (hero + {len(nigeria_sports[:45])} sports + {len(nigeria_nonsports[:5])} other)")
             
             # IRAN ATTACK MARKET: Visible to all users, trending in Israel
             # (No geo-filtering - appears in normal feed based on personalization)
