@@ -9,7 +9,7 @@ Two separate running instances:
 | Environment | Branch | Port | Database | Domain | Status |
 |-------------|--------|------|----------|--------|--------|
 | **Production** | main | 5555 | production.db | currents.global | ✅ Running |
-| **Development** | dev | 5556 | brain.db | *TBD* | ✅ Running |
+| **Development** | dev | 5556 | brain.db | sonic-ben-weekends-sao.trycloudflare.com | ✅ Running |
 
 ## Current Status
 
@@ -38,7 +38,8 @@ sudo systemctl restart currents
 - **Port**: 5556
 - **Service**: `currents-dev.service`
 - **Database**: brain.db (separate copy)
-- **URL**: *Need to set up* (see options below)
+- **URL**: https://sonic-ben-weekends-sao.trycloudflare.com
+- **Tunnel**: Cloudflare Quick Tunnel (free, no account needed)
 
 ```bash
 # Check status
